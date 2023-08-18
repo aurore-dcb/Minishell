@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/18 13:08:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/18 14:02:00 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ void	builtin_pwd(char **env);
 void	builtin_env(char **env);
 // cd.c
 void	builtin_cd(char *chemin);
+// echo.c
+void	builtin_echo(char **cmd);
 #endif

@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/08/18 13:09:37 by aducobu          ###   ########.fr        #
+#    Updated: 2023/08/18 14:02:08 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = 			minishell
 SRCS = 			exec/main_exec.c \
 				exec/pwd.c \
 				exec/env.c \
-				exec/cd.c
+				exec/cd.c \
+				exec/echo.c
 
 OBJS = 			${SRCS:exec/%.c=objects/%.o}
 
