@@ -6,13 +6,14 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/08/18 10:23:02 by aducobu          ###   ########.fr        #
+#    Updated: 2023/08/18 12:45:22 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 			minishell
 
-SRCS = 			exec/main_exec.c
+SRCS = 			exec/main_exec.c \
+				exec/pwd.c
 
 OBJS = 			${SRCS:exec/%.c=objects/%.o}
 

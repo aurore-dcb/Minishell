@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/18 12:44:48 by aducobu          ###   ########.fr       */
+/*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
+/*   Updated: 2023/08/18 12:51:59 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "../headers/exec.h"
+#include "../libft/libft.h"
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <stdlib.h>
+void	builtins_pwd(char **env)
+{
+	int i;
+	int j;
 
-// main_exec.c
-void	main_exec(void);
-// pwd.c
-void	builtins_pwd(char **env);
-
-#endif
+	i = 0;
+	j = 4;
+	if (!env)
+		return ;
+	while (env[i])
+	{
+		if (ft_strnstr(env[i], "PWD=", 4))
+		{
+			while (env[i][j])
+			{
+				printf("%c", env[i][j]);
+				j++;
+			}
+			printf("\n");
+			return ;
+		}
+		i++;
+	}
+}
