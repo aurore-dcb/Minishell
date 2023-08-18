@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/18 12:44:48 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/18 13:08:32 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 // main_exec.c
 void	main_exec(void);
 // pwd.c
-void	builtins_pwd(char **env);
-
+void	builtin_pwd(char **env);
+// env.c
+void	builtin_env(char **env);
+// cd.c
+void	builtin_cd(char *chemin);
 #endif

@@ -6,14 +6,15 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/18 12:51:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/18 13:01:02 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/exec.h"
 #include "../libft/libft.h"
 
-void	builtins_pwd(char **env)
+// gerer argument
+void	builtin_pwd(char **env)
 {
 	int i;
 	int j;

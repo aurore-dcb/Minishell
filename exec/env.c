@@ -1,42 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_exec.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/18 13:41:14 by aducobu          ###   ########.fr       */
+/*   Created: 2023/08/18 12:55:30 by aducobu           #+#    #+#             */
+/*   Updated: 2023/08/18 13:00:45 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/exec.h"
 #include "../libft/libft.h"
 
-void	main_exec(void)
+void builtin_env(char **env)
 {
-	char	*input;
+    int i;
 
-	input = readline("minishell> ");
-	while (input != NULL)
+    i = 0;
+	if (!env)
+		return ;
+	while (env[i])
 	{
-		if (input[0] != '\0')
-		{
-			add_history(input);
-			printf("Vous avez saisi : %s\n", input);
-		}
-		free(input);
-		input = readline("minishell> ");
+		printf("%s\n", env[i]);
+		i++;
 	}
-	free(input);
-	rl_clear_history();
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	(void)argv;
-	(void)argc;
-	(void)env;
-	builtin_cd("..");
-	return (0);
 }
