@@ -6,25 +6,21 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/08/22 14:46:12 by aducobu          ###   ########.fr        #
+#    Updated: 2023/08/22 15:36:05 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 			minishell
 
-SRCS = 			exec/main.c \
-				exec/pwd.c \
-				exec/env.c \
-				exec/cd.c \
-				exec/echo.c \
-				exec/env_variables.c \
-				parsing/quotes.c \
-				parsing/split_meta.c
+SRCS = 			${addprefix sources/, \
+					${addprefix parsing/, quotes.c split_meta.c} \
+					${addprefix exec/, main.c pwd.c env.c cd.c echo.c env_variables.c} \
+				}
 
-OBJS = 			${SRCS:exec/%.c=objects/%.o}
+OBJS = 			${SRCS:sources/%.c=objects/%.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 EXECFLAGS = -lreadline
 RM = rm -rf
 
@@ -36,14 +32,12 @@ all: libft ${NAME}
 libft/libft.a:
 	make -C libft
 
-${NAME}: objects ${OBJS} libft/libft.a Makefile
-	${CC} ${CFLAGS} ${EXECFLAGS} -o ${NAME} ${OBJS} ${LIBFT_LIB}
-
-objects:
-	mkdir -p objects
-
-objects/%.o: exec/%.c | objects
-	${CC} ${CFLAGS} -o $@ -c $<
+${NAME}: ${OBJS} libft/libft.a Makefile
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT_LIB} ${EXECFLAGS}
+	
+objects/%.o: sources/%.c
+	mkdir -p $(dir $@)
+	${CC} ${CFLAGS} -c -o $@ $^
 
 clean:
 	${RM} objects
