@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/22 13:52:37 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:42:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void	builtin_echo(char **cmd);
 // quotes.c
 int		closed_quotes(char *input, t_quotes *etat);
 
+// split_meta.c
+char	**split_meta(char *input, char c);
 #endif
