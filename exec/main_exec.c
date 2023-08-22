@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/18 14:43:54 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/22 13:54:53 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 
 //#include <signal.h>
 
-void	main_exec(void)
+int	main(int argc, char **argv, char **env)
 {
+	(void)argc;
+	(void)argv;
+	(void)env;
+	
 	char	*input;
+	t_quotes etat;
+
+	etat.doubl = 0;
+	etat.simple = 0;
 
 	input = readline("minishell> ");
 	while (input != NULL)
@@ -25,30 +33,14 @@ void	main_exec(void)
 		if (input[0] != '\0')
 		{
 			add_history(input);
-			printf("Vous avez saisi : %s\n", input);
+			// -> traiter input : parsing puis execution
+			printf("etat quotes = %d\n", closed_quotes(input, &etat));
+			// printf("Vous avez saisi : %s\n", input);
 		}
 		free(input);
 		input = readline("minishell> ");
 	}
 	free(input);
 	rl_clear_history();
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	(void)argv;
-	(void)argc;
-	(void)env;
-
-	main_exec();
-	// char **cmd;
-	// cmd = malloc(sizeof(char *) * 5);
-	// cmd[0] = "echo";
-	// cmd[1] = "ok";
-	// cmd[2] = "SUPERR";
-	// cmd[3] = "1 ";
-	// cmd[4] = NULL;
-	// builtin_echo(cmd);
-	// free(cmd);
 	return (0);
 }
