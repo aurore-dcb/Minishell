@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 12:55:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/18 13:00:45 by aducobu          ###   ########.fr       */
+/*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
+/*   Updated: 2023/08/22 15:38:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/exec.h"
-#include "../libft/libft.h"
+#include "../../headers/exec.h"
+#include "../../libft/libft.h"
 
-void builtin_env(char **env)
+void	free_tab(char **tab)
 {
-    int i;
+	int	i;
 
-    i = 0;
-	if (!env)
-		return ;
-	while (env[i])
+	i = 0;
+	while (tab[i])
 	{
-		printf("%s\n", env[i]);
+		free(tab[i]);
 		i++;
 	}
+	free(tab);
 }

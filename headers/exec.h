@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/22 14:42:50 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/22 15:40:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_quotes
 	int	doubl;
 }		t_quotes;
 
+// -------------------- parsing -------------------- //
+// quotes.c
+int		closed_quotes(char *input, t_quotes *etat);
+// split_meta.c
+char	**split_meta(char *input, char c);
+
+// -------------------- exec -------------------- //
 // pwd.c
 void	builtin_pwd(char **env);
 // env.c
@@ -33,10 +40,7 @@ void	builtin_env(char **env);
 void	builtin_cd(char *chemin);
 // echo.c
 void	builtin_echo(char **cmd);
+// frees.c
+void	free_tab(char **tab);
 
-// quotes.c
-int		closed_quotes(char *input, t_quotes *etat);
-
-// split_meta.c
-char	**split_meta(char *input, char c);
 #endif

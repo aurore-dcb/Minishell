@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/22 15:07:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/22 15:44:07 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,13 @@
 #include "../../libft/libft.h"
 
 //#include <signal.h>
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
 
 void	display_tab(char *input)
 {
-	int i = 0;
-	char **tab;
-	
+	int		i;
+	char	**tab;
+
+	i = 0;
 	tab = split_meta(input, ' ');
 	while (tab[i])
 	{
@@ -44,13 +32,13 @@ void	display_tab(char *input)
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
-	(void)env;
+	char		*input;
+	t_quotes	etat; ///// penser a mettre a 0 apres l'utilisation de la fonction
 	
-	char	*input;
-	t_quotes etat; ///// penser a mettre a 0 apres l'utilisation de la fonction
-
+	(void)env;
+	(void)argv;
+	if (argc != 1)
+		return (printf("No argument are needed !\n"), 1);
 	input = readline("minishell> ");
 	while (input != NULL)
 	{
@@ -62,7 +50,6 @@ int	main(int argc, char **argv, char **env)
 			// -> traiter input : parsing puis execution
 			printf("etat quotes = %d\n", closed_quotes(input, &etat));
 			display_tab(input);
-			// printf("Vous avez saisi : %s\n", input);
 		}
 		free(input);
 		input = readline("minishell> ");
