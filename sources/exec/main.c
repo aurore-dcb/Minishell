@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 16:20:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/23 16:41:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	main(int argc, char **argv, char **env)
 	cmd_line	*list;
 
 	list = NULL;
-	
-	(void)env;
 	(void)argv;
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
@@ -58,7 +56,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 			// -> traiter input : parsing puis execution
 			if (!parsing(input, env, &list))
-				return (1);
+				return (1); // afficher l'erreur puis passer au nouveau prompt
 			display_list(list);
 		}
 		free(input);
