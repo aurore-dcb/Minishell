@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 14:08:54 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/23 16:25:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,18 @@ int					closed_quotes(char *input, t_quotes *etat);
 // split_meta.c
 char				**split_meta(char *input, char c);
 // parsing.c
-int					parsing(char *input, char **env);
+int					parsing(char *input, char **env, cmd_line **list);
 // list.c
+void				ft_lstadd_back_cmd_line(cmd_line **lst, cmd_line *new);
+cmd_line			*ft_lstnew_cmd_line(int len);
+cmd_line			*ft_lstlast_cmd_line(cmd_line *lst);
+// split_pipe.c
+int					nb_mots_cmd(char *str);
+int					nb_lettre_cmd(char *s);
+void				split2_pipe(char **input, cmd_line **cmd);
 void				split_pipe(char *input, cmd_line **list);
 
 // -------------------- exec -------------------- //
-
 
 // pwd.c
 void				builtin_pwd(char **env);
@@ -54,5 +60,6 @@ void				builtin_cd(char *chemin);
 void				builtin_echo(char **cmd);
 // frees.c
 void				free_tab(char **tab);
+void				free_list(cmd_line **begin);
 
 #endif

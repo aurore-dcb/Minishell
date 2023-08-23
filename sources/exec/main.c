@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 13:57:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/23 16:20:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,21 @@ void	display_tab(char *input)
 	free_tab(tab);
 }
 
+void	display_list(cmd_line *list)
+{
+	while (list)
+	{
+		printf("cmd_line = .%s.\n", list->cmd);
+		list = list->next;
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char		*input;
 	cmd_line	*list;
+
+	list = NULL;
 	
 	(void)env;
 	(void)argv;
@@ -46,13 +57,12 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(input);
 			// -> traiter input : parsing puis execution
-			if (!parsing(input, env))
+			if (!parsing(input, env, &list))
 				return (1);
-			split_pipe(input, &list);
-			// printf("etat quotes = %d\n", closed_quotes(input, &etat));
-			// display_tab(input);
+			display_list(list);
 		}
 		free(input);
+		free_list(&list);
 		input = readline("minishell> ");
 	}
 	free(input);
