@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 14:19:38 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/23 14:32:25 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,6 @@ int	nb_lettre_cmd(char *s)
 	return (i);
 }
 
-char	**error_cmd(char **res, int i)
-{
-	while (i < 0)
-	{
-		free(res[i]);
-		i--;
-	}
-	free(res);
-	return (NULL);
-}
-
 void	split_pipe(char *input, cmd_line **list)
 {
 	int j;
@@ -128,13 +117,10 @@ void	split_pipe(char *input, cmd_line **list)
 		return ;
 	begin = *list;
 	n = nb_mots_cmd(input);
-	printf("n = %d\n", n);
 	while (n)
 	{
 		if (*input == '|')
 			input++;
-		// printf("nb lettres = %d\n", nb_lettre_cmd(input));
-		// printf("*input = %s\n", input);
 		ft_lstadd_back_cmd_line(&begin, ft_lstnew_cmd_line(nb_lettre_cmd(input) + 1)); //Nouvel element aloue
 		begin = ft_lstlast_cmd_line(begin);
 		j = 0;
@@ -143,23 +129,52 @@ void	split_pipe(char *input, cmd_line **list)
             if (*input == 34 || *input == 39)
             {
                 q = *input;
-				begin->cmd[j++] = *input; 
-                input++;
+				begin->cmd[j++] = *input++; 
                 while (*input && *input != q)
 					begin->cmd[j++] = *input;
                 if (*input == '\0')
                     return ;
-				begin->cmd[j++] = *input;
-                input++;
+				begin->cmd[j++] = *input++;
             }
-			begin->cmd[j++] = *input;
-			// tab[i][j++] = *input;
-			input++;
+			begin->cmd[j++] = *input++;
         }
 		begin->cmd[j] = '\0';
 		n--;
-		printf("cmd line = .%s.\n", begin->cmd);
-        // (*list) = (*list)->next;
-		// tab[i++][j] = '\0';
+		printf("line = .%s.\n", begin->cmd);
 	}
 }
+
+// void	fill_cmd_line(char *input, cmd_line **list)
+// {
+// 	int j;
+//     char q;
+// 	cmd_line *begin;
+
+// 	if (input == NULL)
+// 		return ;
+// 	begin = *list;
+// 	while (list)
+// 	{
+// 		if (*input == '|')
+// 			input++;
+// 		j = 0;
+//         while (*input && *input != '|')
+//         {
+//             if (*input == 34 || *input == 39)
+//             {
+//                 q = *input;
+// 				begin->cmd[j++] = *input; 
+//                 input++;
+//                 while (*input && *input != q)
+// 					begin->cmd[j++] = *input;
+//                 if (*input == '\0')
+//                     return ;
+// 				begin->cmd[j++] = *input;
+//                 input++;
+//             }
+// 			begin->cmd[j++] = *input++;
+//         }
+// 		begin->cmd[j] = '\0';
+// 		begin = begin->next;
+// 	}
+// }
