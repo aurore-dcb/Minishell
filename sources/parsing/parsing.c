@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 16:09:53 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/24 13:19:20 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	parsing(char *input, char **env, cmd_line **list)
 		return (0);
     if (closed_quotes(input, &etat) == 0)
         return (0);
-    split_pipe(input, list);
+    if (error_begin_end_cmd(input) == 1)
+        return (0);
+    if (error_double_pipe(input) == 1)
+        return (0);
+    if (!split_pipe(input, list))
+        return (0);
     return (1);
 }

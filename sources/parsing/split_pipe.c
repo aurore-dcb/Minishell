@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 16:27:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/24 13:19:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	nb_mots_cmd(char *str)
 	int		sep;
 	char	q;
 
-	mots = 0;
+	mots = 1;
 	sep = 1;
 	while (*str)
 	{
@@ -31,11 +31,9 @@ int	nb_mots_cmd(char *str)
 			str++;
 		}
 		if (*str == '|')
-			sep = 1;
-		else if (sep == 1)
 		{
+			sep = 1;
 			mots++;
-			sep = 0;
 		}
 		str++;
 	}
@@ -87,27 +85,32 @@ void	split2_pipe(char **input, cmd_line **cmd)
 				return ;
 			begin->cmd[j++] = *(*input)++;
 		}
-		begin->cmd[j++] = *(*input)++;
+		if (*(*input) != '|')
+			begin->cmd[j++] = *(*input)++;
 	}
 	begin->cmd[j] = '\0';
 }
 
-void	split_pipe(char *input, cmd_line **list)
+int	split_pipe(char *input, cmd_line **list)
 {
-	int			j;
-	int			n;
+	int	j;
+	int	n;
+	cmd_line *new;
 
 	if (input == NULL)
-		return ;
+		return (0);
 	n = nb_mots_cmd(input);
 	while (n)
 	{
 		if (*input == '|')
 			input++;
-		ft_lstadd_back_cmd_line(list, ft_lstnew_cmd_line(nb_lettre_cmd(input)
-					+ 1));
+		new = ft_lstnew_cmd_line(nb_lettre_cmd(input) + 1);
+		if (!new)
+			return (0);
+		ft_lstadd_back_cmd_line(list, new);
 		j = 0;
 		split2_pipe(&input, list);
 		n--;
 	}
+	return (1);
 }

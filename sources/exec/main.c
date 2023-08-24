@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 16:41:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/24 11:21:17 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	main(int argc, char **argv, char **env)
 	char		*input;
 	cmd_line	*list;
 
-	list = NULL;
 	(void)argv;
+	list = NULL;
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
 	input = readline("minishell> ");
@@ -56,8 +56,10 @@ int	main(int argc, char **argv, char **env)
 			add_history(input);
 			// -> traiter input : parsing puis execution
 			if (!parsing(input, env, &list))
-				return (1); // afficher l'erreur puis passer au nouveau prompt
-			display_list(list);
+				printf("ERROR -> parsing\n");
+				// return (1); // afficher l'erreur puis passer au nouveau prompt
+			else
+				display_list(list);
 		}
 		free(input);
 		free_list(&list);

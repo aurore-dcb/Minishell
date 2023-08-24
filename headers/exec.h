@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/23 16:25:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/24 13:18:57 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ cmd_line			*ft_lstlast_cmd_line(cmd_line *lst);
 int					nb_mots_cmd(char *str);
 int					nb_lettre_cmd(char *s);
 void				split2_pipe(char **input, cmd_line **cmd);
-void				split_pipe(char *input, cmd_line **list);
-
+int					split_pipe(char *input, cmd_line **list);
+// error_handling.c
+int					error_begin_end_cmd(char *input);
+int					error_double_pipe(char *input);
 // -------------------- exec -------------------- //
 
 // pwd.c
