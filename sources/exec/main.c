@@ -66,6 +66,7 @@ int	main(int argc, char **argv, char **env)
 		input = readline("minishell> ");
 	}
 	free(input);
-	rl_clear_history();
+	clear_history();
+	// rl_clear_history();
 	return (0);
 }

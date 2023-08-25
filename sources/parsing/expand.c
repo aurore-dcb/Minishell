@@ -125,7 +125,7 @@ int between_double(char **s, char **env)
 		}
 		(*s)++;
 	}
-	// printf("n = %d\n", n);
+	printf("n fin double = %d\n", n);
 	return (n);
 }
 
