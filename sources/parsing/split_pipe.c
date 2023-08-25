@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/25 10:57:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/25 11:35:40 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	split2_pipe(char **input, cmd_line **cmd)
 
 int	split_pipe(char *input, cmd_line **list)
 {
-	int	n;
-	cmd_line *new;
+	int			n;
+	cmd_line	*new;
 
 	if (input == NULL)
 		return (0);

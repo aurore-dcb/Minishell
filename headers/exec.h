@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/25 13:18:30 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/08/25 14:00:59 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int					split_pipe(char *input, cmd_line **list);
 int					error_begin_end_cmd(char *input);
 int					error_double_pipe(char *input);
 // expand.c
-// char				*ft_expand(char *word);
+char				*ft_expand(char *word);
 // split_word.c
 void				ft_strcpy_pos(char *dst, char *src, int start, int end);
 t_type				get_type_meta(char *word);
@@ -83,6 +83,7 @@ void				get_type(token *lst);
 token				*ft_lstnew_token(cmd_line *list, int start, int end);
 void				ft_lstadd_back_token(token **lst, token *new);
 int					add_word(cmd_line *list);
+int					get_end_word(char *cmd, int i);
 void				split_word(cmd_line *list);
 
 // -------------------- exec -------------------- //

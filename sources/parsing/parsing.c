@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/25 10:59:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/25 14:00:46 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int	parsing(char *input, char **env, cmd_line **list)
         return (0);
     if (!split_pipe(input, list))
         return (0);
-    // printf("expand : [%s] -> [%s]\n", input, ft_expand(input));
+    printf("expand : [%s] -> [%s]\n", input, ft_expand(input));
     return (1);
 }
