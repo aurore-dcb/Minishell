@@ -21,7 +21,7 @@ SRCS = 			${addprefix sources/, \
 OBJS = 			${SRCS:sources/%.c=objects/%.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 EXECFLAGS = -lreadline
 RM = rm -rf
 

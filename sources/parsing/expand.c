@@ -140,8 +140,10 @@ int	count_char(char *s, char **env)
 	{
 		if (*s == 39) // '
 		{
+			printf("*s = .%c.\n", *s);
 			n += between_simple(&s);
 			printf("entre simple N = %d\n", n);
+			printf("*s = .%c.\n", *s);
 		}
 		else if (*s == 34) // "
 		{
@@ -155,11 +157,12 @@ int	count_char(char *s, char **env)
 			if (!cpy)
 				return (printf("echec malloc\n"), 0); // ERREUR
 			cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
+			printf("cpy = %s\n", cpy);
 			res = existing_var(cpy, env);
 			n += ft_strlen(res);
-			s = s + len_var_env(s);
+			s = s + len_var_env(s) - 1;
+			// printf("*s = .%c.\n", *s);
 			printf("apres $ dehors n = %d\n", n);
-			// printf("res = %s\n", res);
 		}
 		else
 		{

@@ -16,11 +16,9 @@
 int	nb_mots_cmd(char *str)
 {
 	int		mots;
-	int		sep;
 	char	q;
 
 	mots = 1;
-	sep = 1;
 	while (*str)
 	{
 		if (*str == 34 || *str == 39)
@@ -31,10 +29,7 @@ int	nb_mots_cmd(char *str)
 			str++;
 		}
 		if (*str == '|')
-		{
-			sep = 1;
 			mots++;
-		}
 		str++;
 	}
 	return (mots);
