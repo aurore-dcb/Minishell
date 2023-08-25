@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/25 10:58:47 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/25 13:18:30 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void				ft_strcpy_pos(char *dst, char *src, int start, int end);
 t_type				get_type_meta(char *word);
 void				get_type(token *lst);
 token				*ft_lstnew_token(cmd_line *list, int start, int end);
-int					ft_lstadd_back_token(token **lst, token *new);
-void				add_word(cmd_line *list);
+void				ft_lstadd_back_token(token **lst, token *new);
+int					add_word(cmd_line *list);
 void				split_word(cmd_line *list);
 
 // -------------------- exec -------------------- //
