@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/24 15:30:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/25 10:58:47 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,39 @@
 # include <unistd.h>
 
 // -------------------- parsing -------------------- //
+
+typedef enum type
+{
+	NONE,         //defaut set
+	ARG,          //word
+	FILE_IN,      //word == '<'
+	HERE_DOC,     // word == '<<'
+	FILE_OUT,     //word == '>'
+	FILE_OUT_SUR, //word == '>>'
+	OPEN_FILE,    // word following '<'
+	LIMITOR,      // word following '<<'
+	EXIT_FILE,    // word followinf '>'
+	EXIT_FILE_RET // word following '>>'
+}					t_type;
+
 typedef struct s_quotes
 {
 	int				simple;
 	int				doubl;
 }					t_quotes;
 
+typedef struct token
+{
+	char			*word;
+	t_type			type;
+	struct token	*next;
+	struct token	*previous;
+}					token;
+
 typedef struct cmd_line
 {
 	char			*cmd;
+	struct token	*token;
 	struct cmd_line	*next;
 }					cmd_line;
 
@@ -51,7 +75,16 @@ int					split_pipe(char *input, cmd_line **list);
 int					error_begin_end_cmd(char *input);
 int					error_double_pipe(char *input);
 // expand.c
-char				*ft_expand(char *word);
+// char				*ft_expand(char *word);
+// split_word.c
+void				ft_strcpy_pos(char *dst, char *src, int start, int end);
+t_type				get_type_meta(char *word);
+void				get_type(token *lst);
+token				*ft_lstnew_token(cmd_line *list, int start, int end);
+int					ft_lstadd_back_token(token **lst, token *new);
+void				add_word(cmd_line *list);
+void				split_word(cmd_line *list);
+
 // -------------------- exec -------------------- //
 
 // pwd.c

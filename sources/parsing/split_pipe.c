@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/24 13:19:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/25 10:57:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void	split2_pipe(char **input, cmd_line **cmd)
 
 int	split_pipe(char *input, cmd_line **list)
 {
-	int	j;
 	int	n;
 	cmd_line *new;
 
@@ -108,9 +107,9 @@ int	split_pipe(char *input, cmd_line **list)
 		if (!new)
 			return (0);
 		ft_lstadd_back_cmd_line(list, new);
-		j = 0;
 		split2_pipe(&input, list);
 		n--;
 	}
+	split_word(*list);
 	return (1);
 }

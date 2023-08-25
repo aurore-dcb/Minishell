@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/24 15:32:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/25 10:58:03 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 
 
-char	*ft_expand(char *word)
-{
-	char *trim;
+// char	*ft_expand(char *word)
+// {
+// 	char *trim;
 	
-	if (!word)
-		return (NULL);
-	trim = ft_strtrim(word, " ");
+// 	if (!word)
+// 		return (NULL);
+// 	trim = ft_strtrim(word, " ");
 	
-	// free(word);
+// 	// free(word);
 	
-	return (res);
-}
+// 	return (res);
+// }
