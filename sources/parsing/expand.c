@@ -13,34 +13,6 @@
 #include "../../headers/exec.h"
 #include "../../libft/libft.h"
 
-int between_simple(char **s)
-{
-	int n;
-
-	n = 0;
-	(*s)++;
-	while (*(*s) && *(*s) != 39)
-	{
-		n++;
-		(*s)++;
-	}
-	printf("n = %d\n", n);
-	return (n);
-}
-
-int len_var_env(char *s)
-{
-	int len;
-
-	len = 0;
-	while (*s && (*s == '_' || ft_isalnum(*s)))
-	{
-		len++;
-		s++;
-	}
-	return (len);
-}
-
 char	*ft_strcpy(char *dst, char *src, int dstsize)
 {
 	int	i;
@@ -71,119 +43,21 @@ char	*ft_trim(char *s, int len)
 	return (res);
 }
 
-char *existing_var(char *var, char **env)
-{
-	int i;
-	char *res;
-	
-	i = 0;
-	if (!var)
-		return (NULL);
-	while (env[i])
-	{
-		if (ft_strnstr(env[i], var, ft_strlen(var)))
-		{
-			res = ft_trim(env[i], ft_strlen(var) + 1);
-			if (!res)
-				return (free(var), NULL);
-			return (free(var), res);
-		}
-		i++;
-	}
-	free(var);
-	return (NULL);
-}
-
-int between_double(char **s, char **env)
-{
-	int n;
-	char *cpy;
-	char *res;
-
-	n = 0;
-	(*s)++;
-	while (*(*s) && *(*s) != 34)
-	{
-		if (*(*s) == '$')
-		{
-			(*s)++;
-			cpy = malloc(sizeof(char)  * (len_var_env(*s) + 1));
-			if (!cpy)
-				return (printf("echec malloc\n"), 0); // ERREUR
-			cpy = ft_strcpy(cpy, *s, len_var_env(*s) + 1);
-			res = existing_var(cpy, env);
-			n += ft_strlen(res);
-			printf("n = %d\n", n);
-			(*s) = (*s) + len_var_env(*s) - 1;
-			// printf("res = %s\n", res);
-		}
-		else
-		{
-			printf("char = .%c.\n", *(*s));
-			n++;
-			printf("n char seul entre double = %d\n", n);
-		}
-		(*s)++;
-	}
-	printf("n fin double = %d\n", n);
-	return (n);
-}
-
-int	count_char(char *s, char **env)
-{
-	int n;
-	char *cpy;
-	char *res;
-
-	n = 0;
-	while (*s)
-	{
-		if (*s == 39) // '
-		{
-			printf("*s = .%c.\n", *s);
-			n += between_simple(&s);
-			printf("entre simple N = %d\n", n);
-			printf("*s = .%c.\n", *s);
-		}
-		else if (*s == 34) // "
-		{
-			n += between_double(&s, env);
-			printf("entre double N = %d\n", n);
-		}
-		else if (*s == '$')
-		{
-			s++;
-			cpy = malloc(sizeof(char)  * (len_var_env(s) + 1));
-			if (!cpy)
-				return (printf("echec malloc\n"), 0); // ERREUR
-			cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
-			printf("cpy = %s\n", cpy);
-			res = existing_var(cpy, env);
-			n += ft_strlen(res);
-			s = s + len_var_env(s) - 1;
-			// printf("*s = .%c.\n", *s);
-			printf("apres $ dehors n = %d\n", n);
-		}
-		else
-		{
-			n++;
-			printf("n char seul = %d\n", n);
-		}
-		s++;
-	}
-	return (n);
-}
-
 char	*ft_expand(char *word, char **env)
 {
-	// char *res;
+	char *res;
 	char *trim;
+	int len_malloc;
 
 	if (!word)
-		return (NULL);
+		return (NULL); // ERROR
 	trim = ft_strtrim(word, " ");
-	printf("count_char = %d\n", count_char(word, env));
-	// free(word);
+	// free(word); // commente pour le test dans le main
+	len_malloc = count_char(trim, env);
+	res = malloc(sizeof(char) * (len_malloc + 1));
+	if (!res)
+		return (NULL); // ERROR
+
 	return (trim);
 	// return (res);
 }

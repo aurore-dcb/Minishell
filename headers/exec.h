@@ -76,6 +76,14 @@ int					error_begin_end_cmd(char *input);
 int					error_double_pipe(char *input);
 // expand.c
 char				*ft_expand(char *word, char **env);
+char	*ft_strcpy(char *dst, char *src, int dstsize);
+char	*ft_trim(char *s, int len);
+// expand_count.c
+char *existing_var(char *var, char **env);
+int len_var_env(char *s);
+int between_simple(char **s);
+int between_double(char **s, char **env);
+int	count_char(char *s, char **env);
 // split_word.c
 void				ft_strcpy_pos(char *dst, char *src, int start, int end);
 t_type				get_type_meta(char *word);
