@@ -20,7 +20,6 @@ char *existing_var(char *var, char **env)
 		}
 		i++;
 	}
-	free(var);
 	return (NULL);
 }
 
@@ -37,7 +36,7 @@ int len_var_env(char *s)
 	return (len);
 }
 
-int between_simple(char **s)
+int count_between_simple(char **s)
 {
 	int n;
 
@@ -64,7 +63,7 @@ int find_variable(char *s, char **env)
 	n = ft_strlen(res);
     return (n);
 }
-int between_double(char **s, char **env)
+int count_between_double(char **s, char **env)
 {
 	int n;
 
@@ -81,34 +80,6 @@ int between_double(char **s, char **env)
 		else
 			n++;
 		(*s)++;
-	}
-	return (n);
-}
-
-int	count_char(char *s, char **env)
-{
-	int n;
-
-	n = 0;
-	while (*s)
-	{
-		if (*s == 39)
-		{
-			n += between_simple(&s);
-		}
-		else if (*s == 34)
-		{
-			n += between_double(&s, env);
-		}
-		else if (*s == '$')
-		{
-			s++;
-            n += find_variable(s, env);
-			s = s + len_var_env(s) - 1;
-		}
-		else
-			n++;
-		s++;
 	}
 	return (n);
 }

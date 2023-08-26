@@ -13,7 +13,7 @@
 NAME = 			minishell
 
 SRCS = 			${addprefix sources/, \
-					${addprefix parsing/, parsing.c quotes.c split_meta.c list.c split_pipe.c error_handling.c expand.c expand_count.c split_word.c} \
+					${addprefix parsing/, parsing.c quotes.c split_meta.c list.c split_pipe.c error_handling.c expand.c expand_count.c expand_apply.c split_word.c} \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c} \
 					${addprefix exec/, main.c env_variables.c frees.c} \
 				}

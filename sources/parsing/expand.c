@@ -43,6 +43,98 @@ char	*ft_trim(char *s, int len)
 	return (res);
 }
 
+int	count_char(char *s, char **env)
+{
+	int n;
+
+	n = 0;
+	while (*s)
+	{
+		if (*s == 39)
+		{
+			n += count_between_simple(&s);
+		}
+		else if (*s == 34)
+		{
+			n += count_between_double(&s, env);
+		}
+		else if (*s == '$')
+		{
+			s++;
+            n += find_variable(s, env);
+			s = s + len_var_env(s) - 1;
+		}
+		else
+			n++;
+		s++;
+	}
+	return (n);
+}
+
+char *apply_expand(char *res, char *word, char **env)
+{
+	char *cpy;
+	char *var;
+	int j;
+	int i;
+	
+	i = 0;
+    while (*word)
+	{
+		if (*word == 39)
+		{
+			word++;
+			while (*word && *word != 39)
+			{
+				res[i++] = *word;
+				word++;
+			}
+		}
+		else if (*word == 34)
+		{
+			word++;
+			while (*word && *word != 34)
+			{
+				if (*word == '$')
+				{
+					word++;
+					cpy = malloc(sizeof(char) * (len_var_env(word) + 1));
+					if (!cpy)
+						return (printf("echec malloc\n"), NULL); // ERREUR
+					cpy = ft_strcpy(cpy, word, len_var_env(word) + 1);
+					var = existing_var(cpy, env);
+					j = 0;
+					while (var && var[j])
+						res[i++] = var[j++];
+					word = word + len_var_env(word) - 1;
+				}
+				else
+					res[i++] = *word;
+				word++;
+			}
+		}
+		else if (*word == '$')
+		{
+			word++;
+
+			cpy = malloc(sizeof(char) * (len_var_env(word) + 1));
+			if (!cpy)
+				return (printf("echec malloc\n"), NULL); // ERREUR
+			cpy = ft_strcpy(cpy, word, len_var_env(word) + 1);
+			var = existing_var(cpy, env);
+			j = 0;
+			while (var && var[j])
+				res[i++] = var[j++];
+			word = word + len_var_env(word) - 1;
+		}
+		else
+			res[i++] = *word;
+		word++;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
 char	*ft_expand(char *word, char **env)
 {
 	char *res;
@@ -57,7 +149,8 @@ char	*ft_expand(char *word, char **env)
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (NULL); // ERROR
-
-	return (trim);
-	// return (res);
+	res = apply_expand(res, trim, env);
+	printf("res = %s\n", res);
+	// return (trim);
+	return (res);
 }
