@@ -73,9 +73,6 @@ int	count_char(char *s, char **env)
 
 char *apply_expand(char *res, char *word, char **env)
 {
-	char *cpy;
-	char *var;
-	int j;
 	int i;
 	
 	i = 0;
@@ -83,48 +80,15 @@ char *apply_expand(char *res, char *word, char **env)
 	{
 		if (*word == 39)
 		{
-			word++;
-			while (*word && *word != 39)
-			{
-				res[i++] = *word;
-				word++;
-			}
+			i = between_simple(res, &word, i);
 		}
 		else if (*word == 34)
 		{
-			word++;
-			while (*word && *word != 34)
-			{
-				if (*word == '$')
-				{
-					word++;
-					cpy = malloc(sizeof(char) * (len_var_env(word) + 1));
-					if (!cpy)
-						return (printf("echec malloc\n"), NULL); // ERREUR
-					cpy = ft_strcpy(cpy, word, len_var_env(word) + 1);
-					var = existing_var(cpy, env);
-					j = 0;
-					while (var && var[j])
-						res[i++] = var[j++];
-					word = word + len_var_env(word) - 1;
-				}
-				else
-					res[i++] = *word;
-				word++;
-			}
+			i = between_double(res, &word, env, i);
 		}
 		else if (*word == '$')
 		{
-			word++;
-
-			cpy = malloc(sizeof(char) * (len_var_env(word) + 1));
-			if (!cpy)
-				return (printf("echec malloc\n"), NULL); // ERREUR
-			cpy = ft_strcpy(cpy, word, len_var_env(word) + 1);
-			var = existing_var(cpy, env);
-			j = 0;
-			while (var && var[j])
-				res[i++] = var[j++];
+			i = out_of_quotes(res, &word, env, i);
 			word = word + len_var_env(word) - 1;
 		}
 		else
@@ -150,7 +114,5 @@ char	*ft_expand(char *word, char **env)
 	if (!res)
 		return (NULL); // ERROR
 	res = apply_expand(res, trim, env);
-	printf("res = %s\n", res);
-	// return (trim);
 	return (res);
 }

@@ -86,8 +86,9 @@ int find_variable(char *s, char **env);
 int count_between_simple(char **s);
 int count_between_double(char **s, char **env);
 // expand_apply.c
-void between_simple(char **res, char **s);
-
+int between_simple(char *res, char **word, int i);
+int between_double(char *res, char **word, char **env, int i);
+int out_of_quotes(char *res, char **word, char **env, int i);
 
 // split_word.c
 void				ft_strcpy_pos(char *dst, char *src, int start, int end);
