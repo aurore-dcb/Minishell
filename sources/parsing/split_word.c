@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/08/25 13:33:40 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:01:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,75 @@ void	get_type(token *lst)
 	}
 }
 
-int	get_end_word(char *cmd, int i)
+int    get_end_word(char *cmd, int i)
 {
-	char	q;
+    char    q;
 
-	while (cmd[i])
-	{
-		if (cmd[i] == 34 || cmd[i] == 39)
-		{
-			q = cmd[i];
-			i++;
-			while (cmd[i] && cmd[i] != q)
-				i++;
-			if (cmd[i] == '\0' || cmd[i] == q)
-			{
-				i++;
-				return (i);
-			}
-			i++;
-		}
-		if (cmd[i] == '<' || cmd[i] == '>' || cmd[i] == ' ')
-		{
-			i++;
-			return (i);
-		}
-		i++;
-	}
-	return (i);
+    if (cmd[i] == '<')
+    {
+        i++;
+        if (cmd[i] == '<')
+            i++;
+        return (i);
+    }
+    if (cmd[i] == '>')
+    {
+        i++;
+        if (cmd[i] == '>')
+            i++;
+        return (i);
+    }
+        
+    while (cmd[i])
+    {
+        if (cmd[i] == 34 || cmd[i] == 39)
+        {
+            q = cmd[i];
+            i++;
+            while (cmd[i] && cmd[i] != q)
+                i++;
+            if (cmd[i] == '\0' || cmd[i] == q)
+            {
+                i++;
+                return (i);
+            }
+            i++;
+        }
+        if (cmd[i] == ' ' || cmd[i] == '<' || cmd[i] == '>')
+            return (i);
+        i++;
+    }
+    return (i);
 }
+
+// int	get_end_word(char *cmd, int i)
+// {
+// 	char	q;
+
+// 	while (cmd[i])
+// 	{
+// 		if (cmd[i] == 34 || cmd[i] == 39)
+// 		{
+// 			q = cmd[i];
+// 			i++;
+// 			while (cmd[i] && cmd[i] != q)
+// 				i++;
+// 			if (cmd[i] == '\0' || cmd[i] == q)
+// 			{
+// 				i++;
+// 				return (i);
+// 			}
+// 			i++;
+// 		}
+// 		if (cmd[i] == '<' || cmd[i] == '>' || cmd[i] == ' ')
+// 		{
+// 			i++;
+// 			return (i);
+// 		}
+// 		i++;
+// 	}
+// 	return (i);
+// }
 
 int	add_word(cmd_line *list)
 {

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 11:05:18 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 11:28:38 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	parsing(char *input, char **env, cmd_line **list)
         token = begin->token;
         while (token)
         {
+            printf("token->type = %u\n",token->type);
             if (token->type != LIMITOR)
                 token->word = ft_expand(token->word, env);
             token = token->next;
