@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 10:48:58 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:20:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,12 @@ char	*ft_expand(char *word, char **env)
 	if (!word)
 		return (NULL); // ERROR
 	trim = ft_strtrim(word, " ");
-	// free(word); // commente pour le test dans le main
 	len_malloc = count_char(trim, env);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (NULL); // ERROR
 	res = apply_expand(res, trim, env);
+	free(trim);
+	free(word); // commente pour le test dans le main
 	return (res);
 }

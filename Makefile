@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/08/25 10:50:54 by aducobu          ###   ########.fr        #
+#    Updated: 2023/08/28 13:11:31 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = 			${addprefix sources/, \
 OBJS = 			${SRCS:sources/%.c=objects/%.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 EXECFLAGS = -lreadline
 RM = rm -rf
 
