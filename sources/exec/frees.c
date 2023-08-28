@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 13:27:49 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 14:22:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	free_list(cmd_line **begin)
 {
 	cmd_line	*current;
 	token		*cur_token;
+
 	while (*begin != NULL)
 	{
 		current = *begin;
 		(*begin) = (*begin)->next;
+		free(current->cmd);
 		while (current->token)
 		{
 			cur_token = current->token;
@@ -41,8 +43,6 @@ void	free_list(cmd_line **begin)
 			free(cur_token->word);
 			free(cur_token);
 		}
-		printf("current->cmd = %s\n", current->cmd);
-		free(current->cmd);
 		free(current);
 	}
 }

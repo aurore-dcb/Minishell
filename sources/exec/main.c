@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 10:59:18 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 13:59:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(int argc, char **argv, char **env)
 		free_list(&list);
 		input = readline("minishell> ");
 	}
-	free(input);
+	// free(input);
 	// clear_history();
 	rl_clear_history();
 	return (0);
