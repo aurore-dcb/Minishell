@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/24 11:21:17 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 10:59:18 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ void	display_list(cmd_line *list)
 	}
 }
 
+void	display_token(cmd_line *list)
+{
+	token *token;
+	
+	while (list)
+    {
+		printf("\ncmd line = [%s]\n", list->cmd);
+        token = list->token;
+        while (token)
+        {
+			printf("word : [%s] - type : [%u]\n", token->word, token->type);
+            token = token->next;
+        }
+        list = list->next;
+    }
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char		*input;
@@ -58,15 +75,16 @@ int	main(int argc, char **argv, char **env)
 			if (!parsing(input, env, &list))
 				printf("ERROR -> parsing\n");
 				// return (1); // afficher l'erreur puis passer au nouveau prompt
-			else
-				display_list(list);
+			// else
+			// 	display_list(list);
+			display_token(list);
 		}
 		free(input);
 		free_list(&list);
 		input = readline("minishell> ");
 	}
 	free(input);
-	clear_history();
-	// rl_clear_history();
+	// clear_history();
+	rl_clear_history();
 	return (0);
 }

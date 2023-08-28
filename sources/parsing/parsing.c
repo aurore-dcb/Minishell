@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/25 14:45:22 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 11:05:18 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 int	parsing(char *input, char **env, cmd_line **list)
 {
 	t_quotes etat;
+    cmd_line *begin;
+    token *token;
 
     etat.simple = 0;
     etat.doubl = 0;
@@ -29,6 +31,20 @@ int	parsing(char *input, char **env, cmd_line **list)
         return (0);
     if (!split_pipe(input, list))
         return (0);
-    printf("expand : [%s] -> [%s]\n", input, ft_expand(input, env));
+    begin = *list;
+    if (!list)
+        return (0);
+    while (begin)
+    {
+        token = begin->token;
+        while (token)
+        {
+            if (token->type != LIMITOR)
+                token->word = ft_expand(token->word, env);
+            token = token->next;
+        }
+        begin = begin->next;
+    }
+    // printf("expand : [%s] -> [%s]\n", input, ft_expand(input, env));
     return (1);
 }
