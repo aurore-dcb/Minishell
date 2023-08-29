@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 09:59:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/29 10:02:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int	main(int argc, char **argv, char **env)
 		// perror("Erreur lors de la configuration du gestionnaire de signal");
 		// return 1;
 	// }
-	while (/*signalFlag*/ == 0 &&input != NULL)
+	while (/*signalFlag == 0 &&*/ input != NULL)
 	{
-		if (/*signalFlag*/ == 0 && input[0] != '\0')
+		if (/*signalFlag == 0 && */ input[0] != '\0')
 		{
 			add_history(input);
 			// -> traiter input : parsing puis execution
