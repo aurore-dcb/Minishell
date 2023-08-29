@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 13:59:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/29 09:59:44 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ void	display_token(cmd_line *list)
     }
 }
 
+// int signalFlag = 0;
+
+// #include <signal.h>
+// void handleCtrlC(int signum) {
+// 	(void)signum;
+// 	signalFlag = 1;
+// }
+
 int	main(int argc, char **argv, char **env)
 {
 	char		*input;
@@ -66,24 +74,24 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
 	input = readline("minishell> ");
-	while (input != NULL)
+	// if (signal(SIGINT, handleCtrlC) == SIG_ERR) {
+		// perror("Erreur lors de la configuration du gestionnaire de signal");
+		// return 1;
+	// }
+	while (/*signalFlag*/ == 0 &&input != NULL)
 	{
-		if (input[0] != '\0')
+		if (/*signalFlag*/ == 0 && input[0] != '\0')
 		{
 			add_history(input);
 			// -> traiter input : parsing puis execution
 			if (!parsing(input, env, &list))
 				printf("ERROR -> parsing\n");
-				// return (1); // afficher l'erreur puis passer au nouveau prompt
-			// else
-			// 	display_list(list);
 			display_token(list);
+			// si ctrl-C : sortir de cette boucle
 		}
-		free(input);
-		free_list(&list);
+		free_all(&list, input);
 		input = readline("minishell> ");
 	}
-	// free(input);
 	// clear_history();
 	rl_clear_history();
 	return (0);

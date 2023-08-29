@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 13:40:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 14:41:44 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int	parsing(char *input, char **env, cmd_line **list)
         }
         begin = begin->next;
     }
-    // printf("expand : [%s] -> [%s]\n", input, ft_expand(input, env));
     return (1);
 }

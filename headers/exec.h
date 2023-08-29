@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/25 14:45:38 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 14:41:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,20 @@ int					split_pipe(char *input, cmd_line **list);
 int					error_begin_end_cmd(char *input);
 int					error_double_pipe(char *input);
 // expand.c
-char	*ft_strcpy(char *dst, char *src, int dstsize);
-char	*ft_trim(char *s, int len);
-int	count_char(char *s, char **env);
+char				*ft_strcpy(char *dst, char *src, int dstsize);
+char				*ft_trim(char *s, int len);
+int					count_char(char *s, char **env);
 char				*ft_expand(char *word, char **env);
 // expand_count.c
-char *existing_var(char *var, char **env);
-int len_var_env(char *s);
-int find_variable(char *s, char **env);
-int count_between_simple(char **s);
-int count_between_double(char **s, char **env);
+char				*existing_var(char *var, char **env);
+int					len_var_env(char *s);
+int					find_variable(char *s, char **env);
+int					count_between_simple(char **s);
+int					count_between_double(char **s, char **env);
 // expand_apply.c
-int between_simple(char *res, char **word, int i);
-int between_double(char *res, char **word, char **env, int i);
-int out_of_quotes(char *res, char **word, char **env, int i);
+int					between_simple(char *res, char **word, int i);
+int					between_double(char *res, char **word, char **env, int i);
+int					out_of_quotes(char *res, char **word, char **env, int i);
 
 // split_word.c
 void				ft_strcpy_pos(char *dst, char *src, int start, int end);
@@ -102,6 +102,13 @@ void				split_word(cmd_line *list);
 
 // -------------------- exec -------------------- //
 
+// frees.c
+void				free_tab(char **tab);
+void				free_list(cmd_line **begin);
+void				free_all(cmd_line **cmd, char *input);
+
+// -------------------- builtins.c -------------------- //
+
 // pwd.c
 void				builtin_pwd(char **env);
 // env.c
@@ -110,8 +117,5 @@ void				builtin_env(char **env);
 void				builtin_cd(char *chemin);
 // echo.c
 void				builtin_echo(char **cmd);
-// frees.c
-void				free_tab(char **tab);
-void				free_list(cmd_line **begin);
 
 #endif

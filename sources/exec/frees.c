@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 14:22:40 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/28 14:36:47 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ void	free_list(cmd_line **begin)
 		}
 		free(current);
 	}
+}
+
+void	free_all(cmd_line **cmd, char *input)
+{
+	free(input);
+	free_list(cmd);
 }
