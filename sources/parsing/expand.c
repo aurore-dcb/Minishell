@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 13:20:54 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/29 14:54:44 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_trim(char *s, int len)
 	return (res);
 }
 
-int	count_char(char *s, char **env)
+int	count_char(char *s, char **env, int exit_status)
 {
 	int n;
 
@@ -61,7 +61,7 @@ int	count_char(char *s, char **env)
 		else if (*s == '$')
 		{
 			s++;
-            n += find_variable(s, env);
+            n += find_variable(s, env, exit_status);
 			s = s + len_var_env(s) - 1;
 		}
 		else
@@ -99,16 +99,17 @@ char *apply_expand(char *res, char *word, char **env)
 	return (res);
 }
 
-char	*ft_expand(char *word, char **env)
+char	*ft_expand(char *word, char **env, int exit_status)
 {
 	char *res;
 	char *trim;
 	int len_malloc;
 
+	(void)exit_status;
 	if (!word)
 		return (NULL); // ERROR
 	trim = ft_strtrim(word, " ");
-	len_malloc = count_char(trim, env);
+	len_malloc = count_char(trim, env, exit_status);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (NULL); // ERROR

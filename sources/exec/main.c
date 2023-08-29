@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 10:02:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/29 14:13:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ int	main(int argc, char **argv, char **env)
 {
 	char		*input;
 	cmd_line	*list;
+	t_quotes	etat;
+	int exit_status;
 
 	(void)argv;
-	list = NULL;
+	exit_status = 0;
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
 	input = readline("minishell> ");
@@ -78,13 +80,15 @@ int	main(int argc, char **argv, char **env)
 		// perror("Erreur lors de la configuration du gestionnaire de signal");
 		// return 1;
 	// }
+	printf("input = .%s.\n", input);
 	while (/*signalFlag == 0 &&*/ input != NULL)
 	{
+		initialize(&etat, &list);
 		if (/*signalFlag == 0 && */ input[0] != '\0')
 		{
 			add_history(input);
 			// -> traiter input : parsing puis execution
-			if (!parsing(input, env, &list))
+			if (!parsing(input, env, &etat, &list, exit_status))
 				printf("ERROR -> parsing\n");
 			display_token(list);
 			// si ctrl-C : sortir de cette boucle

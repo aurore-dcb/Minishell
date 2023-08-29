@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/08/28 13:11:31 by aducobu          ###   ########.fr        #
+#    Updated: 2023/08/29 10:11:36 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = 			minishell
 SRCS = 			${addprefix sources/, \
 					${addprefix parsing/, parsing.c quotes.c split_meta.c list.c split_pipe.c error_handling.c expand.c expand_count.c expand_apply.c split_word.c} \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c} \
-					${addprefix exec/, main.c env_variables.c frees.c} \
+					${addprefix exec/, main.c env_variables.c frees.c error.c} \
 				}
 
 OBJS = 			${SRCS:sources/%.c=objects/%.o}

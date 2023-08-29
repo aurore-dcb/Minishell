@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 13:34:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/29 13:43:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	nb_mots_cmd(char *str)
 	char	q;
 
 	mots = 1;
-	while (*str)
+	while (*str != '\0')
 	{
 		if (*str == 34 || *str == 39)
 		{
@@ -93,6 +93,7 @@ int	split_pipe(char *input, cmd_line **list)
 
 	if (input == NULL)
 		return (0);
+	printf("LEN = %d\n", ft_strlen(input));
 	n = nb_mots_cmd(input);
 	while (n)
 	{
