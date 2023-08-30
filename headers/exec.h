@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 13:20:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:26:59 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ typedef struct token
 
 typedef struct cmd_line
 {
-    char            *cmd;
-    char            **args;
-    struct token    *token;
-    struct cmd_line    *next;
-}                    cmd_line;
+	char			*cmd;
+	char			**args;
+	struct token	*token;
+	struct cmd_line	*next;
+}					cmd_line;
 
 typedef struct s_data
 {
@@ -95,12 +95,12 @@ char				*ft_expand(char *word, s_data *data);
 // expand_count.c
 char				*existing_var(char *var, char **env);
 int					len_var_env(char *s);
-int					find_variable(char *s, char **env, int exit_status);
+int					find_variable(char *s, s_data *data);
 int					count_between_simple(char **s);
 int					count_between_double(char **s, s_data *data);
 // expand_apply.c
 int					between_simple(char *res, char **word, int i);
-int					between_double(char *res, char **word, char **env, int i);
+int					between_double(char *res, char **word, s_data *data, int i);
 int					out_of_quotes(char *res, char **word, s_data *data, int i);
 // split_word.c
 void				ft_strcpy_pos(char *dst, char *src, int start, int end);

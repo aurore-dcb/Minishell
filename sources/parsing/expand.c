@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 13:12:11 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:28:18 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	count_char(char *s, s_data *data)
 		else if (*s == '$')
 		{
 			s++;
-            n += find_variable(s, data->env, data->exit_status);
+			n += find_variable(s, data);
 			s = s + len_var_env(s) - 1;
 		}
 		else
@@ -84,12 +84,11 @@ char *apply_expand(char *res, char *word, s_data *data)
 		}
 		else if (*word == 34)
 		{
-			i = between_double(res, &word, data->env, i);
+			i = between_double(res, &word, data, i);
 		}
 		else if (*word == '$')
 		{
 			i = out_of_quotes(res, &word, data, i);
-			// i = out_of_quotes(res, &word, data->env, i);
 			word = word + len_var_env(word) - 1;
 		}
 		else

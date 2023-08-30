@@ -49,19 +49,19 @@ int count_between_simple(char **s)
 	}
 	return (n);
 }
-int find_variable(char *s, char **env, int exit_status)
+int find_variable(char *s, s_data *data)
 {
     int n;
     char *cpy;
     char *res;
 
 	if (*s == '?') //exit status
-		return (size_nb(exit_status));
+		return (size_nb(data->exit_status));
     cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
 	if (!cpy)
 		return (printf("echec malloc\n"), 0); // ERREUR
     cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
-    res = existing_var(cpy, env);
+    res = existing_var(cpy, data->env);
 	n = ft_strlen(res);
     return (n);
 }
@@ -77,7 +77,7 @@ int count_between_double(char **s, s_data *data)
 		if (*(*s) == '$')
 		{
 			(*s)++;
-            n += find_variable(*s, data->env, data->exit_status);
+            n += find_variable(*s, data);
 			(*s) = (*s) + len_var_env(*s) - 1;
 		}
 		else
