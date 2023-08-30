@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 13:17:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:20:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ typedef struct token
 
 typedef struct cmd_line
 {
-	char			*cmd;
-	struct token	*token;
-	struct cmd_line	*next;
-}					cmd_line;
+    char            *cmd;
+    char            **args;
+    struct token    *token;
+    struct cmd_line    *next;
+}                    cmd_line;
 
 typedef struct s_data
 {
