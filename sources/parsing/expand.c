@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 10:17:50 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 12:08:53 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_trim(char *s, int len)
 	return (res);
 }
 
-int	count_char(char *s, char **env, int exit_status)
+int	count_char(char *s, s_data *data)
 {
 	int n;
 
@@ -56,12 +56,12 @@ int	count_char(char *s, char **env, int exit_status)
 		}
 		else if (*s == 34)
 		{
-			n += count_between_double(&s, env, exit_status);
+			n += count_between_double(&s, data);
 		}
 		else if (*s == '$')
 		{
 			s++;
-            n += find_variable(s, env, exit_status);
+            n += find_variable(s, data->env, data->exit_status);
 			s = s + len_var_env(s) - 1;
 		}
 		else
@@ -71,7 +71,7 @@ int	count_char(char *s, char **env, int exit_status)
 	return (n);
 }
 
-char *apply_expand(char *res, char *word, char **env)
+char *apply_expand(char *res, char *word, s_data *data)
 {
 	int i;
 	
@@ -84,11 +84,11 @@ char *apply_expand(char *res, char *word, char **env)
 		}
 		else if (*word == 34)
 		{
-			i = between_double(res, &word, env, i);
+			i = between_double(res, &word, data->env, i);
 		}
 		else if (*word == '$')
 		{
-			i = out_of_quotes(res, &word, env, i);
+			i = out_of_quotes(res, &word, data->env, i);
 			word = word + len_var_env(word) - 1;
 		}
 		else
@@ -99,22 +99,21 @@ char *apply_expand(char *res, char *word, char **env)
 	return (res);
 }
 
-char	*ft_expand(char *word, char **env, int exit_status)
+char	*ft_expand(char *word, s_data *data)
 {
 	char *res;
 	char *trim;
 	int len_malloc;
 
-	(void)exit_status;
 	if (!word)
 		return (NULL); // ERROR
 	trim = ft_strtrim(word, " ");
-	len_malloc = count_char(trim, env, exit_status);
+	len_malloc = count_char(trim, data);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (NULL); // ERROR
-	res = apply_expand(res, trim, env);
+	res = apply_expand(res, trim, data);
 	free(trim);
-	free(word); // commente pour le test dans le main
+	free(word);
 	return (res);
 }

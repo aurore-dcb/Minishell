@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 11:39:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 12:08:42 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ int					is_meta(char c);
 char				**split_meta(char *input, char c);
 // parsing.c
 int					parsing(s_data *data);
-// int					parsing(char *input, char **env, t_quotes *etat,
-// cmd_line **list, int exit_status);
 // list.c
 void				ft_lstadd_back_cmd_line(cmd_line **lst, cmd_line *new);
 cmd_line			*ft_lstnew_cmd_line(int len);
@@ -90,14 +88,16 @@ int					error_syntax(cmd_line **list);
 // expand.c
 char				*ft_strcpy(char *dst, char *src, int dstsize);
 char				*ft_trim(char *s, int len);
-int					count_char(char *s, char **env, int exit_status);
-char				*ft_expand(char *word, char **env, int exit_status);
+int					count_char(char *s, s_data *data);
+char				*apply_expand(char *res, char *word, s_data *data);
+char				*ft_expand(char *word, s_data *data);
 // expand_count.c
 char				*existing_var(char *var, char **env);
 int					len_var_env(char *s);
 int					find_variable(char *s, char **env, int exit_status);
 int					count_between_simple(char **s);
-int					count_between_double(char **s, char **env, int exit_status);
+int count_between_double(char **s, s_data *data);
+// int					count_between_double(char **s, char **env, int exit_status);
 // expand_apply.c
 int					between_simple(char *res, char **word, int i);
 int					between_double(char *res, char **word, char **env, int i);

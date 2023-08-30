@@ -65,7 +65,8 @@ int find_variable(char *s, char **env, int exit_status)
 	n = ft_strlen(res);
     return (n);
 }
-int count_between_double(char **s, char **env, int exit_status)
+
+int count_between_double(char **s, s_data *data)
 {
 	int n;
 
@@ -76,7 +77,7 @@ int count_between_double(char **s, char **env, int exit_status)
 		if (*(*s) == '$')
 		{
 			(*s)++;
-            n += find_variable(*s, env, exit_status);
+            n += find_variable(*s, data->env, data->exit_status);
 			(*s) = (*s) + len_var_env(*s) - 1;
 		}
 		else

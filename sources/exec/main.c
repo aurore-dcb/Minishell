@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 11:36:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 11:41:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,6 @@ int	main(int argc, char **argv, char **env)
 			// -> traiter input : parsing puis execution
 			if (!parsing(&data))
 				printf("ERROR -> parsing\n");
-			// if (!parsing(data.input, data.env, &data.etat, &data.cmd, data.exit_status))
-			// 	printf("ERROR -> parsing\n");
 			else
 				display_token(data.cmd);
 			// si ctrl-C : sortir de cette boucle
