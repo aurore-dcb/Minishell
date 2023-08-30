@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 13:28:18 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 14:18:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ int	count_char(char *s, s_data *data)
 	while (*s)
 	{
 		if (*s == 39)
-		{
 			n += count_between_simple(&s);
-		}
 		else if (*s == 34)
 		{
 			n += count_between_double(&s, data);
@@ -62,7 +60,11 @@ int	count_char(char *s, s_data *data)
 		{
 			s++;
 			n += find_variable(s, data);
-			s = s + len_var_env(s) - 1;
+			if (*s == '?')
+				s += len_var_env(s);
+			else 
+				s = s + len_var_env(s) - 1;
+			printf("char = %c\n", *s);
 		}
 		else
 			n++;
@@ -109,6 +111,7 @@ char	*ft_expand(char *word, s_data *data)
 		return (NULL); // ERROR
 	trim = ft_strtrim(word, " ");
 	len_malloc = count_char(trim, data);
+	// printf("len malloc = %d\n", len_malloc);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (NULL); // ERROR

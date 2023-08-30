@@ -43,14 +43,23 @@ int between_double(char *res, char **word, s_data *data, int i)
         if (*(*word) == '$')
         {
             (*word)++;
-            cpy = malloc(sizeof(char) * (len_var_env(*word) + 1));
-            if (!cpy)
-                return (printf("echec malloc\n"), 0); // ERREUR
-            cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
-            var = existing_var(cpy, data->env);
-            j = 0;
-            while (var && var[j])
-                res[i++] = var[j++];
+            if (*(*word) == '?')
+            {
+                res = ft_itoa(data->exit_status);
+                printf("res = .%s.\n", res);
+                i += size_nb(data->exit_status);
+            }
+            else
+            {
+                cpy = malloc(sizeof(char) * (len_var_env(*word) + 1));
+                if (!cpy)
+                    return (printf("echec malloc\n"), 0); // ERREUR
+                cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
+                var = existing_var(cpy, data->env);
+                j = 0;
+                while (var && var[j])
+                    res[i++] = var[j++];
+            }
             (*word) = (*word) + len_var_env(*word) - 1;
         }
         else

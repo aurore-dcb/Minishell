@@ -28,6 +28,8 @@ int len_var_env(char *s)
 	int len;
 
 	len = 0;
+	if (*s == '?')
+		return (1);
 	while (*s && (*s == '_' || ft_isalnum(*s)))
 	{
 		len++;
@@ -56,7 +58,10 @@ int find_variable(char *s, s_data *data)
     char *res;
 
 	if (*s == '?') //exit status
+	{
+		printf("exit_status = %d\n-> len = %d\n",data->exit_status, size_nb(data->exit_status));
 		return (size_nb(data->exit_status));
+	}
     cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
 	if (!cpy)
 		return (printf("echec malloc\n"), 0); // ERREUR
