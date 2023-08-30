@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 13:13:38 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:17:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,12 @@ void				free_list(cmd_line **begin);
 void				free_all(cmd_line **cmd, char *input);
 // error.c
 
-//
+// main.c
 void				initialize(s_data *data);
+// exec_utils.c
+int					nb_arg(cmd_line *list);
+void				fill_arg(cmd_line *list);
+int					tab_cmd(cmd_line **list);
 
 // -------------------- builtins.c -------------------- //
 
