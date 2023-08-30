@@ -6,19 +6,14 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 14:15:57 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 10:35:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/exec.h"
 #include "../../libft/libft.h"
 
-void initialize(t_quotes *etat, cmd_line **list)
-{
-    etat->simple = 0;
-    etat->doubl = 0;
-    *list = NULL;
-}
+
 
 int expansion(cmd_line **cmd, char **env, int exit_status)
 {
@@ -48,9 +43,6 @@ int expansion(cmd_line **cmd, char **env, int exit_status)
 
 int	parsing(char *input, char **env, t_quotes *etat, cmd_line **list, int exit_status)
 {
-    // cmd_line *begin;
-    // token *token;
-
 	if (!env)
 		return (0);
     if (closed_quotes(input, etat) == 0)
@@ -61,21 +53,9 @@ int	parsing(char *input, char **env, t_quotes *etat, cmd_line **list, int exit_s
         return (0);
     if (!split_pipe(input, list))
         return (0);
+    if (error_syntax(list))
+        return (0);
     if (!expansion(list, env, exit_status))
         return (0);
-    // begin = *list;
-    // if (!list)
-    //     return (0);
-    // while (begin)
-    // {
-    //     token = begin->token;
-    //     while (token)
-    //     {
-    //         if (token->type != LIMITOR)
-    //             token->word = ft_expand(token->word, env);
-    //         token = token->next;
-    //     }
-    //     begin = begin->next;
-    // }
     return (1);
 }

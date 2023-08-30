@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 14:13:01 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 10:45:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,19 @@ void	display_list(cmd_line *list)
 
 void	display_token(cmd_line *list)
 {
-	token *token;
-	
+	token	*token;
+
 	while (list)
-    {
+	{
 		printf("\ncmd line = [%s]\n", list->cmd);
-        token = list->token;
-        while (token)
-        {
+		token = list->token;
+		while (token)
+		{
 			printf("word : [%s] - type : [%u]\n", token->word, token->type);
-            token = token->next;
-        }
-        list = list->next;
-    }
+			token = token->next;
+		}
+		list = list->next;
+	}
 }
 
 // int signalFlag = 0;
@@ -63,34 +63,44 @@ void	display_token(cmd_line *list)
 // 	(void)signum;
 // 	signalFlag = 1;
 // }
+// void initialize(s_data *data)
+// {
+// 	data->etat->simple = 0;
+// 	data->etat->doubl = 0;
+//     data->cmd = NULL;
+	
+// }
 
 int	main(int argc, char **argv, char **env)
 {
 	char		*input;
+	int			exit_status;
+	(void)argv;
 	cmd_line	*list;
 	t_quotes	etat;
-	int exit_status;
-
-	(void)argv;
-	exit_status = 0;
+	// s_data		data;
+	
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
+	exit_status = 0;
 	input = readline("minishell> ");
+	// data.exit_status = 0;
+	// data.input = readline("minishell> ");
 	// if (signal(SIGINT, handleCtrlC) == SIG_ERR) {
-		// perror("Erreur lors de la configuration du gestionnaire de signal");
-		// return 1;
+	// perror("Erreur lors de la configuration du gestionnaire de signal");
+	// return (1);
 	// }
-	printf("input = .%s.\n", input);
 	while (/*signalFlag == 0 &&*/ input != NULL)
 	{
-		initialize(&etat, &list);
+		// initialize(&data);
 		if (/*signalFlag == 0 && */ input[0] != '\0')
 		{
 			add_history(input);
 			// -> traiter input : parsing puis execution
 			if (!parsing(input, env, &etat, &list, exit_status))
 				printf("ERROR -> parsing\n");
-			display_token(list);
+			else
+				display_token(list);
 			// si ctrl-C : sortir de cette boucle
 		}
 		free_all(&list, input);

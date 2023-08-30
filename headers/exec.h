@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 14:56:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 10:55:45 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ typedef enum type
 	EXIT_FILE_RET // word following '>>'
 }					t_type;
 
+// typedef struct s_data
+// {
+// 	char			*input;
+// 	struct cmd_line	*cmd;
+// 	struct s_quotes	etat;
+// 	char			**env;
+// 	int				exit_status;
+// }					data;
+
 typedef struct s_quotes
 {
 	int				simple;
@@ -59,9 +68,9 @@ typedef struct cmd_line
 // quotes.c
 int					closed_quotes(char *input, t_quotes *etat);
 // split_meta.c
+int					is_meta(char c);
 char				**split_meta(char *input, char c);
 // parsing.c
-// int					parsing(char *input, char **env, cmd_line **list);
 int					parsing(char *input, char **env, t_quotes *etat,
 						cmd_line **list, int exit_status);
 // list.c
@@ -76,6 +85,7 @@ int					split_pipe(char *input, cmd_line **list);
 // error_handling.c
 int					error_begin_end_cmd(char *input);
 int					error_double_pipe(char *input);
+int					error_syntax(cmd_line **list);
 // expand.c
 char				*ft_strcpy(char *dst, char *src, int dstsize);
 char				*ft_trim(char *s, int len);
@@ -100,7 +110,7 @@ token				*ft_lstnew_token(cmd_line *list, int start, int end);
 void				ft_lstadd_back_token(token **lst, token *new);
 int					add_word(cmd_line *list);
 int					get_end_word(char *cmd, int i);
-void				split_word(cmd_line *list);
+int 				split_word(cmd_line *list);
 
 // -------------------- exec -------------------- //
 

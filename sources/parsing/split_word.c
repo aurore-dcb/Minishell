@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/08/28 13:01:09 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 11:02:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,12 +162,16 @@ int	add_word(cmd_line *list)
 	return (1);
 }
 
-void	split_word(cmd_line *list)
+int	split_word(cmd_line *list)
 {
 	while (list)
 	{
 		list->cmd = ft_strtrim(list->cmd, " ");
+		printf("test = .%s.\n", list->cmd);
+		if (!list->cmd[0])
+			return (0);
 		add_word(list);
 		list = list->next;
 	}
+	return (1);
 }

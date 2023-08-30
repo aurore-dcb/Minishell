@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 10:51:03 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 11:02:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	free_list(cmd_line **begin)
 		{
 			cur_token = current->token;
 			current->token = cur_token->next;
-			free(cur_token->word);
+			if (cur_token->word)
+				free(cur_token->word);
 			free(cur_token);
 		}
 		free(current);

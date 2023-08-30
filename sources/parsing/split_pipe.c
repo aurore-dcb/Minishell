@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 13:43:23 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 10:56:08 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ int	split_pipe(char *input, cmd_line **list)
 
 	if (input == NULL)
 		return (0);
-	printf("LEN = %d\n", ft_strlen(input));
 	n = nb_mots_cmd(input);
 	while (n)
 	{
 		if (*input == '|')
 			input++;
+		// printf("test\n");
 		new = ft_lstnew_cmd_line(nb_lettre_cmd(input) + 1);
 		if (!new)
 			return (0);
@@ -106,6 +106,6 @@ int	split_pipe(char *input, cmd_line **list)
 		split2_pipe(&input, list);
 		n--;
 	}
-	split_word(*list);
-	return (1);
+	return (split_word(*list));
+	// return (1);
 }

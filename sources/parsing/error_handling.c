@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:24:56 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/24 11:56:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 10:40:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,29 @@ int error_double_pipe(char *input)
         else
             i++;
     }
+    return (0);
+}
+
+int    error_syntax(cmd_line **list)
+{
+    cmd_line    *begin;
+    token       *token;
+
+    begin = *list;
+    while (begin)
+    {
+        token = begin->token;
+        while (token->next)
+        {
+            if (is_meta(token->next->word[0]) && is_meta(token->word[0]))
+                return (1);
+            token = token->next;
+        }
+        begin = begin->next;
+    }
+    if (token->word[0] == '<' || token->word[0] == '>')
+        return (1);
+    if (token->word[0] == '|')
+        return (1);
     return (0);
 }

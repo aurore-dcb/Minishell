@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 14:54:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 10:17:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	count_char(char *s, char **env, int exit_status)
 		}
 		else if (*s == 34)
 		{
-			n += count_between_double(&s, env);
+			n += count_between_double(&s, env, exit_status);
 		}
 		else if (*s == '$')
 		{
