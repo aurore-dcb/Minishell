@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 12:08:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:13:38 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,11 @@ char				*existing_var(char *var, char **env);
 int					len_var_env(char *s);
 int					find_variable(char *s, char **env, int exit_status);
 int					count_between_simple(char **s);
-int count_between_double(char **s, s_data *data);
-// int					count_between_double(char **s, char **env, int exit_status);
+int					count_between_double(char **s, s_data *data);
 // expand_apply.c
 int					between_simple(char *res, char **word, int i);
 int					between_double(char *res, char **word, char **env, int i);
-int					out_of_quotes(char *res, char **word, char **env, int i);
-
+int					out_of_quotes(char *res, char **word, s_data *data, int i);
 // split_word.c
 void				ft_strcpy_pos(char *dst, char *src, int start, int end);
 t_type				get_type_meta(char *word);

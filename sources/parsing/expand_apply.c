@@ -13,7 +13,7 @@ int between_simple(char *res, char **word, int i)
     return (i);
 }
 
-int out_of_quotes(char *res, char **word, char **env, int i)
+int out_of_quotes(char *res, char **word, s_data *data, int i)
 {
 	int j;
 	char *cpy;
@@ -25,7 +25,7 @@ int out_of_quotes(char *res, char **word, char **env, int i)
 	if (!cpy)
 		return (printf("echec malloc\n"), 0);
 	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
-	var = existing_var(cpy, env);
+	var = existing_var(cpy, data->env);
 	while (var && var[j])
 		res[i++] = var[j++];
 	return (i);	

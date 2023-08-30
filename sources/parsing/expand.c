@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 12:08:53 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/30 13:12:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ char *apply_expand(char *res, char *word, s_data *data)
 		}
 		else if (*word == '$')
 		{
-			i = out_of_quotes(res, &word, data->env, i);
+			i = out_of_quotes(res, &word, data, i);
+			// i = out_of_quotes(res, &word, data->env, i);
 			word = word + len_var_env(word) - 1;
 		}
 		else
