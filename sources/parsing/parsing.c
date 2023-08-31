@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 13:42:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 10:51:52 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ int	parsing(s_data *data)
 		return (0);
 	if (error_syntax(&data->cmd))
 		return (0);
-	// printf("exit_status = %d\n", data->exit_status);
 	if (!expansion(data))
+		return (0);
+	if (!tab_cmd(&data->cmd))
 		return (0);
 	return (1);
 }

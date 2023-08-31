@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 09:27:40 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 10:51:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,23 @@ void	display_list(cmd_line *list)
 
 void	display_token(cmd_line *list)
 {
+	int i;
 	token	*token;
 
 	while (list)
 	{
+		i = 0;
 		printf("\ncmd line = [%s]\n", list->cmd);
 		token = list->token;
 		while (token)
 		{
 			printf("word : [%s] - type : [%u]\n", token->word, token->type);
 			token = token->next;
+		}
+		while (list->args[i])
+		{
+			printf("args[%d] = [%s]\n", i, list->args[i]);
+			i++;
 		}
 		list = list->next;
 	}

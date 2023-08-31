@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/08/30 11:02:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 10:30:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int    get_end_word(char *cmd, int i)
             i++;
         return (i);
     }
-        
     while (cmd[i])
     {
         if (cmd[i] == 34 || cmd[i] == 39)
