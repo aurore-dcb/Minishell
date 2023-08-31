@@ -6,11 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 14:49:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:01:19 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
 char *existing_var(char *var, s_data *data)

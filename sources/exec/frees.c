@@ -6,11 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 11:02:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:00:38 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
 void	free_tab(char **tab)

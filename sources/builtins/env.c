@@ -6,11 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:55:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/22 15:07:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:04:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
 void builtin_env(char **env)

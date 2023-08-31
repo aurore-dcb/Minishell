@@ -6,11 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/28 14:22:45 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:01:32 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
 void	ft_lstadd_back_cmd_line(cmd_line **lst, cmd_line *new)

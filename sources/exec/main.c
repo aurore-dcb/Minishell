@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 14:36:15 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:03:16 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,11 @@
 // 	signalFlag = 1;
 // }
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
+// #include "../../headers/exec.h"
 #include "../../libft/libft.h"
 //#include <signal.h>
 
-void	display_tab(char *input)
-{
-	int		i;
-	char	**tab;
-
-	i = 0;
-	tab = split_meta(input, ' ');
-	while (tab[i])
-	{
-		printf(".%s.\n", tab[i]);
-		i++;
-	}
-	free_tab(tab);
-}
 
 void	display_list(cmd_line *list)
 {

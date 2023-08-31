@@ -6,11 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 09:57:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:01:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
 char	*ft_strcpy(char *dst, char *src, int dstsize)

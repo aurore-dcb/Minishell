@@ -6,12 +6,17 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 14:36:24 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:02:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
+
+int	is_meta(char c)
+{
+	return (c == '<' || c == '>' || c == '|');
+}
 
 int	expansion(s_data *data)
 {

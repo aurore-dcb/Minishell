@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 15:04:59 by aducobu          ###   ########.fr       */
+/*   Created: 2023/08/31 14:56:51 by aducobu           #+#    #+#             */
+/*   Updated: 2023/08/31 14:58:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
-#include "../../libft/libft.h"
+#ifndef MINISHELL_H
+#define MINISHELL_H
 
-// gerer argument
-void	builtin_pwd(char **env)
-{
-	int i;
-	int j;
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-	i = 0;
-	j = 4;
-	if (!env)
-		return ;
-	while (env[i])
-	{
-		if (ft_strnstr(env[i], "PWD=", 4))
-		{
-			while (env[i][j])
-			{
-				printf("%c", env[i][j]);
-				j++;
-			}
-			printf("\n");
-			return ;
-		}
-		i++;
-	}
-}
+#include "exec.h"
+
+#endif

@@ -6,9 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 10:11:17 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 10:30:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:00:51 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../headers/minishell.h"
 
 // void ft_error()
 // {

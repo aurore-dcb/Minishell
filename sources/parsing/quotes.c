@@ -6,11 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:19:02 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/29 11:03:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:01:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/exec.h"
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
 int	closed_quotes(char *input, t_quotes *etat)

@@ -1,4 +1,16 @@
-#include "../../headers/exec.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_apply.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
+/*   Updated: 2023/08/31 15:01:15 by aducobu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../headers/minishell.h"
 #include "../../libft/libft.h"
 
 int between_simple(char *res, char **word, int i)
