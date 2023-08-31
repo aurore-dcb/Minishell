@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 13:26:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 13:44:10 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum type
 	FILE_OUT_SUR, //word == '>>'
 	OPEN_FILE,    // word following '<'
 	LIMITOR,      // word following '<<'
-	EXIT_FILE,    // word followinf '>'
+	EXIT_FILE,    // word following '>'
 	EXIT_FILE_RET // word following '>>'
 }					t_type;
 
