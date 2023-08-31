@@ -25,41 +25,23 @@ int out_of_quotes(char *res, char **word, s_data *data, int i)
 	if (!cpy)
 		return (printf("echec malloc\n"), 0);
 	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
-	var = existing_var(cpy, data->env);
-	while (var && var[j])
-		res[i++] = var[j++];
-	return (i);	
+	if (**word == '?')
+        var = ft_itoa(data->exit_status);
+    else
+        var = existing_var(cpy, data->env);
+    while (var && var[j])
+        res[i++] = var[j++];
+    return (i);	
 }
 
 int between_double(char *res, char **word, s_data *data, int i)
 {
-    int j;
-    char *cpy;
-    char *var;
-
     (*word)++;
     while (*(*word) && *(*word) != 34)
     {
         if (*(*word) == '$')
         {
-            (*word)++;
-            if (*(*word) == '?')
-            {
-                res = ft_itoa(data->exit_status);
-                printf("res = .%s.\n", res);
-                i += size_nb(data->exit_status);
-            }
-            else
-            {
-                cpy = malloc(sizeof(char) * (len_var_env(*word) + 1));
-                if (!cpy)
-                    return (printf("echec malloc\n"), 0); // ERREUR
-                cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
-                var = existing_var(cpy, data->env);
-                j = 0;
-                while (var && var[j])
-                    res[i++] = var[j++];
-            }
+            i = out_of_quotes(res, word, data, i);
             (*word) = (*word) + len_var_env(*word) - 1;
         }
         else

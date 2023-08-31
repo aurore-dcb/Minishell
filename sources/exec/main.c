@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/30 14:04:00 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 09:27:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 	
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
-	data.exit_status = 10;
+	data.exit_status = 0;
 	data.input = readline("minishell> ");
 	data.env = env; // creer une autre variable pour qu'on puisse la modifier lors de l'execution
 	// if (signal(SIGINT, handleCtrlC) == SIG_ERR) {

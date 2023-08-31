@@ -57,7 +57,7 @@ int find_variable(char *s, s_data *data)
     char *cpy;
     char *res;
 
-	if (*s == '?') //exit status
+	if (*s == '?')
 	{
 		printf("exit_status = %d\n-> len = %d\n",data->exit_status, size_nb(data->exit_status));
 		return (size_nb(data->exit_status));
