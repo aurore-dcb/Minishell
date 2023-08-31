@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 14:26:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 14:48:52 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ typedef struct cmd_line
 
 typedef struct s_env
 {
-    char            *data;
-    struct s_env    *next;    
-}                    t_env;
+	char			*data;
+	struct s_env	*next;
+}					t_env;
 
 typedef struct s_data
 {
 	char			*input;
 	struct s_quotes	etat;
 	struct cmd_line	*cmd;
-	struct s_env    *envp;
+	struct s_env	*envp;
 	int				exit_status;
 }					s_data;
 
@@ -78,7 +78,7 @@ int					closed_quotes(char *input, t_quotes *etat);
 int					is_meta(char c);
 char				**split_meta(char *input, char c);
 // parsing.c
-int					parsing(s_data *data);
+int					parsing(s_data *data, char **env);
 // list.c
 void				ft_lstadd_back_cmd_line(cmd_line **lst, cmd_line *new);
 cmd_line			*ft_lstnew_cmd_line(int len);
@@ -99,7 +99,7 @@ int					count_char(char *s, s_data *data);
 char				*apply_expand(char *res, char *word, s_data *data);
 char				*ft_expand(char *word, s_data *data);
 // expand_count.c
-char				*existing_var(char *var, char **env);
+char				*existing_var(char *var, s_data *data);
 int					len_var_env(char *s);
 int					find_variable(char *s, s_data *data);
 int					count_between_simple(char **s);
@@ -124,14 +124,17 @@ int					split_word(cmd_line *list);
 void				free_tab(char **tab);
 void				free_list(cmd_line **begin);
 void				free_all(cmd_line **cmd, char *input);
-// error.c
-
 // main.c
 void				initialize(s_data *data);
 // exec_utils.c
 int					nb_arg(cmd_line *list);
 void				fill_arg(cmd_line *list);
 int					tab_cmd(cmd_line **list);
+// parse_env.c
+int					parse_env(char **env, t_env **envp);
+void				ft_lstadd_back_env(t_env **lst, t_env *new);
+t_env				*ft_lstnew_env(char *data);
+// error.c
 
 // -------------------- builtins.c -------------------- //
 

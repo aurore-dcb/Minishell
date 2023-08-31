@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 10:51:52 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 14:36:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	expansion(s_data *data)
 	return (1);
 }
 
-int	parsing(s_data *data)
+int	parsing(s_data *data, char **env)
 {
-	if (!data->env)
+	if (!parse_env(env, &data->envp))
 		return (0);
 	if (closed_quotes(data->input, &data->etat) == 0)
 		return (0);

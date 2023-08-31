@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:49:59 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/08/31 14:25:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 14:52:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	parse_env(char **env, t_env	**envp)
 	int		i;
 
 	i = 0;
+	if (!env)
+		return (0);
 	while (env[i])
 	{
 		new = ft_lstnew_env(env[i]);
@@ -87,5 +89,5 @@ int	parse_env(char **env, t_env	**envp)
 		ft_lstadd_back_env(envp, new);
 		i++;
 	}
-	return (0);
+	return (1);
 }

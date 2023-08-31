@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 10:51:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 14:36:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void initialize(s_data *data)
 	data->etat.simple = 0;
 	data->etat.doubl = 0;
     data->cmd = NULL;
+	data->envp = NULL;
 }
 
 int	main(int argc, char **argv, char **env)
@@ -86,7 +87,7 @@ int	main(int argc, char **argv, char **env)
 		return (printf("No argument are needed !\n"), 1);
 	data.exit_status = 0;
 	data.input = readline("minishell> ");
-	data.env = env; // creer une autre variable pour qu'on puisse la modifier lors de l'execution
+	// data.env = env; // creer une autre variable pour qu'on puisse la modifier lors de l'execution
 	// if (signal(SIGINT, handleCtrlC) == SIG_ERR) {
 	// perror("Erreur lors de la configuration du gestionnaire de signal");
 	// return (1);
@@ -98,7 +99,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			add_history(data.input);
 			// -> traiter input : parsing puis execution
-			if (!parsing(&data))
+			if (!parsing(&data, env))
 				printf("ERROR -> parsing\n");
 			else
 				display_token(data.cmd);

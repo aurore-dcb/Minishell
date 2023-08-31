@@ -1,24 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_count.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
+/*   Updated: 2023/08/31 14:49:42 by aducobu          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../headers/exec.h"
 #include "../../libft/libft.h"
 
-char *existing_var(char *var, char **env)
+char *existing_var(char *var, s_data *data)
 {
-	int i;
+	// int i;
+	t_env *begin;
 	char *res;
 	
-	i = 0;
+	// i = 0;
+	begin = data->envp;
 	if (!var)
 		return (NULL);
-	while (env[i])
+	while (begin)
 	{
-		if (ft_strnstr(env[i], var, ft_strlen(var)))
+		if (ft_strnstr(begin->data, var, ft_strlen(var)))
 		{
-			res = ft_trim(env[i], ft_strlen(var) + 1);
+			res = ft_trim(begin->data, ft_strlen(var) + 1);
 			if (!res)
 				return (free(var), NULL);
 			return (free(var), res);
 		}
-		i++;
+		begin = begin->next;
+		// i++;
 	}
 	return (NULL);
 }
@@ -59,14 +74,14 @@ int find_variable(char *s, s_data *data)
 
 	if (*s == '?')
 	{
-		printf("exit_status = %d\n-> len = %d\n",data->exit_status, size_nb(data->exit_status));
+		// printf("exit_status = %d\n-> len = %d\n",data->exit_status, size_nb(data->exit_status));
 		return (size_nb(data->exit_status));
 	}
     cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
 	if (!cpy)
 		return (printf("echec malloc\n"), 0); // ERREUR
     cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
-    res = existing_var(cpy, data->env);
+    res = existing_var(cpy, data);
 	n = ft_strlen(res);
     return (n);
 }

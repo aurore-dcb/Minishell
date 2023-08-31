@@ -28,7 +28,7 @@ int out_of_quotes(char *res, char **word, s_data *data, int i)
 	if (**word == '?')
         var = ft_itoa(data->exit_status);
     else
-        var = existing_var(cpy, data->env);
+        var = existing_var(cpy, data);
     while (var && var[j])
         res[i++] = var[j++];
     return (i);	
