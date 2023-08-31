@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 13:44:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 14:26:25 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,18 @@ typedef struct cmd_line
 	struct cmd_line	*next;
 }					cmd_line;
 
+typedef struct s_env
+{
+    char            *data;
+    struct s_env    *next;    
+}                    t_env;
+
 typedef struct s_data
 {
 	char			*input;
 	struct s_quotes	etat;
 	struct cmd_line	*cmd;
-	char			**env;
+	struct s_env    *envp;
 	int				exit_status;
 }					s_data;
 

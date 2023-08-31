@@ -6,14 +6,16 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/08/31 13:37:13 by aducobu          ###   ########.fr        #
+#    Updated: 2023/08/31 14:25:59 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 			minishell
 
 SRCS = 			${addprefix sources/, \
-					${addprefix parsing/, parsing.c quotes.c split_meta.c list.c split_pipe.c error_handling.c expand.c expand_count.c expand_apply.c split_word.c} \
+					${addprefix parsing/, parsing.c quotes.c split_meta.c \
+					 	list.c split_pipe.c error_handling.c expand.c \
+					 	expand_count.c expand_apply.c split_word.c parse_env.c} \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c} \
 					${addprefix exec/, main.c frees.c error.c exec_utils.c} \
 				}
