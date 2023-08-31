@@ -6,12 +6,12 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 15:08:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:45:55 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STUCTURES_H
-#define STUCTURES_H
+# define STUCTURES_H
 
 typedef enum type
 {
@@ -63,5 +63,18 @@ typedef struct s_data
 	struct s_env	*envp;
 	int				exit_status;
 }					s_data;
+
+// -------------- PIPEX -------------- //
+
+typedef struct s_pipex_data
+{
+	char			**paths;
+	int				fd[2];
+	int				infile;
+	int				outfile;
+	char			*middle_cmd;
+	char			**middle_cmd_path;
+	//here_doc
+}					pipex;
 
 #endif

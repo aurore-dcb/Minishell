@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/08/31 15:03:01 by aducobu          ###   ########.fr        #
+#    Updated: 2023/08/31 15:39:32 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ SRCS = 			${addprefix sources/, \
 					${addprefix parsing/, parsing.c quotes.c \
 					 	list.c split_pipe.c error_handling.c expand.c \
 					 	expand_count.c expand_apply.c split_word.c parse_env.c} \
+					${addprefix exec/, main.c frees.c error.c exec_utils.c pipex.c} \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c} \
-					${addprefix exec/, main.c frees.c error.c exec_utils.c} \
 				}
 
 OBJS = 			${SRCS:sources/%.c=objects/%.o}

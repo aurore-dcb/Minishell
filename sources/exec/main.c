@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 15:03:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/08/31 15:39:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 // }
 
 #include "../../headers/minishell.h"
-// #include "../../headers/exec.h"
 #include "../../libft/libft.h"
 //#include <signal.h>
 
@@ -88,8 +87,11 @@ int	main(int argc, char **argv, char **env)
 			// -> traiter input : parsing puis execution
 			if (!parsing(&data, env))
 				printf("ERROR -> parsing\n");
-			else
+			else //exec
+			{
 				display_token(data.cmd);
+				
+			}
 			// si ctrl-C : sortir de cette boucle
 		}
 		free_all(&data.cmd, data.input);
