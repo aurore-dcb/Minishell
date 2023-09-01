@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 09:32:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 12:34:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ typedef struct s_data
 	int				exit_status;
 }					s_data;
 
+typedef struct s_outfile
+{
+	int				outfile;
+	struct s_outfile	*next;
+}					t_outfile;
+
 // -------------- PIPEX -------------- //
 
 typedef struct s_pipex_data
@@ -71,7 +77,7 @@ typedef struct s_pipex_data
 	char			**paths;
 	int				fd[2];
 	int				infile;
-	int				outfile;
+	t_outfile		*outfiles;
 	char			*middle_cmd;
 	char			**middle_cmd_path;
 	//here_doc
@@ -82,7 +88,5 @@ typedef struct s_pid
 	pid_t			pid;
 	struct s_pid	*next;
 }					t_pid;
-
-
 
 #endif
