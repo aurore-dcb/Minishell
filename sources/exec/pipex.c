@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:04:53 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:28:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,40 @@ void	initialise_pipex(pipex *pipex)
 	pipex->fd[1] = 0;
 }
 
-// int open_file(pipex *pipex)
+int open_file(pipex *pipex, s_data *data)
+{
+	cmd_line *beg_cmd;
+	token	*beg_token;
+	
+	beg_cmd = data->cmd;
+	if (!beg_cmd)
+		return (0);
+	while (beg_cmd)
+	{
+		beg_token = beg_cmd->token;
+		if (!beg_token)
+			return (0);
+		while (beg_token)
+		{
+			if (beg_token->type == 6)
+				pipex->infile = open(beg_token->word, O_RDONLY);
+			beg_token = beg_token->next;
+		}
+		beg_cmd = beg_cmd->next;
+	}
+	if (pipex->infile == -1)
+		return (0);
+	return (1);
+}
+
 int	parsing_pipex(pipex *pipex, s_data *data)
 {
 	pipex->paths = get_paths(&data->envp);
 	if (!pipex->paths)
-		return (ft_printf("Error -> Paths\n"), 0);
+		return (ft_printf("ERROR -> Paths\n"), 0);
+	if (!open_file(pipex, data))
+		return (ft_printf("ERROR -> Can't open infile\n"), 0);
+	printf("pipex->infile : %d\n", pipex->infile);
 	// data->infile = open(argv[1], O_RDONLY);
 	// if (data->infile == -1)
 	// 	return (ft_printf("Error -> Can't create/open file\n"), 0);
