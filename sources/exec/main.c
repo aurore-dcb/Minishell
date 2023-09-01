@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 15:39:49 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 09:38:27 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 #include "../../headers/minishell.h"
 #include "../../libft/libft.h"
-//#include <signal.h>
-
 
 void	display_list(cmd_line *list)
 {
@@ -90,7 +88,8 @@ int	main(int argc, char **argv, char **env)
 			else //exec
 			{
 				display_token(data.cmd);
-				
+				if (ft_pipex(&data))
+					printf("ERROR -> execution\n");
 			}
 			// si ctrl-C : sortir de cette boucle
 		}

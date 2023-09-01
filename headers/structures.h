@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 15:45:55 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 09:32:28 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,13 @@ typedef struct s_pipex_data
 	char			**middle_cmd_path;
 	//here_doc
 }					pipex;
+
+typedef struct s_pid
+{
+	pid_t			pid;
+	struct s_pid	*next;
+}					t_pid;
+
+
 
 #endif
