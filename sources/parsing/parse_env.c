@@ -6,12 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:49:59 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/08/31 15:01:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:32:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 int	find_pwd(t_env	**envp)
 {

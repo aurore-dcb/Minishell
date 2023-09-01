@@ -6,12 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:46:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 15:04:53 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:31:52 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 int	len_tab(char **cmd)
 {

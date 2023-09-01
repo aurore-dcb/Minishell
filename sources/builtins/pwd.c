@@ -6,12 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/08/31 15:04:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:32:02 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 // gerer argument
 void	builtin_pwd(char **env)

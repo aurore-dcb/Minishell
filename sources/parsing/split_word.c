@@ -6,12 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/08/31 15:02:24 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:32:47 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 void	ft_strcpy_pos(char *dst, char *src, int start, int end)
 {

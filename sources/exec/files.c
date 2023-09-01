@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 12:55:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:00 by aducobu          ###   ########.fr       */
+/*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
+/*   Updated: 2023/09/01 10:30:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void builtin_env(char **env)
+int open_file(pipex *pipex, s_data *data)
 {
-    int i;
-
-    i = 0;
-	if (!env)
-		return ;
-	while (env[i])
+	cmd_line *beg_cmd;
+	token	*beg_token;
+	
+	beg_cmd = data->cmd;
+	if (!beg_cmd)
+		return (0);
+	while (beg_cmd)
 	{
-		printf("%s\n", env[i]);
-		i++;
+		beg_token = beg_cmd->token;
+		if (!beg_token)
+			return (0);
+		while (beg_token)
+		{
+			if (beg_token->type == 6)
+				pipex->infile = open(beg_token->word, O_RDONLY);
+			beg_token = beg_token->next;
+		}
+		beg_cmd = beg_cmd->next;
 	}
+	if (pipex->infile == -1)
+		return (0);
+	return (1);
 }

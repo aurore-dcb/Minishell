@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 09:40:06 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:30:58 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ int		parsing_pipex(pipex *pipex, s_data *data);
 int		ft_pipex(s_data *data);
 // get_paths.c
 char	**get_paths(t_env **envp);
+// files.c
+int open_file(pipex *pipex, s_data *data);
 
 #endif

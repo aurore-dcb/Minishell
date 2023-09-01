@@ -6,12 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:32:42 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 09:45:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 10:31:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 char	*ft_trim_pipex(char *s)
 {
