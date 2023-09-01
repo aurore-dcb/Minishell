@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 12:17:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 13:56:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void	initialize(s_data *data);
 int		nb_arg(cmd_line *list);
 void	fill_arg(cmd_line *list);
 int		tab_cmd(cmd_line **list);
-// parse_env.c
-int		parse_env(char **env, t_env **envp);
-void	ft_lstadd_back_env(t_env **lst, t_env *new);
-t_env	*ft_lstnew_env(char *data);
+
 // pipex.c
 void	initialise_pipex(pipex *pipex);
 int		parsing_pipex(pipex *pipex, s_data *data);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 13:39:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 14:19:48 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	build_cd(s_data *data)
 {
 	int		ret;
 
-	if (!data->cmd->args[1])
+	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0)
 		ret = search_path(data->envp, "HOME=");
 	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0)
 		ret = search_path(data->envp, "OLDPWD=");

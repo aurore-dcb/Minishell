@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:49:59 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:36 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/01 14:05:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,25 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new)
 		*lst = new;
 }
 
-int	parse_env(char **env, t_env	**envp)
+int    parse_env(char **env, s_data *data)
 {
-	t_env	*new;
-	int		i;
+    t_env    *new;
+    int        i;
 
-	i = 0;
-	if (!env)
-		return (0);
-	while (env[i])
-	{
-		new = ft_lstnew_env(env[i]);
-		if (!new)
-			return (0);
-		ft_lstadd_back_env(envp, new);
-		i++;
-	}
-	return (1);
+    i = 0;
+    if (!env)
+        return (0);
+    while (env[i])
+    {
+        if (!ft_strncmp(env[i], "PWD=", 4))
+            data->pwd = ft_strdup(env[i]);
+        else if (!ft_strncmp(env[i], "OLDPWD=", 7))
+            data->oldpwd = ft_strdup(env[i]);
+        new = ft_lstnew_env(env[i]);
+        if (!new)
+            return (0);
+        ft_lstadd_back_env(&data->envp, new);
+        i++;
+    }
+    return (1);
 }
