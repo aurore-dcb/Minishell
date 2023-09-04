@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 12:35:19 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:25:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ int	parsing_pipex(pipex *pipex, s_data *data)
 		return (ft_printf("ERROR -> Paths\n"), 0);
 	if (!open_infile(pipex, data))
 		return (ft_printf("ERROR -> Can't open infile\n"), 0);
-	// data->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0646);
-	// if (data->outfile == -1)
-	// {
-	// 	close(data->infile);
-	// 	ft_printf("Error -> Can't create/open file\n");
-	// 	return (0);
-	// }
+	if (!open_outfile(pipex, data))
+	{
+		close(pipex->infile);
+		return (ft_printf("ERROR -> Can't open outfile\n"), 0);
+	}
 	return (1);
 }
 
@@ -58,11 +56,6 @@ int	ft_pipex(s_data *data)
 	initialise_pipex(&pipex);
 	if (!parsing_pipex(&pipex, data))
 		return (1);
-	while (pipex.outfiles->outfile)
-	{
-		printf("fd = %d\n", pipex.outfiles->outfile);
-		pipex.outfiles = pipex.outfiles->next;
-	}
 		// return (error_free(&data, &cmd, &pids), 1);
 	// if (!create_list_cmd(&cmd, argc, argv, 2))
 	// 	return (error_free(&data, &cmd, &pids), 1);
@@ -71,5 +64,7 @@ int	ft_pipex(s_data *data)
 	// 	return (1);
 	// wait_fct(&pids, &data, &cmd);
 	// }
+	free_outfile(&pipex.outfiles);
+	close(pipex.infile);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:11 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:22:02 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,18 @@ void	free_all(cmd_line **cmd, char *input)
 {
 	free(input);
 	free_list(cmd);
+}
+
+void	free_outfile(t_outfile **outfiles)
+{
+	t_outfile	*tmp;
+
+	while (*outfiles)
+	{
+		printf("ok\n");
+		tmp = *outfiles;
+		*outfiles = (*outfiles)->next;
+		close(tmp->outfile);
+		free(tmp);
+	}
 }

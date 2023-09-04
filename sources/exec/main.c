@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 14:13:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 09:32:20 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,27 +90,26 @@ int	main(int argc, char **argv, char **env)
 			// -> traiter input : parsing puis execution
 			if (!parsing(&data))
 				printf("ERROR -> parsing\n");
+			else //exec
+			{
+				display_token(data.cmd);
+				if (ft_pipex(&data))
+					printf("ERROR -> execution\n");
+			}
 			// printf("%d\n", ft_strcmp(data.cmd->args[0], "cd"));
-			else if (ft_strcmp(data.cmd->args[0], "cd") == 0)
-            {
-                build_cd(&data);
-            }
-            else if (ft_strcmp(data.cmd->args[0], "pwd") == 0)
-            {
-                builtin_pwd(&data);
-            }
-            else if (ft_strcmp(data.cmd->args[0], "env") == 0)
-            {
-                // printf("select env\n");
-                builtin_env(&data);
-            }
-			// else //exec
-			// {
-			// 	display_token(data.cmd);
-			// 	if (ft_pipex(&data))
-			// 		printf("ERROR -> execution\n");
-			// }
-			// si ctrl-C : sortir de cette boucle
+			// else if (ft_strcmp(data.cmd->args[0], "cd") == 0)
+            // {
+            //     build_cd(&data);
+            // }
+            // else if (ft_strcmp(data.cmd->args[0], "pwd") == 0)
+            // {
+            //     builtin_pwd(&data);
+            // }
+            // else if (ft_strcmp(data.cmd->args[0], "env") == 0)
+            // {
+            //     // printf("select env\n");
+            //     builtin_env(&data);
+			//si ctrl-C : sortir de cette boucle
 		}
 		free_all(&data.cmd, data.input);
 		data.input = readline("minishell> ");
