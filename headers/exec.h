@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 10:27:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 15:34:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,14 @@ char	**get_paths(t_env **envp);
 // files.c
 int		open_infile(pipex *pipex, s_data *data);
 int		open_outfile(pipex *pipex, s_data *data);
+// process.c
+int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
+int		ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data);
+int		ft_child(cmd_line *cmd, pipex *pipex, s_data *data);
+// find_path.c
+char	*find_path(char **paths, char *cmd);
+// pids.c
+t_pid	*ft_lstnew_pipex(pid_t pid);
+int		ft_lstadd_back_pipex(t_pid **lst, t_pid *new);
 
 #endif

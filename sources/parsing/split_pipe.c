@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 13:43:20 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	split_pipe(char *input, cmd_line **list)
 	{
 		if (*input == '|')
 			input++;
-		// printf("test\n");
 		new = ft_lstnew_cmd_line(nb_lettre_cmd(input) + 1);
 		if (!new)
 			return (0);
@@ -106,5 +105,4 @@ int	split_pipe(char *input, cmd_line **list)
 		n--;
 	}
 	return (split_word(*list));
-	// return (1);
 }

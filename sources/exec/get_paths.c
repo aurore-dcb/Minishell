@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:32:42 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:31:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 13:37:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ char	*ft_trim_pipex(char *s)
 
 char	**get_paths(t_env **envp)
 {
-	// int		i;
 	char	*lign;
 	char	**paths;
     t_env *begin;
 
-	// i = 0;
     begin = *envp;
 	if (!begin)
 		return (NULL);

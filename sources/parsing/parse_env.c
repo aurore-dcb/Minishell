@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:49:59 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/01 14:05:40 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:00:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	find_pwd(t_env	**envp)
 	return (1);
 }
 
-int	find_path(t_env **envp)
+int	find_path_env(t_env **envp)
 {
 	t_env	*begin;
 

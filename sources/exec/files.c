@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 11:14:51 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 13:38:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	ft_lstadd_back_files(t_outfile **lst, t_outfile *new)
 	if (!new)
 		return (0);
 	list = *lst;
-	printf("new = %d\n", new->outfile);
 	if (list)
 	{
 		while (list->next)
@@ -99,8 +98,6 @@ int open_outfile(pipex *pipex, s_data *data)
 				new = ft_lstnew_files(open(beg_token->word, O_WRONLY | O_CREAT | O_APPEND, 0646));
 			if (beg_token->type == 8 || beg_token->type == 9)
 				ft_lstadd_back_files(&pipex->outfiles, new);
-			// if (!ft_lstadd_back_files(&pipex->outfiles, new))
-			// 	return (0);
 			beg_token = beg_token->next;
 		}
 		beg_cmd = beg_cmd->next;

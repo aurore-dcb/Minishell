@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 13:53:45 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 14:24:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct token
 
 typedef struct cmd_line
 {
+	int					in;
 	char				*cmd;
 	char				**args;
 	struct token		*token;
@@ -80,8 +81,8 @@ typedef struct s_pipex_data
 	int					fd[2];
 	int					infile;
 	t_outfile			*outfiles;
-	char				*middle_cmd;
-	char				**middle_cmd_path;
+	char				**middle_cmd;
+	char				*middle_cmd_path;
 	//here_doc
 }						pipex;
 

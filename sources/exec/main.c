@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 09:32:20 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/04 13:41:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv, char **env)
 				printf("ERROR -> parsing\n");
 			else //exec
 			{
-				display_token(data.cmd);
+				// display_token(data.cmd);
 				if (ft_pipex(&data))
 					printf("ERROR -> execution\n");
 			}
