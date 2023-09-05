@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 13:41:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:23:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv, char **env)
             //     builtin_env(&data);
 			//si ctrl-C : sortir de cette boucle
 		}
-		free_all(&data.cmd, data.input);
+		// free_all(&data.cmd, data.input);
 		data.input = readline("minishell> ");
 	}
 	// clear_history();

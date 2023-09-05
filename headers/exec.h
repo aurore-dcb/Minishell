@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 15:34:50 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/05 10:21:20 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 // frees.c
 void	free_tab(char **tab);
 void	free_list(cmd_line **begin);
-void	free_all(cmd_line **cmd, char *input);
+void	free_all(cmd_line **cmd, char *input, pipex *pipex);
 void	free_outfile(t_outfile **outfiles);
+void	wait_fct(t_pid **pids, pipex *pipex, s_data *data);
 // main.c
 void	initialize(s_data *data);
 // exec_utils.c
