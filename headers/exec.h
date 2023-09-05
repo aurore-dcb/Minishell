@@ -39,6 +39,9 @@ int		open_outfile(pipex *pipex, s_data *data);
 int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
 int		ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data);
 int		ft_child(cmd_line *cmd, pipex *pipex, s_data *data);
+int	ft_lstsize(t_env *lst);
+char **list_to_tab(t_env **envp);
+t_outfile	*ft_lstlast_outfile(t_outfile *lst);
 // find_path.c
 char	*find_path(char **paths, char *cmd);
 // pids.c

@@ -53,10 +53,10 @@ int	ft_pipex(s_data *data)
 	// 	return (ft_here_doc(argv, argc, env, &cmd));
 	// else
 	// {
-	data->cmd->in = pipex.infile;
 	initialise_pipex(&pipex);
 	if (!parsing_pipex(&pipex, data))
 		return (1);
+	data->cmd->in = pipex.infile;
 	if (!loop_process(data, &pids, &pipex))
 		printf("error loop process\n");
 	wait_fct(&pids, &pipex, data);

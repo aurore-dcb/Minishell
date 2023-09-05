@@ -16,18 +16,9 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 {
 	cmd_line	*tmp;
 
-	(void)pids;
 	tmp = data->cmd;
 	while (tmp)
 	{
-		// tmp->args = char **middle_cmd
-		// pipex->middle_cmd = get_args(tmp->arg);
-		// if (data->middle_cmd == NULL)
-		// {
-		// 	ft_printf("Error -> Command\n");
-		// 	error_free(data, cmd, pids);
-		// 	return (0);
-		// }
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
 		if (!pipex->middle_cmd_path)
 			return (0);
@@ -35,12 +26,18 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		// if (!data->middle_cmd_path)
 		// 	return (error_free(data, cmd, pids),
 		// 		ft_printf("Error-> Command\n"), 0);
+		int i = 0;
+		while (tmp->args[i])
+		{
+			dprintf(1, "arg = %s\n", tmp->args[i]);
+			i++;
+		}
 		if (!ft_process(pipex, pids, tmp, data))
 			return (ft_printf("Error-> Process\n"), 0);
 		// return (error_free(data, cmd, pids),
 		// 	ft_printf("Error-> Process\n"), 0);
-		// free_tab(data->middle_cmd);
-		// free(data->middle_cmd_path);
+
+		// free_tab(tmp->args);
 		free(pipex->middle_cmd_path);
 		tmp = tmp->next;
 	}
@@ -73,6 +70,31 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 		if (cmd->in > 2)
 			close(cmd->in);
 	}
+	return (1);
+}
+
+int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
+{
+	if (cmd->in > 2)
+	{
+		dup2(cmd->in, STDIN_FILENO);
+		close(cmd->in);
+	}
+	if (cmd->next)
+	{
+		dup2(pipex->fd[1], STDOUT_FILENO);
+		close(pipex->fd[0]);
+		close(pipex->fd[1]);
+	}
+	else
+	{
+		dprintf(1, "derniere commande\n");
+		pipex->outfiles = ft_lstlast_outfile(pipex->outfiles);
+		dup2(pipex->outfiles->outfile, STDOUT_FILENO);
+		close(pipex->outfiles->outfile);
+	}
+	if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
+		return (close(pipex->fd[0]), close(pipex->fd[1]), 0);
 	return (1);
 }
 
@@ -114,28 +136,12 @@ char **list_to_tab(t_env **envp)
 	return (tab);
 }
 
-int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
+t_outfile	*ft_lstlast_outfile(t_outfile *lst)
 {
-	if (cmd->in > 2)
-	{
-		dup2(cmd->in, STDIN_FILENO);
-		close(cmd->in);
-	}
-	if (cmd->next)
-	{
-		dup2(pipex->fd[1], STDOUT_FILENO);
-		close(pipex->fd[0]);
-		close(pipex->fd[1]);
-	}
-	else
-	{
-		while (pipex->outfiles->next)
-			pipex->outfiles = pipex->outfiles->next;
-		dup2(pipex->outfiles->outfile, STDOUT_FILENO);
-		close(pipex->outfiles->outfile);
-	}
-	printf("")
-	if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
-		return (close(pipex->fd[0]), close(pipex->fd[1]), 0);
-	return (1);
+	fprintf(stderr, "lst->out = %d\n", lst->outfile);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }

@@ -114,7 +114,7 @@ int	main(int argc, char **argv, char **env)
 		// free_all(&data.cmd, data.input);
 		data.input = readline("minishell> ");
 	}
-	// clear_history();
-	rl_clear_history();
+	clear_history();
+	// rl_clear_history();
 	return (0);
 }
