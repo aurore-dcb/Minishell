@@ -12,6 +12,22 @@
 
 #include "../../headers/minishell.h"
 
+void affichage(cmd_line **cmd, pipex *pipex)
+{
+	dprintf(1, "----------------debut---------------\n");
+	cmd_line	*tmp;
+	tmp = *cmd;
+	dprintf(1, "commande : %s\n", tmp->cmd);
+	int i = 0;
+	while (tmp->args[i])
+	{
+		dprintf(1, "arg = %s\n", tmp->args[i]);
+		i++;
+	}
+	dprintf(1, "cmd path = %s\n", pipex->middle_cmd_path);
+	dprintf(1, "-----------------fin--------------\n");
+}
+
 int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 {
 	cmd_line	*tmp;
@@ -21,17 +37,11 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 	{
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
 		if (!pipex->middle_cmd_path)
-			return (dprintf(1, "cmd path\n"), 0);
-		printf("cmd path = %s\n", pipex->middle_cmd_path);
+			return (dprintf(1, "error cmd path\n"), 0);
+		affichage(&tmp, pipex);
 		// if (!data->middle_cmd_path)
 		// 	return (error_free(data, cmd, pids),
 		// 		ft_printf("Error-> Command\n"), 0);
-		int i = 0;
-		while (tmp->args[i])
-		{
-			dprintf(1, "arg = %s\n", tmp->args[i]);
-			i++;
-		}
 		if (!ft_process(pipex, pids, tmp, data))
 			return (ft_printf("Error-> Process\n"), 0);
 		// return (error_free(data, cmd, pids),
@@ -50,6 +60,7 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 
 	if (!cmd || (cmd->next && pipe(pipex->fd) == -1))
 		return (0);
+	dprintf(1, "cmd->in = %d\n", cmd->in);
 	if (cmd->next && cmd->next->in == -2)
 		cmd->next->in = pipex->fd[0];
 	else if (cmd->next && cmd->next->in != -2)
@@ -90,7 +101,6 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 	}
 	else
 	{
-		dprintf(1, "outfile = %d\n", pipex->outfiles->outfile);
 		dprintf(1, "derniere commande\n");
 		pipex->outfiles = ft_lstlast_outfile(pipex->outfiles);
 		dup2(pipex->outfiles->outfile, STDOUT_FILENO);
@@ -141,7 +151,6 @@ char **list_to_tab(t_env **envp)
 
 t_outfile	*ft_lstlast_outfile(t_outfile *lst)
 {
-	fprintf(stderr, "lst->out = %d\n", lst->outfile);
 	if (!lst)
 		return (NULL);
 	while (lst->next)

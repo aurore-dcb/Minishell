@@ -99,6 +99,7 @@ void	wait_fct(t_pid **pids, pipex *pipex, s_data *data)
 	while (*pids)
 	{
 		tmp = *pids;
+		dprintf(1, "WAIT\n");
 		waitpid(((*pids)->pid), NULL, 0);
 		*pids = (*pids)->next;
 		free(tmp);

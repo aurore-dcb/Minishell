@@ -37,6 +37,7 @@ cmd_line	*ft_lstnew_cmd_line(int len)
 	elem->cmd = malloc(sizeof(char) * len);
 	if (!elem->cmd)
 		return (NULL);
+	elem->in = -2;
 	elem->next = NULL;
 	return (elem);
 }

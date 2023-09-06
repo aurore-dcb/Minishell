@@ -58,7 +58,7 @@ int	ft_pipex(s_data *data)
 		return (1);
 	data->cmd->in = pipex.infile;
 	if (!loop_process(data, &pids, &pipex))
-		printf("error loop process\n");
+		return (printf("error loop process\n"), 1);
 	wait_fct(&pids, &pipex, data);
 		// return (error_free(&data, &cmd, &pids), 1);
 	// if (!create_list_cmd(&cmd, argc, argv, 2))
@@ -70,5 +70,6 @@ int	ft_pipex(s_data *data)
 	// }
 	// free_outfile(&pipex.outfiles);
 	// close(pipex.infile);
+	dup2(STDIN_FILENO, data->cmd->in);
 	return (0);
 }
