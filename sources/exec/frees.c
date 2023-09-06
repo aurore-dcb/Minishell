@@ -91,6 +91,7 @@ void	free_outfile(t_outfile **outfiles)
 
 void	wait_fct(t_pid **pids, pipex *pipex, s_data *data)
 {
+	(void)data;
 	t_pid	*tmp;
 
 	close(pipex->fd[0]);
@@ -102,6 +103,11 @@ void	wait_fct(t_pid **pids, pipex *pipex, s_data *data)
 		*pids = (*pids)->next;
 		free(tmp);
 	}
-	free(*pids);
-	free_all(&data->cmd, data->input, pipex);
+	// free(*pids);
+	// free(data->input);
+	// if (pipex->infile > 1)
+	// 	close(pipex->infile);
+	// if (pipex->outfiles)
+	// 	free_outfiles(&pipex->outfiles);
+	// free_all(&data->cmd, data->input, pipex);
 }

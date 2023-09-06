@@ -127,6 +127,10 @@ int open_outfile(pipex *pipex, s_data *data)
 		beg_cmd = beg_cmd->next;
 	}
 	if (!no_outfile(data))
-		pipex->infile = open("/dev/stdout", O_WRONLY | O_CREAT | O_APPEND, 0646);
+	{
+		dprintf(1, "no outfile\n");
+		new = ft_lstnew_files(open("/dev/stdout", O_WRONLY | O_CREAT | O_TRUNC, 0646));
+		ft_lstadd_back_files(&pipex->outfiles, new);
+	}
 	return (1);
 }

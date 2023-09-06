@@ -21,7 +21,7 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 	{
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
 		if (!pipex->middle_cmd_path)
-			return (0);
+			return (dprintf(1, "cmd path\n"), 0);
 		printf("cmd path = %s\n", pipex->middle_cmd_path);
 		// if (!data->middle_cmd_path)
 		// 	return (error_free(data, cmd, pids),
@@ -59,11 +59,13 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 		return (0);
 	if (pid == 0)
 	{
+		dprintf(1, "enfant\n");
 		if (!ft_child(cmd, pipex, data))
 			return (0);
 	}
 	else
 	{
+		dprintf(1, "parent\n");
 		ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
 		if (pipex->fd[1] > 2)
 			close(pipex->fd[1]);
@@ -88,6 +90,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 	}
 	else
 	{
+		dprintf(1, "outfile = %d\n", pipex->outfiles->outfile);
 		dprintf(1, "derniere commande\n");
 		pipex->outfiles = ft_lstlast_outfile(pipex->outfiles);
 		dup2(pipex->outfiles->outfile, STDOUT_FILENO);

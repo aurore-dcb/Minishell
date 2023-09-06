@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **env)
 	while (/*signalFlag == 0 &&*/ data.input != NULL)
 	{
 		initialize(&data);
-		if (/*signalFlag == 0 && */ data.input[0] != '\0')
+		if (/*signalFlag == 0 && */ 1 == 1)
 		{
 			add_history(data.input);
 			// -> traiter input : parsing puis execution
