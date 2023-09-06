@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:32:42 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 13:37:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/06 14:47:50 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,55 +27,27 @@ char	*ft_trim_pipex(char *s)
 	return (res);
 }
 
-char	**get_paths(t_env **envp)
+char    **get_paths(t_env **envp)
 {
-	char	*lign;
-	char	**paths;
+    char    *lign;
+    char    **paths;
     t_env *begin;
 
     begin = *envp;
-	if (!begin)
-		return (NULL);
-	while (begin)
-	{
-		if (ft_strnstr(begin->data, "PATH=", 5))
-		{
-			lign = ft_trim_pipex(begin->data);
-			if (!lign)
-				return (0);
-			paths = ft_split(lign, ':');
-			free(lign);
-			return (paths);
-		}
+    if (!begin)
+        return (NULL);
+    while (begin)
+    {
+        if (ft_strnstr(begin->key, "PATH", 4))
+        {
+            lign = ft_trim_pipex(begin->data);
+            if (!lign)
+                return (0);
+            paths = ft_split(lign, ':');
+            free(lign);
+            return (paths);
+        }
         begin = begin->next;
-		// i++;
-	}
-	return (NULL);
+    }
+    return (NULL);
 }
-
-// char	*find_path(char **paths, char *cmd)
-// {
-// 	int		i;
-// 	char	*slash;
-// 	char	*all_path;
-
-// 	i = -1;
-// 	if (!cmd)
-// 		return (NULL);
-// 	while (paths[++i])
-// 	{
-// 		if (access(cmd, F_OK | R_OK | X_OK) == 0)
-// 			return (ft_substr(cmd, 0, ft_strlen(cmd)));
-// 		slash = ft_strjoin(paths[i], "/");
-// 		if (!slash)
-// 			return (NULL);
-// 		all_path = ft_strjoin(slash, cmd);
-// 		free(slash);
-// 		if (!all_path)
-// 			return (NULL);
-// 		if (access(all_path, F_OK | R_OK | X_OK) == 0)
-// 			return (all_path);
-// 		free(all_path);
-// 	}
-// 	return (NULL);
-// }
