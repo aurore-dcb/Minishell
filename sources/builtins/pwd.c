@@ -12,44 +12,18 @@
 
 #include "../../headers/minishell.h"
 
-// gerer argument
-// void	builtin_pwd(char **env)
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	j = 4;
-// 	if (!env)
-// 		return ;
-// 	while (env[i])
-// 	{
-// 		if (ft_strnstr(env[i], "PWD=", 4))
-// 		{
-// 			while (env[i][j])
-// 			{
-// 				printf("%c", env[i][j]);
-// 				j++;
-// 			}
-// 			printf("\n");
-// 			return ;
-// 		}
-// 		i++;
-// 	}
-// }
-
 void	builtin_pwd(s_data *data)
 {
-	int		i;
+	t_env	*tmp;
 
-	if (!data->pwd)
+	if (!data->envp)
 		return ;
-	i = 4;
-	while (data->pwd[i])
+	tmp = data->envp;
+	while (tmp)
 	{
-		ft_putchar_fd(data->pwd[i], 1);
-		i++;
+		if (!ft_strncmp(tmp->key, "PWD", 3))
+			printf("%s\n", tmp->data);
+		tmp = tmp->next;
 	}
-	printf("\n");
 	return ;
 }

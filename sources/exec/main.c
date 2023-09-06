@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/05 10:23:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/06 14:19:08 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int main(int argc, char **argv, char **env)
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
 	data.envp = NULL;
+	data.envex = NULL;
 	data.exit_status = 0;
 	if (!parse_env(env, &data))
 		return (0);

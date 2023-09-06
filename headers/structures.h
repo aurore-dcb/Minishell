@@ -52,9 +52,10 @@ typedef struct cmd_line
 
 typedef struct s_env
 {
-	char				*data;
-	struct s_env		*next;
-}						t_env;
+    char            *key;
+    char            *data;
+    struct s_env    *next;
+}                    t_env;
 
 typedef struct s_data
 {
@@ -62,9 +63,8 @@ typedef struct s_data
 	struct s_quotes		etat;
 	struct cmd_line		*cmd;
 	struct s_env		*envp;
+	struct s_env    *envex;
 	int					exit_status;
-	char				*pwd;
-	char				*oldpwd;
 }						s_data;
 
 typedef struct s_outfile

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include <dirent.h>
 
 char	*find_path_ret(t_env *envp, char *str)
 {
@@ -20,9 +19,8 @@ char	*find_path_ret(t_env *envp, char *str)
 	begin = envp;
 	while (begin)
 	{
-		if (!ft_strncmp(begin->data, str, ft_strlen(str)))
-			return (ft_substr(begin->data, ft_strlen(str),
-					ft_strlen(begin->data) - ft_strlen(str)));
+		if (!ft_strncmp(begin->key, str, ft_strlen(str)))
+			return (begin->data);
 		begin = begin->next;
 	}
 	return (NULL);
@@ -38,7 +36,7 @@ int	search_path(t_env *envp, char *str)
 	free(tmp);
 	if (ret != 0)
 	{
-		str = ft_substr(str, 0, ft_strlen(str) - 1);
+		str = ft_substr(str, 0, ft_strlen(str));
 		ft_putstr_fd(str, STDERR_FILENO);
 		free(str);
 		ft_putendl_fd(" not set", STDERR_FILENO);
@@ -46,25 +44,53 @@ int	search_path(t_env *envp, char *str)
 	return (ret);
 }
 
-void	change_path(s_data *data)
+char	*change_pwd(s_data *data)
 {
-	char	*tmp;
+	t_env	*tmp_env;
+	char	*ret;
 
-	tmp = ft_strdup(data->pwd);
-	free(data->oldpwd);
-	data->oldpwd = ft_strjoin("OLD", tmp);
-	free(data->pwd);
-	data->pwd = ft_strjoin("PWD=", getcwd(NULL, 0));
+	tmp_env = data->envp;
+	while (tmp_env)
+	{
+		if (!ft_strncmp(tmp_env->key, "PWD", 3))
+		{
+			ret = ft_strdup(tmp_env->data);
+			if (!ret)
+				return (NULL);
+			tmp_env->data = getcwd(NULL, 0);
+		}
+		tmp_env = tmp_env->next;
+	}
+	return (ret);
+}
+
+int	change_oldpwd(s_data *data, char *ret)
+{
+	t_env	*tmp_env;
+
+	tmp_env = data->envp;
+	while (tmp_env)
+	{
+		if (!ft_strncmp(tmp_env->key, "OLDPWD", 6))
+		{
+			tmp_env->data = ft_strdup(ret);
+			if (!tmp_env->data)
+				return (0);
+		}
+		tmp_env = tmp_env->next;
+	}
+	return (1);
 }
 
 int	build_cd(s_data *data)
 {
 	int		ret;
+	char	*res;
 
-	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0)
-		ret = search_path(data->envp, "HOME=");
+	if (!data->cmd->args[1])
+		ret = search_path(data->envp, "HOME");
 	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0)
-		ret = search_path(data->envp, "OLDPWD=");
+		ret = search_path(data->envp, "OLDPWD");
 	else
 	{
 		ret = chdir(data->cmd->args[1]);
@@ -77,6 +103,10 @@ int	build_cd(s_data *data)
 	}
 	if (ret != 0)
 		return (EXIT_FAILURE);
-	change_path(data);
-	return (EXIT_SUCCESS);
+	res = change_pwd(data);
+	if (!res)
+		return (0);
+	if (!change_oldpwd(data, res))
+		return (0);
+	return (1);
 }

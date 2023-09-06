@@ -21,12 +21,11 @@ void	builtin_env(s_data *data)
 		return ;
 	while (begin)
 	{
-		if (!ft_strncmp(begin->data, "PWD=", 4))
-			printf("%s\n", data->pwd);
-		else if (!ft_strncmp(begin->data, "OLDPWD=", 7))
-			printf("%s\n", data->oldpwd);
-		else
-			printf("%s\n", begin->data);
+		if (begin->key)
+			printf("%s=", begin->key);
+		if (begin->data)
+			printf("%s", begin->data);
+		printf("\n");
 		begin = begin->next;
 	}
 }
