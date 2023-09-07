@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 14:25:30 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 15:05:37 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,25 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 {
 	pid_t	pid;
 
-	if (!cmd || (cmd->next && pipe(pipex->fd) == -1))
+	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
 	if (cmd->next && cmd->next->in == -2)
-		cmd->next->in = pipex->fd[0];
+		cmd->next->in = cmd->fd[0];
 	else if (cmd->next && cmd->next->in != -2)
-		close(pipex->fd[0]);
+		close(cmd->fd[0]);
 	pid = fork();
 	if (pid == -1)
 		return (0);
 	if (pid == 0)
 	{
-		// dprintf(1, "enfant\n");
 		if (!ft_child(cmd, pipex, data))
 			return (0);
 	}
 	else
 	{
-		// dprintf(1, "parent\n");
 		ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
-		if (pipex->fd[1] > 2)
-			close(pipex->fd[1]);
+		if (cmd->fd[1] > 2)
+			close(cmd->fd[1]);
 		if (cmd->in > 2)
 			close(cmd->in);
 	}
@@ -87,6 +85,8 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 {
+	if (cmd->in == -1 || cmd->out == -1)
+		return (dprintf(1, "ERROR infile or outfile == -1\n"), 0);
 	if (cmd->in > 2)
 	{
 		dup2(cmd->in, STDIN_FILENO);
@@ -98,14 +98,14 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 		close(cmd->out);
 	}
 	else if (cmd->next)
-		dup2(pipex->fd[1], STDOUT_FILENO);
+		dup2(cmd->fd[1], STDOUT_FILENO);
 	if (cmd->next)
 	{
-		close(pipex->fd[0]);
-		close(pipex->fd[1]);
+		close(cmd->fd[0]);
+		close(cmd->fd[1]);
 	}
 	if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
-		return (close(pipex->fd[0]), close(pipex->fd[1]), 0);
+		return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
 	return (1);
 	// else
 	// {
@@ -156,11 +156,11 @@ char **list_to_tab(t_env **envp)
 	return (tab);
 }
 
-t_outfile	*ft_lstlast_outfile(t_outfile *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
+// t_outfile	*ft_lstlast_outfile(t_outfile *lst)
+// {
+// 	if (!lst)
+// 		return (NULL);
+// 	while (lst->next)
+// 		lst = lst->next;
+// 	return (lst);
+// }

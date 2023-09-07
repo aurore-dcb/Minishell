@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 10:52:51 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 15:03:13 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct cmd_line
 {
 	int					in;
 	int					out;
+	int					fd[2];
 	char				*cmd;
 	char				**args;
 	struct token		*token;
@@ -68,20 +69,20 @@ typedef struct s_data
 	int					exit_status;
 }						s_data;
 
-typedef struct s_outfile
-{
-	int					outfile;
-	struct s_outfile	*next;
-}						t_outfile;
+// typedef struct s_outfile
+// {
+// 	int					outfile;
+// 	struct s_outfile	*next;
+// }						t_outfile;
 
 // -------------- PIPEX -------------- //
 
 typedef struct s_pipex_data
 {
 	char				**paths;
-	int					fd[2];
+	// int					fd[2];
 	int					infile;
-	t_outfile			*outfiles;
+	// t_outfile			*outfiles;
 	char				**middle_cmd;
 	char				*middle_cmd_path;
 	//here_doc

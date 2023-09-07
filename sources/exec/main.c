@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 10:16:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 15:03:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,10 @@ int main(int argc, char **argv, char **env)
 			{
 				if (ft_pipex(&data) == 1)
 					printf("ERROR -> execution\n");
-				else
-					dprintf(1, "EXEC OK\n");
 				
 			}
-			free(data.input);
-			dup2(STDIN_FILENO, data.cmd->in);
+			// free(data.input);
+			// dup2(STDIN_FILENO, data.cmd->in);
 		}
 		else
 		{
@@ -100,6 +98,7 @@ int main(int argc, char **argv, char **env)
 		}
 	}
 	clear_history();
+	// rl_clear_history();
 }
 // int	main(int argc, char **argv, char **env)
 // {
