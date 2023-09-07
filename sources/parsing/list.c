@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 10:53:17 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ cmd_line	*ft_lstnew_cmd_line(int len)
 	if (!elem->cmd)
 		return (NULL);
 	elem->in = -2;
+	elem->out = -2;
 	elem->next = NULL;
 	return (elem);
 }

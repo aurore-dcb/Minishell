@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 10:21:23 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 14:25:30 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,26 +89,33 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 {
 	if (cmd->in > 2)
 	{
-		dprintf(1, "cmd->in = %d\n", cmd->in);
 		dup2(cmd->in, STDIN_FILENO);
 		close(cmd->in);
 	}
+	if (cmd->out > 2)
+	{
+		dup2(cmd->out, STDOUT_FILENO);
+		close(cmd->out);
+	}
+	else if (cmd->next)
+		dup2(pipex->fd[1], STDOUT_FILENO);
 	if (cmd->next)
 	{
-		dup2(pipex->fd[1], STDOUT_FILENO);
 		close(pipex->fd[0]);
 		close(pipex->fd[1]);
-	}
-	else
-	{
-		dprintf(1, "derniere commande\n");
-		pipex->outfiles = ft_lstlast_outfile(pipex->outfiles);
-		dup2(pipex->outfiles->outfile, STDOUT_FILENO);
-		close(pipex->outfiles->outfile);
 	}
 	if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
 		return (close(pipex->fd[0]), close(pipex->fd[1]), 0);
 	return (1);
+	// else
+	// {
+	// 	dprintf(1, "derniere commande\n");
+	// 	pipex->outfiles = ft_lstlast_outfile(pipex->outfiles);
+	// 	dup2(pipex->outfiles->outfile, STDOUT_FILENO);
+	// 	close(pipex->outfiles->outfile);
+	// }
+	// if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
+	// 	return (close(pipex->fd[0]), close(pipex->fd[1]), 0);
 }
 
 int	ft_lstsize(t_env *lst)
