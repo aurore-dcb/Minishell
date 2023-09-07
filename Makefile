@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/09/07 10:34:25 by aducobu          ###   ########.fr        #
+#    Updated: 2023/09/07 16:21:52 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS = 			${addprefix sources/, \
 					${addprefix exec/, main.c frees.c error.c exec_utils.c \
 						pipex.c get_paths.c files.c process.c find_path.c pids.c} \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c export.c \
-						export_utils.c export_utils2.c unset.c} \
+						export_utils.c export_utils2.c unset.c builtins.c} \
 				}
 
 OBJS = 			${SRCS:sources/%.c=objects/%.o}

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 15:25:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:23:47 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*find_path_ret(t_env *envp, char *str);
 int		search_path(t_env *envp, char *str);
 char	*change_pwd(s_data *data);
 int		change_oldpwd(s_data *data, char *ret);
-int		buildin_cd(s_data *data);
+int		builtin_cd(s_data *data);
 // env.c
 int		builtin_env(s_data *data);
 // export.c
@@ -43,4 +43,6 @@ int		builtin_pwd(s_data *data);
 // unset.c
 void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);
+// builtins.c
+int	is_builtins(char *cmd, s_data *data);
 #endif

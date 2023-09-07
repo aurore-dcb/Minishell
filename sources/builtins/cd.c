@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 15:16:50 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:24:03 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	change_oldpwd(s_data *data, char *ret)
 	return (1);
 }
 
-int	buildin_cd(s_data *data)
+int	builtin_cd(s_data *data)
 {
 	int		ret;
 	char	*res;
