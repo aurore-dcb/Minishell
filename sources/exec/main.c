@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/06 14:19:08 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/07 10:16:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ int main(int argc, char **argv, char **env)
 		return (0);
 	while (1)
 	{
-		data.input = readline("minishell> ");
 		initialize(&data);
+		data.input = readline("minishell> ");
+		dprintf(1, "input = %s\n", data.input);
 		if (data.input && data.input[0])
 		{
 			add_history(data.input);
@@ -87,11 +88,16 @@ int main(int argc, char **argv, char **env)
 					printf("ERROR -> execution\n");
 				else
 					dprintf(1, "EXEC OK\n");
+				
 			}
 			free(data.input);
+			dup2(STDIN_FILENO, data.cmd->in);
 		}
 		else
+		{
+			dprintf(1, "break\n");
 			break;
+		}
 	}
 	clear_history();
 }

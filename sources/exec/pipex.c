@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/06 14:58:35 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/07 09:57:12 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	ft_pipex(s_data *data)
 {
 	t_pid *pids;
 	pipex pipex;
-	// t_parsing	data;
-	// t_cmd		*cmd;
 
 	pids = NULL;
 	// pipex = NULL;
@@ -62,6 +60,7 @@ int	ft_pipex(s_data *data)
 	wait_fct(&pids, &pipex, data);
 	// free_outfile(&pipex.outfiles);
 	// close(pipex.infile);
-	dup2(STDIN_FILENO, data->cmd->in);
+	// dup2(cmd->in, STDIN_FILENO)
+	// dup2(STDIN_FILENO, data->cmd->in);
 	return (0);
 }

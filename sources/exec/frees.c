@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/05 10:22:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 10:21:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	wait_fct(t_pid **pids, pipex *pipex, s_data *data)
 	while (*pids)
 	{
 		tmp = *pids;
-		dprintf(1, "WAIT\n");
+		// dprintf(1, "WAIT\n");
 		waitpid(((*pids)->pid), NULL, 0);
 		*pids = (*pids)->next;
 		free(tmp);

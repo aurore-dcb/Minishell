@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:52:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 13:59:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 09:36:06 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,6 @@ char	*ft_trim_paths(char *s)
 	res = ft_substr(s, 0, ft_strlen(s) - 5);
 	return (res);
 }
-
-// char	**get_paths(char **env)
-// {
-// 	int		i;
-// 	char	*lign;
-// 	char	**paths;
-
-// 	i = 0;
-// 	if (!env)
-// 		return (NULL);
-// 	while (env[i])
-// 	{
-// 		if (ft_strnstr(env[i], "PATH=", 5))
-// 		{
-// 			lign = ft_trim_paths(env[i]);
-// 			if (!lign)
-// 				return (0);
-// 			paths = ft_split(lign, ':');
-// 			free(lign);
-// 			return (paths);
-// 		}
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
 
 char	*find_path(char **paths, char *cmd)
 {

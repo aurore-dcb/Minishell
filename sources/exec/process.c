@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/05 10:43:22 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 10:21:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
 		if (!pipex->middle_cmd_path)
 			return (dprintf(1, "error cmd path\n"), 0);
-		affichage(&tmp, pipex);
+		// affichage(&tmp, pipex);
 		// if (!data->middle_cmd_path)
 		// 	return (error_free(data, cmd, pids),
 		// 		ft_printf("Error-> Command\n"), 0);
@@ -60,7 +60,6 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 
 	if (!cmd || (cmd->next && pipe(pipex->fd) == -1))
 		return (0);
-	dprintf(1, "cmd->in = %d\n", cmd->in);
 	if (cmd->next && cmd->next->in == -2)
 		cmd->next->in = pipex->fd[0];
 	else if (cmd->next && cmd->next->in != -2)
@@ -70,13 +69,13 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 		return (0);
 	if (pid == 0)
 	{
-		dprintf(1, "enfant\n");
+		// dprintf(1, "enfant\n");
 		if (!ft_child(cmd, pipex, data))
 			return (0);
 	}
 	else
 	{
-		dprintf(1, "parent\n");
+		// dprintf(1, "parent\n");
 		ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
 		if (pipex->fd[1] > 2)
 			close(pipex->fd[1]);
@@ -90,6 +89,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 {
 	if (cmd->in > 2)
 	{
+		dprintf(1, "cmd->in = %d\n", cmd->in);
 		dup2(cmd->in, STDIN_FILENO);
 		close(cmd->in);
 	}
