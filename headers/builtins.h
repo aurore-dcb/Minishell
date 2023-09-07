@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 16:23:47 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 16:31:33 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);
 // builtins.c
 int	is_builtins(char *cmd, s_data *data);
+
 #endif
