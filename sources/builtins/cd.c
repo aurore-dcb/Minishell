@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 14:26:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 15:16:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	change_oldpwd(s_data *data, char *ret)
 	return (1);
 }
 
-int	build_cd(s_data *data)
+int	buildin_cd(s_data *data)
 {
 	int		ret;
 	char	*res;
@@ -105,8 +105,8 @@ int	build_cd(s_data *data)
 		return (EXIT_FAILURE);
 	res = change_pwd(data);
 	if (!res)
-		return (0);
+		return (EXIT_FAILURE);
 	if (!change_oldpwd(data, res))
-		return (0);
-	return (1);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

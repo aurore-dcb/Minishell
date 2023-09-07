@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 15:05:37 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/07 15:13:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
 		if (!pipex->middle_cmd_path)
 			return (dprintf(1, "error cmd path\n"), 0);
-		// affichage(&tmp, pipex);
 		// if (!data->middle_cmd_path)
 		// 	return (error_free(data, cmd, pids),
 		// 		ft_printf("Error-> Command\n"), 0);
@@ -107,15 +106,6 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 	if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
 		return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
 	return (1);
-	// else
-	// {
-	// 	dprintf(1, "derniere commande\n");
-	// 	pipex->outfiles = ft_lstlast_outfile(pipex->outfiles);
-	// 	dup2(pipex->outfiles->outfile, STDOUT_FILENO);
-	// 	close(pipex->outfiles->outfile);
-	// }
-	// if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
-	// 	return (close(pipex->fd[0]), close(pipex->fd[1]), 0);
 }
 
 int	ft_lstsize(t_env *lst)
@@ -155,12 +145,3 @@ char **list_to_tab(t_env **envp)
 	}
 	return (tab);
 }
-
-// t_outfile	*ft_lstlast_outfile(t_outfile *lst)
-// {
-// 	if (!lst)
-// 		return (NULL);
-// 	while (lst->next)
-// 		lst = lst->next;
-// 	return (lst);
-// }

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:34:05 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/06 17:26:46 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/07 15:18:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 void	del_var(t_env **head, char *arg)
 {
@@ -34,7 +33,7 @@ void	del_var(t_env **head, char *arg)
 	free(current);
 }
 
-void	builtin_unset(s_data *data)
+int	builtin_unset(s_data *data)
 {
 	int		i;
 	char	**args;
@@ -45,7 +44,9 @@ void	builtin_unset(s_data *data)
 	{
 		if (args[i][0] && args[i][0] == '-')
 		{
-			printf("bash: unset: %s: invalid option\n", args[i]);
+			ft_putstr_fd("bash: unset: ", STDERR_FILENO);
+			ft_putstr_fd(args[i], STDERR_FILENO);
+			ft_putstr_fd(": invalid option\n", STDERR_FILENO);
 			i++;
 			continue ;
 		}		
@@ -55,4 +56,5 @@ void	builtin_unset(s_data *data)
 			del_var(&data->envp, args[i]);
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }

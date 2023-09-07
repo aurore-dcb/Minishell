@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/06 13:48:00 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/07 15:17:55 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ int	do_export(s_data *data, int i, char **args)
 {
 	if (ft_isdigit(args[i][0]) || is_inv(args[i]) || has_plus(args[i]))
 	{
-		printf("bash: export: `%s': not a valid identifier\n", args[i]);
+		ft_putstr_fd("bash: export: `", STDERR_FILENO);
+		ft_putstr_fd(args[i], STDERR_FILENO);
+		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
 		i++;
 		return (1);
 	}
@@ -82,9 +84,9 @@ int	builtin_export(s_data *data)
 		while (args[i])
 		{
 			if (!do_export(data, i, args))
-				return (0);
+				return (EXIT_FAILURE);
 			i++;
 		}
 	}
-	return (1);
+	return (EXIT_SUCCESS);
 }
