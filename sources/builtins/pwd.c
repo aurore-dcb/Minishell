@@ -6,24 +6,22 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 15:18:13 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:19:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	builtin_pwd(s_data *data)
+int	builtin_pwd(void)
 {
-	t_env	*tmp;
-
-	if (!data->envp)
-		return (EXIT_FAILURE);
-	tmp = data->envp;
-	while (tmp)
+	if (getcwd(NULL, 0))
+		printf("%s\n", getcwd(NULL, 0));
+	else
 	{
-		if (!ft_strncmp(tmp->key, "PWD", 3))
-			printf("%s\n", tmp->data);
-		tmp = tmp->next;
+		ft_putstr_fd("pwd: error retrieving current directory: getcwd: ", 2);
+		ft_putstr_fd("cannot access parent directories: ", 2);
+		ft_putstr_fd("No such file or directory\n", 2);
+		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

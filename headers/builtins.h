@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 14:39:13 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:19:25 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		has_plus(char *str);
 int		in_env(t_env *env, char *key);
 void	del_plus(char *str);
 // pwd.c
-int		builtin_pwd(s_data *data);
+int		builtin_pwd(void);
 // unset.c
 void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/08 14:35:40 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 15:19:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	builtins_pipe(char *cmd, s_data *data)
 
 	len = ft_strlen(cmd);
 	if (!ft_strncmp(cmd, "pwd", 3) && len == 3)
-		return (builtin_pwd(data), 1);
+		return (builtin_pwd(), 1);
 	else if (!ft_strncmp(cmd, "env", 3) && len == 3)
 		return (builtin_env(data), 1);
 	else if (!ft_strncmp(cmd, "unset", 5) && len == 5)
