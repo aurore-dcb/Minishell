@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 16:25:20 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 11:54:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		// if (!data->middle_cmd_path)
 		// 	return (error_free(data, cmd, pids),
 		// 		ft_printf("Error-> Command\n"), 0);
+		if (builtins_no_pipe(tmp->args[0], data))
+			return (1);
 		if (!ft_process(pipex, pids, tmp, data))
 			return (ft_printf("Error-> Process\n"), 0);
 		// return (error_free(data, cmd, pids),
@@ -103,12 +105,14 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 		close(cmd->fd[0]);
 		close(cmd->fd[1]);
 	}
-	if (is_builtins(cmd->cmd, data))
+	if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
+		return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
+	if (builtins_pipe(cmd->args[0], data) == 0)
 	{
 		if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
 			return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
 	}
-	exit(0);
+	return(0);
 }
 
 int	ft_lstsize(t_env *lst)

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 16:31:33 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 11:53:18 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int		builtin_pwd(s_data *data);
 void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);
 // builtins.c
-int	is_builtins(char *cmd, s_data *data);
-
+int	builtins_pipe(char *cmd, s_data *data);
+int	builtins_no_pipe(char *cmd, s_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 15:03:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 10:12:47 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ int main(int argc, char **argv, char **env)
 					printf("ERROR -> execution\n");
 				
 			}
-			// free(data.input);
-			// dup2(STDIN_FILENO, data.cmd->in);
+			free(data.input);
 		}
 		else
 		{

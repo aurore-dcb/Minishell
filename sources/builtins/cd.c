@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 16:24:03 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 10:19:05 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	builtin_cd(s_data *data)
 	int		ret;
 	char	*res;
 
+	dprintf(1, "------- CD ----------\n");
 	if (!data->cmd->args[1])
 		ret = search_path(data->envp, "HOME");
 	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0)
