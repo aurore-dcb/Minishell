@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:46:02 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/06 13:47:07 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:37:44 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 int	is_inv(char *str)
 {
@@ -28,7 +27,7 @@ int	is_inv(char *str)
 			if (str[i] == '+')
 			{
 				if (str[i + 1] == '=')
-					return (0);
+					return (2);
 				return (1);
 			}
 			else if (str[i] == '=')
@@ -71,4 +70,13 @@ int	in_env(t_env *env, char *key)
 		begin = begin->next;
 	}
 	return (0);
+}
+
+void	del_plus(char *str)
+{
+	int	len;
+
+	len = ft_strlen(str);
+	if (len > 0 && str[len - 1] == '+')
+		str[len - 1] = '\0';
 }

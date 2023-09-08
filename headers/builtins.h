@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 11:53:18 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:39:13 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,18 @@ void	ft_swap(t_env *a, t_env *b);
 t_env	*ft_sort_list(t_env *envex);
 void	print_sorted_env(t_env *envex);
 void	ft_lstreplace_env(t_env **lst, t_env *new);
+void	ft_lstjoin_env(t_env **lst, t_env *new);
 // export_utils2.c
 int		is_inv(char *str);
 int		has_plus(char *str);
 int		in_env(t_env *env, char *key);
+void	del_plus(char *str);
 // pwd.c
 int		builtin_pwd(s_data *data);
 // unset.c
 void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);
 // builtins.c
-int	builtins_pipe(char *cmd, s_data *data);
-int	builtins_no_pipe(char *cmd, s_data *data);
+int		builtins_pipe(char *cmd, s_data *data);
+int		builtins_no_pipe(char *cmd, s_data *data);
 #endif

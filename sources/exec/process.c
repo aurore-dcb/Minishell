@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 11:54:09 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:19:48 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 		close(cmd->fd[0]);
 		close(cmd->fd[1]);
 	}
-	if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
-		return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
 	if (builtins_pipe(cmd->args[0], data) == 0)
 	{
 		if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)

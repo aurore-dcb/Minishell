@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:17:07 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/06 14:27:30 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/08 14:37:07 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 void	ft_swap(t_env *a, t_env *b)
 {
@@ -76,6 +75,24 @@ void	ft_lstreplace_env(t_env **lst, t_env *new)
 				new->next = list->next->next;
 				list->next = new;
 			}
+			list = list->next;
+		}
+	}
+	else
+		*lst = new;
+}
+
+void	ft_lstjoin_env(t_env **lst, t_env *new)
+{
+	t_env	*list;
+
+	list = *lst;
+	if (list)
+	{
+		while (list)
+		{
+			if (!ft_strcmp(list->key, new->key))
+				list->data = ft_strjoin(list->data, new->data);
 			list = list->next;
 		}
 	}

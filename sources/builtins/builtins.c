@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/08 11:55:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:35:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int	builtins_pipe(char *cmd, s_data *data)
 {
-	if (!ft_strcmp(cmd, "pwd"))
-		return (builtin_pwd(data), 0);
-	else if (!ft_strcmp(cmd, "env"))
-		return (builtin_env(data), 0);
-	else if (!ft_strcmp(cmd, "unset"))
-		return (builtin_unset(data), 0);
-	else if (!ft_strcmp(cmd, "echo"))
-		return (builtin_echo(data), 0);
+	int len;
+
+	len = ft_strlen(cmd);
+	if (!ft_strncmp(cmd, "pwd", 3) && len == 3)
+		return (builtin_pwd(data), 1);
+	else if (!ft_strncmp(cmd, "env", 3) && len == 3)
+		return (builtin_env(data), 1);
+	else if (!ft_strncmp(cmd, "unset", 5) && len == 5)
+		return (builtin_unset(data), 1);
+	else if (!ft_strncmp(cmd, "echo", 4) && len == 4)
+		return (builtin_echo(data), 1);
 	// else if (ft_strcmp(cmd, "exit"))
 	// 	return (builtin_exit(data));
-	return (1);
+	return (0);
 }
 
 int builtins_no_pipe(char *cmd, s_data *data)

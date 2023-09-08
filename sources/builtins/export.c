@@ -6,24 +6,27 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/07 15:17:55 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 14:36:33 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-#include "../../libft/libft.h"
 
 int	add_two_env(t_env *env, char *args, int to_equal)
 {
 	t_env	*new;
 
-	if (to_equal == 1)
+	if (to_equal >= 1)
 		new = ft_lstnew_env_equal(args);
 	else
 		new = ft_lstnew_env(args);
 	if (!new)
 		return (0);
-	if (in_env(env, new->key))
+	if (to_equal == 2)
+		del_plus(new->key);
+	if (in_env(env, new->key) && to_equal == 2)
+		ft_lstjoin_env(&env, new);
+	else if (in_env(env, new->key))
 		ft_lstreplace_env(&env, new);
 	else
 		ft_lstadd_back_env(&env, new);
@@ -44,9 +47,31 @@ int	add_no_equal(t_env *env, char *args)
 	return (1);
 }
 
+int	handle_equal(s_data *data, int i, char **args, int ret_inv)
+{
+	if (ret_inv == 2)
+	{
+		if (!add_two_env(data->envex, args[i], 2))
+			return (0);
+		if (!add_two_env(data->envp, args[i], 2))
+			return (0);
+	}
+	else
+	{
+		if (!add_two_env(data->envex, args[i], 1))
+			return (0);
+		if (!add_two_env(data->envp, args[i], 0))
+			return (0);
+	}
+	return (1);
+}
+
 int	do_export(s_data *data, int i, char **args)
 {
-	if (ft_isdigit(args[i][0]) || is_inv(args[i]) || has_plus(args[i]))
+	int	ret_inv;
+
+	ret_inv = is_inv(args[i]);
+	if (ft_isdigit(args[i][0]) || (ret_inv == 1) || has_plus(args[i]))
 	{
 		ft_putstr_fd("bash: export: `", STDERR_FILENO);
 		ft_putstr_fd(args[i], STDERR_FILENO);
@@ -56,9 +81,7 @@ int	do_export(s_data *data, int i, char **args)
 	}
 	if (ft_strrchr(args[i], '='))
 	{
-		if (!add_two_env(data->envex, args[i], 1))
-			return (0);
-		if (!add_two_env(data->envp, args[i], 0))
+		if (!handle_equal(data, i, args, ret_inv))
 			return (0);
 	}
 	else if (!ft_strrchr(args[i], '='))

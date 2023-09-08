@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 10:12:47 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/08 12:38:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,87 +77,22 @@ int main(int argc, char **argv, char **env)
 		initialize(&data);
 		data.input = readline("minishell> ");
 		dprintf(1, "input = %s\n", data.input);
-		if (data.input && data.input[0])
+		if (data.input)
 		{
-			add_history(data.input);
-			if (!parsing(&data))
-				printf("ERROR -> parsing\n");
-			else
+			if (data.input[0])
 			{
-				if (ft_pipex(&data) == 1)
-					printf("ERROR -> execution\n");
-				
+				add_history(data.input);
+				if (!parsing(&data))
+					printf("ERROR -> parsing\n");
+				else
+					if (ft_pipex(&data) == 1)
+						printf("ERROR -> execution\n");
 			}
 			free(data.input);
 		}
 		else
-		{
-			dprintf(1, "break\n");
 			break;
-		}
 	}
 	clear_history();
 	// rl_clear_history();
 }
-// int	main(int argc, char **argv, char **env)
-// {
-// 	(void)argv;
-// 	s_data		data;
-// 	if (argc != 1)
-// 		return (printf("No argument are needed !\n"), 1);
-// 	data.envp = NULL;
-// 	data.exit_status = 0;
-// 	data.input = readline("minishell> ");
-// 	// data.env = env; // creer une autre variable pour qu'on puisse la modifier lors de l'execution
-// 	// if (signal(SIGINT, handleCtrlC) == SIG_ERR) {
-// 	// perror("Erreur lors de la configuration du gestionnaire de signal");
-// 	// return (1);
-// 	// }
-// 	if (!parse_env(env, &data))
-// 		return (0);
-// 	// while (data.envp)
-// 	// {
-// 	// 	printf("%s\n", data.envp->data);
-// 	// 	data.envp = data.envp->next;
-// 	// }
-// 	while (/*signalFlag == 0 &&*/ data.input != NULL)
-// 	{
-// 		initialize(&data);
-// 		if (/*signalFlag == 0 && */ 1 == 1)
-// 		{
-// 			add_history(data.input);
-// 			// -> traiter input : parsing puis execution
-// 			if (!parsing(&data))
-// 				printf("ERROR -> parsing\n");
-// 			else //exec
-// 			{
-// 				// display_token(data.cmd);
-// 				if (ft_pipex(&data))
-// 					printf("ERROR -> execution\n");
-// 				else
-// 				{
-// 					dprintf(1, "EXEC OK\n");
-// 				}
-// 			}
-// 			// printf("%d\n", ft_strcmp(data.cmd->args[0], "cd"));
-// 			// else if (ft_strcmp(data.cmd->args[0], "cd") == 0)
-//             // {
-//             //     build_cd(&data);
-//             // }
-//             // else if (ft_strcmp(data.cmd->args[0], "pwd") == 0)
-//             // {
-//             //     builtin_pwd(&data);
-//             // }
-//             // else if (ft_strcmp(data.cmd->args[0], "env") == 0)
-//             // {
-//             //     // printf("select env\n");
-//             //     builtin_env(&data);
-// 			//si ctrl-C : sortir de cette boucle
-// 		}
-// 		// free_all(&data.cmd, data.input);
-// 		data.input = readline("minishell> ");
-// 	}
-// 	clear_history();
-// 	// rl_clear_history();
-// 	return (0);
-// }
