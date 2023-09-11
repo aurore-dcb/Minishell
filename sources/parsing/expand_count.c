@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 char *existing_var(char *var, s_data *data)
 {
-	// int i;
 	t_env *begin;
 	char *res;
 	
-	// i = 0;
 	begin = data->envp;
 	if (!var)
 		return (NULL);
@@ -32,7 +30,6 @@ char *existing_var(char *var, s_data *data)
 			return (free(var), res);
 		}
 		begin = begin->next;
-		// i++;
 	}
 	return (NULL);
 }
@@ -72,10 +69,7 @@ int find_variable(char *s, s_data *data)
     char *res;
 
 	if (*s == '?')
-	{
-		// printf("exit_status = %d\n-> len = %d\n",data->exit_status, size_nb(data->exit_status));
 		return (size_nb(data->exit_status));
-	}
     cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
 	if (!cpy)
 		return (printf("echec malloc\n"), 0); // ERREUR
