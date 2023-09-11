@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/11 10:53:08 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:20:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	initialise_pipex(pipex *pipex)
 {
 	pipex->paths = NULL;
 	pipex->infile = -1;
-	// pipex->here_doc_file = -1;
+	pipex->here_doc_file = -1;
 	pipex->middle_cmd = NULL;
 	pipex->middle_cmd_path = NULL;
 }
@@ -42,9 +42,6 @@ int	ft_pipex(s_data *data)
 	pipex pipex;
 
 	pids = NULL;
-	// 	return (ft_here_doc(argv, argc, env, &cmd));
-	// else
-	// {
 	initialise_pipex(&pipex);
 	if (!parsing_pipex(&pipex, data))
 		return (1);

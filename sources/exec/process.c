@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/11 12:04:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:39:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		{
 			if (!ft_here_doc(tmp, pipex, data, pids))
 				return (dprintf(1, "erreur here_doc\n"), 0);
-			return (dprintf(1, "\nfin here_doc\n"), 1);
+			return (unlink(".here_doc"), 1);
 		}
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
 		// if (!data->middle_cmd_path)
@@ -112,7 +112,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 		if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
 			return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
 	}
-	return(1);
+	exit(0);
 }
 
 int	ft_lstsize(t_env *lst)

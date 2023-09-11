@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 15:15:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/11 15:19:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ int	open_infile(pipex *pipex, s_data *data)
 		beg_cmd = beg_cmd->next;
 	}
 	if (!file)
-	{
-		dprintf(1, "no infile\n");
 		pipex->infile = open("/dev/stdin", O_RDONLY);
-	}
 	else
 	{
 		pipex->infile = open(file, O_RDONLY);
@@ -71,6 +68,8 @@ int	open_outfile(pipex *pipex, s_data *data)
 				cmd->out = open(beg_token->word, O_WRONLY | O_CREAT | O_APPEND, 0646);
 			beg_token = beg_token->next;
 		}
+		// if (cmd->out == -2)
+		// 	cmd->out = open("/dev/stdout", O_WRONLY);
 		cmd = cmd->next;
 	}
 	return (1);
