@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 15:27:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/11 10:53:08 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	ft_pipex(s_data *data)
 	pipex pipex;
 
 	pids = NULL;
-	// if (is_here_doc(argc, argv))
 	// 	return (ft_here_doc(argv, argc, env, &cmd));
 	// else
 	// {

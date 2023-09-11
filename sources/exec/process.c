@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 12:19:48 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:04:29 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,13 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 	tmp = data->cmd;
 	while (tmp)
 	{
+		if (is_here_doc(tmp))
+		{
+			if (!ft_here_doc(tmp, pipex, data, pids))
+				return (dprintf(1, "erreur here_doc\n"), 0);
+			return (dprintf(1, "\nfin here_doc\n"), 1);
+		}
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
-		// if (!pipex->middle_cmd_path)
-		// 	return (dprintf(1, "error cmd path\n"), 0);
 		// if (!data->middle_cmd_path)
 		// 	return (error_free(data, cmd, pids),
 		// 		ft_printf("Error-> Command\n"), 0);
@@ -47,8 +51,6 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 			return (ft_printf("Error-> Process\n"), 0);
 		// return (error_free(data, cmd, pids),
 		// 	ft_printf("Error-> Process\n"), 0);
-
-		// free_tab(tmp->args);
 		free(pipex->middle_cmd_path);
 		tmp = tmp->next;
 	}
@@ -110,7 +112,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 		if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
 			return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
 	}
-	return(0);
+	return(1);
 }
 
 int	ft_lstsize(t_env *lst)

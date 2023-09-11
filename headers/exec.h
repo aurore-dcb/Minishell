@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/07 14:37:55 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/11 12:01:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,16 @@ int		open_outfile(pipex *pipex, s_data *data);
 int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
 int		ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data);
 int		ft_child(cmd_line *cmd, pipex *pipex, s_data *data);
-int	ft_lstsize(t_env *lst);
-char **list_to_tab(t_env **envp);
+int		ft_lstsize(t_env *lst);
+char	**list_to_tab(t_env **envp);
 // t_outfile	*ft_lstlast_outfile(t_outfile *lst);
 // find_path.c
 char	*find_path(char **paths, char *cmd);
 // pids.c
 t_pid	*ft_lstnew_pipex(pid_t pid);
 int		ft_lstadd_back_pipex(t_pid **lst, t_pid *new);
+// here_doc.c
+int		is_here_doc(cmd_line *cmd);
+int	ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 
 #endif
