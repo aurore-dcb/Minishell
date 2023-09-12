@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:17:07 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/08 14:37:07 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:53:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ft_lstreplace_env(t_env **lst, t_env *new)
 void	ft_lstjoin_env(t_env **lst, t_env *new)
 {
 	t_env	*list;
+	char	*tmp;
 
 	list = *lst;
 	if (list)
@@ -92,7 +93,12 @@ void	ft_lstjoin_env(t_env **lst, t_env *new)
 		while (list)
 		{
 			if (!ft_strcmp(list->key, new->key))
-				list->data = ft_strjoin(list->data, new->data);
+			{	
+				tmp = ft_strdup(list->data);
+				free(list->data);
+				list->data = ft_strjoin(tmp, new->data);
+				free(tmp);
+			}
 			list = list->next;
 		}
 	}

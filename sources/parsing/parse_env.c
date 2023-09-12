@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:49:59 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/06 14:16:46 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/12 17:16:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,39 @@ int	copy_elem(char **split_res, char *nul_char, t_env *elem)
 	return (1);
 }
 
-t_env	*ft_lstnew_env(char *data)
-{
-	t_env	*elem;
-	char	**split_res;
+// t_env	*ft_lstnew_env(char *data)
+// {
+// 	t_env	*elem;
+// 	char	**split_res;
 
-	elem = malloc(sizeof(t_env));
-	if (!elem)
-		return (NULL);
-	split_res = ft_split_env(data);
-	if (!split_res)
-		return (NULL);
-	if (!copy_elem(split_res, NULL, elem))
-		return (NULL);
-	elem->next = NULL;
-	return (elem);
-}
+// 	elem = malloc(sizeof(t_env));
+// 	if (!elem)
+// 		return (NULL);
+// 	split_res = ft_split_env(data);
+// 	if (!split_res)
+// 		return (NULL);
+// 	if (!copy_elem(split_res, NULL, elem))
+// 		return (NULL);
+// 	elem->next = NULL;
+// 	return (elem);
+// }
 
-t_env	*ft_lstnew_env_equal(char *data)
-{
-	t_env	*elem;
-	char	**split_res;
+// t_env	*ft_lstnew_env_equal(char *data)
+// {
+// 	t_env	*elem;
+// 	char	**split_res;
 
-	elem = malloc(sizeof(t_env));
-	if (!elem)
-		return (NULL);
-	split_res = ft_split_env(data);
-	if (!split_res)
-		return (NULL);
-	if (!copy_elem(split_res, "", elem))
-		return (NULL);
-	elem->next = NULL;
-	return (elem);
-}
+// 	elem = malloc(sizeof(t_env));
+// 	if (!elem)
+// 		return (NULL);
+// 	split_res = ft_split_env(data);
+// 	if (!split_res)
+// 		return (NULL);
+// 	if (!copy_elem(split_res, "", elem))
+// 		return (NULL);
+// 	elem->next = NULL;
+// 	return (elem);
+// }
 
 void	ft_lstadd_back_env(t_env **lst, t_env *new)
 {

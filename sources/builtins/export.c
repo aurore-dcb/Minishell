@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/08 14:36:33 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:53:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ int	add_two_env(t_env *env, char *args, int to_equal)
 	if (!new)
 		return (0);
 	if (to_equal == 2)
-		del_plus(new->key);
+		del_plus(new->key, '+');
 	if (in_env(env, new->key) && to_equal == 2)
+	{
 		ft_lstjoin_env(&env, new);
+		free_env(new);
+	}
 	else if (in_env(env, new->key))
 		ft_lstreplace_env(&env, new);
 	else
@@ -37,7 +40,7 @@ int	add_no_equal(t_env *env, char *args)
 {
 	t_env	*newex;
 
-	newex = ft_lstnew_env(args);
+	newex = ft_lstnew_env_no_equal(args);
 	if (!newex)
 		return (0);
 	if (!in_env(env, newex->key))

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 10:19:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:53:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char	*change_pwd(s_data *data)
 			ret = ft_strdup(tmp_env->data);
 			if (!ret)
 				return (NULL);
+			free(tmp_env->data);
 			tmp_env->data = getcwd(NULL, 0);
 		}
 		tmp_env = tmp_env->next;
@@ -73,6 +74,7 @@ int	change_oldpwd(s_data *data, char *ret)
 	{
 		if (!ft_strncmp(tmp_env->key, "OLDPWD", 6))
 		{
+			free(tmp_env->data);
 			tmp_env->data = ft_strdup(ret);
 			if (!tmp_env->data)
 				return (0);
@@ -87,7 +89,6 @@ int	builtin_cd(s_data *data)
 	int		ret;
 	char	*res;
 
-	dprintf(1, "------- CD ----------\n");
 	if (!data->cmd->args[1])
 		ret = search_path(data->envp, "HOME");
 	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0)
@@ -109,5 +110,6 @@ int	builtin_cd(s_data *data)
 		return (EXIT_FAILURE);
 	if (!change_oldpwd(data, res))
 		return (EXIT_FAILURE);
+	free(res);
 	return (EXIT_SUCCESS);
 }

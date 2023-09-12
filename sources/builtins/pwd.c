@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 15:19:01 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:54:57 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 int	builtin_pwd(void)
 {
-	if (getcwd(NULL, 0))
-		printf("%s\n", getcwd(NULL, 0));
+	char	*res;
+
+	res = getcwd(NULL, 0);
+	if (res)
+	{
+		printf("%s\n", res);
+		free(res);
+	}
 	else
 	{
 		ft_putstr_fd("pwd: error retrieving current directory: getcwd: ", 2);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:46:02 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/08 14:37:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:54:33 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ int	in_env(t_env *env, char *key)
 	return (0);
 }
 
-void	del_plus(char *str)
+void	del_plus(char *str, char to_del)
 {
 	int	len;
 
 	len = ft_strlen(str);
-	if (len > 0 && str[len - 1] == '+')
+	if (len > 0 && str[len - 1] == to_del)
 		str[len - 1] = '\0';
 }

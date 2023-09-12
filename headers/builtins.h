@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 15:19:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:07:37 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_lstjoin_env(t_env **lst, t_env *new);
 int		is_inv(char *str);
 int		has_plus(char *str);
 int		in_env(t_env *env, char *key);
-void	del_plus(char *str);
+void	del_plus(char *str, char to_del);
 // pwd.c
 int		builtin_pwd(void);
 // unset.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/06 14:22:19 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/12 17:01:27 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,9 @@ t_env		*ft_lstnew_env(char *data);
 t_env	*ft_lstnew_env_equal(char *data);
 void		ft_lstadd_back_env(t_env **lst, t_env *new);
 int			parse_env(char **env, s_data *data);
+//list_env.c
+t_env	*ft_lstnew_env(char *data);
+t_env	*ft_lstnew_env_no_equal(char *data);
+t_env	*ft_lstnew_env_equal(char *data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/08 12:38:36 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:12:27 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ int main(int argc, char **argv, char **env)
 		}
 		else
 			break;
+		free_list(data.cmd);
 	}
 	clear_history();
 	// rl_clear_history();
+	free_all(&data);
 }
