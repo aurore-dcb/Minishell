@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 14:52:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:06:19 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	free_list(cmd_line *begin)
 	{
 		current = begin;
 		begin = begin->next;
+		if (current->in > 2)
+			close (current->in);
+		if (current->out > 2)
+			close (current->out);
 		if (current->cmd)
 			free(current->cmd);
 		if (current->args)
@@ -78,27 +82,15 @@ void	free_all(s_data *data)
 		free_tab(data->tab_env);
 }
 
-void	wait_fct(t_pid **pids, pipex *pipex, s_data *data)
+void	wait_fct(t_pid **pids)
 {
 	t_pid	*tmp;
 
-	(void)data;
-	(void)pipex;
-	// close(pipex->fd[0]);
-	// close(pipex->fd[1]);
 	while (*pids)
 	{
 		tmp = *pids;
 		waitpid(((*pids)->pid), NULL, 0);
 		*pids = (*pids)->next;
-		// dprintf(1, "----------------wait\n");
 		free(tmp);
 	}
-	// free(*pids);
-	// free(data->input);
-	// if (pipex->infile > 1)
-	// 	close(pipex->infile);
-	// if (pipex->outfiles)
-	// 	free_outfiles(&pipex->outfiles);
-	// free_all(&data->cmd, data->input, pipex);
 }

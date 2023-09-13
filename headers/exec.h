@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 09:16:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:05:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_list(cmd_line *begin);
 void	free_all(s_data *data);
 void	free_env(t_env *env);
 // void	free_outfile(t_outfile **outfiles);
-void	wait_fct(t_pid **pids, pipex *pipex, s_data *data);
+void	wait_fct(t_pid **pids);
 // main.c
 void	initialize(s_data *data);
 // exec_utils.c

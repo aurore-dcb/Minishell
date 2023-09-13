@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/12 17:41:38 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:34:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	count_char(char *s, s_data *data)
 				s += len_var_env(s);
 			else
 				s = s + len_var_env(s) - 1;
-			printf("char = %c\n", *s);
 		}
 		else
 			n++;
@@ -102,6 +101,7 @@ char	*ft_expand(char *word, s_data *data)
 
 	if (!word)
 		return (NULL); // ERROR
+	dprintf(1, "word = .%s.\n", word);
 	trim = ft_strtrim(word, " ");
 	len_malloc = count_char(trim, data);
 	res = malloc(sizeof(char) * (len_malloc + 1));
@@ -110,5 +110,6 @@ char	*ft_expand(char *word, s_data *data)
 	res = apply_expand(res, trim, data);
 	free(trim);
 	free(word);
+	dprintf(1, "res = .%s.\n", res);
 	return (res);
 }

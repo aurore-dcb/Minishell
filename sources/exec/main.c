@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 14:47:47 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:00:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,6 @@ int main(int argc, char **argv, char **env)
 	data.envp = NULL;
 	data.envex = NULL;
 	data.exit_status = 0;
-	// if (!parse_env(env, &data))
-	// {
-		
-	// 	dprintf(1, "return 0\n");
-	// 	return (0);
-	// }
 	parse_env(env, &data);
 	while (1)
 	{

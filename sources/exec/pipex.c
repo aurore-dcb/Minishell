@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 14:43:02 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:30:58 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ int	ft_pipex(s_data *data)
 	pipex pipex;
 
 	pids = NULL;
+	dprintf(1, "cmd = .%s.\n", data->cmd->args[1]);
 	initialise_pipex(&pipex);
 	if (!parsing_pipex(&pipex, data))
 		return (1);
 	data->cmd->in = pipex.infile;
 	if (!loop_process(data, &pids, &pipex))
 		return (free_tab(pipex.paths), free(pids), printf("error loop process\n"), 1);
-	wait_fct(&pids, &pipex, data);
+	wait_fct(&pids);
 	free_tab(pipex.paths);
 	return (0);
 }

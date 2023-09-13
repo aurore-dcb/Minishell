@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 14:18:37 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:27:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 			return (0);
 		if (!ft_process(pipex, pids, tmp, data))
 			return (ft_printf("Error-> Process\n"), 0);
-		// return (error_free(data, cmd, pids),
-		// 	ft_printf("Error-> Process\n"), 0);
 		free(pipex->middle_cmd_path);
 		tmp = tmp->next;
 	}

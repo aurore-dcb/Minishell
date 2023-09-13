@@ -6,48 +6,68 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:46:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 13:53:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:27:28 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	verif_n(char **args)
+int	test_arg(char **args, int i)
+{
+	int	y;
+
+	y = 0;
+	if (args[i][0] == '-' && args[i][1] == 'n')
+	{
+		y++;
+		while (args[i][y] == 'n')
+			y++;
+		if (y == (int)ft_strlen(args[i]))
+			return (1);
+		else if (args[i][y] != 'n')
+			return (0);
+	}
+	else
+		return (0);
+	return (0);
+}
+
+int	nb_option(char **args)
 {
 	int	i;
-	int	y;
 	int	cpt;
 
-	cpt = 1;
-	y = 0;
 	i = 1;
-	while (args[i] && ft_strlen(args[i]) >= 2)
+	cpt = 0;
+	while (args[i])
 	{
-		if (args[i][y] == '-' && args[i][y + 1] == 'n')
-		{
-			y++;
-			while (args[i][y] == 'n')
-				y++;
-			if (y == (int)ft_strlen(args[i]))
-				cpt++;
-		}
-		else
-			return (cpt);
+		if (args[i][0] == '-' && args[i][1] == 'n')
+			cpt++;
 		i++;
-		y = 0;
 	}
 	return (cpt);
 }
 
-int	builtin_echo(s_data *data)
+int	verif_n(char **args)
 {
 	int	i;
-	int	y;
+	int	cpt;
 
-	y = 0;
-	i = verif_n(data->cmd->args);
-	if (i > 1)
-		y++;
+	cpt = 0;
+	i = 1;
+	while (args[i])
+	{
+		if (test_arg(args, i))
+			cpt += 1;
+		else
+			return (cpt);
+		i++;
+	}
+	return (cpt);
+}
+
+void	print_echo(s_data *data, int i, int y)
+{
 	while (data->cmd->args[i])
 	{
 		printf("%s", data->cmd->args[i]);
@@ -57,5 +77,26 @@ int	builtin_echo(s_data *data)
 	}
 	if (y == 0)
 		printf("\n");
+}
+
+int	builtin_echo(s_data *data)
+{
+	int	i;
+	int	y;
+	int	nb_op;
+	int	verif;
+
+	i = 0;
+	y = 0;
+	verif = verif_n(data->cmd->args);
+	nb_op = nb_option(data->cmd->args);
+	if (((nb_op == verif) && (nb_op != 0)) || test_arg(data->cmd->args, 1))
+	{
+		i = verif + 1;
+		y = 1;
+	}
+	else
+		i = 1;
+	print_echo(data, i, y);
 	return (EXIT_SUCCESS);
 }
