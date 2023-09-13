@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/13 09:32:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 10:39:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	nb_arg(cmd_line *list)
 	return (len);
 }
 
-void	fill_arg(cmd_line *list)
+void	fill_arg(cmd_line *list) //modif
 {
 	token	*cur;
 	int		i;
@@ -39,7 +39,7 @@ void	fill_arg(cmd_line *list)
 	{
 		if (cur->type == ARG)
 		{
-			list->args[i] = ft_substr(cur->word, 0, ft_strlen(cur->word));
+			list->args[i] = ft_strdup(cur->word);
 			i++;
 		}
 		cur = cur->next;

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 09:15:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 10:34:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int main(int argc, char **argv, char **env)
 					if (ft_pipex(&data) == 1)
 						printf("ERROR -> execution\n");
 			}
-			// free(data.input);
 		}
 		else
 			break;
