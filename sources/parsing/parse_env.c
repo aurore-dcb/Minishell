@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:49:59 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/12 17:16:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:49:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,7 @@ int	parse_env(char **env, s_data *data)
 	int		i;
 
 	i = 0;
-	if (!env)
-		return (0);
-	while (env[i])
+	while (env && env[i])
 	{
 		new = ft_lstnew_env(env[i]);
 		if (!new)

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 12:16:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:52:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab[i])
+	while (tab && tab[i])
 	{
 		free(tab[i]);
 		i++;
@@ -89,9 +89,9 @@ void	wait_fct(t_pid **pids, pipex *pipex, s_data *data)
 	while (*pids)
 	{
 		tmp = *pids;
-		// dprintf(1, "WAIT\n");
 		waitpid(((*pids)->pid), NULL, 0);
 		*pids = (*pids)->next;
+		// dprintf(1, "----------------wait\n");
 		free(tmp);
 	}
 	// free(*pids);

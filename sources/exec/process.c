@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 14:11:46 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:18:37 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void affichage(cmd_line **cmd, pipex *pipex)
 	dprintf(1, "cmd path = %s\n", pipex->middle_cmd_path);
 	dprintf(1, "-----------------fin--------------\n");
 }
-
-// void cmd_not_found()
 
 int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 {
