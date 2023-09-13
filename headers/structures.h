@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/11 10:56:33 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 09:16:16 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,9 @@ typedef struct s_data
 	struct cmd_line	*cmd;
 	struct s_env	*envp;
 	struct s_env	*envex;
+	char			**tab_env;
 	int				exit_status;
 }					s_data;
-
-// typedef struct s_outfile
-// {
-// 	int					outfile;
-// 	struct s_outfile	*next;
-// }						t_outfile;
 
 // -------------- PIPEX -------------- //
 

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:36 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:43:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int find_variable(char *s, s_data *data)
     cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
     res = existing_var(cpy, data);
 	n = ft_strlen(res);
+	free(res);
     return (n);
 }
 

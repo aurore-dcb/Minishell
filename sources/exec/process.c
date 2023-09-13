@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/11 15:39:49 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 10:06:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ void affichage(cmd_line **cmd, pipex *pipex)
 	dprintf(1, "-----------------fin--------------\n");
 }
 
+// void cmd_not_found()
+
 int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 {
 	cmd_line	*tmp;
 
+	data->tab_env = list_to_tab(&data->envp);
 	tmp = data->cmd;
 	while (tmp)
 	{
@@ -42,9 +45,8 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 			return (unlink(".here_doc"), 1);
 		}
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
-		// if (!data->middle_cmd_path)
-		// 	return (error_free(data, cmd, pids),
-		// 		ft_printf("Error-> Command\n"), 0);
+		if (!pipex->middle_cmd_path)
+			return (0);
 		if (builtins_no_pipe(tmp->args[0], data))
 			return (1);
 		if (!ft_process(pipex, pids, tmp, data))
@@ -109,7 +111,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 	}
 	if (builtins_pipe(cmd->args[0], data) == 0)
 	{
-		if (execve(pipex->middle_cmd_path, cmd->args, list_to_tab(&data->envp)) == -1)
+		if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
 			return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
 	}
 	exit(0);
@@ -150,5 +152,6 @@ char **list_to_tab(t_env **envp)
 		i++;
 		tmp = tmp->next;
 	}
+	tab[i] = NULL;
 	return (tab);
 }

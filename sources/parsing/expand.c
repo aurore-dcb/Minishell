@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/12 17:41:38 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_trim(char *s, int len)
 
 int	count_char(char *s, s_data *data)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	while (*s)
@@ -59,7 +59,7 @@ int	count_char(char *s, s_data *data)
 			n += find_variable(s, data);
 			if (*s == '?')
 				s += len_var_env(s);
-			else 
+			else
 				s = s + len_var_env(s) - 1;
 			printf("char = %c\n", *s);
 		}
@@ -70,12 +70,12 @@ int	count_char(char *s, s_data *data)
 	return (n);
 }
 
-char *apply_expand(char *res, char *word, s_data *data)
+char	*apply_expand(char *res, char *word, s_data *data)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-    while (*word)
+	while (*word)
 	{
 		if (*word == 39)
 			i = between_simple(res, &word, i);
@@ -96,9 +96,9 @@ char *apply_expand(char *res, char *word, s_data *data)
 
 char	*ft_expand(char *word, s_data *data)
 {
-	char *res;
-	char *trim;
-	int len_malloc;
+	char	*res;
+	char	*trim;
+	int		len_malloc;
 
 	if (!word)
 		return (NULL); // ERROR
@@ -106,7 +106,7 @@ char	*ft_expand(char *word, s_data *data)
 	len_malloc = count_char(trim, data);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
-		return (NULL); // ERROR
+		return (free(trim), NULL); // ERROR
 	res = apply_expand(res, trim, data);
 	free(trim);
 	free(word);

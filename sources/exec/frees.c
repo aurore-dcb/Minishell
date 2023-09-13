@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/12 17:06:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 09:22:05 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	free_all(s_data *data)
 		free_env(data->envp);
 	if (data->envex)
 		free_env(data->envex);
+	if (data->tab_env)
+		free_tab(data->tab_env);
 }
 
 void	wait_fct(t_pid **pids, pipex *pipex, s_data *data)

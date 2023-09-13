@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:08 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 09:32:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	fill_arg(cmd_line *list)
 	{
 		if (cur->type == ARG)
 		{
-			list->args[i] = cur->word;
+			list->args[i] = ft_substr(cur->word, 0, ft_strlen(cur->word));
 			i++;
 		}
 		cur = cur->next;
@@ -49,8 +49,8 @@ void	fill_arg(cmd_line *list)
 
 int	tab_cmd(cmd_line **list)
 {
-	cmd_line	*begin;
-	char		**cmd;
+	cmd_line *begin;
+	char **cmd;
 
 	begin = *list;
 	while (begin)
