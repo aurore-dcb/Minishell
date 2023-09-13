@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   init_sig.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 14:56:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 17:17:31 by rmeriau          ###   ########.fr       */
+/*   Created: 2023/09/13 17:09:06 by rmeriau           #+#    #+#             */
+/*   Updated: 2023/09/13 17:36:00 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "../../headers/minishell.h"
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <signal.h>
+void	handle_sigint(int signum)
+{
+	if (signum != SIGINT)
+		return ;
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	// g_manager.exit_code = 1;
+}
 
-#include "../libft/libft.h"
-#include "structures.h"
-#include "parsing.h"
-#include "exec.h"
-#include "builtins.h"
-#include "signal.h"
-
-#endif
+void	init_signal(void)
+{
+	signal(SIGINT, handle_sigint);
+	// signal(EOF, builtin_exit);
+	signal(SIGQUIT, SIG_IGN);
+}

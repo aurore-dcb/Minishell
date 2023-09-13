@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 15:00:23 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 18:19:44 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int main(int argc, char **argv, char **env)
 	parse_env(env, &data);
 	while (1)
 	{
+		init_signal();
 		initialize(&data);
 		data.input = readline("minishell> ");
 		dprintf(1, "input = %s\n", data.input);

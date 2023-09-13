@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 15:05:11 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 18:18:55 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		tab_cmd(cmd_line **list);
 void	initialise_pipex(pipex *pipex);
 int		parsing_pipex(pipex *pipex, s_data *data);
 int		ft_pipex(s_data *data);
+int		ft_lstsize_cmd(cmd_line *lst);
 // get_paths.c
 char	**get_paths(t_env **envp);
 // files.c

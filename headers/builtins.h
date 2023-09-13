@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/12 17:07:37 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 18:18:24 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,6 @@ int		builtin_unset(s_data *data);
 // builtins.c
 int		builtins_pipe(char *cmd, s_data *data);
 int		builtins_no_pipe(char *cmd, s_data *data);
+// exit.c
+int		builtin_exit(s_data *data);
 #endif

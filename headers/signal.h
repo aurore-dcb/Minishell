@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 14:56:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 17:17:31 by rmeriau          ###   ########.fr       */
+/*   Created: 2023/09/13 17:09:42 by rmeriau           #+#    #+#             */
+/*   Updated: 2023/09/13 17:11:01 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <signal.h>
-
-#include "../libft/libft.h"
-#include "structures.h"
-#include "parsing.h"
-#include "exec.h"
-#include "builtins.h"
-#include "signal.h"
+void	init_signal(void);
+void	handle_sigint(int signum);
 
 #endif

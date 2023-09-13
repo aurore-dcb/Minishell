@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 15:30:58 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 18:18:42 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,26 @@ int	parsing_pipex(pipex *pipex, s_data *data)
 	return (1);
 }
 
+int	ft_lstsize_cmd(cmd_line *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
 int	ft_pipex(s_data *data)
 {
 	t_pid *pids;
 	pipex pipex;
 
+	if (!ft_strcmp(data->cmd->args[0], "exit") && ft_lstsize_cmd(data->cmd) == 1)
+		builtin_exit(data);
 	pids = NULL;
 	dprintf(1, "cmd = .%s.\n", data->cmd->args[1]);
 	initialise_pipex(&pipex);

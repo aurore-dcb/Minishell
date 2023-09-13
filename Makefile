@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
+#    By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/09/12 17:00:40 by aducobu          ###   ########.fr        #
+#    Updated: 2023/09/13 17:15:34 by rmeriau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,14 @@ SRCS = 			${addprefix sources/, \
 					${addprefix parsing/, parsing.c quotes.c \
 					 	list.c split_pipe.c error_handling.c expand.c \
 					 	expand_count.c expand_apply.c split_word.c \
-						list_env.c parse_env.c} \
+						list_env.c parse_env.c } \
 					${addprefix exec/, main.c frees.c error.c exec_utils.c \
 						pipex.c get_paths.c files.c process.c find_path.c pids.c \
 						here_doc.c } \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c export.c \
-						export_utils.c export_utils2.c unset.c builtins.c} \
+						export_utils.c export_utils2.c unset.c builtins.c \
+						exit.c } \
+					${addprefix signal/, init_sig.c } \
 				}
 
 OBJS = 			${SRCS:sources/%.c=objects/%.o}
