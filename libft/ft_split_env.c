@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:14:55 by aurore            #+#    #+#             */
-/*   Updated: 2023/09/06 14:15:05 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/13 12:13:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	**error(char **res, int i)
 	return (NULL);
 }
 
-static char	**fill_tab(const char *str, char	**tab)
+static char	**fill_tab(const char *str, char **tab)
 {
 	int	j;
 
@@ -52,7 +52,10 @@ static char	**fill_tab(const char *str, char	**tab)
 	tab[0][j] = '\0';
 	str++;
 	if (*str == '\0')
+	{
+		tab[1] = NULL;
 		return (tab);
+	}
 	tab[1] = malloc(sizeof(char) * nb_lettre(str, '\0') + 1);
 	if (!tab[1])
 		return (error(tab, 1));
@@ -73,6 +76,8 @@ char	**ft_split_env(const char *str)
 	if (tab == NULL)
 		return (NULL);
 	tab = fill_tab(str, tab);
+	if (!tab[1])
+		tab[1] = 0;
 	tab[2] = 0;
 	return (tab);
 }

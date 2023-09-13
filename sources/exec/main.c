@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 10:34:50 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 12:17:28 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void initialize(s_data *data)
 	data->etat.simple = 0;
 	data->etat.doubl = 0;
     data->cmd = NULL;
+	data->tab_env = NULL;
 }
 
 int main(int argc, char **argv, char **env)
@@ -92,6 +93,8 @@ int main(int argc, char **argv, char **env)
 		else
 			break;
 		free_list(data.cmd);
+		if (data.tab_env)
+			free_tab(data.tab_env);
 	}
 	clear_history();
 	// rl_clear_history();

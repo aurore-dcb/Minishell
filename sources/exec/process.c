@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 10:30:57 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 11:31:10 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,14 +144,16 @@ char **list_to_tab(t_env **envp)
 		return (0);
 	i = 0;
 	while (tmp)
-	{
-		tab[i] = malloc(sizeof(char) * (ft_strlen(tmp->data) + 1));
-		if (!tab[i])
-			return (0);
-		tab[i] = ft_strcpy(tab[i], tmp->data, ft_strlen(tmp->data) + 1);
-		i++;
-		tmp = tmp->next;
-	}
+    {
+        if (tmp->data)
+            tab[i] = ft_strdup(tmp->data);
+        else
+            tab[i] = ft_strdup("");
+        if (!tab[i])
+            return (0);
+        i++;
+        tmp = tmp->next;
+    }
 	tab[i] = NULL;
 	return (tab);
 }

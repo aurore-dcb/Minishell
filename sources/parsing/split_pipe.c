@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/04 13:43:20 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/13 11:55:44 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,31 @@ int	nb_mots_cmd(char *str)
 {
 	int		mots;
 	char	q;
+	int i;
 
 	mots = 1;
+	i = 0;
+	if (!str)
+		return (0);
+	// while (i < ft_strlen(str))
 	while (*str != '\0')
 	{
 		if (*str == 34 || *str == 39)
 		{
 			q = *str++;
+			// i++;
 			while (*str && *str != q)
+			{
 				str++;
+				// i++;
+			}
 			str++;
+			// i++;
 		}
 		if (*str == '|')
 			mots++;
 		str++;
+		// i++;
 	}
 	return (mots);
 }
@@ -40,7 +51,8 @@ int	nb_lettre_cmd(char *s)
 	char	q;
 
 	i = 0;
-	while (s[i])
+	// while (i < ft_strlen(s))
+	while (s && s[i])
 	{
 		if (s[i] == 34 || s[i] == 39)
 		{
