@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 11:55:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/14 11:26:12 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,19 @@ int	nb_mots_cmd(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	// while (i < ft_strlen(str))
 	while (*str != '\0')
 	{
 		if (*str == 34 || *str == 39)
 		{
 			q = *str++;
-			// i++;
 			while (*str && *str != q)
-			{
 				str++;
-				// i++;
-			}
 			str++;
-			// i++;
 		}
-		if (*str == '|')
+		if (*str && *str == '|')
 			mots++;
-		str++;
-		// i++;
+		if (*str)
+			str++;
 	}
 	return (mots);
 }
@@ -51,8 +45,7 @@ int	nb_lettre_cmd(char *s)
 	char	q;
 
 	i = 0;
-	// while (i < ft_strlen(s))
-	while (s && s[i])
+	while (s && i < ft_strlen(s))
 	{
 		if (s[i] == 34 || s[i] == 39)
 		{
@@ -64,7 +57,7 @@ int	nb_lettre_cmd(char *s)
 				return (i);
 			i++;
 		}
-		if (s[i] == '|')
+		if (s[i] && s[i] == '|')
 			return (i);
 		i++;
 	}
@@ -91,7 +84,7 @@ void	split2_pipe(char **input, cmd_line **cmd)
 				return ;
 			begin->cmd[j++] = *(*input)++;
 		}
-		if (*(*input) != '|')
+		if (*(*input) && *(*input) != '|')
 			begin->cmd[j++] = *(*input)++;
 	}
 	begin->cmd[j] = '\0';
