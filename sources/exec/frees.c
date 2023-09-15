@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 10:28:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:02:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,23 @@ void	free_all(s_data *data)
 		free_tab(data->tab_env);
 }
 
-void	wait_fct(t_pid **pids)
+void	wait_fct(t_pid **pids, s_data *data)
 {
 	t_pid	*tmp;
 
 	while (*pids)
 	{
 		tmp = *pids;
-		waitpid(((*pids)->pid), NULL, 0);
+		waitpid(((*pids)->pid), &data->exit_status, 0);
 		*pids = (*pids)->next;
 		free(tmp);
+	}
+	if (WIFEXITED(data->exit_status))
+		data->exit_status = WEXITSTATUS(data->exit_status);
+	else if (WIFSIGNALED(data->exit_status))
+	{
+		if (data->exit_status == SIGTERM)
+			ft_putstr_fd("Terminated\n", 2);
+		data->exit_status += 128;
 	}
 }

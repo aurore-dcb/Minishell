@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 18:18:24 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:33:06 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);
 // builtins.c
 int		builtins_pipe(char *cmd, s_data *data);
-int		builtins_no_pipe(char *cmd, s_data *data);
+int		builtins_no_pipe(cmd_line *cmd, s_data *data);
 // exit.c
 int		builtin_exit(s_data *data);
 #endif

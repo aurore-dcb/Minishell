@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 11:37:15 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:33:55 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	standart_input(cmd_line *cmd, pipex *pipex)
 	{
 		if (signalFlag == 1)
         {
+			printf("test\n");
             close(pipex->here_doc_file);
             unlink(".here_doc");
             return ;
@@ -78,7 +79,7 @@ int	process_here_doc(pipex *pipex, cmd_line *cmd, s_data *data, t_pid **pids)
 	pipex->middle_cmd_path = find_path(pipex->paths, cmd->args[0]);
 	if (!pipex->middle_cmd_path)
 		return (0);
-	if (builtins_no_pipe(cmd->args[0], data))
+	if (builtins_no_pipe(cmd, data))
 		return (1);
 	if (!ft_process(pipex, pids, cmd, data))
 		return (0);

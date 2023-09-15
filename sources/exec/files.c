@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 10:25:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:28:29 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	open_infile(s_data *data)
 		while (beg_token)
 		{
 			if (beg_token->type == 6)
+			{
 				beg_cmd->in = open(beg_token->word, O_RDONLY);
+				beg_cmd->error = errno;
+			}
 			beg_token = beg_token->next;
 		}
 		beg_cmd = beg_cmd->next;

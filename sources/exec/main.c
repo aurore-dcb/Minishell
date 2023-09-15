@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 11:35:48 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 18:38:23 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	free_cmd_in(cmd_line **cmd)
 	}
 }
 
+
 int	main(int argc, char **argv, char **env)
 {
 	s_data	data;
@@ -90,9 +91,10 @@ int	main(int argc, char **argv, char **env)
 	parse_env(env, &data);
 	while (1)
 	{
-		init_signal();
+		set_signals();
 		initialize(&data);
 		data.input = readline("minishell> ");
+		// printf("data.input = %s\n", data.input);
 		if (data.input)
 		{
 			if (data.input[0])
@@ -100,6 +102,8 @@ int	main(int argc, char **argv, char **env)
 				add_history(data.input);
 				if (parsing(&data))
 					ft_pipex(&data);
+				else
+					data.exit_status = 2;
 				// if (!parsing(&data))
 				// 	printf("ERROR -> parsing\n");
 				// else if (ft_pipex(&data) == 1)
@@ -107,7 +111,12 @@ int	main(int argc, char **argv, char **env)
 			}
 		}
 		else
-			break ;
+		{
+			if (isatty(0) == 1)
+				printf("exit\n");
+			return (free_all(&data), data.exit_status);		
+			// break ;
+		}
 		free_list(data.cmd);
 		if (data.tab_env)
 			free_tab(data.tab_env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/15 10:29:09 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:25:45 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,23 @@ int	builtins_pipe(char *cmd, s_data *data)
 	return (0);
 }
 
-int	builtins_no_pipe(char *cmd, s_data *data)
+int	builtins_no_pipe(cmd_line *cmd, s_data *data)
 {
 	int	len;
 
-	if (cmd)
+	if (cmd->in == -1)
 	{
-		len = ft_strlen(cmd);
-		if (!ft_strncmp(cmd, "cd", 2) && len == 2)
+		error_file(cmd, data, 6);
+		return (1);
+	}
+	if (cmd->args[0])
+	{
+		len = ft_strlen(cmd->args[0]);
+		if (!ft_strncmp(cmd->args[0], "cd", 2) && len == 2)
 			return ((builtin_cd(data)), 1);
-		else if (!ft_strncmp(cmd, "export", 6) && len == 6)
+		else if (!ft_strncmp(cmd->args[0], "export", 6) && len == 6)
 			return (builtin_export(data), 1);
-		else if (!ft_strncmp(cmd, "unset", 5) && len == 5)
+		else if (!ft_strncmp(cmd->args[0], "unset", 5) && len == 5)
 			return (builtin_unset(data), 1);
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/12 17:26:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:52:11 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ int	builtin_cd(s_data *data)
 		ret = chdir(data->cmd->args[1]);
 		if (ret != 0)
 		{
-			ft_putstr_fd("minishell: ", STDERR_FILENO);
+			ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 			ft_putstr_fd(data->cmd->args[1], STDERR_FILENO);
-			perror(" ");
+			ft_putstr_fd(": No such file or directory\n", 2);
 		}
 	}
 	if (ret != 0)

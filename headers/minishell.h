@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:56:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 17:17:31 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/15 15:05:20 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include <sys/ioctl.h>
+# include <errno.h>
 
 #include "../libft/libft.h"
 #include "structures.h"
