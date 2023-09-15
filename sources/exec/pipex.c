@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 18:24:46 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/15 18:43:47 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	ft_pipex(s_data *data)
 	t_pid	*pids;
 	pipex	pipex;
 
-	if (!ft_strcmp(data->cmd->args[0], "exit")
-		&& ft_lstsize_cmd(data->cmd) == 1)
-		builtin_exit(data);
+	// if (!ft_strcmp(data->cmd->args[0], "exit")
+	// 	&& ft_lstsize_cmd(data->cmd) == 1)
+	// 	builtin_exit(data);
 	pids = NULL;
 	initialise_pipex(&pipex);
 	signal(SIGINT, sig_handler_job);
