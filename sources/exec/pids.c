@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:32:34 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/11 15:22:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:08:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	ft_lstadd_back_pipex(t_pid **lst, t_pid *new)
 {
 	t_pid	*list;
 
-	// if (lst)
-	// {
 	list = *lst;
 	if (!new)
 		return (0);
@@ -44,5 +42,4 @@ int	ft_lstadd_back_pipex(t_pid **lst, t_pid *new)
 		*lst = new;
 	}
 	return (1);
-	// }
 }

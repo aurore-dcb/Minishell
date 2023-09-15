@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:32:42 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/06 14:47:50 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/14 14:08:18 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,27 @@ char	*ft_trim_pipex(char *s)
 	return (res);
 }
 
-char    **get_paths(t_env **envp)
+char	**get_paths(t_env **envp)
 {
-    char    *lign;
-    char    **paths;
-    t_env *begin;
+	char	*lign;
+	char	**paths;
+	t_env	*begin;
 
-    begin = *envp;
-    if (!begin)
-        return (NULL);
-    while (begin)
-    {
-        if (ft_strnstr(begin->key, "PATH", 4))
-        {
-            lign = ft_trim_pipex(begin->data);
-            if (!lign)
-                return (0);
-            paths = ft_split(lign, ':');
-            free(lign);
-            return (paths);
-        }
-        begin = begin->next;
-    }
-    return (NULL);
+	begin = *envp;
+	if (!begin)
+		return (NULL);
+	while (begin)
+	{
+		if (ft_strnstr(begin->key, "PATH", 4))
+		{
+			lign = ft_trim_pipex(begin->data);
+			if (!lign)
+				return (0);
+			paths = ft_split(lign, ':');
+			free(lign);
+			return (paths);
+		}
+		begin = begin->next;
+	}
+	return (NULL);
 }

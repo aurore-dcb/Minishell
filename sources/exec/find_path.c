@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:52:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 14:49:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:08:48 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ char	*find_path(char **paths, char *cmd)
 	if (!cmd)
 		return (NULL);
 	if (!paths)
-    {
-        if (access(cmd, F_OK | R_OK | X_OK) == 0)
-            return (ft_substr(cmd, 0, ft_strlen(cmd)));
-        return (NULL);
-    }
+	{
+		if (access(cmd, F_OK | R_OK | X_OK) == 0)
+			return (ft_substr(cmd, 0, ft_strlen(cmd)));
+		return (NULL);
+	}
 	while (paths && paths[++i])
 	{
 		if (access(cmd, F_OK | R_OK | X_OK) == 0)

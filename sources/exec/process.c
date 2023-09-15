@@ -6,27 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 11:26:54 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 10:29:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-void affichage(cmd_line **cmd, pipex *pipex)
-{
-	dprintf(1, "----------------debut---------------\n");
-	cmd_line	*tmp;
-	tmp = *cmd;
-	dprintf(1, "commande : %s\n", tmp->cmd);
-	int i = 0;
-	while (tmp->args[i])
-	{
-		dprintf(1, "arg = %s\n", tmp->args[i]);
-		i++;
-	}
-	dprintf(1, "cmd path = %s\n", pipex->middle_cmd_path);
-	dprintf(1, "-----------------fin--------------\n");
-}
 
 int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 {
@@ -112,9 +96,8 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 	}
 	free(pipex->middle_cmd_path);
 	free_tab(pipex->paths);
-    free_all(data);
-    exit(0);
-	// return(1);
+	free_all(data);
+	exit(0);
 }
 
 int	ft_lstsize(t_env *lst)
@@ -130,12 +113,12 @@ int	ft_lstsize(t_env *lst)
 	return (i);
 }
 
-char **list_to_tab(t_env **envp)
+char	**list_to_tab(t_env **envp)
 {
-	int i;
-	t_env *tmp;
-	char **tab;
-	
+	int		i;
+	t_env	*tmp;
+	char	**tab;
+
 	tmp = *envp;
 	if (!tmp)
 		return (0);
@@ -144,16 +127,16 @@ char **list_to_tab(t_env **envp)
 		return (0);
 	i = 0;
 	while (tmp)
-    {
-        if (tmp->data)
-            tab[i] = ft_strdup(tmp->data);
-        else
-            tab[i] = ft_strdup("");
-        if (!tab[i])
-            return (0);
-        i++;
-        tmp = tmp->next;
-    }
+	{
+		if (tmp->data)
+			tab[i] = ft_strdup(tmp->data);
+		else
+			tab[i] = ft_strdup("");
+		if (!tab[i])
+			return (0);
+		i++;
+		tmp = tmp->next;
+	}
 	tab[i] = NULL;
 	return (tab);
 }

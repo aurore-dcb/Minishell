@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 09:19:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:06:51 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	display_list(cmd_line *list)
 
 void	display_token(cmd_line *list)
 {
-	int i;
+	int		i;
 	token	*token;
 
 	while (list)
@@ -53,17 +53,17 @@ void	display_token(cmd_line *list)
 	}
 }
 
-void initialize(s_data *data)
+void	initialize(s_data *data)
 {
 	data->etat.simple = 0;
 	data->etat.doubl = 0;
-    data->cmd = NULL;
+	data->cmd = NULL;
 	data->tab_env = NULL;
 }
 
-void free_cmd_in(cmd_line **cmd)
+void	free_cmd_in(cmd_line **cmd)
 {
-	cmd_line *tmp;
+	cmd_line	*tmp;
 
 	tmp = *cmd;
 	if (tmp)
@@ -77,11 +77,11 @@ void free_cmd_in(cmd_line **cmd)
 	}
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
-	(void)argv;
-	s_data		data;
+	s_data	data;
 
+	(void)argv;
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
 	data.envp = NULL;
@@ -93,7 +93,6 @@ int main(int argc, char **argv, char **env)
 		init_signal();
 		initialize(&data);
 		data.input = readline("minishell> ");
-		// dprintf(1, "input = %s\n", data.input);
 		if (data.input)
 		{
 			if (data.input[0])
@@ -101,13 +100,12 @@ int main(int argc, char **argv, char **env)
 				add_history(data.input);
 				if (!parsing(&data))
 					printf("ERROR -> parsing\n");
-				else
-					if (ft_pipex(&data) == 1)
-						printf("ERROR -> execution\n");
+				else if (ft_pipex(&data) == 1)
+					printf("ERROR -> execution\n");
 			}
 		}
 		else
-			break;
+			break ;
 		free_list(data.cmd);
 		if (data.tab_env)
 			free_tab(data.tab_env);

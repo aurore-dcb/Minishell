@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 18:18:55 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/15 10:26:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int		ft_lstsize_cmd(cmd_line *lst);
 // get_paths.c
 char	**get_paths(t_env **envp);
 // files.c
-int		open_infile(pipex *pipex, s_data *data);
-int		open_outfile(pipex *pipex, s_data *data);
+int		open_infile(s_data *data);
+int		open_outfile(s_data *data);
 // process.c
 int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
 int		ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/13 10:39:11 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:07:58 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	nb_arg(cmd_line *list)
 	return (len);
 }
 
-void	fill_arg(cmd_line *list) //modif
+void	fill_arg(cmd_line *list)
 {
-	token	*cur;
 	int		i;
+	token	*cur;
 
 	cur = list->token;
 	i = 0;
@@ -49,8 +49,8 @@ void	fill_arg(cmd_line *list) //modif
 
 int	tab_cmd(cmd_line **list)
 {
-	cmd_line *begin;
-	char **cmd;
+	char		**cmd;
+	cmd_line	*begin;
 
 	begin = *list;
 	while (begin)
