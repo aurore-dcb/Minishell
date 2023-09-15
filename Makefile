@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
+#    By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/09/14 14:09:35 by aducobu          ###   ########.fr        #
+#    Updated: 2023/09/15 15:12:13 by rmeriau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS = 			${addprefix sources/, \
 						list_env.c parse_env.c } \
 					${addprefix exec/, main.c frees.c exec_utils.c \
 						pipex.c get_paths.c files.c process.c find_path.c pids.c \
-						here_doc.c } \
+						here_doc.c error.c } \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c export.c \
 						export_utils.c export_utils2.c unset.c builtins.c \
 						exit.c } \
