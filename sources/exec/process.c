@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 10:29:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 11:29:51 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		if (is_here_doc(tmp))
 		{
 			if (!ft_here_doc(tmp, pipex, data, pids))
-				return (dprintf(1, "erreur here_doc\n"), 0);
+				return (0);
+				// return (dprintf(1, "ERROR -> ft_here_doc\n"), 0);
 			return (unlink(".here_doc"), 1);
 		}
 		if (builtins_no_pipe(tmp->args[0], data))
@@ -32,7 +33,8 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		if (!pipex->middle_cmd_path)
 			return (0);
 		if (!ft_process(pipex, pids, tmp, data))
-			return (ft_printf("Error-> Process\n"), 0);
+			return (0);
+			// return (ft_printf("Error-> Process\n"), 0);
 		free(pipex->middle_cmd_path);
 		tmp = tmp->next;
 	}
@@ -71,7 +73,8 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 {
 	if (cmd->in == -1 || cmd->out == -1)
-		return (dprintf(1, "ERROR infile or outfile == -1\n"), 0);
+		return (0);
+		// return (dprintf(1, "ERROR infile or outfile == -1\n"), 0);
 	if (cmd->in > 2)
 	{
 		dup2(cmd->in, STDIN_FILENO);

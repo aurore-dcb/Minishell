@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:42 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/13 17:11:01 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/15 11:34:30 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNAL_H
 # define SIGNAL_H
 
+extern int	signalFlag;
+
 void	init_signal(void);
-void	handle_sigint(int signum);
+void	heredoc_signal(int sig);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 14:06:51 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/15 11:35:48 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,12 @@ int	main(int argc, char **argv, char **env)
 			if (data.input[0])
 			{
 				add_history(data.input);
-				if (!parsing(&data))
-					printf("ERROR -> parsing\n");
-				else if (ft_pipex(&data) == 1)
-					printf("ERROR -> execution\n");
+				if (parsing(&data))
+					ft_pipex(&data);
+				// if (!parsing(&data))
+				// 	printf("ERROR -> parsing\n");
+				// else if (ft_pipex(&data) == 1)
+				// 	printf("ERROR -> execution\n");
 			}
 		}
 		else
