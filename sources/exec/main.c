@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 18:38:23 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:50:42 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,11 @@ int	main(int argc, char **argv, char **env)
 			{
 				add_history(data.input);
 				if (parsing(&data))
+				{
 					ft_pipex(&data);
+					// if (!ft_pipex(&data))
+						// dprintf(1, "pipex 0\n");
+				}
 				else
 					data.exit_status = 2;
 				// if (!parsing(&data))

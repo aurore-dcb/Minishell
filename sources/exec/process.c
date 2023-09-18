@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 11:59:19 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/18 14:50:04 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 		if (builtins_no_pipe(tmp, data))
 			return (1);
 		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
-		if (!pipex->middle_cmd_path)
-		{
-			error_cmd(tmp, data);
-			return (0);
-		}
+		// if (!pipex->middle_cmd_path)
+		// {
+		// 	error_cmd(tmp, data);
+		// 	return (0);
+		// }
 		if (!ft_process(pipex, pids, tmp, data))
 			return (0);
 			// return (ft_printf("Error-> Process\n"), 0);
@@ -107,15 +107,18 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 		close(cmd->fd[0]);
 		close(cmd->fd[1]);
 	}
-	if (builtins_pipe(cmd->args[0], data) == 0)
-	{
-		if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
-		{
-			// data->exit_status = 128;
-			// error_cmd(cmd, data);
-			return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
-		}
-	}
+	    if (builtins_pipe(cmd->args[0], data) == 0)
+    {
+        if (!pipex->middle_cmd_path)
+        {
+            error_cmd(cmd, data);
+            free_tab(pipex->paths);
+            free_all(data);
+            exit (127);
+        }
+        if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
+            return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
+    }
 	free(pipex->middle_cmd_path);
 	free_tab(pipex->paths);
 	free_all(data);
