@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 14:36:52 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/18 16:02:52 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,15 @@ void	standart_input(cmd_line *cmd, pipex *pipex)
 	signal(SIGINT, heredoc_signal);
 	while (1)
 	{
-		lign = readline(">");
-		// dprintf(1, "lign = %s\n", lign);
 		if (signalFlag == 1)
         {
-			printf("test\n");
+			dprintf(2, "test\n");
             close(pipex->here_doc_file);
             unlink(".here_doc");
 			// signalFlag = 0;
             return ;
         }
+		lign = readline(">");
 		if (!lign || ft_strncmp(lign, to_find, ft_strlen(to_find)) == 0)
 		{
 			free(lign);

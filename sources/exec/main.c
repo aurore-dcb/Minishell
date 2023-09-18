@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 14:50:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:15:40 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	main(int argc, char **argv, char **env)
 		set_signals();
 		initialize(&data);
 		data.input = readline("minishell> ");
-		// printf("data.input = %s\n", data.input);
+		printf("data.input = %s\n", data.input);
 		if (data.input)
 		{
 			if (data.input[0])
@@ -102,9 +102,9 @@ int	main(int argc, char **argv, char **env)
 				add_history(data.input);
 				if (parsing(&data))
 				{
-					ft_pipex(&data);
-					// if (!ft_pipex(&data))
-						// dprintf(1, "pipex 0\n");
+					// ft_pipex(&data);
+					if (!ft_pipex(&data))
+						dprintf(1, "pipex 0\n");
 				}
 				else
 					data.exit_status = 2;
@@ -125,6 +125,7 @@ int	main(int argc, char **argv, char **env)
 		if (data.tab_env)
 			free_tab(data.tab_env);
 	}
+	dprintf(1, "-----------\n");
 	clear_history();
 	// rl_clear_history();
 	free_all(&data);

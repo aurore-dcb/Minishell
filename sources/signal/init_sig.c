@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:06 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/18 13:59:37 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/18 15:38:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	sig_handler_job(int sig)
 void	heredoc_signal(int sig)
 {
 	close(0);
+	dprintf(1, "close\n");
 	if (sig == SIGINT)
 		signalFlag = 1;
 	ft_putstr_fd("\n", 2);
