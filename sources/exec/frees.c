@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 15:02:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/18 13:41:33 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,12 @@ void	wait_fct(t_pid **pids, s_data *data)
 	while (*pids)
 	{
 		tmp = *pids;
-		waitpid(((*pids)->pid), &data->exit_status, 0);
+		if (waitpid(((*pids)->pid), &data->exit_status, 0) == -1)
+		{
+			dprintf(1, "erreur wait\n");
+		}
 		*pids = (*pids)->next;
+		// dprintf(1, "FREE PID\n");
 		free(tmp);
 	}
 	if (WIFEXITED(data->exit_status))

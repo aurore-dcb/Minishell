@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 11:26:48 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/18 10:25:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	count_char(char *s, s_data *data)
 	int	n;
 
 	n = 0;
-	while (*s)
+	while (s && *s != '\0')
 	{
 		if (*s == 39)
 			n += count_between_simple(&s);
@@ -64,7 +64,8 @@ int	count_char(char *s, s_data *data)
 		}
 		else
 			n++;
-		s++;
+		if (*s)
+			s++;
 	}
 	return (n);
 }

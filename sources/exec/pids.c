@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:32:34 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 14:08:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/18 13:41:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_pid	*ft_lstnew_pipex(pid_t pid)
 {
 	t_pid	*elem;
 
+	// dprintf(1, "NEW PID\n");
 	elem = malloc(sizeof(t_pid));
 	if (!elem)
 		return (NULL);

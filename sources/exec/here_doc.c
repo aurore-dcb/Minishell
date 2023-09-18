@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 15:33:55 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/18 13:40:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	standart_input(cmd_line *cmd, pipex *pipex)
 	token	*tok;
 	char	*to_find;
 
-	lign = "ok";
+	lign = NULL;
 	tok = cmd->token;
 	while (tok)
 	{
@@ -62,11 +62,15 @@ void	standart_input(cmd_line *cmd, pipex *pipex)
             unlink(".here_doc");
             return ;
         }
-		ft_putstr_fd(">", 1);
-		lign = get_next_line(0, to_find);
-		if (!lign)
-			break ;
+		lign = readline(">");
+		if (!lign || ft_strncmp(lign, to_find, ft_strlen(to_find)) == 0)
+		{
+			dprintf(1, "lim\n");
+			free(lign);
+			return ;
+		}
 		ft_putstr_fd(lign, pipex->here_doc_file);
+		ft_putstr_fd("\n", pipex->here_doc_file);
 		free(lign);
 	}
 }
