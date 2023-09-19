@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 15:56:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:57:44 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,46 +43,19 @@ int	search_path(t_env *envp, char *str)
 	return (ret);
 }
 
-char	*change_pwd(s_data *data)
-{
-	t_env	*tmp_env;
-	char	*ret;
-
-	tmp_env = data->envp;
-	while (tmp_env)
-	{
-		if (!ft_strncmp(tmp_env->key, "PWD", 3))
-		{
-			ret = ft_strdup(tmp_env->data);
-			if (!ret)
-				return (NULL);
-			free(tmp_env->data);
-			tmp_env->data = getcwd(NULL, 0);
-		}
-		tmp_env = tmp_env->next;
-	}
-	return (ret);
-}
-
-int	change_oldpwd(s_data *data, char *ret)
+void	print_oldpwd(s_data *data, int ret)
 {
 	t_env	*tmp_env;
 
-	if (!ret)
-		return (0);
+	if (ret)
+		return ;
 	tmp_env = data->envp;
 	while (tmp_env)
 	{
 		if (!ft_strncmp(tmp_env->key, "OLDPWD", 6))
-		{
-			free(tmp_env->data);
-			tmp_env->data = ft_strdup(ret);
-			if (!tmp_env->data)
-				return (0);
-		}
+			printf("%s\n", tmp_env->data);
 		tmp_env = tmp_env->next;
 	}
-	return (1);
 }
 
 int	builtin_cd(s_data *data)
@@ -90,23 +63,18 @@ int	builtin_cd(s_data *data)
 	int		ret;
 	char	*res;
 
+	if (get_len_tab(data->cmd->args) > 2)
+		return (error_message(), EXIT_FAILURE);
 	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0)
 		ret = search_path(data->envp, "HOME");
-	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0 && ft_strlen(data->cmd->args[1]) == 1)
+	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0
+		&& ft_strlen(data->cmd->args[1]) == 1)
 	{
 		ret = search_path(data->envp, "OLDPWD");
-		// affichage chemin cd -
+		print_oldpwd(data, ret);
 	}
 	else
-	{
-		ret = chdir(data->cmd->args[1]);
-		if (ret != 0)
-		{
-			ft_putstr_fd("bash: cd: ", STDERR_FILENO);
-			ft_putstr_fd(data->cmd->args[1], STDERR_FILENO);
-			ft_putstr_fd(": No such file or directory\n", 2);
-		}
-	}
+		ret = error_path(data);
 	if (ret != 0)
 		return (EXIT_FAILURE);
 	res = change_pwd(data);

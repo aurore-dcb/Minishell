@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 10:41:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:56:31 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ int		builtin_echo(cmd_line *cmd);
 // cd.c
 char	*find_path_ret(t_env *envp, char *str);
 int		search_path(t_env *envp, char *str);
+int		builtin_cd(s_data *data);
+void	print_oldpwd(s_data *data, int ret);
+// cd_utils.c
 char	*change_pwd(s_data *data);
 int		change_oldpwd(s_data *data, char *ret);
-int		builtin_cd(s_data *data);
+int		error_path(s_data *data);
+void	error_message(void);
 // env.c
 int		builtin_env(s_data *data);
 // export.c
@@ -50,4 +54,5 @@ int		builtins_pipe(char *cmd, s_data *data, cmd_line *cmd_l);
 int		builtins_no_pipe(cmd_line *cmd, s_data *data);
 // exit.c
 int		builtin_exit(s_data *data);
+int		get_len_tab(char **str);
 #endif

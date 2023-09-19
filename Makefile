@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
+#    By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/09/19 15:20:29 by aducobu          ###   ########.fr        #
+#    Updated: 2023/09/19 16:57:10 by rmeriau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = 			${addprefix sources/, \
 						here_doc.c error.c shlvl.c} \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c export.c \
 						export_utils.c export_utils2.c unset.c builtins.c \
-						exit.c } \
+						exit.c cd_utils.c } \
 					${addprefix signal/, init_sig.c } \
 				}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:46:29 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/06 14:15:30 by aurore           ###   ########.fr       */
+/*   Updated: 2023/09/19 16:35:09 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-char	**ft_split_env(const char *str);
+char				**ft_split_env(const char *str);
 
 // t_list				*ft_lstnew(void *content);
 // void				ft_lstadd_front(t_list **lst, t_list *new);

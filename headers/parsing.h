@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 15:08:08 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:17:09 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int			add_word(cmd_line *list);
 int			split_word(cmd_line *list);
 // get_end_word.c
 int			get_end_word(char *cmd, int i);
+int			end_except(char *cmd, int i);
 // parse_env.c
 int			copy_elem(char **split_res, char *nul_char, t_env *elem);
 t_env		*ft_lstnew_env(char *data);

@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_end_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:06:50 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 15:15:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:18:50 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_end_word(char *cmd, int i)
+int	end_except(char *cmd, int i)
 {
-	char	q;
-
 	if (cmd[i] == '<')
 	{
 		i++;
@@ -28,6 +26,13 @@ int	get_end_word(char *cmd, int i)
 			i++;
 		return (i);
 	}
+	return (i);
+}
+
+int	get_end_word(char *cmd, int i)
+{
+	char	q;
+
 	while (cmd[i])
 	{
 		if (cmd[i] == 34 || cmd[i] == 39)
