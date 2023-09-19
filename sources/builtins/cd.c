@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 15:52:11 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:56:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	search_path(t_env *envp, char *str)
 
 	tmp = find_path_ret(envp, str);
 	ret = chdir(tmp);
-	free(tmp);
 	if (ret != 0)
 	{
 		str = ft_substr(str, 0, ft_strlen(str));
@@ -69,6 +68,8 @@ int	change_oldpwd(s_data *data, char *ret)
 {
 	t_env	*tmp_env;
 
+	if (!ret)
+		return (0);
 	tmp_env = data->envp;
 	while (tmp_env)
 	{
@@ -89,10 +90,13 @@ int	builtin_cd(s_data *data)
 	int		ret;
 	char	*res;
 
-	if (!data->cmd->args[1])
+	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0)
 		ret = search_path(data->envp, "HOME");
-	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0)
+	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0 && ft_strlen(data->cmd->args[1]) == 1)
+	{
 		ret = search_path(data->envp, "OLDPWD");
+		// affichage chemin cd -
+	}
 	else
 	{
 		ret = chdir(data->cmd->args[1]);
@@ -106,8 +110,6 @@ int	builtin_cd(s_data *data)
 	if (ret != 0)
 		return (EXIT_FAILURE);
 	res = change_pwd(data);
-	if (!res)
-		return (EXIT_FAILURE);
 	if (!change_oldpwd(data, res))
 		return (EXIT_FAILURE);
 	free(res);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 14:18:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:56:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	builtins_pipe(char *cmd, s_data *data, cmd_line *cmd_l)
 	else if (!ft_strncmp(cmd, "echo", 4) && len == 4)
 		return (builtin_echo(cmd_l), 1);
 	else if (!ft_strncmp(cmd, "exit", 4) && len == 4)
-	    return (1);
+		return (1);
 	return (0);
 }
 

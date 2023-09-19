@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 15:17:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 16:00:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	standart_input(cmd_line *cmd, pipex *pipex)
 	while (1)
 	{
 		lign = readline(">");
-		if (signalFlag == 1)
+		if (g_flag == 1)
 		{
 			close(pipex->here_doc_file);
 			unlink(".here_doc");
@@ -95,7 +95,7 @@ int	ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 		return (0);
 	if (!standart_input(cmd, pipex))
 		return (0);
-	if (signalFlag == 1)
+	if (g_flag == 1)
 		cmd->in = open("/dev/stdout", O_RDONLY);
 	else
 		cmd->in = pipex->here_doc_file;
