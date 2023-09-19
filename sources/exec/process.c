@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 11:23:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 13:25:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,30 +139,36 @@ int	ft_lstsize(t_env *lst)
 	return (i);
 }
 
-char	**list_to_tab(t_env **envp)
+char    **list_to_tab(t_env **envp)
 {
-	int		i;
-	t_env	*tmp;
-	char	**tab;
+    int        i;
+    t_env    *tmp;
+    char    **tab;
+    char    *ctmp;
 
-	tmp = *envp;
-	if (!tmp)
-		return (0);
-	tab = malloc(sizeof(char *) * (ft_lstsize(*envp) + 1));
-	if (!tab)
-		return (0);
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->data)
-			tab[i] = ft_strdup(tmp->data);
-		else
-			tab[i] = ft_strdup("");
-		if (!tab[i])
-			return (0);
-		i++;
-		tmp = tmp->next;
-	}
-	tab[i] = NULL;
-	return (tab);
+    tmp = *envp;
+    if (!tmp)
+        return (0);
+    tab = malloc(sizeof(char *) * (ft_lstsize(*envp) + 1));
+    if (!tab)
+        return (0);
+    i = 0;
+    while (tmp)
+    {
+        if (tmp->data)
+        {
+            ctmp = ft_strjoin(tmp->key, "=");
+            tab[i] = ft_strjoin(ctmp, tmp->data);
+            free(ctmp);
+        }
+        else
+            tab[i] = ft_strdup("");
+        if (!tab[i])
+            return (0);
+        i++;
+        tmp = tmp->next;
+    }
+    tab[i] = NULL;
+    return (tab);
 }
+

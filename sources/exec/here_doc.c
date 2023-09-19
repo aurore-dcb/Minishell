@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 12:07:11 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 12:53:17 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	standart_input(cmd_line *cmd, pipex *pipex)
         {
             close(pipex->here_doc_file);
             unlink(".here_doc");
-			// close(0);
 		    return (1);
         }
 		if (!lign || ft_strncmp(lign, to_find, ft_strlen(to_find)) == 0)
