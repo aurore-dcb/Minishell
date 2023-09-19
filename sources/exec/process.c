@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 10:40:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/19 11:23:32 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,19 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 			if (!ft_here_doc(tmp, pipex, data, pids))
 			{
 				data->exit_status = 1;
+				unlink(".here_doc");
 				return (dprintf(1, "erreur here_doc\n"), 0);
 			}
-			return (unlink(".here_doc"), 1);
 		}
-		// dprintf(1, "--------\n");
-		if (builtins_no_pipe(tmp, data))
-			return (1);
-		pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
-		// if (!pipex->middle_cmd_path)
-		// {
-		// 	error_cmd(tmp, data);
-		// 	return (0);
-		// }
-		if (!ft_process(pipex, pids, tmp, data))
-			return (0);
-			// return (ft_printf("Error-> Process\n"), 0);
-		free(pipex->middle_cmd_path);
+		else
+		{
+			if (builtins_no_pipe(tmp, data))
+				return (1);
+			pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
+			if (!ft_process(pipex, pids, tmp, data))
+				return (0);
+			free(pipex->middle_cmd_path);
+		}
 		tmp = tmp->next;
 	}
 	return (1);
@@ -51,15 +47,14 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 {
 	pid_t	pid;
 
-	// if (signalFlag == 1)
-	// 	return (0);
+	dprintf(1, "cmd - %s\n", cmd->cmd);
+	// dprintf(1, "cmd->in = %d\ncmd->out = %d\n", cmd->in, cmd->out);
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
 	if (cmd->next && cmd->next->in == -2)
 		cmd->next->in = cmd->fd[0];
 	else if (cmd->next && cmd->next->in != -2)
 		close(cmd->fd[0]);
-	dprintf(1, "fork\n");
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -82,7 +77,6 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
-	// dprintf(1, "cmd->in = %d\ncmd->out = %d\n", cmd->in, cmd->out);
 	if (cmd->in == -1)
 	{
 		error_file(cmd, data, 6);
