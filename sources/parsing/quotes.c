@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:19:02 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/01 10:32:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:44:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ int	closed_quotes(char *input, t_quotes *etat)
 	}
 	return (etat->simple == 0 && etat->doubl == 0);
 }
-

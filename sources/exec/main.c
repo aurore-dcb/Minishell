@@ -6,17 +6,9 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 11:57:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:25:03 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// int signalFlag = 0;
-
-// #include <signal.h>
-// void handleCtrlC(int signum) {
-// 	(void)signum;
-// 	signalFlag = 1;
-// }
 
 #include "../../headers/minishell.h"
 
@@ -77,7 +69,6 @@ void	free_cmd_in(cmd_line **cmd)
 	}
 }
 
-
 int	main(int argc, char **argv, char **env)
 {
 	s_data	data;
@@ -89,13 +80,12 @@ int	main(int argc, char **argv, char **env)
 	data.envex = NULL;
 	data.exit_status = 0;
 	parse_env(env, &data);
+	handle_shlevel(&data);
 	while (1)
 	{
 		set_signals();
 		initialize(&data);
-		// open(STDIN_FILENO, );
 		data.input = readline("minishell> ");
-		// printf("data.input = %s\n", data.input);
 		if (data.input)
 		{
 			if (data.input[0])
@@ -103,7 +93,6 @@ int	main(int argc, char **argv, char **env)
 				add_history(data.input);
 				if (parsing(&data))
 				{
-					// ft_pipex(&data);
 					if (!ft_pipex(&data))
 						dprintf(1, "pipex 0\n");
 				}
@@ -115,15 +104,12 @@ int	main(int argc, char **argv, char **env)
 		{
 			if (isatty(0) == 1)
 				printf("exit\n");
-			return (free_all(&data), data.exit_status);		
-			// break ;
+			return (free_all(&data), data.exit_status);
 		}
 		free_list(data.cmd);
 		if (data.tab_env)
 			free_tab(data.tab_env);
 	}
 	clear_history();
-	// close(2);
-	// rl_clear_history();
 	free_all(&data);
 }

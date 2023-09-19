@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 10:27:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:21:00 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,6 @@ int		ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 void	error_file(cmd_line *cmd, s_data *data, t_type type);
 char	*get_info_cmd(cmd_line *beg_cmd, t_type type);
 void	error_cmd(cmd_line *cmd, s_data *data);
+// shlvl.c
+void	handle_shlevel(s_data *data);
 #endif

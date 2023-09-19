@@ -6,17 +6,17 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 10:41:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:05:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-char *existing_var(char *var, s_data *data)
+char	*existing_var(char *var, s_data *data)
 {
-	t_env *begin;
-	char *res;
-	
+	t_env	*begin;
+	char	*res;
+
 	begin = data->envp;
 	if (!var)
 		return (NULL);
@@ -34,9 +34,9 @@ char *existing_var(char *var, s_data *data)
 	return (NULL);
 }
 
-int len_var_env(char *s)
+int	len_var_env(char *s)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (*s == '?')
@@ -49,9 +49,9 @@ int len_var_env(char *s)
 	return (len);
 }
 
-int count_between_simple(char **s)
+int	count_between_simple(char **s)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	(*s)++;
@@ -62,27 +62,28 @@ int count_between_simple(char **s)
 	}
 	return (n);
 }
-int find_variable(char *s, s_data *data)
+
+int	find_variable(char *s, s_data *data)
 {
-    int n;
-    char *cpy;
-    char *res;
+	int		n;
+	char	*cpy;
+	char	*res;
 
 	if (*s == '?')
 		return (size_nb(data->exit_status));
-    cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
+	cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
 	if (!cpy)
-		return (printf("echec malloc\n"), 0); // ERREUR
-    cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
-    res = existing_var(cpy, data);
+		return (0);
+	cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
+	res = existing_var(cpy, data);
 	n = ft_strlen(res);
 	free(res);
-    return (n);
+	return (n);
 }
 
-int count_between_double(char **s, s_data *data)
+int	count_between_double(char **s, s_data *data)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	(*s)++;
@@ -91,7 +92,7 @@ int count_between_double(char **s, s_data *data)
 		if (*(*s) == '$')
 		{
 			(*s)++;
-            n += find_variable(*s, data);
+			n += find_variable(*s, data);
 			(*s) = (*s) + len_var_env(*s) - 1;
 		}
 		else

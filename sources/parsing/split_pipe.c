@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 11:26:12 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:06:06 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	nb_mots_cmd(char *str)
 {
 	int		mots;
 	char	q;
-	int i;
+	int		i;
 
 	mots = 1;
 	i = 0;

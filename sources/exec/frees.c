@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 10:47:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:17:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,6 @@ void	free_list(cmd_line *begin)
 	}
 }
 
-void	free_env(t_env *env)
-{
-	t_env	*temp;
-
-	while (env != NULL)
-	{
-		temp = env;
-		env = env->next;
-		free(temp->key);
-		free(temp->data);
-		free(temp);
-	}
-}
-
 void	free_all(s_data *data)
 {
 	if (data->input)
@@ -108,18 +94,6 @@ void	wait_fct(t_pid **pids, s_data *data)
 		tmp = tmp->next;
 	}
 	free_pid(pids);
-	// while (*pids)
-	// {
-	// 	// tmp = *pids;
-	// 	// dprintf(1, "pid = %d\n", tmp->pid);
-	// 	if (waitpid(((*pids)->pid), &data->exit_status, 0) == -1)
-	// 	{
-	// 		dprintf(1, "erreur wait\n");
-	// 	}
-	// 	*pids = (*pids)->next;
-	// 	// dprintf(1, "FREE PID\n");
-	// 	// free(tmp);
-	// }
 	if (WIFEXITED(data->exit_status))
 		data->exit_status = WEXITSTATUS(data->exit_status);
 	else if (WIFSIGNALED(data->exit_status))

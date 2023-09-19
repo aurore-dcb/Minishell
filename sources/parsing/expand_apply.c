@@ -6,29 +6,29 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 13:58:15 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:05:00 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int between_simple(char *res, char **word, int i)
+int	between_simple(char *res, char **word, int i)
 {
 	(*word)++;
 	while (*(*word) && *(*word) != 39)
 	{
 		res[i] = *(*word);
 		(*word)++;
-        i++;
+		i++;
 	}
-    return (i);
+	return (i);
 }
 
-int out_of_quotes(char *res, char **word, s_data *data, int i)
+int	out_of_quotes(char *res, char **word, s_data *data, int i)
 {
-	int j;
-	char *cpy;
-	char *var;
+	int		j;
+	char	*cpy;
+	char	*var;
 
 	j = 0;
 	(*word)++;
@@ -37,28 +37,28 @@ int out_of_quotes(char *res, char **word, s_data *data, int i)
 		return (printf("echec malloc\n"), 0);
 	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
 	if (**word == '?')
-        var = ft_itoa(data->exit_status);
-    else
-        var = existing_var(cpy, data);
-    while (var && var[j])
-        res[i++] = var[j++];
-    free(var);
-    return (i);	
+		var = ft_itoa(data->exit_status);
+	else
+		var = existing_var(cpy, data);
+	while (var && var[j])
+		res[i++] = var[j++];
+	free(var);
+	return (i);
 }
 
-int between_double(char *res, char **word, s_data *data, int i)
+int	between_double(char *res, char **word, s_data *data, int i)
 {
-    (*word)++;
-    while (*(*word) && *(*word) != 34)
-    {
-        if (*(*word) == '$')
-        {
-            i = out_of_quotes(res, word, data, i);
-            (*word) = (*word) + len_var_env(*word) - 1;
-        }
-        else
-            res[i++] = *(*word);
-        (*word)++;
-    }
-    return (i);
+	(*word)++;
+	while (*(*word) && *(*word) != 34)
+	{
+		if (*(*word) == '$')
+		{
+			i = out_of_quotes(res, word, data, i);
+			(*word) = (*word) + len_var_env(*word) - 1;
+		}
+		else
+			res[i++] = *(*word);
+		(*word)++;
+	}
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 14:15:02 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:23:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_pipex(s_data *data)
 	t_pid	*pids;
 	pipex	pipex;
 
-	if (!ft_strcmp(data->cmd->args[0], "exit")
+	if (data->cmd->args[0] && !ft_strcmp(data->cmd->args[0], "exit")
 		&& ft_lstsize_cmd(data->cmd) == 1)
 		builtin_exit(data);
 	pids = NULL;
@@ -64,8 +64,6 @@ int	ft_pipex(s_data *data)
 		return (1);
 	if (!loop_process(data, &pids, &pipex))
 		return (free_tab(pipex.paths), free(pids), 0);
-		// return (free_tab(pipex.paths), free(pids),
-			// printf("error loop process\n"), 1);
 	wait_fct(&pids, data);
 	free_tab(pipex.paths);
 	return (1);

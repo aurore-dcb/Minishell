@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 12:53:17 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 15:17:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	standart_input(cmd_line *cmd, pipex *pipex)
 	{
 		lign = readline(">");
 		if (signalFlag == 1)
-        {
-            close(pipex->here_doc_file);
-            unlink(".here_doc");
-		    return (1);
-        }
+		{
+			close(pipex->here_doc_file);
+			unlink(".here_doc");
+			return (1);
+		}
 		if (!lign || ft_strncmp(lign, to_find, ft_strlen(to_find)) == 0)
 		{
 			free(lign);
@@ -96,20 +96,15 @@ int	ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	if (!standart_input(cmd, pipex))
 		return (0);
 	if (signalFlag == 1)
-	{
-		dprintf(1, "-------\n");
 		cmd->in = open("/dev/stdout", O_RDONLY);
-	}
 	else
 		cmd->in = pipex->here_doc_file;
 	close(pipex->here_doc_file);
 	pipex->here_doc_file = open(".here_doc", O_RDONLY);
 	if (pipex->here_doc_file == -1)
 		return (0);
-	// si type arg :
 	if (!process_here_doc(pipex, cmd, data, pids))
 		return (0);
-		// return (dprintf(1, "ERROR -> process heredoc\n"), 0);
 	close(pipex->here_doc_file);
 	unlink(".here_doc");
 	return (1);
