@@ -6,13 +6,13 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/15 15:25:45 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:41:05 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	builtins_pipe(char *cmd, s_data *data)
+int	builtins_pipe(char *cmd, s_data *data, cmd_line *cmd_l)
 {
 	int	len;
 
@@ -24,7 +24,7 @@ int	builtins_pipe(char *cmd, s_data *data)
 	else if (!ft_strncmp(cmd, "unset", 5) && len == 5)
 		return (builtin_unset(data), 1);
 	else if (!ft_strncmp(cmd, "echo", 4) && len == 4)
-		return (builtin_echo(data), 1);
+		return (builtin_echo(cmd_l), 1);
 	// else if (!ft_strncmp(cmd, "exit", 4) && len == 4)
 	//     return (builtin_exit(data), 1);
 	return (0);

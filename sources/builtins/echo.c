@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:46:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 10:25:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:44:11 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int	verif_n(char **args)
 	return (cpt);
 }
 
-void	print_echo(s_data *data, int i, int y)
+void	print_echo(cmd_line *cmd, int i, int y)
 {
-	while (data->cmd->args[i])
+	while (cmd->args[i])
 	{
-		printf("%s", data->cmd->args[i]);
-		if (data->cmd->args[i + 1])
+		printf("%s", cmd->args[i]);
+		if (cmd->args[i + 1])
 			printf(" ");
 		i++;
 	}
@@ -77,7 +77,7 @@ void	print_echo(s_data *data, int i, int y)
 		printf("\n");
 }
 
-int	builtin_echo(s_data *data)
+int	builtin_echo(cmd_line *cmd)
 {
 	int	i;
 	int	y;
@@ -86,18 +86,18 @@ int	builtin_echo(s_data *data)
 
 	i = 1;
 	y = 0;
-	verif = verif_n(data->cmd->args);
-	nb_op = nb_option(data->cmd->args);
+	verif = verif_n(cmd->args);
+	nb_op = nb_option(cmd->args);
 	if ((nb_op == verif) && (nb_op != 0))
 	{
 		i = verif + 1;
 		y = 1;
 	}
-	else if (data->cmd->args[1] && test_arg(data->cmd->args, 1))
+	else if (cmd->args[1] && test_arg(cmd->args, 1))
 	{
 		i = verif + 1;
 		y = 1;
 	}
-	print_echo(data, i, y);
+	print_echo(cmd, i, y);
 	return (EXIT_SUCCESS);
 }

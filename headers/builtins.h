@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 15:33:06 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:41:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // echo.c
 int		verif_n(char **args);
-int		builtin_echo(s_data *cmd);
+int		builtin_echo(cmd_line *cmd);
 // cd.c
 char	*find_path_ret(t_env *envp, char *str);
 int		search_path(t_env *envp, char *str);
@@ -46,7 +46,7 @@ int		builtin_pwd(void);
 void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);
 // builtins.c
-int		builtins_pipe(char *cmd, s_data *data);
+int		builtins_pipe(char *cmd, s_data *data, cmd_line *cmd_l);
 int		builtins_no_pipe(cmd_line *cmd, s_data *data);
 // exit.c
 int		builtin_exit(s_data *data);
