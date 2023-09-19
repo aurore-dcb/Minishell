@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 14:18:45 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 08:45:48 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ int	ft_pipex(s_data *data)
 			// printf("error loop process\n"), 1);
 	wait_fct(&pids, data);
 	free_tab(pipex.paths);
-	return (0);
+	return (1);
 }

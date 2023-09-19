@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 16:04:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:23:19 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 		cmd->next->in = cmd->fd[0];
 	else if (cmd->next && cmd->next->in != -2)
 		close(cmd->fd[0]);
+	dprintf(1, "fork\n");
 	pid = fork();
 	if (pid == -1)
 		return (0);
 	if (pid == 0)
 	{
-		if (!ft_child(cmd, pipex, data))
+		if (!ft_child(cmd, pipex, data, pids))
 			return (0);
 	}
 	else
@@ -79,8 +80,9 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 }
 
 
-int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
+int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
+	// dprintf(1, "cmd->in = %d\ncmd->out = %d\n", cmd->in, cmd->out);
 	if (cmd->in == -1)
 	{
 		error_file(cmd, data, 6);
@@ -126,6 +128,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data)
 	free(pipex->middle_cmd_path);
 	free_tab(pipex->paths);
 	free_all(data);
+	free_pid(pids);
 	exit(0);
 }
 

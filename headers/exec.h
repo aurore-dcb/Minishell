@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/15 15:40:29 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:27:29 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	free_tab(char **tab);
 void	free_list(cmd_line *begin);
 void	free_all(s_data *data);
 void	free_env(t_env *env);
+void	free_pid(t_pid **pids);
+// frees2.c
+void	free_elem_env(t_env *list);
 // void	free_outfile(t_outfile **outfiles);
 void	wait_fct(t_pid **pids, s_data *data);
 // main.c
@@ -39,7 +42,7 @@ int		open_outfile(s_data *data);
 // process.c
 int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
 int		ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data);
-int		ft_child(cmd_line *cmd, pipex *pipex, s_data *data);
+int		ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 int		ft_lstsize(t_env *lst);
 char	**list_to_tab(t_env **envp);
 // t_outfile	*ft_lstlast_outfile(t_outfile *lst);

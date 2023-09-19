@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 16:02:52 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:02:05 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ int	parsing_here_doc(pipex *pipex)
 {
 	pipex->here_doc_file = open(".here_doc", O_WRONLY | O_CREAT | O_TRUNC,
 			0646);
+	// dprintf(1, "pipex->here_doc_file = %d\n", pipex->here_doc_file);
 	if (pipex->here_doc_file == -1)
 		return (ft_printf("Error -> Can't create/open file\n"), 0);
 	return (1);
 }
 
-void	standart_input(cmd_line *cmd, pipex *pipex)
+int	standart_input(cmd_line *cmd, pipex *pipex)
 {
 	char	*lign;
 	token	*tok;
@@ -55,19 +56,19 @@ void	standart_input(cmd_line *cmd, pipex *pipex)
 	signal(SIGINT, heredoc_signal);
 	while (1)
 	{
+		lign = readline(">");
 		if (signalFlag == 1)
         {
-			dprintf(2, "test\n");
+			// dprintf(2, "test\n");
             close(pipex->here_doc_file);
             unlink(".here_doc");
-			// signalFlag = 0;
-            return ;
+			// dprintf(1, "-------- ctrl C\n");
+            return (0);
         }
-		lign = readline(">");
 		if (!lign || ft_strncmp(lign, to_find, ft_strlen(to_find)) == 0)
 		{
 			free(lign);
-			return ;
+			return (1);
 		}
 		ft_putstr_fd(lign, pipex->here_doc_file);
 		ft_putstr_fd("\n", pipex->here_doc_file);
@@ -97,10 +98,11 @@ int	ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	unlink(".here_doc");
 	if (!parsing_here_doc(pipex))
 		return (0);
-		// return (dprintf(1, "Error -> parse here_doc\n"), 0);
-	standart_input(cmd, pipex);
+	if (!standart_input(cmd, pipex))
+		return (1);
 	close(pipex->here_doc_file);
 	pipex->here_doc_file = open(".here_doc", O_RDONLY);
+	// dprintf(1, "pipex->here_doc_file = %d\n", pipex->here_doc_file);
 	if (pipex->here_doc_file == -1)
 		return (0);
 		// return (dprintf(1, "Error -> parse here_doc\n"), 0);

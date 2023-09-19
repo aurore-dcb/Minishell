@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:17:07 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/12 16:53:54 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:28:22 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,25 @@ void	print_sorted_env(t_env *envex)
 void	ft_lstreplace_env(t_env **lst, t_env *new)
 {
 	t_env	*list;
+	t_env	*prev;
 
 	list = *lst;
+	prev = NULL;
 	if (list)
 	{
-		while (list->next)
+		while (list)
 		{
-			if (!ft_strcmp(list->next->key, new->key))
+			if (!ft_strcmp(list->key, new->key))
 			{
-				new->next = list->next->next;
-				list->next = new;
+				if (prev)
+					prev->next = new;
+				else
+					*lst = new;
+				new->next = list->next;
+				free_elem_env(list);
+				return ;
 			}
+			prev = list;
 			list = list->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 13:41:33 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:14:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	free_list(cmd_line *begin)
 		current = begin;
 		begin = begin->next;
 		if (current->in > 2)
-			close (current->in);
+			close(current->in);
 		if (current->out > 2)
-			close (current->out);
+			close(current->out);
 		if (current->cmd)
 			free(current->cmd);
 		if (current->args)
@@ -82,21 +82,46 @@ void	free_all(s_data *data)
 		free_tab(data->tab_env);
 }
 
-void	wait_fct(t_pid **pids, s_data *data)
+void	free_pid(t_pid **pids)
 {
 	t_pid	*tmp;
 
 	while (*pids)
 	{
+		dprintf(1, "free\n");
 		tmp = *pids;
-		if (waitpid(((*pids)->pid), &data->exit_status, 0) == -1)
+		*pids = (*pids)->next;
+		free(tmp);
+	}
+}
+
+void	wait_fct(t_pid **pids, s_data *data)
+{
+	t_pid	*tmp;
+
+	tmp = *pids;
+	while (tmp)
+	{
+		dprintf(1, "pid = %d\n", tmp->pid);
+		if (waitpid((tmp->pid), &data->exit_status, 0) == -1)
 		{
 			dprintf(1, "erreur wait\n");
 		}
-		*pids = (*pids)->next;
-		// dprintf(1, "FREE PID\n");
-		free(tmp);
+		tmp = tmp->next;
 	}
+	free_pid(pids);
+	// while (*pids)
+	// {
+	// 	// tmp = *pids;
+	// 	// dprintf(1, "pid = %d\n", tmp->pid);
+	// 	if (waitpid(((*pids)->pid), &data->exit_status, 0) == -1)
+	// 	{
+	// 		dprintf(1, "erreur wait\n");
+	// 	}
+	// 	*pids = (*pids)->next;
+	// 	// dprintf(1, "FREE PID\n");
+	// 	// free(tmp);
+	// }
 	if (WIFEXITED(data->exit_status))
 		data->exit_status = WEXITSTATUS(data->exit_status);
 	else if (WIFSIGNALED(data->exit_status))

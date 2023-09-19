@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:46:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/13 15:27:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:25:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	test_arg(char **args, int i)
 		else if (args[i][y] != 'n')
 			return (0);
 	}
-	else
-		return (0);
 	return (0);
 }
 
@@ -86,17 +84,20 @@ int	builtin_echo(s_data *data)
 	int	nb_op;
 	int	verif;
 
-	i = 0;
+	i = 1;
 	y = 0;
 	verif = verif_n(data->cmd->args);
 	nb_op = nb_option(data->cmd->args);
-	if (((nb_op == verif) && (nb_op != 0)) || test_arg(data->cmd->args, 1))
+	if ((nb_op == verif) && (nb_op != 0))
 	{
 		i = verif + 1;
 		y = 1;
 	}
-	else
-		i = 1;
+	else if (data->cmd->args[1] && test_arg(data->cmd->args, 1))
+	{
+		i = verif + 1;
+		y = 1;
+	}
 	print_echo(data, i, y);
 	return (EXIT_SUCCESS);
 }
