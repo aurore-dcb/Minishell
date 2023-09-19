@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 10:41:05 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/19 14:18:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	builtins_pipe(char *cmd, s_data *data, cmd_line *cmd_l)
 		return (builtin_unset(data), 1);
 	else if (!ft_strncmp(cmd, "echo", 4) && len == 4)
 		return (builtin_echo(cmd_l), 1);
-	// else if (!ft_strncmp(cmd, "exit", 4) && len == 4)
-	//     return (builtin_exit(data), 1);
+	else if (!ft_strncmp(cmd, "exit", 4) && len == 4)
+	    return (1);
 	return (0);
 }
 

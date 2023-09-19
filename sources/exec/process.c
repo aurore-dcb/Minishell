@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 13:25:24 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 13:58:58 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 {
 	pid_t	pid;
 
-	dprintf(1, "cmd - %s\n", cmd->cmd);
-	// dprintf(1, "cmd->in = %d\ncmd->out = %d\n", cmd->in, cmd->out);
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
 	if (cmd->next && cmd->next->in == -2)

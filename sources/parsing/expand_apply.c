@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 09:31:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/19 13:58:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int out_of_quotes(char *res, char **word, s_data *data, int i)
     while (var && var[j])
         res[i++] = var[j++];
     free(var);
-    free(cpy);
     return (i);	
 }
 
