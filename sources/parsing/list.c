@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/20 10:14:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:17:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ cmd_line	*ft_lstnew_cmd_line(int len)
 	elem->cmd = malloc(sizeof(char) * len);
 	if (!elem->cmd)
 		return (NULL);
-	elem->in = -2;
+	ft_bzero(elem->cmd, len);
+	elem->infile = NULL;
 	elem->out = -2;
-	elem->error = 0;
+	// elem->error = 0;
 	elem->fd[0] = 0;
 	elem->fd[1] = 0;
+	elem->token = NULL;
 	elem->next = NULL;
 	elem->args = NULL;
 	return (elem);

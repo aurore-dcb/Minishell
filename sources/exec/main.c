@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/20 10:16:52 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:18:58 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,21 @@ void	initialize(s_data *data)
 	data->tab_env = NULL;
 }
 
-void	free_cmd_in(cmd_line **cmd)
-{
-	cmd_line	*tmp;
+// void	free_cmd_in(cmd_line **cmd)
+// {
+// 	cmd_line	*tmp;
 
-	tmp = *cmd;
-	if (tmp)
-	{
-		while (tmp)
-		{
-			if (tmp->in > 2)
-				close(tmp->in);
-			tmp = tmp->next;
-		}
-	}
-}
+// 	tmp = *cmd;
+// 	if (tmp)
+// 	{
+// 		while (tmp)
+// 		{
+// 			if (tmp->in > 2)
+// 				close(tmp->in);
+// 			tmp = tmp->next;
+// 		}
+// 	}
+// }
 
 int	main(int argc, char **argv, char **env)
 {
@@ -93,8 +93,7 @@ int	main(int argc, char **argv, char **env)
 				add_history(data.input);
 				if (parsing(&data))
 				{
-					if (!ft_pipex(&data))
-						dprintf(1, "pipex 0\n");
+					ft_pipex(&data);
 				}
 				else
 					data.exit_status = 2;

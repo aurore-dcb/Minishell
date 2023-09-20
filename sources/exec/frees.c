@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/20 10:16:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/20 13:40:28 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ void	free_list(cmd_line *begin)
 	{
 		current = begin;
 		begin = begin->next;
-		if (current->in > 2)
-			close(current->in);
-		if (current->out > 2)
-			close(current->out);
+		// if (current->in > 2)
+		// 	close(current->in);
+		// if (current->out > 2)
+		// 	close(current->out);
 		if (current->cmd)
 			free(current->cmd);
 		if (current->args)
-		{
 			free_tab(current->args);
-		}
 		while (current->token)
 		{
 			cur_token = current->token;
@@ -63,8 +61,8 @@ void	free_all(s_data *data)
 {
 	if (data->input)
 		free(data->input);
-	if (data->cmd)
-		free_list(data->cmd);
+	// if (data->cmd)
+	// 	free_list(data->cmd);
 	if (data->envp)
 		free_env(data->envp);
 	if (data->envex)

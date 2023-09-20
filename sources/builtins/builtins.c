@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 15:56:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/20 14:28:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	builtins_no_pipe(cmd_line *cmd, s_data *data)
 {
 	int	len;
 
-	if (cmd->in == -1)
-	{
-		error_file(cmd, data, 6);
-		return (1);
-	}
+	// if (cmd->infile->fd == -1)
+	// {
+	// 	error_file(cmd, data, 6);
+	// 	return (1);
+	// }
 	if (cmd->args[0])
 	{
 		len = ft_strlen(cmd->args[0]);

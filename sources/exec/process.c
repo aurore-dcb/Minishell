@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 15:18:08 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/20 15:05:20 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 			if (!ft_here_doc(tmp, pipex, data, pids))
 			{
 				data->exit_status = 1;
-				unlink(".here_doc");
-				return (dprintf(1, "erreur here_doc\n"), 0);
+				return (unlink(".here_doc"), 0);
 			}
 		}
 		else
@@ -46,13 +45,20 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 {
 	pid_t	pid;
+	t_infile *last;
+	t_infile *last_next;
 
+	last = NULL;
+	last_next = NULL;
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
-	if (cmd->next && cmd->next->in == -2)
-		cmd->next->in = cmd->fd[0];
-	else if (cmd->next && cmd->next->in != -2)
+		// cmd->next->infile->fd = cmd->fd[0];
+	if (cmd->next && cmd->next->infile == NULL)
+		ft_lstadd_back_infile(&cmd->infile, ft_lstnew_infile(cmd->fd[0], 0));
+	else if (cmd->next && cmd->next->infile != NULL)
 		close(cmd->fd[0]);
+	last = ft_lstlast_infile(cmd->infile);
+	dprintf(1, "last->fd = %d\n",last->fd);
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -66,28 +72,35 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 		ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
 		if (cmd->fd[1] > 2)
 			close(cmd->fd[1]);
-		if (cmd->in > 2)
-			close(cmd->in);
+		if (cmd->infile && last->fd > 2)
+			close(last->fd);
 	}
 	return (1);
 }
 
+// void redirections()
+
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
-	if (cmd->in == -1)
+	// si un des infile == -1
+	t_infile *last;
+
+	last = ft_lstlast_infile(cmd->next->infile);
+	// if (last->fd == -1)
+	// {
+	// 	error_file(cmd, data, 6);
+	// 	return (0);
+	// }
+	// // si un des infile == -2
+	// if (cmd->out == -1)
+	// {
+	// 	error_file(cmd, data, 8);
+	// 	return (0);
+	// }
+	if (last->fd > 2)
 	{
-		error_file(cmd, data, 6);
-		return (0);
-	}
-	if (cmd->out == -1)
-	{
-		error_file(cmd, data, 8);
-		return (0);
-	}
-	if (cmd->in > 2)
-	{
-		dup2(cmd->in, STDIN_FILENO);
-		close(cmd->in);
+		dup2(last->fd, STDIN_FILENO);
+		close(last->fd);
 	}
 	if (cmd->out > 2)
 	{
@@ -120,7 +133,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	free_tab(pipex->paths);
 	free_all(data);
 	free_pid(pids);
-	exit(0);
+	exit(data->exit_status);
 }
 
 int	ft_lstsize(t_env *lst)
