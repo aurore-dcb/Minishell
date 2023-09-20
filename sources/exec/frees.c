@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 15:17:24 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/20 10:16:28 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab && tab[i])
+	if (tab)
 	{
-		free(tab[i]);
-		i++;
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
 	}
-	free(tab);
 }
 
 void	free_list(cmd_line *begin)
@@ -41,7 +44,9 @@ void	free_list(cmd_line *begin)
 		if (current->cmd)
 			free(current->cmd);
 		if (current->args)
+		{
 			free_tab(current->args);
+		}
 		while (current->token)
 		{
 			cur_token = current->token;
