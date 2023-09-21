@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 11:02:08 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 11:36:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ int	open_infile(s_data *data)
 		add_infiles(beg_cmd);
 		beg_cmd = beg_cmd->next;
 	}
-	display_in(data);
 	return (1);
 }
 
