@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/20 15:05:20 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 11:13:29 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,17 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 {
 	pid_t	pid;
 	t_infile *last;
-	t_infile *last_next;
 
 	last = NULL;
-	last_next = NULL;
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
-		// cmd->next->infile->fd = cmd->fd[0];
 	if (cmd->next && cmd->next->infile == NULL)
-		ft_lstadd_back_infile(&cmd->infile, ft_lstnew_infile(cmd->fd[0], 0));
+		ft_lstadd_back_infile(&cmd->next->infile, ft_lstnew_infile(cmd->fd[0], 0));
 	else if (cmd->next && cmd->next->infile != NULL)
 		close(cmd->fd[0]);
 	last = ft_lstlast_infile(cmd->infile);
-	dprintf(1, "last->fd = %d\n",last->fd);
+	if (last == NULL)
+		dprintf(1, "last == NULL\n");
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -82,22 +80,21 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
-	// si un des infile == -1
 	t_infile *last;
 
-	last = ft_lstlast_infile(cmd->next->infile);
-	// if (last->fd == -1)
-	// {
-	// 	error_file(cmd, data, 6);
-	// 	return (0);
-	// }
-	// // si un des infile == -2
+	last = ft_lstlast_infile(cmd->infile);
+	if (last && last->fd == -1)
+	{
+		error_file(cmd, last, data, 6);
+		return (0);
+	}
+	// // si un des infile == -1
 	// if (cmd->out == -1)
 	// {
 	// 	error_file(cmd, data, 8);
 	// 	return (0);
 	// }
-	if (last->fd > 2)
+	if (last && last->fd > 2)
 	{
 		dup2(last->fd, STDIN_FILENO);
 		close(last->fd);

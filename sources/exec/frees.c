@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/20 13:40:28 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 11:25:17 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ void	free_tab(char **tab)
 	}
 }
 
+void	free_cmd_in(t_infile *in)
+{	
+	t_infile	*current;
+
+	// current = in;
+	while (in)
+	{
+		current = in;
+		in = in->next;
+		if (current->fd > 2)
+			close(current->fd);
+		free(current);
+	}
+}
+
 void	free_list(cmd_line *begin)
 {
 	cmd_line	*current;
@@ -37,7 +52,9 @@ void	free_list(cmd_line *begin)
 	{
 		current = begin;
 		begin = begin->next;
-		// if (current->in > 2)
+		if (current->infile)
+			free_cmd_in(current->infile);
+			// free list de infile
 		// 	close(current->in);
 		// if (current->out > 2)
 		// 	close(current->out);
