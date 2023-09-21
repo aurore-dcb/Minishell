@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:24:56 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 14:44:58 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:11:53 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,25 @@ int	error_double_pipe(char *input)
 	return (0);
 }
 
-int	error_syntax(cmd_line **list)
+int	error_syntax_alone(cmd_line **list)
+{
+	cmd_line	*begin;
+	token		*token;
+
+	begin = *list;
+	while (begin)
+	{
+		token = begin->token;
+		while (token->next)
+			token = token->next;
+		begin = begin->next;
+	}
+	if (token->word[0] == '<' || token->word[0] == '>')
+		return (1);
+	return (0);
+}
+
+char	error_syntax(cmd_line **list)
 {
 	cmd_line	*begin;
 	token		*token;
@@ -70,14 +88,12 @@ int	error_syntax(cmd_line **list)
 		while (token->next)
 		{
 			if (is_meta(token->next->word[0]) && is_meta(token->word[0]))
-				return (1);
+				return (token->next->word[0]);
 			token = token->next;
 		}
 		begin = begin->next;
 	}
-	if (token->word[0] == '<' || token->word[0] == '>')
-		return (1);
 	if (token->word[0] == '|')
-		return (1);
+		return (token->word[0]);
 	return (0);
 }

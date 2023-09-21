@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 11:10:06 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:09:51 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int		ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 void	error_file(cmd_line *cmd, t_infile *in, s_data *data, t_type type);
 char	*get_info_cmd(cmd_line *beg_cmd, t_type type);
 void	error_cmd(cmd_line *cmd, s_data *data);
+void	error_token_gen(s_data *data);
+void	error_token(s_data *data, char c);
 // shlvl.c
 void	handle_shlevel(s_data *data);
 #endif

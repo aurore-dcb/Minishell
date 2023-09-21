@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 16:57:44 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:05:05 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	builtin_cd(s_data *data)
 	char	*res;
 
 	if (get_len_tab(data->cmd->args) > 2)
-		return (error_message(), EXIT_FAILURE);
+		return (error_message(data), EXIT_FAILURE);
 	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0)
 		ret = search_path(data->envp, "HOME");
 	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0
@@ -81,5 +81,6 @@ int	builtin_cd(s_data *data)
 	if (!change_oldpwd(data, res))
 		return (EXIT_FAILURE);
 	free(res);
+	data->exit_status = 0;
 	return (EXIT_SUCCESS);
 }

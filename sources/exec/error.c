@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:47:13 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/21 11:11:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:09:35 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,18 @@ void	error_cmd(cmd_line *cmd, s_data *data)
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd->args[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
+}
+
+void	error_token_gen(s_data *data)
+{
+	data->exit_status = 2;
+	ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
+}
+
+void	error_token(s_data *data, char c)
+{
+	data->exit_status = 2;
+	ft_putstr_fd("bash: syntax error near unexpected token `", 2);
+	ft_putchar_fd(c, 2);
+	ft_putstr_fd("'\n", 2);
 }

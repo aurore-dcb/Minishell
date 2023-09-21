@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:06:50 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 16:18:50 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:12:35 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,26 @@ int	end_except(char *cmd, int i)
 int	get_end_word(char *cmd, int i)
 {
 	char	q;
+	int		tmp;
 
-	while (cmd[i])
+	tmp = end_except(cmd, i);
+	if (tmp != i)
+		return (tmp);
+	while (cmd[tmp])
 	{
-		if (cmd[i] == 34 || cmd[i] == 39)
+		if (cmd[tmp] == 34 || cmd[tmp] == 39)
 		{
-			q = cmd[i];
-			i++;
-			while (cmd[i] && cmd[i] != q)
-				i++;
-			if (cmd[i] == '\0' || cmd[i] == q)
-			{
-				i++;
-				return (i);
-			}
-			i++;
+			q = cmd[tmp];
+			tmp++;
+			while (cmd[tmp] && cmd[tmp] != q)
+				tmp++;
+			if (cmd[tmp] == '\0' || cmd[tmp] == q)
+				return (++tmp);
+			tmp++;
 		}
-		if (cmd[i] == ' ' || cmd[i] == '<' || cmd[i] == '>')
-			return (i);
-		i++;
+		if (cmd[tmp] == ' ' || cmd[tmp] == '<' || cmd[tmp] == '>')
+			return (tmp);
+		tmp++;
 	}
-	return (i);
+	return (tmp);
 }

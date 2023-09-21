@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 11:25:17 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:10:30 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,11 @@ void	wait_fct(t_pid **pids, s_data *data)
 	else if (WIFSIGNALED(data->exit_status))
 	{
 		if (data->exit_status == SIGTERM)
+		{
+			data->exit_status = 143;
 			ft_putstr_fd("Terminated\n", 2);
-		data->exit_status += 128;
+		}
+		if (data->exit_status == SIGINT)
+			data->exit_status = 130;
 	}
 }

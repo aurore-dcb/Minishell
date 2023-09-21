@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/12 16:53:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:06:34 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@ int	do_export(s_data *data, int i, char **args)
 	ret_inv = is_inv(args[i]);
 	if (ft_isdigit(args[i][0]) || (ret_inv == 1) || has_plus(args[i]))
 	{
-		ft_putstr_fd("bash: export: `", STDERR_FILENO);
-		ft_putstr_fd(args[i], STDERR_FILENO);
-		ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+		data->exit_status = 1;
+		ft_putstr_fd("bash: export: `", 2);
+		ft_putstr_fd(args[i], 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		i++;
 		return (1);
 	}
@@ -102,6 +103,7 @@ int	builtin_export(s_data *data)
 
 	i = 0;
 	args = data->cmd->args;
+	data->exit_status = 0;
 	if (!args[1])
 		print_sorted_env(data->envex);
 	else if (args[1])
@@ -110,7 +112,10 @@ int	builtin_export(s_data *data)
 		while (args[i])
 		{
 			if (!do_export(data, i, args))
+			{
+				data->exit_status = 1;
 				return (EXIT_FAILURE);
+			}
 			i++;
 		}
 	}

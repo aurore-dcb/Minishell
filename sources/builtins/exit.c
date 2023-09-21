@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:01:33 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 14:15:33 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:06:24 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	num_exit(char *str, int error)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(str, STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		exit_code = 255;
+		exit_code = 2;
 	}
 	else
 		exit_code = ft_atoi(str);
@@ -69,6 +69,7 @@ int	builtin_exit(s_data *data)
 		else if (get_len_tab(data->cmd->args) > 2)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+			data->exit_status = 1;
 			return (EXIT_FAILURE);
 		}
 	}
@@ -78,5 +79,6 @@ int	builtin_exit(s_data *data)
 		str = 0;
 	free_all(data);
 	num_exit(str, error);
+	data->exit_status = 0;
 	return (EXIT_SUCCESS);
 }

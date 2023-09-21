@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/20 14:25:27 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:13:47 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int	add_word(cmd_line *list)
 		while (list->cmd[i] == ' ' && list->cmd[i])
 			i++;
 		start = i;
-		i = end_except(list->cmd, i);
 		i = get_end_word(list->cmd, i);
 		new = ft_lstnew_token(list, start, i);
 		if (!new)

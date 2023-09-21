@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:29:26 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 16:57:53 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:04:56 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	error_path(s_data *data)
 	ret = chdir(data->cmd->args[1]);
 	if (ret != 0)
 	{
+		data->exit_status = 1;
 		ft_putstr_fd("bash: cd: ", 2);
 		ft_putstr_fd(data->cmd->args[1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
@@ -68,7 +69,8 @@ int	error_path(s_data *data)
 	return (ret);
 }
 
-void	error_message(void)
+void	error_message(s_data *data)
 {
+	data->exit_status = 1;
 	ft_putstr_fd("bash: cd: too many arguments\n", 2);
 }

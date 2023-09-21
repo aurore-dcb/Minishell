@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 16:56:31 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:07:33 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // echo.c
 int		verif_n(char **args);
-int		builtin_echo(cmd_line *cmd);
+int		builtin_echo(cmd_line *cmd, s_data *data);
 // cd.c
 char	*find_path_ret(t_env *envp, char *str);
 int		search_path(t_env *envp, char *str);
@@ -25,7 +25,7 @@ void	print_oldpwd(s_data *data, int ret);
 char	*change_pwd(s_data *data);
 int		change_oldpwd(s_data *data, char *ret);
 int		error_path(s_data *data);
-void	error_message(void);
+void	error_message(s_data *data);
 // env.c
 int		builtin_env(s_data *data);
 // export.c
@@ -45,7 +45,7 @@ int		has_plus(char *str);
 int		in_env(t_env *env, char *key);
 void	del_plus(char *str, char to_del);
 // pwd.c
-int		builtin_pwd(void);
+int		builtin_pwd(s_data *data);
 // unset.c
 void	del_var(t_env **head, char *arg);
 int		builtin_unset(s_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:34:05 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/07 15:18:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:07:41 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,13 @@ int	builtin_unset(s_data *data)
 	i = 1;
 	args = data->cmd->args;
 	while (args[i])
-	{
-		if (args[i][0] && args[i][0] == '-')
-		{
-			ft_putstr_fd("bash: unset: ", STDERR_FILENO);
-			ft_putstr_fd(args[i], STDERR_FILENO);
-			ft_putstr_fd(": invalid option\n", STDERR_FILENO);
-			i++;
-			continue ;
-		}		
+	{	
 		if (in_env(data->envex, args[i]))
 			del_var(&data->envex, args[i]);
 		if (in_env(data->envp, args[i]))
 			del_var(&data->envp, args[i]);
 		i++;
 	}
+	data->exit_status = 0;
 	return (EXIT_SUCCESS);
 }

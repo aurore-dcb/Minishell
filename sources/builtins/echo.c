@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:46:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 10:44:11 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:05:47 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	print_echo(cmd_line *cmd, int i, int y)
 		printf("\n");
 }
 
-int	builtin_echo(cmd_line *cmd)
+int	builtin_echo(cmd_line *cmd, s_data *data)
 {
 	int	i;
 	int	y;
@@ -99,5 +99,6 @@ int	builtin_echo(cmd_line *cmd)
 		y = 1;
 	}
 	print_echo(cmd, i, y);
+	data->exit_status = 0;
 	return (EXIT_SUCCESS);
 }
