@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 15:05:26 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 13:41:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*existing_var(char *var, s_data *data)
 		return (NULL);
 	while (begin)
 	{
-		if (ft_strnstr(begin->key, var, ft_strlen(var)))
+		if (ft_strnstr(begin->key, var, ft_strlen(var))
+			&& ft_strlen(var) == ft_strlen(begin->key))
 		{
 			res = ft_strdup(begin->data);
 			if (!res)
