@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/20 14:17:49 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 12:21:19 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ token	*ft_lstnew_token(cmd_line *list, int start, int end)
 	if (!elem->word)
 		return (NULL);
 	ft_strcpy_pos(elem->word, list->cmd, start, end);
+	elem->old_word = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!elem->old_word)
+		return (NULL);
+	elem->old_word = ft_strdup(elem->word);
 	elem->type = get_type_meta(elem->word);
 	elem->next = NULL;
 	elem->previous = NULL;
