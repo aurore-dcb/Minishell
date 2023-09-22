@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 12:12:14 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/22 11:27:53 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 // quotes.c
 int			closed_quotes(char *input, t_quotes *etat);
-// split_meta.c
-int			is_meta(char c);
-char		**split_meta(char *input, char c);
 // parsing.c
+int			is_meta(char c);
 int			parsing(s_data *data);
 // list.c
 void		ft_lstadd_back_cmd_line(cmd_line **lst, cmd_line *new);
@@ -37,19 +35,23 @@ int			error_syntax_alone(cmd_line **list);
 // expand.c
 char		*ft_strcpy(char *dst, char *src, int dstsize);
 char		*ft_trim(char *s, int len);
-int			count_char(char *s, s_data *data);
+int			count_char(char *s, s_data *data, token **token);
 char		*apply_expand(char *res, char *word, s_data *data);
-char		*ft_expand(char *word, s_data *data);
+char		*ft_expand(char *word, s_data *data, token **token);
 // expand_count.c
 char		*existing_var(char *var, s_data *data);
 int			len_var_env(char *s);
 int			find_variable(char *s, s_data *data);
+int			find_variable_special(char *s, s_data *data, token **token);
 int			count_between_simple(char **s);
 int			count_between_double(char **s, s_data *data);
 // expand_apply.c
 int			between_simple(char *res, char **word, int i);
 int			between_double(char *res, char **word, s_data *data, int i);
 int			out_of_quotes(char *res, char **word, s_data *data, int i);
+// expand_special.c
+int			ft_strlen_expand(char *var);
+void		new_words(char *var, s_data *data, token **token);
 // split_word.c
 void		ft_strcpy_pos(char *dst, char *src, int start, int end);
 t_type		get_type_meta(char *word);

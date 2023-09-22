@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 11:36:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 15:00:25 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ t_infile	*ft_lstnew_infile(int fd, int err)
 	if (!elem)
 		return (NULL);
 	elem->next = NULL;
-	dprintf(1, "FD = %d\n", fd);
 	elem->fd = fd;
 	elem->r_no = err;
-	// elem->fd = open(fd, O_RDONLY);
 	elem->r_no = errno;
 	return (elem);
 }

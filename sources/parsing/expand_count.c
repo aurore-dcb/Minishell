@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 13:41:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 11:42:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	count_between_simple(char **s)
 	return (n);
 }
 
-int	find_variable(char *s, s_data *data)
+int	find_variable_special(char *s, s_data *data, token **token)
 {
 	int		n;
 	char	*cpy;
@@ -75,6 +75,37 @@ int	find_variable(char *s, s_data *data)
 	cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
 	if (!cpy)
 		return (0);
+	cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
+	res = existing_var(cpy, data);
+	// expand special
+	if (res)
+	{
+		n = ft_strlen_expand(res);
+		printf("ft_strlen_expand = %d\n", n);
+		if (n != ft_strlen(res)) // il y a au moins un espace dans la variable d'env donc au moins un maillon a creer -> faire une boucle pour les maillons
+		{
+			res = ft_trim(res, ft_strlen_expand(res)); // on enleve la premiere partie du mot / de la variable
+			printf("res = %s\n", res);
+			new_words(res, data, token); // on cree les nouveaux maillons avec la/les autres parties de la varible
+			// return (-1);
+		}
+		free(res);
+		return (n);
+	}
+	return (0);
+}
+
+int	find_variable(char *s, s_data *data)
+{
+	int		n;
+	char	*cpy;
+	char	*res;
+
+	if (*s == '?')
+		return (size_nb(data->exit_status));
+	cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
+	if (!cpy)
+		return (printf("echec malloc\n"), 0); // ERREUR
 	cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
 	res = existing_var(cpy, data);
 	n = ft_strlen(res);

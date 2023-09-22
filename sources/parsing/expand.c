@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/18 10:25:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 13:11:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ char	*ft_trim(char *s, int len)
 	return (res);
 }
 
-int	count_char(char *s, s_data *data)
+int	count_char(char *s, s_data *data, token **token)
 {
 	int	n;
+	int k;
 
 	n = 0;
 	while (s && *s != '\0')
@@ -56,16 +57,19 @@ int	count_char(char *s, s_data *data)
 		else if (*s == '$')
 		{
 			s++;
-			n += find_variable(s, data);
+			k = find_variable_special(s, data, token);
+			n += k;
 			if (*s == '?')
 				s += len_var_env(s);
 			else
-				s = s + len_var_env(s) - 1;
+				s = s + k;
+				// s = s + len_var_env(s) - 1;
 		}
 		else
 			n++;
 		if (*s)
 			s++;
+		// printf("s = %s\n", s);
 	}
 	return (n);
 }
@@ -94,7 +98,7 @@ char	*apply_expand(char *res, char *word, s_data *data)
 	return (res);
 }
 
-char	*ft_expand(char *word, s_data *data)
+char	*ft_expand(char *word, s_data *data, token **token)
 {
 	char	*res;
 	char	*trim;
@@ -103,11 +107,15 @@ char	*ft_expand(char *word, s_data *data)
 	if (!word)
 		return (NULL);
 	trim = ft_strtrim(word, " ");
-	len_malloc = count_char(trim, data);
+	len_malloc = count_char(trim, data, token);
+	dprintf(1, "len_malloc = %d\n", len_malloc);
+	// if (len_malloc == -1)
+	// 	return (NULL); // a voir ...
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (free(trim), NULL);
 	res = apply_expand(res, trim, data);
+	printf("res = %s\n", res);
 	free(trim);
 	free(word);
 	return (res);

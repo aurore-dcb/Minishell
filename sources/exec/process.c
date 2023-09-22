@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 11:13:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 14:29:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 	else if (cmd->next && cmd->next->infile != NULL)
 		close(cmd->fd[0]);
 	last = ft_lstlast_infile(cmd->infile);
-	if (last == NULL)
-		dprintf(1, "last == NULL\n");
 	pid = fork();
 	if (pid == -1)
 		return (0);

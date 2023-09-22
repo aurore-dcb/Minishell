@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 11:16:11 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/21 14:05:16 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,6 @@ void	initialize(s_data *data)
 	data->cmd = NULL;
 	data->tab_env = NULL;
 }
-
-// void	free_cmd_in(cmd_line **cmd)
-// {
-// 	cmd_line	*tmp;
-
-// 	tmp = *cmd;
-// 	if (tmp)
-// 	{
-// 		while (tmp)
-// 		{
-// 			if (tmp->in > 2)
-// 				close(tmp->in);
-// 			tmp = tmp->next;
-// 		}
-// 	}
-// }
 
 int	main(int argc, char **argv, char **env)
 {
