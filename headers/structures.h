@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 10:53:58 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:55:51 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,22 @@ typedef struct s_quotes
 typedef struct token
 {
 	char			*word;
-	// char			*old_word;
 	t_type			type;
 	struct token	*next;
 	struct token	*previous;
 }					token;
 
-typedef struct s_infile
+typedef struct s_file
 {
 	int				fd;
 	int				r_no;
-	struct s_infile	*next;
-}					t_infile;
+	struct s_file	*next;
+}					t_file;
 
 typedef struct cmd_line
 {
-	struct s_infile	*infile;
-	int				out;
+	struct s_file	*infile;
+	struct s_file	*outfile;
 	int				fd[2];
 	char			*cmd;
 	char			**args;

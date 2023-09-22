@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 13:36:30 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:11:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int apply_out_quotes(char *res, char **word, s_data *data, int i)
 	(*word)++;
 	cpy = malloc(sizeof(char) * (len_var_env(*word) + 1));
 	if (!cpy)
-		return (printf("echec malloc\n"), 0);
+		return (0);
 	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
 	if (**word == '?')
         var = ft_itoa(data->exit_status);

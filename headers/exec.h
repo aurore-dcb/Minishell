@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:14:20 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:53:20 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ int		ft_lstsize_cmd(cmd_line *lst);
 // get_paths.c
 char	**get_paths(t_env **envp);
 // files.c
-int		open_infile(s_data *data);
-int		open_outfile(s_data *data);
-t_infile	*ft_lstlast_infile(t_infile *lst);
-void	ft_lstadd_back_infile(t_infile **lst, t_infile *new);
-t_infile	*ft_lstnew_infile(int fd, int err);
-// t_infile	*ft_lstnew_infile(char *file);
+int		open_files(s_data *data);
+// int		open_outfile(s_data *data);
+t_file	*ft_lstlast_file(t_file *lst);
+void	ft_lstadd_back_file(t_file **lst, t_file *new);
+t_file	*ft_lstnew_file(int fd, int err);
+void	add_outfiles(cmd_line *cmd);
 // process.c
 int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
 int		ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data);
 int		ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
-void    error_file_exec(char *cmd, s_data *data, int error);
+void	error_file_exec(char *cmd, s_data *data, int error);
 int		ft_lstsize(t_env *lst);
 char	**list_to_tab(t_env **envp);
-// t_outfile	*ft_lstlast_outfile(t_outfile *lst);
+// t_file	*ft_lstlast_file(t_outfile *lst);
 // find_path.c
 char	*find_path(char **paths, char *cmd);
 // pids.c
@@ -61,7 +61,7 @@ int		ft_lstadd_back_pipex(t_pid **lst, t_pid *new);
 int		is_here_doc(cmd_line *cmd);
 int		ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 // error.c
-void	error_file(cmd_line *cmd, t_infile *in, s_data *data, t_type type);
+void	error_file(cmd_line *cmd, t_file *in, s_data *data, t_type type);
 char	*get_info_cmd(cmd_line *beg_cmd, t_type type);
 void	error_cmd(cmd_line *cmd, s_data *data);
 void	error_token_gen(s_data *data, int tmp);

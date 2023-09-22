@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:07:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:12:02 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	expansion(s_data *data)
 					return (0);
 			}
 			token = token->next;
-			if (token)
-				printf("TOKEN->word = %s\n", token->word);
+			// if (token)
+				// printf("TOKEN->word = %s\n", token->word);
 		}
 		begin = begin->next;
 	}

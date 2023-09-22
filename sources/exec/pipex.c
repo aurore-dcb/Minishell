@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 14:23:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:10:59 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ void	initialise_pipex(pipex *pipex)
 int	parsing_pipex(pipex *pipex, s_data *data)
 {
 	pipex->paths = get_paths(&data->envp);
-	if (!open_infile(data))
+	if (!open_files(data))
 	{
 		data->exit_status = 1;
-		return (ft_printf("ERROR -> Can't open infile\n"), 0);
+		return (0);
 	}
-	if (!open_outfile(data))
-	{
-		data->exit_status = 1;
-		return (ft_printf("ERROR -> Can't open outfile\n"), 0);
-	}
+	// if (!open_outfile(data))
+	// {
+	// 	data->exit_status = 1;
+	// 	return (ft_printf("ERROR -> Can't open outfile\n"), 0);
+	// }
 	return (1);
 }
 

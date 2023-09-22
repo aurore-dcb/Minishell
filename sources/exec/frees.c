@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:02:00 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:56:09 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	free_tab(char **tab)
 	}
 }
 
-void	free_cmd_in(t_infile *in)
+void	free_cmd_in(t_file *in)
 {	
-	t_infile	*current;
+	t_file	*current;
 
 	while (in)
 	{
@@ -55,8 +55,8 @@ void	free_list(cmd_line *begin)
 			free_cmd_in(current->infile);
 			// free list de infile
 		// 	close(current->in);
-		if (current->out > 2)
-			close(current->out);
+		// if (current->out > 2)
+		// 	close(current->out);
 		if (current->cmd)
 			free(current->cmd);
 		if (current->args)

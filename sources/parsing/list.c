@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:51:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 11:17:08 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:58:00 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ cmd_line	*ft_lstnew_cmd_line(int len)
 		return (NULL);
 	ft_bzero(elem->cmd, len);
 	elem->infile = NULL;
-	elem->out = -2;
-	// elem->error = 0;
+	elem->outfile = NULL;
 	elem->fd[0] = 0;
 	elem->fd[1] = 0;
 	elem->token = NULL;

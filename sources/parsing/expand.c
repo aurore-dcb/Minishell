@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 13:11:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:11:55 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,14 @@ char	*ft_expand(char *word, s_data *data, token **token)
 		return (NULL);
 	trim = ft_strtrim(word, " ");
 	len_malloc = count_char(trim, data, token);
-	dprintf(1, "len_malloc = %d\n", len_malloc);
+	// dprintf(1, "len_malloc = %d\n", len_malloc);
 	// if (len_malloc == -1)
 	// 	return (NULL); // a voir ...
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (free(trim), NULL);
 	res = apply_expand(res, trim, data);
-	printf("res = %s\n", res);
+	// printf("res = %s\n", res);
 	free(trim);
 	free(word);
 	return (res);

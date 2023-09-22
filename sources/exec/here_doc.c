@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 14:02:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:10:20 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ int	ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	pipex->here_doc_file = open(".here_doc", O_WRONLY | O_CREAT | O_TRUNC,
 			0646);
 	if (pipex->here_doc_file == -1)
-		return (ft_printf("Error -> Can't create/open file\n"), 0);
+		return (0);
 	if (!standart_input(cmd, pipex))
 		return (0);
 	if (g_flag == 1)
-		ft_lstadd_back_infile(&cmd->infile, ft_lstnew_infile(open("/dev/stdout", O_RDONLY), 0));
+		ft_lstadd_back_file(&cmd->infile, ft_lstnew_file(open("/dev/stdout", O_RDONLY), 0));
 	else
-		ft_lstadd_back_infile(&cmd->infile, ft_lstnew_infile(pipex->here_doc_file, 0));
+		ft_lstadd_back_file(&cmd->infile, ft_lstnew_file(pipex->here_doc_file, 0));
 	close(pipex->here_doc_file);
 	pipex->here_doc_file = open(".here_doc", O_RDONLY);
 	if (pipex->here_doc_file == -1)

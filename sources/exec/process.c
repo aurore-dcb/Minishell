@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:14:07 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:14:16 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 {
 	pid_t	pid;
-	t_infile *last;
+	t_file *last_in;
 
-	last = NULL;
+	last_in = NULL;
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
 	if (cmd->next && cmd->next->infile == NULL)
-		ft_lstadd_back_infile(&cmd->next->infile, ft_lstnew_infile(cmd->fd[0], 0));
+		ft_lstadd_back_file(&cmd->next->infile, ft_lstnew_file(cmd->fd[0], 0));
 	else if (cmd->next && cmd->next->infile != NULL)
 		close(cmd->fd[0]);
-	last = ft_lstlast_infile(cmd->infile);
+	last_in = ft_lstlast_file(cmd->infile);
 	pid = fork();
 	if (pid == -1)
 		return (0);
@@ -68,8 +68,8 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 		ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
 		if (cmd->fd[1] > 2)
 			close(cmd->fd[1]);
-		if (cmd->infile && last->fd > 2)
-			close(last->fd);
+		if (cmd->infile && last_in->fd > 2)
+			close(last_in->fd);
 	}
 	return (1);
 }
@@ -78,29 +78,36 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
-	t_infile *last;
+	t_file *last_in;
+	t_file *last_out;
 
-	last = ft_lstlast_infile(cmd->infile);
-	if (last && last->fd == -1)
+	last_in = ft_lstlast_file(cmd->infile);
+	last_out = ft_lstlast_file(cmd->outfile);
+	if (last_in && last_in->fd == -1)
 	{
-		error_file(cmd, last, data, 6);
+		error_file(cmd, last_in, data, 6);
 		return (0);
 	}
+	// if (last_out && last_out->fd == 1)
+	// {
+	// 	error_file(cmd, last_out, data, 8);
+	// 	return (0);
+	// }
 	// // si un des infile == -1
 	// if (cmd->out == -1)
 	// {
 	// 	error_file(cmd, data, 8);
 	// 	return (0);
 	// }
-	if (last && last->fd > 2)
+	if (last_in && last_in->fd > 2)
 	{
-		dup2(last->fd, STDIN_FILENO);
-		close(last->fd);
+		dup2(last_in->fd, STDIN_FILENO);
+		close(last_in->fd);
 	}
-	if (cmd->out > 2)
+	if (last_out && last_out->fd > 2)
 	{
-		dup2(cmd->out, STDOUT_FILENO);
-		close(cmd->out);
+		dup2(last_out->fd, STDOUT_FILENO);
+		close(last_out->fd);
 	}
 	else if (cmd->next)
 	{

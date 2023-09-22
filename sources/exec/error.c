@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:47:13 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/22 13:59:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 15:41:22 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*get_info_cmd(cmd_line *beg_cmd, t_type type)
 	return (NULL);
 }
 
-void	error_file(cmd_line *cmd, t_infile *in, s_data *data, t_type type)
+void	error_file(cmd_line *cmd, t_file *in, s_data *data, t_type type)
 {
 	data->exit_status = 1;
 	ft_putstr_fd("bash: ", 2);

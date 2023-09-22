@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:09:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 13:23:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:11:45 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	new_words(char *var, s_data *data, token **maillon)
 			var++;
 			//nouveau maillon a inserer juste apres l'actuel
             new = ft_lstnew_token_special(var, *maillon);
-			printf("new->word = %s\n", new->word);
+			// printf("new->word = %s\n", new->word);
 			// 1 - nouveau maillon
 			// 2 - new->next = current->next
 			// 3 - new->previous = current

@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   files.c                                            :+:      :+:    :+:   */
+/*   infiles.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 15:00:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 16:19:05 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	ft_lstadd_back_infile(t_infile **lst, t_infile *new)
+void	display_file(s_data *data)
 {
-	t_infile	*list;
+	cmd_line	*cmd;
+	t_file		*out;
+
+	dprintf(1, "DISPLAY\n");
+	cmd = data->cmd;
+	while (cmd)
+	{
+		out = cmd->infile;
+		while (out)
+		{
+			dprintf(1, "fd = %d    r_no = %d\n", out->fd, out->r_no);
+			out = out->next;
+		}
+		cmd = cmd->next;
+	}
+}
+
+void	ft_lstadd_back_file(t_file **lst, t_file *new)
+{
+	t_file	*list;
 
 	list = *lst;
 	if (list)
@@ -27,11 +46,11 @@ void	ft_lstadd_back_infile(t_infile **lst, t_infile *new)
 		*lst = new;
 }
 
-t_infile	*ft_lstnew_infile(int fd, int err)
+t_file	*ft_lstnew_file(int fd, int err)
 {
-	t_infile	*elem;
+	t_file	*elem;
 
-	elem = malloc(sizeof(t_infile));
+	elem = malloc(sizeof(t_file));
 	if (!elem)
 		return (NULL);
 	elem->next = NULL;
@@ -41,7 +60,7 @@ t_infile	*ft_lstnew_infile(int fd, int err)
 	return (elem);
 }
 
-t_infile	*ft_lstlast_infile(t_infile *lst)
+t_file	*ft_lstlast_file(t_file *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -50,31 +69,12 @@ t_infile	*ft_lstlast_infile(t_infile *lst)
 	return (lst);
 }
 
-void	display_in(s_data *data)
-{
-	cmd_line	*cmd;
-	t_infile	*in;
-
-	dprintf(1, "DISPLAY\n");
-	cmd = data->cmd;
-	while (cmd)
-	{
-		in = cmd->infile;
-		while (in)
-		{
-			dprintf(1, "fd = %d    r_no = %d\n", in->fd, in->r_no);
-			in = in->next;
-		}
-		cmd = cmd->next;
-	}
-}
-
 void	add_infiles(cmd_line *cmd)
 {
-	int			fd;
-	int			r_no;
-	t_infile	*new;
-	token		*beg_token;
+	int		fd;
+	int		r_no;
+	t_file	*new;
+	token	*beg_token;
 
 	r_no = 0;
 	beg_token = cmd->token;
@@ -84,8 +84,8 @@ void	add_infiles(cmd_line *cmd)
 		{
 			fd = open(beg_token->word, O_RDONLY);
 			r_no = errno;
-			new = ft_lstnew_infile(fd, r_no);
-			ft_lstadd_back_infile(&cmd->infile, new);
+			new = ft_lstnew_file(fd, r_no);
+			ft_lstadd_back_file(&cmd->infile, new);
 		}
 		if (r_no != 0)
 			return ;
@@ -93,7 +93,7 @@ void	add_infiles(cmd_line *cmd)
 	}
 }
 
-int	open_infile(s_data *data)
+int	open_files(s_data *data)
 {
 	cmd_line	*beg_cmd;
 
@@ -105,35 +105,9 @@ int	open_infile(s_data *data)
 		if (!beg_cmd->token)
 			return (0);
 		add_infiles(beg_cmd);
+		add_outfiles(beg_cmd);
 		beg_cmd = beg_cmd->next;
 	}
-	return (1);
-}
-
-int	open_outfile(s_data *data)
-{
-	cmd_line	*cmd;
-	token		*beg_token;
-
-	cmd = data->cmd;
-	if (!cmd)
-		return (0);
-	while (cmd)
-	{
-		beg_token = cmd->token;
-		if (!beg_token)
-			return (0);
-		while (beg_token)
-		{
-			if (beg_token->type == EXIT_FILE)
-				cmd->out = open(beg_token->word, O_WRONLY | O_CREAT | O_TRUNC,
-						0646);
-			else if (beg_token->type == EXIT_FILE_RET)
-				cmd->out = open(beg_token->word, O_WRONLY | O_CREAT | O_APPEND,
-						0646);
-			beg_token = beg_token->next;
-		}
-		cmd = cmd->next;
-	}
+	display_file(data);
 	return (1);
 }
