@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 13:17:20 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 13:36:30 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,29 @@ int	out_of_quotes(char *res, char **word, s_data *data, int i)
 	return (i);
 }
 
+int apply_out_quotes(char *res, char **word, s_data *data, int i)
+{
+	int j;
+	char *cpy;
+	char *var;
+
+	j = 0;
+	(*word)++;
+	cpy = malloc(sizeof(char) * (len_var_env(*word) + 1));
+	if (!cpy)
+		return (printf("echec malloc\n"), 0);
+	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
+	if (**word == '?')
+        var = ft_itoa(data->exit_status);
+    else
+        var = existing_var(cpy, data);
+    while (var && var[j])
+        res[i++] = var[j++];
+    free(var);
+    // free(cpy);
+    return (i);	
+}
+
 int	between_double(char *res, char **word, s_data *data, int i)
 {
 	(*word)++;
@@ -57,7 +80,7 @@ int	between_double(char *res, char **word, s_data *data, int i)
 	{
 		if (*(*word) == '$')
 		{
-			i = out_of_quotes(res, word, data, i);
+			i = apply_out_quotes(res, word, data, i);
 			(*word) = (*word) + len_var_env(*word) - 1;
 		}
 		else

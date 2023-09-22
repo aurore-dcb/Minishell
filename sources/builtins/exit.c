@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:01:33 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/21 12:06:24 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/22 13:57:46 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	is_str_digit(char *str)
 {
 	int	i;
 
-	i = 0;
+	if (!ft_isdigit(str[0]) && str[0] != '+' && str[0] != '-')
+		return (0);
+	i = 1;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))

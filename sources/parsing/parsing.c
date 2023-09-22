@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 13:21:40 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:07:10 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	expansion(s_data *data)
 			if (token->type != LIMITOR)
 			{
 				token->word = ft_expand(token->word, data, &token);
-				// printf("token->word = %s\n",token->word);
 				if (!token->word)
 					return (0);
 			}
@@ -56,6 +55,8 @@ int	parsing(s_data *data)
 		return (error_token(data, '|'), 0);
 	if (error_double_pipe(data->input) == 1)
 		return (error_token(data, '|'), 0);
+	if (error_pipe_token(data->input) == 1)
+		return (error_token(data, '|'), 0);
 	if (!split_pipe(data->input, &data->cmd))
 	{
 		data->exit_status = 1;
@@ -64,8 +65,10 @@ int	parsing(s_data *data)
 	tmp = error_syntax(&data->cmd);
 	if (tmp)
 		return (error_token(data, tmp), 0);
-	if (error_syntax_alone(&data->cmd))
-		return (error_token_gen(data), 0);
+	if (error_syntax_alone(&data->cmd) == 1)
+		return (error_token_gen(data, 1), 0);
+	else if (error_syntax_alone(&data->cmd) == 2)
+		return (error_token_gen(data, 2), 0);
 	if (!expansion(data))
 		return (0);
 	if (!tab_cmd(&data->cmd))

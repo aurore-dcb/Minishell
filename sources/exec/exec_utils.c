@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/14 14:07:58 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:03:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,24 @@ int	tab_cmd(cmd_line **list)
 		begin = begin->next;
 	}
 	return (1);
+}
+
+char	**new_tab(char **old_tab, int old_len)
+{
+	int		i;
+	char	**new_tab;
+
+	new_tab = (char **)malloc(old_len * sizeof(char *));
+	if (!new_tab)
+		return (0);
+	i = 1;
+	while (i < old_len)
+	{
+		new_tab[i - 1] = ft_strdup(old_tab[i]);
+		if (!new_tab[i - 1])
+			return (error(new_tab, i - 1));
+		i++;
+	}
+	new_tab[i - 1] = 0;
+	return (new_tab);
 }

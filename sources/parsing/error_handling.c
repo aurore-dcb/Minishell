@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:24:56 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 12:11:53 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:05:29 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,28 @@ int	error_begin_end_cmd(char *input)
 		i--;
 	if (i >= 0 && input[i] == '|')
 		return (1);
+	return (0);
+}
+
+int	error_pipe_token(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i] && input[i] == ' ')
+		i++;
+	if (input[i] && (input[i] == '<' || input[i] == '>'))
+	{
+		i++;
+		if (input[i] && (input[i] == '<' || input[i] == '>'))
+		{
+			i++;
+			if (input[i] && input[i] == '|')
+				return (1);
+		}
+		else if (input[i] && input[i] == '|')
+			return (1);
+	}
 	return (0);
 }
 
@@ -73,6 +95,8 @@ int	error_syntax_alone(cmd_line **list)
 	}
 	if (token->word[0] == '<' || token->word[0] == '>')
 		return (1);
+	if (token->word[0] == '.' && ft_strlen(token->word) == 1)
+		return (2);
 	return (0);
 }
 

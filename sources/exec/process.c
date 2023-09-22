@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 14:29:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:14:07 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,22 +113,41 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 		close(cmd->fd[1]);
 	}
 	if (builtins_pipe(cmd->args[0], data, cmd) == 0)
-	{
-		if (!pipex->middle_cmd_path)
-		{
-			error_cmd(cmd, data);
-			free_tab(pipex->paths);
-			free_all(data);
-			exit(127);
-		}
-		if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
-			return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
-	}
-	free(pipex->middle_cmd_path);
-	free_tab(pipex->paths);
-	free_all(data);
-	free_pid(pids);
-	exit(data->exit_status);
+    {
+        if (!pipex->middle_cmd_path)
+        {
+            error_cmd(cmd, data);
+            free_tab(pipex->paths);
+            free_all(data);
+            exit(127);
+        }
+        if (strcmp(pipex->middle_cmd_path, ".") == 0)
+        {
+            char **tab = new_tab(cmd->args, get_len_tab(cmd->args));
+            if (execve(cmd->args[1], tab, data->tab_env) == -1)
+                error_file_exec(cmd->args[1], data, errno);
+            free(pipex->middle_cmd_path);
+            return (free_tab(tab), close(cmd->fd[0]), close(cmd->fd[1]), 0);
+        }
+        else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
+            return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
+    }
+    free(pipex->middle_cmd_path);
+    free_tab(pipex->paths);
+    free_all(data);
+    free_pid(pids);
+    exit(data->exit_status);
+}
+
+void    error_file_exec(char *cmd, s_data *data, int error)
+{
+    data->exit_status = 1;
+    ft_putstr_fd("bash: ", 2);
+    ft_putstr_fd(cmd, 2);
+    if (error == 13)
+        ft_putstr_fd(": Permission denied\n", 2);
+    else
+        ft_putstr_fd(": No such file or directory\n", 2);
 }
 
 int	ft_lstsize(t_env *lst)

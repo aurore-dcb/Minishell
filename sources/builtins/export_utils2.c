@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 13:46:02 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/12 16:54:33 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 13:58:52 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_inv(char *str)
 		{
 			if (str[i] == '+')
 			{
-				if (str[i + 1] == '=')
+				if (str[i + 1] && str[i + 1] == '=')
 					return (2);
 				return (1);
 			}
@@ -49,7 +49,7 @@ int	has_plus(char *str)
 	{
 		if (str[i] == '+')
 		{
-			if (str[i + 1] == '=')
+			if (str[i + 1] && str[i + 1] == '=')
 				return (0);
 			return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 11:27:53 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:09:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int			error_begin_end_cmd(char *input);
 int			error_double_pipe(char *input);
 char		error_syntax(cmd_line **list);
 int			error_syntax_alone(cmd_line **list);
+int			error_pipe_token(char *input);
 // expand.c
 char		*ft_strcpy(char *dst, char *src, int dstsize);
 char		*ft_trim(char *s, int len);

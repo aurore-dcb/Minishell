@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_end_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:06:50 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 12:12:35 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:06:04 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../headers/minishell.h"
 
 int	end_except(char *cmd, int i)
 {
@@ -29,9 +31,15 @@ int	end_except(char *cmd, int i)
 	return (i);
 }
 
+char	is_quote(char c)
+{
+	if (c == 34 || c == 39)
+		return (1);
+	return (0);
+}
+
 int	get_end_word(char *cmd, int i)
 {
-	char	q;
 	int		tmp;
 
 	tmp = end_except(cmd, i);
@@ -39,17 +47,19 @@ int	get_end_word(char *cmd, int i)
 		return (tmp);
 	while (cmd[tmp])
 	{
-		if (cmd[tmp] == 34 || cmd[tmp] == 39)
+		if (cmd[tmp] == 39)
 		{
-			q = cmd[tmp];
 			tmp++;
-			while (cmd[tmp] && cmd[tmp] != q)
+			while (cmd[tmp] && cmd[tmp] != 39)
 				tmp++;
-			if (cmd[tmp] == '\0' || cmd[tmp] == q)
-				return (++tmp);
-			tmp++;
 		}
-		if (cmd[tmp] == ' ' || cmd[tmp] == '<' || cmd[tmp] == '>')
+		else if (cmd[tmp] == 34)
+		{
+			tmp++;
+			while (cmd[tmp] && cmd[tmp] != 34)
+				tmp++;
+		}
+		else if (cmd[tmp] == ' ' || cmd[tmp] == '<' || cmd[tmp] == '>')
 			return (tmp);
 		tmp++;
 	}

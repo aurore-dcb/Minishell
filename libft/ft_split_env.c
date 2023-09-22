@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:14:55 by aurore            #+#    #+#             */
-/*   Updated: 2023/09/13 12:13:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:15:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ static int	nb_lettre(const char *s, const char sep)
 		i++;
 	}
 	return (i);
-}
-
-static char	**error(char **res, int i)
-{
-	while (i < 0)
-	{
-		free(res[i]);
-		i--;
-	}
-	free(res);
-	return (NULL);
 }
 
 static char	**fill_tab(const char *str, char **tab)

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 14:07:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/22 14:02:00 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,7 @@ void	wait_fct(t_pid **pids, s_data *data)
 	tmp = *pids;
 	while (tmp)
 	{
-		if (waitpid((tmp->pid), &data->exit_status, 0) == -1)
-		{
-			dprintf(1, "erreur wait\n");
-		}
+		waitpid((tmp->pid), &data->exit_status, 0);
 		tmp = tmp->next;
 	}
 	free_pid(pids);
