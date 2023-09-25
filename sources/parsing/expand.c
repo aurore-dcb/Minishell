@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 17:25:01 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:31:04 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_trim(char *s, int len)
 int	count_char(char *s, s_data *data, token **token)
 {
 	int	n;
-	int k;
+	int	k;
 
 	n = 0;
 	while (s && *s != '\0')
@@ -55,10 +55,11 @@ int	count_char(char *s, s_data *data, token **token)
 			n += count_between_simple(&s);
 		else if (*s == 34)
 			n += count_between_double(&s, data);
-		else if (*s == '$')
+		// else if (*s == '$')
+		if (*s == '$' && *(s + 1) && *(s + 1) != 34 && *(s + 1) != ' '
+			&& *(s + 1) != '/')
 		{
 			s++;
-			// printf("s = %s\n", s);
 			k = find_variable_special(&s, data, token);
 			n += k;
 			if (*s == '?')
@@ -66,7 +67,7 @@ int	count_char(char *s, s_data *data, token **token)
 			// else
 			// 	s += k - 2;
 			// printf("s = %s\n", s);
-				// s = s + len_var_env(s) - 1;
+			// s = s + len_var_env(s) - 1;
 		}
 		else
 			n++;
@@ -88,7 +89,8 @@ char	*apply_expand(char *res, char *word, s_data *data)
 			i = between_simple(res, &word, i);
 		else if (*word == 34)
 			i = between_double(res, &word, data, i);
-		else if (*word == '$' && *(word + 1) && *(word + 1) != ' ' && *(word + 1) != '/')
+		else if (*word == '$' && *(word + 1) && *(word + 1) != ' ' && *(word
+					+ 1) != '/')
 		{
 			i = out_of_quotes(res, &word, data, i);
 			word = word + len_var_env(word) - 1;
