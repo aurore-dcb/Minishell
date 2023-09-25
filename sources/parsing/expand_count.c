@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 16:11:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:24:10 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*existing_var(char *var, s_data *data)
 	t_env	*begin;
 	char	*res;
 
+	res = NULL;
 	begin = data->envp;
 	if (!var)
 		return (NULL);
@@ -27,11 +28,12 @@ char	*existing_var(char *var, s_data *data)
 		{
 			res = ft_strdup(begin->data);
 			if (!res)
-				return (free(var), NULL);
-			return (free(var), res);
+				return (NULL);
+			return (res);
 		}
 		begin = begin->next;
 	}
+	free(res);
 	return (NULL);
 }
 
@@ -64,28 +66,30 @@ int	count_between_simple(char **s)
 	return (n);
 }
 
-int	find_variable_special(char *s, s_data *data, token **token)
+int	find_variable_special(char **s, s_data *data, token **token)
 {
 	int		n;
 	char	*cpy;
 	char	*res;
+	char	*trim;
 
-	if (*s == '?')
+	trim = NULL;
+	if (**s == '?')
 		return (size_nb(data->exit_status));
-	cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
+	cpy = malloc(sizeof(char) * (len_var_env(*s) + 1));
 	if (!cpy)
 		return (0);
-	cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
+	cpy = ft_strcpy(cpy, *s, len_var_env(*s) + 1);
 	res = existing_var(cpy, data);
-	// expand special
+	free(cpy);
 	if (res)
 	{
 		n = ft_strlen_expand(res);
-		if (n != ft_strlen(res)) // il y a au moins un espace dans la variable d'env donc au moins un maillon a creer -> faire une boucle pour les maillons
+		if (n != ft_strlen(res))
 		{
-			res = ft_trim(res, ft_strlen_expand(res)); // on enleve la premiere partie du mot / de la variable
-			new_words(res, data, token); // on cree les nouveaux maillons avec la/les autres parties de la varible
-			// return (-1);
+			trim = ft_trim(res, ft_strlen_expand(res));
+			new_words(trim, data, token);
+			free(trim);
 		}
 		free(res);
 		return (n);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 16:11:55 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:15:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_trim(char *s, int len)
 		i++;
 	}
 	res = ft_substr(s, 0, ft_strlen(s));
+	free(s);
 	return (res);
 }
 
@@ -57,12 +58,14 @@ int	count_char(char *s, s_data *data, token **token)
 		else if (*s == '$')
 		{
 			s++;
-			k = find_variable_special(s, data, token);
+			printf("s = %s\n", s);
+			k = find_variable_special(&s, data, token);
 			n += k;
 			if (*s == '?')
 				s += len_var_env(s);
-			else
-				s = s + k;
+			// else
+			// 	s += k - 2;
+			printf("s = %s\n", s);
 				// s = s + len_var_env(s) - 1;
 		}
 		else
@@ -107,6 +110,7 @@ char	*ft_expand(char *word, s_data *data, token **token)
 	if (!word)
 		return (NULL);
 	trim = ft_strtrim(word, " ");
+	printf("trim = .%s.\n", trim);
 	len_malloc = count_char(trim, data, token);
 	// dprintf(1, "len_malloc = %d\n", len_malloc);
 	// if (len_malloc == -1)

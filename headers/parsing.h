@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:09:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 15:13:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char		*ft_expand(char *word, s_data *data, token **token);
 char		*existing_var(char *var, s_data *data);
 int			len_var_env(char *s);
 int			find_variable(char *s, s_data *data);
-int			find_variable_special(char *s, s_data *data, token **token);
+int			find_variable_special(char **s, s_data *data, token **token);
 int			count_between_simple(char **s);
 int			count_between_double(char **s, s_data *data);
 // expand_apply.c

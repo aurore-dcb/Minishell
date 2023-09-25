@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 16:19:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 14:33:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	add_infiles(cmd_line *cmd)
 	beg_token = cmd->token;
 	while (beg_token)
 	{
-		if (beg_token->type == 6)
+		if (beg_token->type == OPEN_FILE)
 		{
 			fd = open(beg_token->word, O_RDONLY);
 			r_no = errno;
@@ -108,6 +108,6 @@ int	open_files(s_data *data)
 		add_outfiles(beg_cmd);
 		beg_cmd = beg_cmd->next;
 	}
-	display_file(data);
+	// display_file(data);
 	return (1);
 }

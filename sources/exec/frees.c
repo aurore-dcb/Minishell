@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 15:56:09 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 14:31:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	free_list(cmd_line *begin)
 		if (current->infile)
 			free_cmd_in(current->infile);
 			// free list de infile
+		if (current->outfile)
+			free_cmd_in(current->outfile);
 		// 	close(current->in);
 		// if (current->out > 2)
 		// 	close(current->out);
