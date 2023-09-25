@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 15:24:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 16:18:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int	find_variable(char *s, s_data *data)
 	if (*s == '?')
 		return (size_nb(data->exit_status));
 	cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
-	if (!cpy)
-		return (0);
+	if (!cpy || len_var_env(s) == 0)
+		return (free(cpy), 0);
 	cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
 	res = existing_var(cpy, data);
 	n = ft_strlen(res);

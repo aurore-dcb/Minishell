@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 15:15:41 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:25:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int	count_char(char *s, s_data *data, token **token)
 		else if (*s == '$')
 		{
 			s++;
-			printf("s = %s\n", s);
+			// printf("s = %s\n", s);
 			k = find_variable_special(&s, data, token);
 			n += k;
 			if (*s == '?')
 				s += len_var_env(s);
 			// else
 			// 	s += k - 2;
-			printf("s = %s\n", s);
+			// printf("s = %s\n", s);
 				// s = s + len_var_env(s) - 1;
 		}
 		else
@@ -88,7 +88,7 @@ char	*apply_expand(char *res, char *word, s_data *data)
 			i = between_simple(res, &word, i);
 		else if (*word == 34)
 			i = between_double(res, &word, data, i);
-		else if (*word == '$')
+		else if (*word == '$' && *(word + 1) && *(word + 1) != ' ' && *(word + 1) != '/')
 		{
 			i = out_of_quotes(res, &word, data, i);
 			word = word + len_var_env(word) - 1;
@@ -110,16 +110,11 @@ char	*ft_expand(char *word, s_data *data, token **token)
 	if (!word)
 		return (NULL);
 	trim = ft_strtrim(word, " ");
-	printf("trim = .%s.\n", trim);
 	len_malloc = count_char(trim, data, token);
-	// dprintf(1, "len_malloc = %d\n", len_malloc);
-	// if (len_malloc == -1)
-	// 	return (NULL); // a voir ...
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (free(trim), NULL);
 	res = apply_expand(res, trim, data);
-	// printf("res = %s\n", res);
 	free(trim);
 	free(word);
 	return (res);

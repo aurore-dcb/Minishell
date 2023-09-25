@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 15:22:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:25:12 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	out_of_quotes(char *res, char **word, s_data *data, int i)
 
 	j = 0;
 	(*word)++;
+	var = NULL;
 	cpy = malloc(sizeof(char) * (len_var_env(*word) + 1));
 	if (!cpy)
 		return (0);
@@ -70,7 +71,6 @@ int apply_out_quotes(char *res, char **word, s_data *data, int i)
     while (var && var[j])
         res[i++] = var[j++];
     free(var);
-    // free(cpy);
     return (i);	
 }
 
@@ -79,10 +79,10 @@ int	between_double(char *res, char **word, s_data *data, int i)
 	(*word)++;
 	while (*(*word) && *(*word) != 34)
 	{
-		if (*(*word) == '$')
+		if (**word == '$' && *(*word + 1) && *(*word + 1) != 34 && *(*word + 1) != ' ' && *(*word + 1) != '/')
 		{
 			i = apply_out_quotes(res, word, data, i);
-			(*word) = (*word) + len_var_env(*word) - 1;
+			(*word) = (*word) + len_var_env(*word) - 1;			
 		}
 		else
 			res[i++] = *(*word);
