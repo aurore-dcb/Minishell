@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:29:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:23:58 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ char	*existing_var(char *var, s_data *data)
             {
                 res = ft_strdup(begin->data);
                 if (!res)
-                    return (free(var), NULL);
+                    return (NULL);
             }
             else
                 res = ft_strdup("");
-            return (free(var), res);
+            return (res);
         }
 		begin = begin->next;
 	}
@@ -86,7 +86,8 @@ int	find_variable_special(char **s, s_data *data, token **token)
 		return (0);
 	cpy = ft_strcpy(cpy, *s, len_var_env(*s) + 1);
 	res = existing_var(cpy, data);
-	free(cpy);
+	if (cpy != NULL)
+		free(cpy);
 	if (res)
 	{
 		n = ft_strlen_expand(res);

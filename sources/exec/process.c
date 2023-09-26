@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 14:04:06 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:11:13 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	last_out = ft_lstlast_file(cmd->outfile);
 	if (last_in && last_in->fd == -1)
 	{
-		error_file(cmd, last_in, data, last_in->r_no);
+		error_file(last_in, data);
 		exit (0); // free_exec pour tout les returns dans le fork
 	}
 	if (last_out && last_out->fd == -1)
 	{
-		error_file(cmd, last_out, data, last_out->r_no);
+		error_file(last_out, data);
 		exit (0); // free_exec pour tout les returns dans le fork
 	}
 	if (last_in && last_in->fd > 2)
