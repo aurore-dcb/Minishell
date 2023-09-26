@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:32:42 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/14 14:08:18 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:25:32 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_trim_pipex(char *s)
 	int		i;
 	char	*res;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	while (*s && i < 5)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:34:05 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/21 12:07:41 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:23:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	del_var(t_env **head, char *arg)
 		*head = current->next;
 	else
 		prev->next = current->next;
-	free(current->key);
-	free(current->data);
-	free(current);
+	free_elem_env(current);
 }
 
 int	builtin_unset(s_data *data)

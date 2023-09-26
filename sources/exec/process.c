@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 16:14:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:34:45 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 				return (1);
 			pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
 			if (!ft_process(pipex, pids, tmp, data))
-				return (0);
+				return (free(pipex->middle_cmd_path), 0);
 			free(pipex->middle_cmd_path);
 		}
 		tmp = tmp->next;
@@ -83,6 +83,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 
 	last_in = ft_lstlast_file(cmd->infile);
 	last_out = ft_lstlast_file(cmd->outfile);
+	// dprintf(1, "last_out = %d\n", last_in->fd);
 	if (last_in && last_in->fd == -1)
 	{
 		error_file(cmd, last_in, data, 6);
@@ -91,12 +92,6 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	// if (last_out && last_out->fd == 1)
 	// {
 	// 	error_file(cmd, last_out, data, 8);
-	// 	return (0);
-	// }
-	// // si un des infile == -1
-	// if (cmd->out == -1)
-	// {
-	// 	error_file(cmd, data, 8);
 	// 	return (0);
 	// }
 	if (last_in && last_in->fd > 2)
@@ -134,7 +129,13 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
             if (execve(cmd->args[1], tab, data->tab_env) == -1)
                 error_file_exec(cmd->args[1], data, errno);
             free(pipex->middle_cmd_path);
-            return (free_tab(tab), close(cmd->fd[0]), close(cmd->fd[1]), 0);
+			free_tab(tab);
+			free_tab(pipex->paths);
+			free_all(data);
+			free_pid(pids);
+			close(cmd->fd[0]);
+			close(cmd->fd[1]);
+			exit(126);
         }
         else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
             return (close(cmd->fd[0]), close(cmd->fd[1]), 0);

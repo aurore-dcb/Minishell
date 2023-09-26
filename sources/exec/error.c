@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:47:13 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/22 15:41:22 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:33:32 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	error_file(cmd_line *cmd, t_file *in, s_data *data, t_type type)
 	ft_putstr_fd(get_info_cmd(cmd, type), 2);
 	if (in->r_no == 13)
 		ft_putstr_fd(": Permission denied\n", 2);
+	// else if (in->r_no == 21)
+	// {
+	// 	ft_putstr_fd("bash: ", 2);
+	// 	ft_putstr_fd(cmd->outfile, 2);
+	// 	ft_putstr_fd(": Is a directory\n", 2);
+	// }
 	else
 		ft_putstr_fd(": No such file or directory\n", 2);
 }

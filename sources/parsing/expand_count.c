@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 17:30:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:29:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@ char	*existing_var(char *var, s_data *data)
 	while (begin)
 	{
 		if (ft_strnstr(begin->key, var, ft_strlen(var))
-			&& ft_strlen(var) == ft_strlen(begin->key))
-		{
-			res = ft_strdup(begin->data);
-			if (!res)
-				return (NULL);
-			return (res);
-		}
+            && ft_strlen(var) == ft_strlen(begin->key))
+        {
+            if (begin->data && ft_strcmp(begin->data, "") != 0)
+            {
+                res = ft_strdup(begin->data);
+                if (!res)
+                    return (free(var), NULL);
+            }
+            else
+                res = ft_strdup("");
+            return (free(var), res);
+        }
 		begin = begin->next;
 	}
 	free(res);
@@ -111,6 +116,7 @@ int	find_variable(char *s, s_data *data)
 	cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
 	res = existing_var(cpy, data);
 	n = ft_strlen(res);
+	free(cpy);
 	free(res);
 	return (n);
 }

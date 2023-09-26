@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 17:31:04 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/25 17:32:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	count_char(char *s, s_data *data, token **token)
 			n += count_between_simple(&s);
 		else if (*s == 34)
 			n += count_between_double(&s, data);
-		// else if (*s == '$')
 		if (*s == '$' && *(s + 1) && *(s + 1) != 34 && *(s + 1) != ' '
 			&& *(s + 1) != '/')
 		{
@@ -64,16 +63,11 @@ int	count_char(char *s, s_data *data, token **token)
 			n += k;
 			if (*s == '?')
 				s += len_var_env(s);
-			// else
-			// 	s += k - 2;
-			// printf("s = %s\n", s);
-			// s = s + len_var_env(s) - 1;
 		}
 		else
 			n++;
 		if (*s)
 			s++;
-		// printf("s = %s\n", s);
 	}
 	return (n);
 }

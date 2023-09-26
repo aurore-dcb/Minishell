@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 12:05:05 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:22:45 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	builtin_cd(s_data *data)
 
 	if (get_len_tab(data->cmd->args) > 2)
 		return (error_message(data), EXIT_FAILURE);
-	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0)
+	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0
+		|| ft_strncmp(data->cmd->args[1], "--", 2) == 0)
 		ret = search_path(data->envp, "HOME");
 	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0
 		&& ft_strlen(data->cmd->args[1]) == 1)

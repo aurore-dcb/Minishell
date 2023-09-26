@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 16:10:47 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:33:16 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,23 @@ void	initialize(s_data *data)
 	data->tab_env = NULL;
 }
 
+// char    *prompt(void)
+// {
+//     char    *input;
+//     char    *line;
+
+//     set_signals();
+//     if (isatty(STDIN_FILENO))
+//         input = readline("minishell$ ");
+//     else
+//     {
+//         line = get_next_line(STDIN_FILENO);
+//         input = ft_strtrim(line, "\n");
+//         free(line);
+//     }
+//     return (input);
+// }
+
 int	main(int argc, char **argv, char **env)
 {
 	s_data	data;
@@ -69,7 +86,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		set_signals();
 		initialize(&data);
-		data.input = readline("minishell> ");
+		data.input = readline("minishell$ ");
 		if (data.input)
 		{
 			if (data.input[0])

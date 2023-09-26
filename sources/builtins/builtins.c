@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 15:40:15 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/22 13:56:00 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:22:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	builtins_pipe(char *cmd, s_data *data, cmd_line *cmd_l)
 	int	len;
 
 	len = ft_strlen(cmd);
-	if (!ft_strncmp(cmd, "pwd", 3) && len == 3)
+	if (!ft_strcmp(cmd, ".") && !cmd_l->args[1])
+		return (error_token_gen(data, 2), 1);
+	else if (!ft_strncmp(cmd, "pwd", 3) && len == 3)
 		return (builtin_pwd(data), 1);
 	else if (!ft_strncmp(cmd, "env", 3) && len == 3)
 		return (builtin_env(data), 1);

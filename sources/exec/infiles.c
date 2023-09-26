@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 14:33:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:34:35 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	display_file(s_data *data)
 	cmd_line	*cmd;
 	t_file		*out;
 
-	dprintf(1, "DISPLAY\n");
 	cmd = data->cmd;
 	while (cmd)
 	{
