@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 14:11:13 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:43:45 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
 	if (cmd->next && cmd->next->infile == NULL)
-		ft_lstadd_back_file(&cmd->next->infile, ft_lstnew_file(cmd->fd[0], 0, NULL));
+		ft_lstadd_back_file(&cmd->next->infile, ft_lstnew_file(cmd->fd[0], 0, ""));
 	else if (cmd->next && cmd->next->infile != NULL)
 		close(cmd->fd[0]);
 	last_in = ft_lstlast_file(cmd->infile);
@@ -86,12 +86,12 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	if (last_in && last_in->fd == -1)
 	{
 		error_file(last_in, data);
-		exit (0); // free_exec pour tout les returns dans le fork
+		exit (data->exit_status); // free_exec pour tout les returns dans le fork
 	}
 	if (last_out && last_out->fd == -1)
 	{
 		error_file(last_out, data);
-		exit (0); // free_exec pour tout les returns dans le fork
+		exit (data->exit_status); // free_exec pour tout les returns dans le fork
 	}
 	if (last_in && last_in->fd > 2)
 	{
