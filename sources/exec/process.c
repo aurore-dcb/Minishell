@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:34:45 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:50:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 
 	last_in = ft_lstlast_file(cmd->infile);
 	last_out = ft_lstlast_file(cmd->outfile);
-	// dprintf(1, "last_out = %d\n", last_in->fd);
 	if (last_in && last_in->fd == -1)
 	{
 		error_file(cmd, last_in, data, 6);

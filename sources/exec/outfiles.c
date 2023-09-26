@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:34:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 14:34:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 10:50:13 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	add_outfiles(cmd_line *cmd)
 		{
 			r_no = errno;
 			new = ft_lstnew_file(fd, r_no);
-			ft_lstadd_back_file(&cmd->infile, new);
+			ft_lstadd_back_file(&cmd->outfile, new);
 		}
 		if (r_no != 0)
 			return ;
