@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 15:53:20 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:06:57 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		open_files(s_data *data);
 // int		open_outfile(s_data *data);
 t_file	*ft_lstlast_file(t_file *lst);
 void	ft_lstadd_back_file(t_file **lst, t_file *new);
-t_file	*ft_lstnew_file(int fd, int err);
+t_file	*ft_lstnew_file(int fd, int err, char *file);
 void	add_outfiles(cmd_line *cmd);
 // process.c
 int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
@@ -61,7 +61,7 @@ int		ft_lstadd_back_pipex(t_pid **lst, t_pid *new);
 int		is_here_doc(cmd_line *cmd);
 int		ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 // error.c
-void	error_file(cmd_line *cmd, t_file *in, s_data *data, t_type type);
+void	error_file(t_file *in, s_data *data);
 char	*get_info_cmd(cmd_line *beg_cmd, t_type type);
 void	error_cmd(cmd_line *cmd, s_data *data);
 void	error_token_gen(s_data *data, int tmp);

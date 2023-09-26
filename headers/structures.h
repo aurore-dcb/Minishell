@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 15:55:51 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 11:08:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_file
 {
 	int				fd;
 	int				r_no;
+	char			*name;
 	struct s_file	*next;
 }					t_file;
 

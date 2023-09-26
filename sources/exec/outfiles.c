@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:34:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:50:13 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:07:22 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	add_outfiles(cmd_line *cmd)
         if (beg_token->type == EXIT_FILE || beg_token->type == EXIT_FILE_RET)
 		{
 			r_no = errno;
-			new = ft_lstnew_file(fd, r_no);
+			new = ft_lstnew_file(fd, r_no, beg_token->word);
 			ft_lstadd_back_file(&cmd->outfile, new);
 		}
 		if (r_no != 0)

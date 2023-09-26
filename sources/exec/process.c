@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:50:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:04:06 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
 	if (cmd->next && cmd->next->infile == NULL)
-		ft_lstadd_back_file(&cmd->next->infile, ft_lstnew_file(cmd->fd[0], 0));
+		ft_lstadd_back_file(&cmd->next->infile, ft_lstnew_file(cmd->fd[0], 0, NULL));
 	else if (cmd->next && cmd->next->infile != NULL)
 		close(cmd->fd[0]);
 	last_in = ft_lstlast_file(cmd->infile);
@@ -85,14 +85,14 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	last_out = ft_lstlast_file(cmd->outfile);
 	if (last_in && last_in->fd == -1)
 	{
-		error_file(cmd, last_in, data, 6);
-		return (0);
+		error_file(cmd, last_in, data, last_in->r_no);
+		exit (0); // free_exec pour tout les returns dans le fork
 	}
-	// if (last_out && last_out->fd == 1)
-	// {
-	// 	error_file(cmd, last_out, data, 8);
-	// 	return (0);
-	// }
+	if (last_out && last_out->fd == -1)
+	{
+		error_file(cmd, last_out, data, last_out->r_no);
+		exit (0); // free_exec pour tout les returns dans le fork
+	}
 	if (last_in && last_in->fd > 2)
 	{
 		dup2(last_in->fd, STDIN_FILENO);

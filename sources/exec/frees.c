@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 14:31:01 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 11:10:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	free_cmd_in(t_file *in)
 		in = in->next;
 		if (current->fd > 2)
 			close(current->fd);
+		if (current->name)
+			free(current->name);
 		free(current);
 	}
 }

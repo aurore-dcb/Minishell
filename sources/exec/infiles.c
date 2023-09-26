@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:34:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 11:10:14 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_lstadd_back_file(t_file **lst, t_file *new)
 		*lst = new;
 }
 
-t_file	*ft_lstnew_file(int fd, int err)
+t_file	*ft_lstnew_file(int fd, int err, char *file)
 {
 	t_file	*elem;
 
@@ -55,7 +55,7 @@ t_file	*ft_lstnew_file(int fd, int err)
 	elem->next = NULL;
 	elem->fd = fd;
 	elem->r_no = err;
-	elem->r_no = errno;
+	elem->name = ft_strdup(file);
 	return (elem);
 }
 
@@ -83,7 +83,7 @@ void	add_infiles(cmd_line *cmd)
 		{
 			fd = open(beg_token->word, O_RDONLY);
 			r_no = errno;
-			new = ft_lstnew_file(fd, r_no);
+			new = ft_lstnew_file(fd, r_no, beg_token->word);
 			ft_lstadd_back_file(&cmd->infile, new);
 		}
 		if (r_no != 0)
