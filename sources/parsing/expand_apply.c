@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 14:26:42 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 08:40:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	out_of_quotes(char *res, char **word, s_data *data, int i)
 	if (**word == '?')
 		var = ft_itoa(data->exit_status);
 	else
-		var = existing_var(cpy, data);
+		var = existing_var(cpy, data, 1);
 	if (ft_strlen_expand(var) != ft_strlen(var))
 		while (var && var[j] != ' ')
 			res[i++] = var[j++];
@@ -68,7 +68,7 @@ int apply_out_quotes(char *res, char **word, s_data *data, int i)
 	if (**word == '?')
         var = ft_itoa(data->exit_status);
     else
-        var = existing_var(cpy, data);
+        var = existing_var(cpy, data, 1);
     while (var && var[j])
         res[i++] = var[j++];
     free(var);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:33:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 17:02:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	initialize(s_data *data)
 //     char    *input;
 //     char    *line;
 
-//     set_signals();
+//     set_signals(1);
 //     if (isatty(STDIN_FILENO))
 //         input = readline("minishell$ ");
 //     else
@@ -84,7 +84,7 @@ int	main(int argc, char **argv, char **env)
 	handle_shlevel(&data);
 	while (1)
 	{
-		set_signals();
+		set_signals(1);
 		initialize(&data);
 		data.input = readline("minishell$ ");
 		if (data.input)

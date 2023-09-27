@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 15:13:54 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 08:45:39 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ int			error_pipe_token(char *input);
 char		*ft_strcpy(char *dst, char *src, int dstsize);
 char		*ft_trim(char *s, int len);
 int			count_char(char *s, s_data *data, token **token);
-char		*apply_expand(char *res, char *word, s_data *data);
+char		*apply_expand(char *res, char *word, s_data *data, token **token);
 char		*ft_expand(char *word, s_data *data, token **token);
 // expand_count.c
-char		*existing_var(char *var, s_data *data);
+char		*existing_var(char *var, s_data *data, t_type type);
 int			len_var_env(char *s);
-int			find_variable(char *s, s_data *data);
+int			find_variable(char *s, s_data *data, token **token);
 int			find_variable_special(char **s, s_data *data, token **token);
 int			count_between_simple(char **s);
-int			count_between_double(char **s, s_data *data);
+int			count_between_double(char **s, s_data *data, token **token);
 // expand_apply.c
 int			between_simple(char *res, char **word, int i);
 int			between_double(char *res, char **word, s_data *data, int i);

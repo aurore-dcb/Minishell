@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/22 13:58:16 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 16:59:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,28 +96,31 @@ int	do_export(s_data *data, int i, char **args)
 	return (1);
 }
 
-int	builtin_export(s_data *data)
+int    builtin_export(s_data *data)
 {
-	char	**args;
-	int		i;
+    char    **args;
+    int        i;
 
-	i = 0;
-	args = data->cmd->args;
-	data->exit_status = 0;
-	if (!args[1])
-		print_sorted_env(data->envex);
-	else if (args[1])
-	{
-		i = 1;
-		while (args[i])
-		{
-			if (!do_export(data, i, args))
-			{
-				data->exit_status = 1;
-				return (EXIT_FAILURE);
-			}
-			i++;
-		}
-	}
-	return (EXIT_SUCCESS);
+    i = 0;
+    args = data->cmd->args;
+    data->exit_status = 0;
+    if (!args[1])
+        print_sorted_env(data->envex);
+    else if (args[1])
+    {
+        i = 1;
+        while (args[i])
+        {
+            if (ft_strlen(args[i]) == 1 && args[i][0] != '_')
+            {
+                if (!do_export(data, i, args))
+                {
+                    data->exit_status = 1;
+                    return (EXIT_FAILURE);
+                }
+            }
+            i++;
+        }
+    }
+    return (EXIT_SUCCESS);
 }

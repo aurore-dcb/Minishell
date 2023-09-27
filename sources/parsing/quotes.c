@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:19:02 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/19 14:44:49 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/26 15:30:59 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	closed_quotes(char *input, t_quotes *etat)
 	int	i;
 
 	i = -1;
-	while (input[++i])
+	while (input && i < ft_strlen(input) && input[++i])
 	{
 		if (input[i] == 39)
 		{

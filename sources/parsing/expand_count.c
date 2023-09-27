@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_count.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 14:55:33 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/27 09:04:45 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-char	*existing_var(char *var, s_data *data)
+char	*existing_var(char *var, s_data *data, t_type type)
 {
 	t_env	*begin;
 	char	*res;
@@ -28,7 +28,12 @@ char	*existing_var(char *var, s_data *data)
         {
             if (begin->data && ft_strcmp(begin->data, "") != 0)
             {
-                res = ft_strdup(begin->data);
+                if (type == LIMITOR)
+				{
+					res = ft_strdup(var);
+					return (res);
+				}
+				res = ft_strdup(begin->data);
                 if (!res)
                     return (NULL);
             }
@@ -85,7 +90,7 @@ int	find_variable_special(char **s, s_data *data, token **token)
 	if (!cpy)
 		return (0);
 	cpy = ft_strcpy(cpy, *s, len_var_env(*s) + 1);
-	res = existing_var(cpy, data);
+	res = existing_var(cpy, data, (*token)->type);
 	if (cpy != NULL)
 		free(cpy);
 	if (res)
@@ -103,7 +108,7 @@ int	find_variable_special(char **s, s_data *data, token **token)
 	return (0);
 }
 
-int	find_variable(char *s, s_data *data)
+int	find_variable(char *s, s_data *data, token **token)
 {
 	int		n;
 	char	*cpy;
@@ -115,14 +120,14 @@ int	find_variable(char *s, s_data *data)
 	if (!cpy || len_var_env(s) == 0)
 		return (free(cpy), 0);
 	cpy = ft_strcpy(cpy, s, len_var_env(s) + 1);
-	res = existing_var(cpy, data);
+	res = existing_var(cpy, data, (*token)->type);
 	n = ft_strlen(res);
 	free(cpy);
 	free(res);
 	return (n);
 }
 
-int	count_between_double(char **s, s_data *data)
+int	count_between_double(char **s, s_data *data, token **token)
 {
 	int	n;
 
@@ -134,7 +139,7 @@ int	count_between_double(char **s, s_data *data)
 			&& *(*s + 1) != '/')
 		{
 			(*s)++;
-			n += find_variable(*s, data);
+			n += find_variable(*s, data, token);
 			(*s) = (*s) + len_var_env(*s) - 1;
 		}
 		else

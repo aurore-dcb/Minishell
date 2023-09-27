@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/25 14:29:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 09:05:44 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,9 @@ int	expansion(s_data *data)
 		token = begin->token;
 		while (token)
 		{
-			if (token->type != LIMITOR)
-			{
 				token->word = ft_expand(token->word, data, &token);
 				if (!token->word)
 					return (0);
-			}
 			token = token->next;
 		}
 		begin = begin->next;

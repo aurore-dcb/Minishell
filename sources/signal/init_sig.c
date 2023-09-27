@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sig.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:06 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/21 12:14:06 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/26 16:58:29 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,21 @@ void	heredoc_signal(int sig)
 	ft_putstr_fd("\n", 2);
 }
 
-void	set_signals(void)
+void	set_signals(int sig)
 {
-	signal(SIGINT, signal_cmd);
-	signal(SIGQUIT, SIG_IGN);
+	if (sig == 1)
+	{
+		signal(SIGINT, signal_cmd);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (sig == 2)
+	{
+		signal(SIGINT, sig_handler_job);
+		signal(SIGQUIT, sig_handler_job);
+	}
+	if (sig == 4)
+	{
+		signal(SIGINT, SIG_IGN);		
+		signal(SIGQUIT, SIG_IGN);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 15:10:31 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/27 09:03:12 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	count_char(char *s, s_data *data, token **token)
 		if (*s == 39)
 			n += count_between_simple(&s);
 		else if (*s == 34)
-			n += count_between_double(&s, data);
-		if (*s == '$' && *(s + 1) && *(s + 1) != 34 && *(s + 1) != ' '
-			&& *(s + 1) != '/')
+			n += count_between_double(&s, data, token);
+		if (*s == '$' && *(s + 1) && *(s + 1) != 34 && *(s + 1) != ' ' && *(s
+				+ 1) != '/')
 		{
 			s++;
 			k = find_variable_special(&s, data, token);
@@ -71,7 +71,7 @@ int	count_char(char *s, s_data *data, token **token)
 	return (n);
 }
 
-char	*apply_expand(char *res, char *word, s_data *data)
+char	*apply_expand(char *res, char *word, s_data *data, token **token)
 {
 	int	i;
 
@@ -81,12 +81,20 @@ char	*apply_expand(char *res, char *word, s_data *data)
 		if (*word == 39)
 			i = between_simple(res, &word, i);
 		else if (*word == 34)
-			i = between_double(res, &word, data, i);
+		{
+			if ((*token)->type != LIMITOR)
+				i = between_double(res, &word, data, i);
+		}
 		else if (*word == '$' && *(word + 1) && *(word + 1) != ' ' && *(word
 					+ 1) != '/')
 		{
-			i = out_of_quotes(res, &word, data, i);
-			word = word + len_var_env(word) - 1;
+			if ((*token)->type != LIMITOR)
+			{
+				i = out_of_quotes(res, &word, data, i);
+				word = word + len_var_env(word) - 1;
+			}
+			else
+				res[i++] = *word;
 		}
 		else
 			res[i++] = *word;
@@ -94,6 +102,25 @@ char	*apply_expand(char *res, char *word, s_data *data)
 	}
 	res[i] = '\0';
 	return (res);
+}
+
+char	*trim_isspace(char const *s1, char const *set)
+{
+	char	*ret;
+	char	*start;
+	char	*end;
+
+	if (!s1 || !set)
+		return (0);
+	start = (char *)s1;
+	end = start + ft_strlen(s1);
+	while (*start && ((*start >= 9 && *start <= 13) || *start == 32))
+		++start;
+	while (start < end && ((*(end - 1) >= 9 && *(end - 1) <= 13) || *(end
+				- 1) == 32))
+		--end;
+	ret = ft_substr(start, 0, end - start);
+	return (ret);
 }
 
 char	*ft_expand(char *word, s_data *data, token **token)
@@ -104,12 +131,14 @@ char	*ft_expand(char *word, s_data *data, token **token)
 
 	if (!word)
 		return (NULL);
-	trim = ft_strtrim(word, " ");
+	trim = trim_isspace(word, " ");
 	len_malloc = count_char(trim, data, token);
+	printf("len malloc = %d\n", len_malloc);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (free(trim), NULL);
-	res = apply_expand(res, trim, data);
+	res = apply_expand(res, trim, data, token);
+	printf("res = %s\n", res);
 	free(trim);
 	free(word);
 	return (res);
