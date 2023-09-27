@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 08:45:39 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:09:05 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int			closed_quotes(char *input, t_quotes *etat);
 // parsing.c
 int			is_meta(char c);
+int			is_spaces(char c);
 int			parsing(s_data *data);
 // list.c
 void		ft_lstadd_back_cmd_line(cmd_line **lst, cmd_line *new);

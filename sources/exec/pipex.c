@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 16:59:07 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:37:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ int	parsing_pipex(pipex *pipex, s_data *data)
 		data->exit_status = 1;
 		return (0);
 	}
-	// if (!open_outfile(data))
-	// {
-	// 	data->exit_status = 1;
-	// 	return (ft_printf("ERROR -> Can't open outfile\n"), 0);
-	// }
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 14:43:45 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:37:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,32 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 }
 
 // void redirections()
+void    no_builtins(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
+{
+    char    **tab;
+
+    tab = NULL;
+    if (!pipex->middle_cmd_path)
+    {
+        error_cmd(cmd, data);
+        free_no_buil(cmd, pipex, data, pids);
+        exit(127);
+    }
+    if (ft_strcmp(pipex->middle_cmd_path, ".") == 0)
+    {
+        tab = new_tab(cmd->args, get_len_tab(cmd->args));
+        if (execve(cmd->args[1], tab, data->tab_env) == -1)
+            error_file_exec(cmd->args[1], data, errno);
+        free_tab(tab);
+        free_no_buil(cmd, pipex, data, pids);
+        exit(126);
+    }
+    else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
+    {
+        free_no_buil(cmd, pipex, data, pids);
+        exit(127);
+    }
+}
 
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
@@ -86,12 +112,12 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	if (last_in && last_in->fd == -1)
 	{
 		error_file(last_in, data);
-		exit (data->exit_status); // free_exec pour tout les returns dans le fork
+		exit (data->exit_status);
 	}
 	if (last_out && last_out->fd == -1)
 	{
 		error_file(last_out, data);
-		exit (data->exit_status); // free_exec pour tout les returns dans le fork
+		exit (data->exit_status);
 	}
 	if (last_in && last_in->fd > 2)
 	{
@@ -113,36 +139,9 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 		close(cmd->fd[0]);
 		close(cmd->fd[1]);
 	}
-	if (builtins_pipe(cmd->args[0], data, cmd) == 0)
-    {
-        if (!pipex->middle_cmd_path)
-        {
-            error_cmd(cmd, data);
-            free_tab(pipex->paths);
-            free_all(data);
-            exit(127);
-        }
-        if (strcmp(pipex->middle_cmd_path, ".") == 0)
-        {
-            char **tab = new_tab(cmd->args, get_len_tab(cmd->args));
-            if (execve(cmd->args[1], tab, data->tab_env) == -1)
-                error_file_exec(cmd->args[1], data, errno);
-            free(pipex->middle_cmd_path);
-			free_tab(tab);
-			free_tab(pipex->paths);
-			free_all(data);
-			free_pid(pids);
-			close(cmd->fd[0]);
-			close(cmd->fd[1]);
-			exit(126);
-        }
-        else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
-            return (close(cmd->fd[0]), close(cmd->fd[1]), 0);
-    }
-    free(pipex->middle_cmd_path);
-    free_tab(pipex->paths);
-    free_all(data);
-    free_pid(pids);
+    if (builtins_pipe(cmd->args[0], data, cmd) == 0)
+        no_builtins(cmd, pipex, data, pids);
+    free_no_buil(cmd, pipex, data, pids);
     exit(data->exit_status);
 }
 

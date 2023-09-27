@@ -6,29 +6,11 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:47:13 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/26 14:06:23 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:37:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-// char	*get_info_cmd(cmd_line *beg_cmd, t_type type)
-// {
-// 	token		*beg_token;
-
-// 	if (!beg_cmd)
-// 		return (NULL);
-// 	beg_token = beg_cmd->token;
-// 	if (!beg_token)
-// 		return (NULL);
-// 	while (beg_token)
-// 	{
-// 		if (beg_token->type == type)
-// 			return (beg_token->word);
-// 		beg_token = beg_token->next;
-// 	}
-// 	return (NULL);
-// }
 
 void	error_file(t_file *in, s_data *data)
 {

@@ -6,29 +6,29 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 11:10:14 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:10:13 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	display_file(s_data *data)
-{
-	cmd_line	*cmd;
-	t_file		*out;
+// void	display_file(s_data *data)
+// {
+// 	cmd_line	*cmd;
+// 	t_file		*out;
 
-	cmd = data->cmd;
-	while (cmd)
-	{
-		out = cmd->infile;
-		while (out)
-		{
-			dprintf(1, "fd = %d    r_no = %d\n", out->fd, out->r_no);
-			out = out->next;
-		}
-		cmd = cmd->next;
-	}
-}
+// 	cmd = data->cmd;
+// 	while (cmd)
+// 	{
+// 		out = cmd->infile;
+// 		while (out)
+// 		{
+// 			dprintf(1, "fd = %d    r_no = %d\n", out->fd, out->r_no);
+// 			out = out->next;
+// 		}
+// 		cmd = cmd->next;
+// 	}
+// }
 
 void	ft_lstadd_back_file(t_file **lst, t_file *new)
 {

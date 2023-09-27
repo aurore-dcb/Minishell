@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:24:56 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:05:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:08:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int	error_syntax_alone(cmd_line **list)
 	}
 	if (token->word[0] == '<' || token->word[0] == '>')
 		return (1);
-	if (token->word[0] == '.' && ft_strlen(token->word) == 1)
-		return (2);
 	return (0);
 }
 

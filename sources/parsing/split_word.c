@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_word.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/21 12:13:47 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:09:41 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,28 +67,28 @@ void	get_type(token *lst)
 	}
 }
 
-int	add_word(cmd_line *list)
+int    add_word(cmd_line *list)
 {
-	int		i;
-	int		start;
-	token	*new;
+    int        i;
+    int        start;
+    token    *new;
 
-	i = 0;
-	start = 0;
-	list->token = NULL;
-	while (list->cmd[i])
-	{
-		while (list->cmd[i] == ' ' && list->cmd[i])
-			i++;
-		start = i;
-		i = get_end_word(list->cmd, i);
-		new = ft_lstnew_token(list, start, i);
-		if (!new)
-			return (0);
-		ft_lstadd_back_token(&list->token, new);
-	}
-	get_type(list->token);
-	return (1);
+    i = 0;
+    start = 0;
+    list->token = NULL;
+    while (list->cmd[i])
+    {
+        while (is_spaces(list->cmd[i]) && list->cmd[i])
+            i++;
+        start = i;
+        i = get_end_word(list->cmd, i);
+        new = ft_lstnew_token(list, start, i);
+        if (!new)
+            return (0);
+        ft_lstadd_back_token(&list->token, new);
+    }
+    get_type(list->token);
+    return (1);
 }
 
 int	split_word(cmd_line *list)

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/20 14:24:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:36:02 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,22 @@ int	nb_mots_cmd(char *str)
 		if (*str == 34 || *str == 39)
 		{
 			q = *str++;
+			i++;
 			while (*str && *str != q)
+			{
 				str++;
+				i++;
+			}
 			str++;
+			i++;
 		}
 		if (*str && *str == '|')
 			mots++;
 		if (*str)
+		{
+			i++;
 			str++;
+		}
 	}
 	return (mots);
 }

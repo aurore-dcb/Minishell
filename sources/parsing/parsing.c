@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 09:05:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:08:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int	is_meta(char c)
 {
 	return (c == '<' || c == '>' || c == '|');
+}
+
+int    is_spaces(char c)
+{
+    if ((c >= 9 && c <= 13) || c == ' ')
+        return (1);
+    return (0);
 }
 
 int	expansion(s_data *data)

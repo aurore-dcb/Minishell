@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 14:06:57 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:07:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_env(t_env *env);
 void	free_pid(t_pid **pids);
 // frees2.c
 void	free_elem_env(t_env *list);
+void    free_no_buil(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 // void	free_outfile(t_outfile **outfiles);
 void	wait_fct(t_pid **pids, s_data *data);
 // main.c
@@ -48,6 +49,7 @@ void	add_outfiles(cmd_line *cmd);
 int		loop_process(s_data *data, t_pid **pids, pipex *pipex);
 int		ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data);
 int		ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
+void    no_builtins(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids);
 void	error_file_exec(char *cmd, s_data *data, int error);
 int		ft_lstsize(t_env *lst);
 char	**list_to_tab(t_env **envp);

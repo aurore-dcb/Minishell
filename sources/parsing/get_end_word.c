@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:06:50 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:06:04 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:08:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,30 @@ char	is_quote(char c)
 	return (0);
 }
 
-int	get_end_word(char *cmd, int i)
+int    get_end_word(char *cmd, int i)
 {
-	int		tmp;
+    int        tmp;
 
-	tmp = end_except(cmd, i);
-	if (tmp != i)
-		return (tmp);
-	while (cmd[tmp])
-	{
-		if (cmd[tmp] == 39)
-		{
-			tmp++;
-			while (cmd[tmp] && cmd[tmp] != 39)
-				tmp++;
-		}
-		else if (cmd[tmp] == 34)
-		{
-			tmp++;
-			while (cmd[tmp] && cmd[tmp] != 34)
-				tmp++;
-		}
-		else if (cmd[tmp] == ' ' || cmd[tmp] == '<' || cmd[tmp] == '>')
-			return (tmp);
-		tmp++;
-	}
-	return (tmp);
+    tmp = end_except(cmd, i);
+    if (tmp != i)
+        return (tmp);
+    while (cmd[tmp])
+    {
+        if (cmd[tmp] == 39)
+        {
+            tmp++;
+            while (cmd[tmp] && cmd[tmp] != 39)
+                tmp++;
+        }
+        else if (cmd[tmp] == 34)
+        {
+            tmp++;
+            while (cmd[tmp] && cmd[tmp] != 34)
+                tmp++;
+        }
+        else if (is_spaces(cmd[tmp]) || cmd[tmp] == '<' || cmd[tmp] == '>')
+            return (tmp);
+        tmp++;
+    }
+    return (tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 09:15:02 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/27 11:37:30 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,10 @@ char	*ft_expand(char *word, s_data *data, token **token)
 		return (NULL);
 	trim = trim_isspace(word, " ");
 	len_malloc = count_char(trim, data, token);
-	// printf("len malloc = %d\n", len_malloc);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (free(trim), NULL);
 	res = apply_expand(res, trim, data, token);
-	// printf("res = %s\n", res);
 	free(trim);
 	free(word);
 	return (res);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_special.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:09:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 15:10:50 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/27 10:43:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ token	*ft_lstnew_token_special(char *var, token *current)
     elem->word = ft_substr(var, 0, ft_strlen_expand(var));
     elem->next = current->next;
     elem->previous = current;
-    elem->type = 1; // a changer par la suite 
+    elem->type = 1;
     current->next = elem;
     return (elem);
 }
@@ -40,14 +40,17 @@ token	*ft_lstnew_token_special(char *var, token *current)
 void	new_words(char *var, s_data *data, token **maillon)
 {
 	token *new;
+	token *curr;
     (void)data;
     new = NULL;
-    while (*var != '\0')
+	curr = *maillon;
+    while (*var && *var != '\0')
 	{
 		if (*var == ' ')
 		{
 			var++;
-            new = ft_lstnew_token_special(var, *maillon);
+            new = ft_lstnew_token_special(var, curr);
+			curr = curr->next;
 		}
         var++;
 		while (*var && *var != ' ')
