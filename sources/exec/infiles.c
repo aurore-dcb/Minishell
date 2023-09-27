@@ -3,34 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   infiles.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 11:10:13 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:28:30 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-// void	display_file(s_data *data)
-// {
-// 	cmd_line	*cmd;
-// 	t_file		*out;
-
-// 	cmd = data->cmd;
-// 	while (cmd)
-// 	{
-// 		out = cmd->infile;
-// 		while (out)
-// 		{
-// 			dprintf(1, "fd = %d    r_no = %d\n", out->fd, out->r_no);
-// 			out = out->next;
-// 		}
-// 		cmd = cmd->next;
-// 	}
-// }
-
-void	ft_lstadd_back_file(t_file **lst, t_file *new)
+void	ft_lstadd_file(t_file **lst, t_file *new)
 {
 	t_file	*list;
 
@@ -84,7 +66,7 @@ void	add_infiles(cmd_line *cmd)
 			fd = open(beg_token->word, O_RDONLY);
 			r_no = errno;
 			new = ft_lstnew_file(fd, r_no, beg_token->word);
-			ft_lstadd_back_file(&cmd->infile, new);
+			ft_lstadd_file(&cmd->infile, new);
 		}
 		if (r_no != 0)
 			return ;
@@ -107,6 +89,5 @@ int	open_files(s_data *data)
 		add_outfiles(beg_cmd);
 		beg_cmd = beg_cmd->next;
 	}
-	// display_file(data);
 	return (1);
 }

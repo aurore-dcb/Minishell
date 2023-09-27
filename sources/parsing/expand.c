@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 11:37:30 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:31:04 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,6 @@ char	*ft_strcpy(char *dst, char *src, int dstsize)
 	if (i < dstsize)
 		dst[i] = '\0';
 	return (dst);
-}
-
-char	*ft_trim(char *s, int len)
-{
-	int		i;
-	char	*res;
-
-	i = 0;
-	while (*s && i < len)
-	{
-		++s;
-		i++;
-	}
-	res = ft_substr(s, 0, ft_strlen(s));
-	return (res);
 }
 
 int	count_char(char *s, s_data *data, token **token)
@@ -80,21 +65,14 @@ char	*apply_expand(char *res, char *word, s_data *data, token **token)
 	{
 		if (*word == 39)
 			i = between_simple(res, &word, i);
-		else if (*word == 34)
-		{
-			if ((*token)->type != LIMITOR)
+		else if (*word == 34 && (*token)->type != LIMITOR)
 				i = between_double(res, &word, data, i);
-		}
-		else if (*word == '$' && *(word + 1) && *(word + 1) != ' ' && *(word
-					+ 1) != '/')
+		else if (*word == '$' && *(word + 1)
+			&& *(word + 1) != ' ' && *(word + 1) != '/'
+			&& (*token)->type != LIMITOR)
 		{
-			if ((*token)->type != LIMITOR)
-			{
-				i = out_of_quotes(res, &word, data, i);
-				word = word + len_var_env(word) - 1;
-			}
-			else
-				res[i++] = *word;
+			i = out_of_quotes(res, &word, data, i);
+			word = word + len_var_env(word) - 1;
 		}
 		else
 			res[i++] = *word;

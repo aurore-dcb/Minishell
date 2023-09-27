@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 11:37:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:40:00 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,38 +20,32 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 	tmp = data->cmd;
 	while (tmp)
 	{
-		if (is_here_doc(tmp))
-		{
-			if (!ft_here_doc(tmp, pipex, data, pids))
-			{
-				data->exit_status = 1;
-				return (unlink(".here_doc"), 0);
-			}
-		}
-		else
-		{
-			if (builtins_no_pipe(tmp, data))
-				return (1);
-			pipex->middle_cmd_path = find_path(pipex->paths, tmp->args[0]);
-			if (!ft_process(pipex, pids, tmp, data))
-				return (free(pipex->middle_cmd_path), 0);
-			free(pipex->middle_cmd_path);
-		}
+		if (!handle_hd(data, pids, pipex, tmp))
+			return (0);
 		tmp = tmp->next;
 	}
 	return (1);
 }
 
+void	ft_parent(t_pid **pids, pid_t pid, cmd_line *cmd, t_file *last_in)
+{
+	ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
+	if (cmd->fd[1] > 2)
+		close(cmd->fd[1]);
+	if (cmd->infile && last_in->fd > 2)
+		close(last_in->fd);
+}
+
 int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 {
 	pid_t	pid;
-	t_file *last_in;
+	t_file	*last_in;
 
 	last_in = NULL;
 	if (!cmd || (cmd->next && pipe(cmd->fd) == -1))
 		return (0);
 	if (cmd->next && cmd->next->infile == NULL)
-		ft_lstadd_back_file(&cmd->next->infile, ft_lstnew_file(cmd->fd[0], 0, ""));
+		ft_lstadd_file(&cmd->next->infile, ft_lstnew_file(cmd->fd[0], 0, ""));
 	else if (cmd->next && cmd->next->infile != NULL)
 		close(cmd->fd[0]);
 	last_in = ft_lstlast_file(cmd->infile);
@@ -64,48 +58,31 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 			return (0);
 	}
 	else
-	{
-		ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
-		if (cmd->fd[1] > 2)
-			close(cmd->fd[1]);
-		if (cmd->infile && last_in->fd > 2)
-			close(last_in->fd);
-	}
+		ft_parent(pids, pid, cmd, last_in);
 	return (1);
 }
 
-// void redirections()
-void    no_builtins(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
+void	no_builtins(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
-    char    **tab;
-
-    tab = NULL;
-    if (!pipex->middle_cmd_path)
-    {
-        error_cmd(cmd, data);
-        free_no_buil(cmd, pipex, data, pids);
-        exit(127);
-    }
-    if (ft_strcmp(pipex->middle_cmd_path, ".") == 0)
-    {
-        tab = new_tab(cmd->args, get_len_tab(cmd->args));
-        if (execve(cmd->args[1], tab, data->tab_env) == -1)
-            error_file_exec(cmd->args[1], data, errno);
-        free_tab(tab);
-        free_no_buil(cmd, pipex, data, pids);
-        exit(126);
-    }
-    else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
-    {
-        free_no_buil(cmd, pipex, data, pids);
-        exit(127);
-    }
+	if (!pipex->middle_cmd_path)
+	{
+		error_cmd(cmd, data);
+		free_no_buil(cmd, pipex, data, pids);
+		exit(127);
+	}
+	if (ft_strcmp(pipex->middle_cmd_path, ".") == 0)
+		handle_point(cmd, pipex, data, pids);
+	else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
+	{
+		free_no_buil(cmd, pipex, data, pids);
+		exit(127);
+	}
 }
 
 int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 {
-	t_file *last_in;
-	t_file *last_out;
+	t_file	*last_in;
+	t_file	*last_out;
 
 	last_in = ft_lstlast_file(cmd->infile);
 	last_out = ft_lstlast_file(cmd->outfile);
@@ -119,85 +96,14 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 		error_file(last_out, data);
 		exit (data->exit_status);
 	}
-	if (last_in && last_in->fd > 2)
-	{
-		dup2(last_in->fd, STDIN_FILENO);
-		close(last_in->fd);
-	}
-	if (last_out && last_out->fd > 2)
-	{
-		dup2(last_out->fd, STDOUT_FILENO);
-		close(last_out->fd);
-	}
-	else if (cmd->next)
-	{
-		dup2(cmd->fd[1], STDOUT_FILENO);
-		close(cmd->fd[1]);
-	}
+	do_dup(cmd, last_in, last_out);
 	if (cmd->next)
 	{
 		close(cmd->fd[0]);
 		close(cmd->fd[1]);
 	}
-    if (builtins_pipe(cmd->args[0], data, cmd) == 0)
-        no_builtins(cmd, pipex, data, pids);
-    free_no_buil(cmd, pipex, data, pids);
-    exit(data->exit_status);
-}
-
-void    error_file_exec(char *cmd, s_data *data, int error)
-{
-    data->exit_status = 1;
-    ft_putstr_fd("bash: ", 2);
-    ft_putstr_fd(cmd, 2);
-    if (error == 13)
-        ft_putstr_fd(": Permission denied\n", 2);
-    else
-        ft_putstr_fd(": No such file or directory\n", 2);
-}
-
-int	ft_lstsize(t_env *lst)
-{
-	int	i;
-
-	i = 0;
-	while (lst)
-	{
-		i++;
-		lst = lst->next;
-	}
-	return (i);
-}
-
-char	**list_to_tab(t_env **envp)
-{
-	int		i;
-	t_env	*tmp;
-	char	**tab;
-	char	*ctmp;
-
-	tmp = *envp;
-	if (!tmp)
-		return (0);
-	tab = malloc(sizeof(char *) * (ft_lstsize(*envp) + 1));
-	if (!tab)
-		return (0);
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->data)
-		{
-			ctmp = ft_strjoin(tmp->key, "=");
-			tab[i] = ft_strjoin(ctmp, tmp->data);
-			free(ctmp);
-		}
-		else
-			tab[i] = ft_strdup("");
-		if (!tab[i])
-			return (0);
-		i++;
-		tmp = tmp->next;
-	}
-	tab[i] = NULL;
-	return (tab);
+	if (builtins_pipe(cmd->args[0], data, cmd) == 0)
+		no_builtins(cmd, pipex, data, pids);
+	free_no_buil(cmd, pipex, data, pids);
+	exit(data->exit_status);
 }

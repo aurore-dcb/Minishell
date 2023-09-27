@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:29:40 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/12 16:57:48 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:20:22 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,32 @@ t_env	*ft_lstnew_env_equal(char *data)
 	elem->next = NULL;
 	free_tab(split_res);
 	return (elem);
+}
+
+int	ft_lstsize(t_env *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+
+int	len_var_env(char *s)
+{
+	int	len;
+
+	len = 0;
+	if (*s == '?')
+		return (1);
+	while (*s && (*s == '_' || ft_isalnum(*s)))
+	{
+		len++;
+		s++;
+	}
+	return (len);
 }

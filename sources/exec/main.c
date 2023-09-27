@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 09:14:18 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/27 14:53:08 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,21 @@ void	initialize(s_data *data)
 	data->tab_env = NULL;
 }
 
-char    *prompt(void)
+char	*prompt(void)
 {
-    char    *input;
-    char    *line;
+	char	*input;
+	char	*line;
 
-    set_signals(1);
-    if (isatty(STDIN_FILENO))
-        input = readline("minishell$ ");
-    else
-    {
-        line = get_next_line(STDIN_FILENO);
-        input = ft_strtrim(line, "\n");
-        free(line);
-    }
-    return (input);
+	set_signals(1);
+	if (isatty(STDIN_FILENO))
+		input = readline("minishell$ ");
+	else
+	{
+		line = get_next_line(STDIN_FILENO);
+		input = ft_strtrim(line, "\n");
+		free(line);
+	}
+	return (input);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -84,7 +84,6 @@ int	main(int argc, char **argv, char **env)
 	handle_shlevel(&data);
 	while (1)
 	{
-		// set_signals(1);
 		initialize(&data);
 		data.input = prompt();
 		if (data.input)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 11:09:05 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:20:52 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,25 @@ int			error_syntax_alone(cmd_line **list);
 int			error_pipe_token(char *input);
 // expand.c
 char		*ft_strcpy(char *dst, char *src, int dstsize);
-char		*ft_trim(char *s, int len);
 int			count_char(char *s, s_data *data, token **token);
 char		*apply_expand(char *res, char *word, s_data *data, token **token);
 char		*ft_expand(char *word, s_data *data, token **token);
 // expand_count.c
 char		*existing_var(char *var, s_data *data, t_type type);
-int			len_var_env(char *s);
 int			find_variable(char *s, s_data *data, token **token);
-int			find_variable_special(char **s, s_data *data, token **token);
 int			count_between_simple(char **s);
 int			count_between_double(char **s, s_data *data, token **token);
 // expand_apply.c
 int			between_simple(char *res, char **word, int i);
 int			between_double(char *res, char **word, s_data *data, int i);
 int			out_of_quotes(char *res, char **word, s_data *data, int i);
+char		*ft_trim(char *s, int len);
 // expand_special.c
 int			ft_strlen_expand(char *var);
-void		new_words(char *var, s_data *data, token **token);
+void		new_words(char *var, token **token);
+int			do_find(token **token, char *res, char *trim);
+int			find_variable_special(char **s, s_data *data, token **token);
+token		*ft_lstnew_token_special(char *var, token *current);
 // split_word.c
 void		ft_strcpy_pos(char *dst, char *src, int start, int end);
 t_type		get_type_meta(char *word);
@@ -75,5 +76,6 @@ int			parse_env(char **env, s_data *data);
 t_env		*ft_lstnew_env(char *data);
 t_env		*ft_lstnew_env_no_equal(char *data);
 t_env		*ft_lstnew_env_equal(char *data);
-
+int			ft_lstsize(t_env *lst);
+int			len_var_env(char *s);
 #endif

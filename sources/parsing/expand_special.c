@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_special.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:09:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 10:43:23 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 17:08:27 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,42 @@ int	ft_strlen_expand(char *var)
 	return (i);
 }
 
+int	do_find(token **token, char *res, char *trim)
+{
+	int		n;
+
+	n = ft_strlen_expand(res);
+	if (n != ft_strlen(res))
+	{
+		trim = ft_trim(res, ft_strlen_expand(res));
+		new_words(trim, token);
+		free(trim);
+	}
+	free(res);
+	return (n);
+}
+
+int	find_variable_special(char **s, s_data *data, token **token)
+{
+	char	*cpy;
+	char	*res;
+	char	*trim;
+
+	trim = NULL;
+	if (**s == '?')
+		return (size_nb(data->exit_status));
+	cpy = malloc(sizeof(char) * (len_var_env(*s) + 1));
+	if (!cpy)
+		return (0);
+	cpy = ft_strcpy(cpy, *s, len_var_env(*s) + 1);
+	res = existing_var(cpy, data, (*token)->type);
+	if (cpy != NULL)
+		free(cpy);
+	if (res)
+		return (do_find(token, res, trim));
+	return (0);
+}
+
 token	*ft_lstnew_token_special(char *var, token *current)
 {
 	token	*elem;
@@ -29,30 +65,30 @@ token	*ft_lstnew_token_special(char *var, token *current)
 	elem = malloc(sizeof(token));
 	if (!elem)
 		return (NULL);
-    elem->word = ft_substr(var, 0, ft_strlen_expand(var));
-    elem->next = current->next;
-    elem->previous = current;
-    elem->type = 1;
-    current->next = elem;
-    return (elem);
+	elem->word = ft_substr(var, 0, ft_strlen_expand(var));
+	elem->next = current->next;
+	elem->previous = current;
+	elem->type = 1;
+	current->next = elem;
+	return (elem);
 }
 
-void	new_words(char *var, s_data *data, token **maillon)
+void	new_words(char *var, token **link)
 {
-	token *new;
-	token *curr;
-    (void)data;
-    new = NULL;
-	curr = *maillon;
-    while (*var && *var != '\0')
+	token	*new;
+	token	*curr;
+
+	new = NULL;
+	curr = *link;
+	while (*var && *var != '\0')
 	{
 		if (*var == ' ')
 		{
 			var++;
-            new = ft_lstnew_token_special(var, curr);
+			new = ft_lstnew_token_special(var, curr);
 			curr = curr->next;
 		}
-        var++;
+		var++;
 		while (*var && *var != ' ')
 			var++;
 	}

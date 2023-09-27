@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:47:13 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/27 11:37:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:20:43 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,15 @@ void	error_token(s_data *data, char c)
 	ft_putstr_fd("bash: syntax error near unexpected token `", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd("'\n", 2);
+}
+
+void	error_file_exec(char *cmd, s_data *data, int error)
+{
+	data->exit_status = 1;
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(cmd, 2);
+	if (error == 13)
+		ft_putstr_fd(": Permission denied\n", 2);
+	else
+		ft_putstr_fd(": No such file or directory\n", 2);
 }

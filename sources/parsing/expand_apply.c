@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_apply.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 08:40:36 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 16:52:56 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	out_of_quotes(char *res, char **word, s_data *data, int i)
 	return (i);
 }
 
-int apply_out_quotes(char *res, char **word, s_data *data, int i)
+int	apply_out_quotes(char *res, char **word, s_data *data, int i)
 {
-	int j;
-	char *cpy;
-	char *var;
+	int		j;
+	char	*cpy;
+	char	*var;
 
 	j = 0;
 	(*word)++;
@@ -66,14 +66,14 @@ int apply_out_quotes(char *res, char **word, s_data *data, int i)
 		return (0);
 	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
 	if (**word == '?')
-        var = ft_itoa(data->exit_status);
-    else
-        var = existing_var(cpy, data, 1);
-    while (var && var[j])
-        res[i++] = var[j++];
-    free(var);
+		var = ft_itoa(data->exit_status);
+	else
+		var = existing_var(cpy, data, 1);
+	while (var && var[j])
+		res[i++] = var[j++];
+	free(var);
 	free(cpy);
-    return (i);	
+	return (i);
 }
 
 int	between_double(char *res, char **word, s_data *data, int i)
@@ -81,14 +81,30 @@ int	between_double(char *res, char **word, s_data *data, int i)
 	(*word)++;
 	while (*(*word) && *(*word) != 34)
 	{
-		if (**word == '$' && *(*word + 1) && *(*word + 1) != 34 && *(*word + 1) != ' ' && *(*word + 1) != '/')
+		if (**word == '$' && *(*word + 1) && *(*word + 1) != 34
+			&& *(*word + 1) != ' ' && *(*word + 1) != '/')
 		{
 			i = apply_out_quotes(res, word, data, i);
-			(*word) = (*word) + len_var_env(*word) - 1;			
+			(*word) = (*word) + len_var_env(*word) - 1;
 		}
 		else
 			res[i++] = *(*word);
 		(*word)++;
 	}
 	return (i);
+}
+
+char	*ft_trim(char *s, int len)
+{
+	int		i;
+	char	*res;
+
+	i = 0;
+	while (*s && i < len)
+	{
+		++s;
+		i++;
+	}
+	res = ft_substr(s, 0, ft_strlen(s));
+	return (res);
 }

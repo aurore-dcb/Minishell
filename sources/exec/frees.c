@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 11:10:50 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 15:50:31 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,8 @@ void	free_list(cmd_line *begin)
 		begin = begin->next;
 		if (current->infile)
 			free_cmd_in(current->infile);
-			// free list de infile
 		if (current->outfile)
 			free_cmd_in(current->outfile);
-		// 	close(current->in);
-		// if (current->out > 2)
-		// 	close(current->out);
 		if (current->cmd)
 			free(current->cmd);
 		if (current->args)
@@ -89,18 +85,6 @@ void	free_all(s_data *data)
 		free_env(data->envex);
 	if (data->tab_env)
 		free_tab(data->tab_env);
-}
-
-void	free_pid(t_pid **pids)
-{
-	t_pid	*tmp;
-
-	while (*pids)
-	{
-		tmp = *pids;
-		*pids = (*pids)->next;
-		free(tmp);
-	}
 }
 
 void	wait_fct(t_pid **pids, s_data *data)

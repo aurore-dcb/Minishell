@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sig.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:06 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/26 16:58:29 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 14:29:40 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	set_signals(int sig)
 	}
 	if (sig == 4)
 	{
-		signal(SIGINT, SIG_IGN);		
+		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }
