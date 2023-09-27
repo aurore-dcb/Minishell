@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/26 16:59:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 09:54:43 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ int    builtin_export(s_data *data)
         i = 1;
         while (args[i])
         {
-            if (ft_strlen(args[i]) == 1 && args[i][0] != '_')
+            if (!(args[i][0] == '_' && args[i][1] == '='))
             {
-                if (!do_export(data, i, args))
-                {
-                    data->exit_status = 1;
-                    return (EXIT_FAILURE);
-                }
+				if (!do_export(data, i, args))
+				{
+					data->exit_status = 1;
+					return (EXIT_FAILURE);
+				}
             }
             i++;
         }

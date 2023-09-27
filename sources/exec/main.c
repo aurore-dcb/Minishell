@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 17:02:24 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/27 09:14:18 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,22 @@ void	initialize(s_data *data)
 	data->tab_env = NULL;
 }
 
-// char    *prompt(void)
-// {
-//     char    *input;
-//     char    *line;
+char    *prompt(void)
+{
+    char    *input;
+    char    *line;
 
-//     set_signals(1);
-//     if (isatty(STDIN_FILENO))
-//         input = readline("minishell$ ");
-//     else
-//     {
-//         line = get_next_line(STDIN_FILENO);
-//         input = ft_strtrim(line, "\n");
-//         free(line);
-//     }
-//     return (input);
-// }
+    set_signals(1);
+    if (isatty(STDIN_FILENO))
+        input = readline("minishell$ ");
+    else
+    {
+        line = get_next_line(STDIN_FILENO);
+        input = ft_strtrim(line, "\n");
+        free(line);
+    }
+    return (input);
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -84,9 +84,9 @@ int	main(int argc, char **argv, char **env)
 	handle_shlevel(&data);
 	while (1)
 	{
-		set_signals(1);
+		// set_signals(1);
 		initialize(&data);
-		data.input = readline("minishell$ ");
+		data.input = prompt();
 		if (data.input)
 		{
 			if (data.input[0])
