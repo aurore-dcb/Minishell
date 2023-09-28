@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:04:15 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int		change_oldpwd(t_data *data, char *ret);
 int		error_path(t_cmd_line *cmd, t_data *data);
 void	error_message(t_data *data);
 int		builtin_env(t_data *data);
-int		add_two_env(t_env *env, char *args, int to_equal);
+int		add_to_envp(char *args, int to_equal, t_data *data);
+int		add_to_envex(char *args, int to_equal, t_data *data);
 int		add_no_equal(t_env *env, char *args);
 int		handle_equal(t_data *data, int i, char **args, int ret_inv);
 int		do_export(t_data *data, int i, char **args);

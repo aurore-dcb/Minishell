@@ -6,49 +6,34 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:56:23 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:32:45 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	nb_between_quotes(char **str, int i)
-{
-	char	q;
-
-	i = 0;
-	q = *(*str)++;
-	i++;
-	while (**str && **str != q)
-	{
-		(*str)++;
-		i++;
-	}
-	(*str)++;
-	i++;
-	return (i);
-}
-
 int	nb_mots_cmd(char *str)
 {
-	int	mots;
-	int	i;
+	char	q;
+	int		mots;
 
 	mots = 1;
-	i = 0;
 	if (!str)
 		return (0);
 	while (*str != '\0')
 	{
 		if (*str == 34 || *str == 39)
-			i = nb_between_quotes(&str, i);
-		if (*str && *str == '|')
-			mots++;
-		if (*str)
 		{
-			i++;
+			q = *str;
+			str++;
+			while (*str && *str != q)
+				str++;
 			str++;
 		}
+		if (*str && *str == '|')
+			mots++;
+		if (*str && *str != 34 && *str != 39)
+			str++;
 	}
 	return (mots);
 }
@@ -73,7 +58,8 @@ int	nb_lettre_cmd(char *s)
 		}
 		if (s[i] && s[i] == '|')
 			return (i);
-		i++;
+		else if (s[i] && s[i] != 34 && s[i] != 39)
+			i++;
 	}
 	return (i);
 }
@@ -98,7 +84,7 @@ void	split2_pipe(char **input, t_cmd_line **cmd)
 				return ;
 			begin->cmd[j++] = *(*input)++;
 		}
-		if (*(*input) && *(*input) != '|')
+		if (*(*input) && *(*input) != '|' && *(*input) != 34 && *(*input) != 39)
 			begin->cmd[j++] = *(*input)++;
 	}
 	begin->cmd[j] = '\0';

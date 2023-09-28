@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 09:32:42 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:25:32 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:18:49 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	**get_paths(t_env **envp)
 				return (0);
 			paths = ft_split(lign, ':');
 			free(lign);
+			if (paths == NULL)
+				return (0);
 			return (paths);
 		}
 		begin = begin->next;

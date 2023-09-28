@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:34:40 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ char	*ft_expand(char *word, t_data *data, t_token **token)
 	if (!word)
 		return (NULL);
 	trim = trim_isspace(word, " ");
+	if (!trim)
+		return (NULL);
 	len_malloc = count_char(trim, data, token);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)

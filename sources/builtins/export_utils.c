@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:17:07 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 10:28:22 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 13:28:07 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,17 @@ void	print_sorted_env(t_env *envex)
 	t_env	*begin;
 
 	begin = envex;
-	tmp = ft_sort_list(begin);
-	while (tmp)
+	if (begin)
 	{
-		if (tmp->data)
-			printf("export %s=\"%s\"\n", tmp->key, tmp->data);
-		else
-			printf("export %s\n", tmp->key);
-		tmp = tmp->next;
+		tmp = ft_sort_list(begin);
+		while (tmp)
+		{
+			if (tmp->data)
+				printf("export %s=\"%s\"\n", tmp->key, tmp->data);
+			else
+				printf("export %s\n", tmp->key);
+			tmp = tmp->next;
+		}
 	}
 }
 

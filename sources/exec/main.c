@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:26:38 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char	*prompt(void)
 		line = get_next_line(STDIN_FILENO);
 		input = ft_strtrim(line, "\n");
 		free(line);
+		// get_next_line(STDIN_FILENO);
 	}
 	return (input);
 }
@@ -66,6 +67,7 @@ int	main(int argc, char **argv, char **env)
 				else
 					data.exit_status = 2;
 			}
+			free(data.input);
 		}
 		else
 		{

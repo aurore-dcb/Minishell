@@ -6,13 +6,13 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:32:37 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	add_two_env(t_env *env, char *args, int to_equal)
+int	add_to_envp(char *args, int to_equal, t_data *data)
 {
 	t_env	*new;
 
@@ -24,15 +24,39 @@ int	add_two_env(t_env *env, char *args, int to_equal)
 		return (0);
 	if (to_equal == 2)
 		del_plus(new->key, '+');
-	if (in_env(env, new->key) && to_equal == 2)
+	if (in_env(data->envp, new->key) && to_equal == 2)
 	{
-		ft_lstjoin_env(&env, new);
+		ft_lstjoin_env(&data->envp, new);
 		free_env(new);
 	}
-	else if (in_env(env, new->key))
-		ft_lstreplace_env(&env, new);
+	else if (in_env(data->envp, new->key))
+		ft_lstreplace_env(&data->envp, new);
 	else
-		ft_lstadd_back_env(&env, new);
+		ft_lstadd_back_env(&data->envp, new);
+	return (1);
+}
+
+int	add_to_envex(char *args, int to_equal, t_data *data)
+{
+	t_env	*new;
+
+	if (to_equal >= 1)
+		new = ft_lstnew_env_equal(args);
+	else
+		new = ft_lstnew_env(args);
+	if (!new)
+		return (0);
+	if (to_equal == 2)
+		del_plus(new->key, '+');
+	if (in_env(data->envex, new->key) && to_equal == 2)
+	{
+		ft_lstjoin_env(&data->envex, new);
+		free_env(new);
+	}
+	else if (in_env(data->envex, new->key))
+		ft_lstreplace_env(&data->envex, new);
+	else
+		ft_lstadd_back_env(&data->envex, new);
 	return (1);
 }
 
@@ -54,16 +78,16 @@ int	handle_equal(t_data *data, int i, char **args, int ret_inv)
 {
 	if (ret_inv == 2)
 	{
-		if (!add_two_env(data->envex, args[i], 2))
+		if (!add_to_envex(args[i], 2, data))
 			return (0);
-		if (!add_two_env(data->envp, args[i], 2))
+		if (!add_to_envp(args[i], 2, data))
 			return (0);
 	}
 	else
 	{
-		if (!add_two_env(data->envex, args[i], 1))
+		if (!add_to_envex(args[i], 1, data))
 			return (0);
-		if (!add_two_env(data->envp, args[i], 0))
+		if (!add_to_envp(args[i], 0, data))
 			return (0);
 	}
 	return (1);

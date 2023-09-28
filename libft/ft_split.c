@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:35:50 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/22 14:11:55 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:18:11 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	nb_lettre(const char *s, char c)
 
 char	**error(char **res, int i)
 {
-	while (i < 0)
+	while (i > 0)
 	{
 		free(res[i]);
 		i--;
@@ -72,7 +72,7 @@ char	**ft_split(const char *str, char c)
 			str++;
 		tab[i] = malloc(sizeof(char) * nb_lettre(str, c) + 1);
 		if (!tab[i])
-			return (error(tab, i));
+			return (error(tab, i), NULL);
 		j = 0;
 		while (*str && *str != c)
 			tab[i][j++] = *str++;
