@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 14:53:08 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 08:46:17 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	display_token(cmd_line *list)
 
 void	initialize(s_data *data)
 {
+	g_flag = 0;
 	data->etat.simple = 0;
 	data->etat.doubl = 0;
 	data->cmd = NULL;
