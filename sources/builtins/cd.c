@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 10:22:45 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	search_path(t_env *envp, char *str)
 	return (ret);
 }
 
-void	print_oldpwd(s_data *data, int ret)
+void	print_oldpwd(t_data *data, int ret)
 {
 	t_env	*tmp_env;
 
@@ -58,24 +58,24 @@ void	print_oldpwd(s_data *data, int ret)
 	}
 }
 
-int	builtin_cd(s_data *data)
+int	builtin_cd(t_cmd_line *cmd, t_data *data)
 {
 	int		ret;
 	char	*res;
 
-	if (get_len_tab(data->cmd->args) > 2)
+	if (get_len_tab(cmd->args) > 2)
 		return (error_message(data), EXIT_FAILURE);
-	if (!data->cmd->args[1] || ft_strncmp(data->cmd->args[1], "~", 1) == 0
-		|| ft_strncmp(data->cmd->args[1], "--", 2) == 0)
+	if (!cmd->args[1] || ft_strncmp(cmd->args[1], "~", 1) == 0
+		|| ft_strncmp(cmd->args[1], "--", 2) == 0)
 		ret = search_path(data->envp, "HOME");
-	else if (ft_strncmp(data->cmd->args[1], "-", 1) == 0
-		&& ft_strlen(data->cmd->args[1]) == 1)
+	else if (ft_strncmp(cmd->args[1], "-", 1) == 0
+		&& ft_strlen(cmd->args[1]) == 1)
 	{
 		ret = search_path(data->envp, "OLDPWD");
 		print_oldpwd(data, ret);
 	}
 	else
-		ret = error_path(data);
+		ret = error_path(cmd, data);
 	if (ret != 0)
 		return (EXIT_FAILURE);
 	res = change_pwd(data);

@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 17:20:04 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_copy(t_env *begin, t_type type, char *var)
 	return (res);
 }
 
-char	*existing_var(char *var, s_data *data, t_type type)
+char	*existing_var(char *var, t_data *data, t_type type)
 {
 	t_env	*begin;
 	char	*res;
@@ -70,7 +70,7 @@ int	count_between_simple(char **s)
 	return (n);
 }
 
-int	find_variable(char *s, s_data *data, token **token)
+int	find_variable(char *s, t_data *data, t_token **token)
 {
 	int		n;
 	char	*cpy;
@@ -89,7 +89,7 @@ int	find_variable(char *s, s_data *data, token **token)
 	return (n);
 }
 
-int	count_between_double(char **s, s_data *data, token **token)
+int	count_between_double(char **s, t_data *data, t_token **token)
 {
 	int	n;
 

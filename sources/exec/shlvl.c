@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   shlvl.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:28:45 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 15:25:45 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	get_shlvl(s_data *data)
+int	get_shlvl(t_data *data)
 {
 	t_env	*tmp_env;
 	int		ret;
@@ -27,7 +27,7 @@ int	get_shlvl(s_data *data)
 	return (ret);
 }
 
-int	is_shlvl(s_data *data)
+int	is_shlvl(t_data *data)
 {
 	t_env	*tmp_env;
 
@@ -41,7 +41,7 @@ int	is_shlvl(s_data *data)
 	return (0);
 }
 
-char	*get_shvalue(s_data *data)
+char	*get_shvalue(t_data *data)
 {
 	int	old_shlevel;
 
@@ -58,7 +58,7 @@ char	*get_shvalue(s_data *data)
 	return (ft_itoa(old_shlevel));
 }
 
-void	handle_shlevel(s_data *data)
+void	handle_shlevel(t_data *data)
 {
 	char	*sh_value;
 	char	*tmp;

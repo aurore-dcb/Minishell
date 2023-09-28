@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/27 14:27:37 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	add_no_equal(t_env *env, char *args)
 	return (1);
 }
 
-int	handle_equal(s_data *data, int i, char **args, int ret_inv)
+int	handle_equal(t_data *data, int i, char **args, int ret_inv)
 {
 	if (ret_inv == 2)
 	{
@@ -69,7 +69,7 @@ int	handle_equal(s_data *data, int i, char **args, int ret_inv)
 	return (1);
 }
 
-int	do_export(s_data *data, int i, char **args)
+int	do_export(t_data *data, int i, char **args)
 {
 	int	ret_inv;
 
@@ -96,13 +96,13 @@ int	do_export(s_data *data, int i, char **args)
 	return (1);
 }
 
-int	builtin_export(s_data *data)
+int	builtin_export(t_cmd_line *cmd, t_data *data)
 {
 	char	**args;
 	int		i;
 
 	i = 0;
-	args = data->cmd->args;
+	args = cmd->args;
 	data->exit_status = 0;
 	if (!args[1])
 		print_sorted_env(data->envex);

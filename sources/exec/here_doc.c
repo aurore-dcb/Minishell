@@ -6,15 +6,15 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 08:47:17 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:48:51 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	is_here_doc(cmd_line *cmd)
+int	is_here_doc(t_cmd_line *cmd)
 {
-	token	*tok;
+	t_token	*tok;
 
 	tok = cmd->token;
 	if (tok)
@@ -29,7 +29,7 @@ int	is_here_doc(cmd_line *cmd)
 	return (0);
 }
 
-int	read_standart(pipex *pipex, char *to_find)
+int	read_standart(t_pipex *pipex, char *to_find)
 {
 	char	*lign;
 
@@ -55,9 +55,9 @@ int	read_standart(pipex *pipex, char *to_find)
 	return (0);
 }
 
-int	standart_input(cmd_line *cmd, pipex *pipex)
+int	standart_input(t_cmd_line *cmd, t_pipex *pipex)
 {
-	token	*tok;
+	t_token	*tok;
 	char	*to_find;
 
 	tok = cmd->token;
@@ -72,7 +72,7 @@ int	standart_input(cmd_line *cmd, pipex *pipex)
 	return (1);
 }
 
-int	process_here_doc(pipex *pipex, cmd_line *cmd, s_data *data, t_pid **pids)
+int	proc_hd(t_pipex *pipex, t_cmd_line *cmd, t_data *data, t_pid **pids)
 {
 	if (!cmd->args[0])
 		return (0);
@@ -87,7 +87,7 @@ int	process_here_doc(pipex *pipex, cmd_line *cmd, s_data *data, t_pid **pids)
 	return (1);
 }
 
-int	ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
+int	ft_hd(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 {
 	unlink(".here_doc");
 	pipex->here_doc_file = open(".here_doc", O_WRONLY | O_CREAT | O_TRUNC,
@@ -106,7 +106,7 @@ int	ft_here_doc(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 	pipex->here_doc_file = open(".here_doc", O_RDONLY);
 	if (pipex->here_doc_file == -1)
 		return (0);
-	if (!process_here_doc(pipex, cmd, data, pids))
+	if (!proc_hd(pipex, cmd, data, pids))
 		return (0);
 	close(pipex->here_doc_file);
 	unlink(".here_doc");

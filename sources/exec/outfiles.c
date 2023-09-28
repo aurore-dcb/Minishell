@@ -6,18 +6,18 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:34:00 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 15:28:30 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:25:59 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	add_outfiles(cmd_line *cmd)
+void	add_outfiles(t_cmd_line *cmd)
 {
 	int		fd;
 	int		r_no;
 	t_file	*new;
-	token	*beg_token;
+	t_token	*beg_token;
 
 	r_no = 0;
 	beg_token = cmd->token;

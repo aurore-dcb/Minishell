@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:24:56 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 11:08:01 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:26:48 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	error_double_pipe(char *input)
 	return (0);
 }
 
-int	error_syntax_alone(cmd_line **list)
+int	error_syntax_alone(t_cmd_line **list)
 {
-	cmd_line	*begin;
-	token		*token;
+	t_cmd_line	*begin;
+	t_token		*token;
 
 	begin = *list;
 	while (begin)
@@ -98,10 +98,10 @@ int	error_syntax_alone(cmd_line **list)
 	return (0);
 }
 
-char	error_syntax(cmd_line **list)
+char	error_syntax(t_cmd_line **list)
 {
-	cmd_line	*begin;
-	token		*token;
+	t_cmd_line	*begin;
+	t_token		*token;
 
 	begin = *list;
 	while (begin)

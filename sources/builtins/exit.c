@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:01:33 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/22 13:57:46 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,26 @@ int	get_len_tab(char **str)
 	return (i);
 }
 
-int	builtin_exit(s_data *data)
+int	builtin_exit(t_cmd_line *cmd, t_data *data)
 {
 	char	*str;
 	int		error;
 
 	error = 0;
 	ft_putstr_fd("exit\n", 2);
-	if (get_len_tab(data->cmd->args) > 1)
+	if (get_len_tab(cmd->args) > 1)
 	{
-		if (!is_str_digit(data->cmd->args[1]))
+		if (!is_str_digit(cmd->args[1]))
 			error = 1;
-		else if (get_len_tab(data->cmd->args) > 2)
+		else if (get_len_tab(cmd->args) > 2)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 			data->exit_status = 1;
 			return (EXIT_FAILURE);
 		}
 	}
-	if (data->cmd->args[1])
-		str = ft_strdup(data->cmd->args[1]);
+	if (cmd->args[1])
+		str = ft_strdup(cmd->args[1]);
 	else
 		str = 0;
 	free_all(data);

@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 17:31:04 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strcpy(char *dst, char *src, int dstsize)
 	return (dst);
 }
 
-int	count_char(char *s, s_data *data, token **token)
+int	count_char(char *s, t_data *data, t_token **token)
 {
 	int	n;
 	int	k;
@@ -56,7 +56,7 @@ int	count_char(char *s, s_data *data, token **token)
 	return (n);
 }
 
-char	*apply_expand(char *res, char *word, s_data *data, token **token)
+char	*apply_expand(char *res, char *word, t_data *data, t_token **token)
 {
 	int	i;
 
@@ -101,7 +101,7 @@ char	*trim_isspace(char const *s1, char const *set)
 	return (ret);
 }
 
-char	*ft_expand(char *word, s_data *data, token **token)
+char	*ft_expand(char *word, t_data *data, t_token **token)
 {
 	char	*res;
 	char	*trim;

@@ -6,13 +6,13 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:55:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 12:06:11 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	builtin_env(s_data *data)
+int	builtin_env(t_data *data)
 {
 	t_env	*begin;
 

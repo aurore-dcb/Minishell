@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/27 14:38:16 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:28:16 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_type	get_type_meta(char *word)
 	return (NONE);
 }
 
-void	get_type(token *lst)
+void	get_type(t_token *lst)
 {
 	lst = lst->next;
 	while (lst)
@@ -67,11 +67,11 @@ void	get_type(token *lst)
 	}
 }
 
-int	add_word(cmd_line *list)
+int	add_word(t_cmd_line *list)
 {
 	int		i;
 	int		start;
-	token	*new;
+	t_token	*new;
 
 	i = 0;
 	start = 0;
@@ -91,7 +91,7 @@ int	add_word(cmd_line *list)
 	return (1);
 }
 
-int	split_word(cmd_line *list)
+int	split_word(t_cmd_line *list)
 {
 	while (list)
 	{

@@ -6,13 +6,13 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/21 12:07:14 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	builtin_pwd(s_data *data)
+int	builtin_pwd(t_data *data)
 {
 	char	*res;
 

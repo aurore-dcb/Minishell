@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 16:52:56 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	between_simple(char *res, char **word, int i)
 	return (i);
 }
 
-int	out_of_quotes(char *res, char **word, s_data *data, int i)
+int	out_of_quotes(char *res, char **word, t_data *data, int i)
 {
 	int		j;
 	char	*cpy;
@@ -53,7 +53,7 @@ int	out_of_quotes(char *res, char **word, s_data *data, int i)
 	return (i);
 }
 
-int	apply_out_quotes(char *res, char **word, s_data *data, int i)
+int	apply_out_quotes(char *res, char **word, t_data *data, int i)
 {
 	int		j;
 	char	*cpy;
@@ -76,7 +76,7 @@ int	apply_out_quotes(char *res, char **word, s_data *data, int i)
 	return (i);
 }
 
-int	between_double(char *res, char **word, s_data *data, int i)
+int	between_double(char *res, char **word, t_data *data, int i)
 {
 	(*word)++;
 	while (*(*word) && *(*word) != 34)

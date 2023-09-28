@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 15:28:30 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ t_file	*ft_lstlast_file(t_file *lst)
 	return (lst);
 }
 
-void	add_infiles(cmd_line *cmd)
+void	add_infiles(t_cmd_line *cmd)
 {
 	int		fd;
 	int		r_no;
 	t_file	*new;
-	token	*beg_token;
+	t_token	*beg_token;
 
 	r_no = 0;
 	beg_token = cmd->token;
@@ -74,9 +74,9 @@ void	add_infiles(cmd_line *cmd)
 	}
 }
 
-int	open_files(s_data *data)
+int	open_files(t_data *data)
 {
-	cmd_line	*beg_cmd;
+	t_cmd_line	*beg_cmd;
 
 	beg_cmd = data->cmd;
 	if (!beg_cmd)

@@ -3,20 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   split_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 16:23:10 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 11:36:02 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:56:23 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
+int	nb_between_quotes(char **str, int i)
+{
+	char	q;
+
+	i = 0;
+	q = *(*str)++;
+	i++;
+	while (**str && **str != q)
+	{
+		(*str)++;
+		i++;
+	}
+	(*str)++;
+	i++;
+	return (i);
+}
+
 int	nb_mots_cmd(char *str)
 {
-	int		mots;
-	char	q;
-	int		i;
+	int	mots;
+	int	i;
 
 	mots = 1;
 	i = 0;
@@ -25,17 +41,7 @@ int	nb_mots_cmd(char *str)
 	while (*str != '\0')
 	{
 		if (*str == 34 || *str == 39)
-		{
-			q = *str++;
-			i++;
-			while (*str && *str != q)
-			{
-				str++;
-				i++;
-			}
-			str++;
-			i++;
-		}
+			i = nb_between_quotes(&str, i);
 		if (*str && *str == '|')
 			mots++;
 		if (*str)
@@ -72,11 +78,11 @@ int	nb_lettre_cmd(char *s)
 	return (i);
 }
 
-void	split2_pipe(char **input, cmd_line **cmd)
+void	split2_pipe(char **input, t_cmd_line **cmd)
 {
 	int			j;
 	char		q;
-	cmd_line	*begin;
+	t_cmd_line	*begin;
 
 	j = 0;
 	begin = ft_lstlast_cmd_line(*cmd);
@@ -98,10 +104,10 @@ void	split2_pipe(char **input, cmd_line **cmd)
 	begin->cmd[j] = '\0';
 }
 
-int	split_pipe(char *input, cmd_line **list)
+int	split_pipe(char *input, t_cmd_line **list)
 {
 	int			n;
-	cmd_line	*new;
+	t_cmd_line	*new;
 
 	if (input == NULL)
 		return (0);

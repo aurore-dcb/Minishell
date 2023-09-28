@@ -6,15 +6,15 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 15:40:00 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:48:14 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
+int	loop_process(t_data *data, t_pid **pids, t_pipex *pipex)
 {
-	cmd_line	*tmp;
+	t_cmd_line	*tmp;
 
 	data->tab_env = list_to_tab(&data->envp);
 	tmp = data->cmd;
@@ -27,7 +27,7 @@ int	loop_process(s_data *data, t_pid **pids, pipex *pipex)
 	return (1);
 }
 
-void	ft_parent(t_pid **pids, pid_t pid, cmd_line *cmd, t_file *last_in)
+void	ft_parent(t_pid **pids, pid_t pid, t_cmd_line *cmd, t_file *last_in)
 {
 	ft_lstadd_back_pipex(pids, ft_lstnew_pipex(pid));
 	if (cmd->fd[1] > 2)
@@ -36,7 +36,7 @@ void	ft_parent(t_pid **pids, pid_t pid, cmd_line *cmd, t_file *last_in)
 		close(last_in->fd);
 }
 
-int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
+int	ft_process(t_pipex *pipex, t_pid **pids, t_cmd_line *cmd, t_data *data)
 {
 	pid_t	pid;
 	t_file	*last_in;
@@ -62,24 +62,24 @@ int	ft_process(pipex *pipex, t_pid **pids, cmd_line *cmd, s_data *data)
 	return (1);
 }
 
-void	no_builtins(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
+void	no_built(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 {
 	if (!pipex->middle_cmd_path)
 	{
 		error_cmd(cmd, data);
-		free_no_buil(cmd, pipex, data, pids);
+		fr_no_buil(cmd, pipex, data, pids);
 		exit(127);
 	}
 	if (ft_strcmp(pipex->middle_cmd_path, ".") == 0)
-		handle_point(cmd, pipex, data, pids);
+		handle_pt(cmd, pipex, data, pids);
 	else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
 	{
-		free_no_buil(cmd, pipex, data, pids);
+		fr_no_buil(cmd, pipex, data, pids);
 		exit(127);
 	}
 }
 
-int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
+int	ft_child(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 {
 	t_file	*last_in;
 	t_file	*last_out;
@@ -103,7 +103,7 @@ int	ft_child(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
 		close(cmd->fd[1]);
 	}
 	if (builtins_pipe(cmd->args[0], data, cmd) == 0)
-		no_builtins(cmd, pipex, data, pids);
-	free_no_buil(cmd, pipex, data, pids);
+		no_built(cmd, pipex, data, pids);
+	fr_no_buil(cmd, pipex, data, pids);
 	exit(data->exit_status);
 }

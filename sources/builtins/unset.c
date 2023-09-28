@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 16:34:05 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/26 10:23:23 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	del_var(t_env **head, char *arg)
 	free_elem_env(current);
 }
 
-int	builtin_unset(s_data *data)
+int	builtin_unset(t_cmd_line *cmd, t_data *data)
 {
 	int		i;
 	char	**args;
 
 	i = 1;
-	args = data->cmd->args;
+	args = cmd->args;
 	while (args[i])
 	{	
 		if (in_env(data->envex, args[i]))

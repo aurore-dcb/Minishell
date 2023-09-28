@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:09:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 17:08:27 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strlen_expand(char *var)
 	return (i);
 }
 
-int	do_find(token **token, char *res, char *trim)
+int	do_find(t_token **token, char *res, char *trim)
 {
 	int		n;
 
@@ -37,7 +37,7 @@ int	do_find(token **token, char *res, char *trim)
 	return (n);
 }
 
-int	find_variable_special(char **s, s_data *data, token **token)
+int	find_variable_special(char **s, t_data *data, t_token **token)
 {
 	char	*cpy;
 	char	*res;
@@ -58,11 +58,11 @@ int	find_variable_special(char **s, s_data *data, token **token)
 	return (0);
 }
 
-token	*ft_lstnew_token_special(char *var, token *current)
+t_token	*ft_lstnew_token_special(char *var, t_token *current)
 {
-	token	*elem;
+	t_token	*elem;
 
-	elem = malloc(sizeof(token));
+	elem = malloc(sizeof(t_token));
 	if (!elem)
 		return (NULL);
 	elem->word = ft_substr(var, 0, ft_strlen_expand(var));
@@ -73,10 +73,10 @@ token	*ft_lstnew_token_special(char *var, token *current)
 	return (elem);
 }
 
-void	new_words(char *var, token **link)
+void	new_words(char *var, t_token **link)
 {
-	token	*new;
-	token	*curr;
+	t_token	*new;
+	t_token	*curr;
 
 	new = NULL;
 	curr = *link;

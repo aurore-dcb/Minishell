@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/22 14:03:15 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:54:42 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	nb_arg(cmd_line *list)
+int	nb_arg(t_cmd_line *list)
 {
-	token	*cur;
+	t_token	*cur;
 	int		len;
 
 	len = 0;
@@ -28,10 +28,10 @@ int	nb_arg(cmd_line *list)
 	return (len);
 }
 
-void	fill_arg(cmd_line *list)
+void	fill_arg(t_cmd_line *list)
 {
 	int		i;
-	token	*cur;
+	t_token	*cur;
 
 	cur = list->token;
 	i = 0;
@@ -47,10 +47,10 @@ void	fill_arg(cmd_line *list)
 	list->args[i] = NULL;
 }
 
-int	tab_cmd(cmd_line **list)
+int	tab_cmd(t_cmd_line **list)
 {
 	char		**cmd;
-	cmd_line	*begin;
+	t_cmd_line	*begin;
 
 	begin = *list;
 	while (begin)
@@ -83,4 +83,11 @@ char	**new_tab(char **old_tab, int old_len)
 	}
 	new_tab[i - 1] = 0;
 	return (new_tab);
+}
+
+void	parse_error(char *input)
+{
+	ft_putstr_fd("bash: '", 2);
+	ft_putstr_fd(input, 2);
+	ft_putstr_fd("': parse error\n", 2);
 }

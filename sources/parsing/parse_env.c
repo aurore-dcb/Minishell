@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:49:59 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/19 14:42:27 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new)
 		*lst = new;
 }
 
-int	parse_env(char **env, s_data *data)
+int	parse_env(char **env, t_data *data)
 {
 	t_env	*new;
 	t_env	*newex;

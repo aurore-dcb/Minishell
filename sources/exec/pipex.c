@@ -6,20 +6,20 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 14:54:58 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:40:02 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	initialise_pipex(pipex *pipex)
+void	initialise_pipex(t_pipex *pipex)
 {
 	pipex->paths = NULL;
 	pipex->here_doc_file = -1;
 	pipex->middle_cmd_path = NULL;
 }
 
-int	parsing_pipex(pipex *pipex, s_data *data)
+int	parsing_pipex(t_pipex *pipex, t_data *data)
 {
 	pipex->paths = get_paths(&data->envp);
 	if (!open_files(data))
@@ -30,7 +30,7 @@ int	parsing_pipex(pipex *pipex, s_data *data)
 	return (1);
 }
 
-int	ft_lstsize_cmd(cmd_line *lst)
+int	ft_lstsize_cmd(t_cmd_line *lst)
 {
 	int	i;
 
@@ -43,14 +43,14 @@ int	ft_lstsize_cmd(cmd_line *lst)
 	return (i);
 }
 
-int	ft_pipex(s_data *data)
+int	ft_pipex(t_data *data)
 {
 	t_pid	*pids;
-	pipex	pipex;
+	t_pipex	pipex;
 
 	if (data->cmd->args[0] && !ft_strcmp(data->cmd->args[0], "exit")
 		&& ft_lstsize_cmd(data->cmd) == 1)
-		builtin_exit(data);
+		builtin_exit(data->cmd, data);
 	if (data->cmd->args[0] && !ft_strcmp(data->cmd->args[0], "./minishell")
 		&& ft_lstsize_cmd(data->cmd) == 1)
 		set_signals(4);

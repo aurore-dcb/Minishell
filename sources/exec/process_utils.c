@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:08:58 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/27 15:40:08 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:48:51 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ char	**list_to_tab(t_env **envp)
 	return (tab);
 }
 
-int	handle_hd(s_data *data, t_pid **pids, pipex *pipex, cmd_line	*tmp)
+int	handle_hd(t_data *data, t_pid **pids, t_pipex *pipex, t_cmd_line *tmp)
 {
 	if (is_here_doc(tmp))
 	{
-		if (!ft_here_doc(tmp, pipex, data, pids))
+		if (!ft_hd(tmp, pipex, data, pids))
 		{
 			data->exit_status = 1;
 			return (unlink(".here_doc"), 0);
@@ -76,24 +76,24 @@ int	handle_hd(s_data *data, t_pid **pids, pipex *pipex, cmd_line	*tmp)
 	return (1);
 }
 
-void	handle_point(cmd_line *cmd, pipex *pipex, s_data *data, t_pid **pids)
+void	handle_pt(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 {
 	char	**tab;
 
 	tab = new_tab(cmd->args, get_len_tab(cmd->args));
 	if (!tab)
 	{
-		free_no_buil(cmd, pipex, data, pids);
+		fr_no_buil(cmd, pipex, data, pids);
 		exit (1);
 	}
 	if (execve(cmd->args[1], tab, data->tab_env) == -1)
 		error_file_exec(cmd->args[1], data, errno);
 	free_tab(tab);
-	free_no_buil(cmd, pipex, data, pids);
+	fr_no_buil(cmd, pipex, data, pids);
 	exit(126);
 }
 
-void	do_dup(cmd_line *cmd, t_file *last_in, t_file *last_out)
+void	do_dup(t_cmd_line *cmd, t_file *last_in, t_file *last_out)
 {
 	if (last_in && last_in->fd > 2)
 	{

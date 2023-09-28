@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 17:22:48 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:54:17 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	is_spaces(char c)
 	return (0);
 }
 
-int	expansion(s_data *data)
+int	expansion(t_data *data)
 {
-	token		*token;
-	cmd_line	*begin;
+	t_token		*token;
+	t_cmd_line	*begin;
 
 	begin = data->cmd;
 	if (!begin)
@@ -47,25 +47,25 @@ int	expansion(s_data *data)
 	return (1);
 }
 
-int	error_pars(s_data *data)
+int	error_pars(t_data *data)
 {
 	if (closed_quotes(data->input, &data->etat) == 0)
-		return (0);
+		return (parse_error(data->input), 0);
 	if (error_begin_end_cmd(data->input) == 1)
-		return (error_token(data, '|'), 0);
+		return (parse_error(data->input), error_token(data, '|'), 0);
 	if (error_double_pipe(data->input) == 1)
-		return (error_token(data, '|'), 0);
+		return (parse_error(data->input), error_token(data, '|'), 0);
 	if (error_pipe_token(data->input) == 1)
-		return (error_token(data, '|'), 0);
+		return (parse_error(data->input), error_token(data, '|'), 0);
 	if (!split_pipe(data->input, &data->cmd))
 	{
 		data->exit_status = 1;
-		return (0);
+		return (parse_error(data->input), 0);
 	}
 	return (1);
 }
 
-int	parsing(s_data *data)
+int	parsing(t_data *data)
 {
 	char	tmp;
 

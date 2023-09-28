@@ -6,46 +6,13 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 08:46:17 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	display_list(cmd_line *list)
-{
-	while (list)
-	{
-		printf("cmd_line = .%s.\n", list->cmd);
-		list = list->next;
-	}
-}
-
-void	display_token(cmd_line *list)
-{
-	int		i;
-	token	*token;
-
-	while (list)
-	{
-		i = 0;
-		printf("\ncmd line = [%s]\n", list->cmd);
-		token = list->token;
-		while (token)
-		{
-			printf("word : [%s] - type : [%u]\n", token->word, token->type);
-			token = token->next;
-		}
-		while (list->args[i])
-		{
-			printf("args[%d] = [%s]\n", i, list->args[i]);
-			i++;
-		}
-		list = list->next;
-	}
-}
-
-void	initialize(s_data *data)
+void	initialize(t_data *data)
 {
 	g_flag = 0;
 	data->etat.simple = 0;
@@ -73,7 +40,7 @@ char	*prompt(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	s_data	data;
+	t_data	data;
 
 	(void)argv;
 	if (argc != 1)

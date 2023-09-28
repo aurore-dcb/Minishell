@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/27 15:50:31 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	free_cmd_in(t_file *in)
 	}
 }
 
-void	free_list(cmd_line *begin)
+void	free_list(t_cmd_line *begin)
 {
-	cmd_line	*current;
-	token		*cur_token;
+	t_cmd_line	*current;
+	t_token		*cur_token;
 
 	while (begin != NULL)
 	{
@@ -73,7 +73,7 @@ void	free_list(cmd_line *begin)
 	}
 }
 
-void	free_all(s_data *data)
+void	free_all(t_data *data)
 {
 	if (data->input)
 		free(data->input);
@@ -87,7 +87,7 @@ void	free_all(s_data *data)
 		free_tab(data->tab_env);
 }
 
-void	wait_fct(t_pid **pids, s_data *data)
+void	wait_fct(t_pid **pids, t_data *data)
 {
 	t_pid	*tmp;
 
