@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 16:26:38 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 17:04:04 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,32 @@ char	*prompt(void)
 		line = get_next_line(STDIN_FILENO);
 		input = ft_strtrim(line, "\n");
 		free(line);
-		// get_next_line(STDIN_FILENO);
 	}
 	return (input);
+}
+
+void	init_main(t_data *data, char **env)
+{
+	data->envp = NULL;
+	data->envex = NULL;
+	data->exit_status = 0;
+	parse_env(env, data);
+	handle_shlevel(data);
+}
+
+void	main_utils(t_data *data)
+{
+	if (data->input[0])
+	{
+		add_history(data->input);
+		if (parsing(data))
+		{
+			ft_pipex(data);
+		}
+		else
+			data->exit_status = 2;
+	}
+	free(data->input);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -46,29 +69,13 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	if (argc != 1)
 		return (printf("No argument are needed !\n"), 1);
-	data.envp = NULL;
-	data.envex = NULL;
-	data.exit_status = 0;
-	parse_env(env, &data);
-	handle_shlevel(&data);
+	init_main(&data, env);
 	while (1)
 	{
 		initialize(&data);
 		data.input = prompt();
 		if (data.input)
-		{
-			if (data.input[0])
-			{
-				add_history(data.input);
-				if (parsing(&data))
-				{
-					ft_pipex(&data);
-				}
-				else
-					data.exit_status = 2;
-			}
-			free(data.input);
-		}
+			main_utils(&data);
 		else
 		{
 			if (isatty(0) == 1)

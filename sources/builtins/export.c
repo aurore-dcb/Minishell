@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 16:32:37 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 17:05:15 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,6 @@ int	add_no_equal(t_env *env, char *args)
 		ft_lstadd_back_env(&env, newex);
 	else
 		free(newex);
-	return (1);
-}
-
-int	handle_equal(t_data *data, int i, char **args, int ret_inv)
-{
-	if (ret_inv == 2)
-	{
-		if (!add_to_envex(args[i], 2, data))
-			return (0);
-		if (!add_to_envp(args[i], 2, data))
-			return (0);
-	}
-	else
-	{
-		if (!add_to_envex(args[i], 1, data))
-			return (0);
-		if (!add_to_envp(args[i], 0, data))
-			return (0);
-	}
 	return (1);
 }
 
