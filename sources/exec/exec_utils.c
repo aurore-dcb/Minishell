@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:54:42 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 11:24:39 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ char	**new_tab(char **old_tab, int old_len)
 	return (new_tab);
 }
 
-void	parse_error(char *input)
+void	parse_error(t_data *data)
 {
+	data->exit_status = 1;
 	ft_putstr_fd("bash: '", 2);
-	ft_putstr_fd(input, 2);
+	ft_putstr_fd(data->input, 2);
 	ft_putstr_fd("': parse error\n", 2);
 }

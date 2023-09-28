@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:55:03 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 11:25:03 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		nb_arg(t_cmd_line *list);
 void	fill_arg(t_cmd_line *list);
 int		tab_cmd(t_cmd_line **list);
 char	**new_tab(char **old_tab, int old_len);
-void	parse_error(char *input);
+void	parse_error(t_data *data);
 void	initialise_pipex(t_pipex *pipex);
 int		parsing_pipex(t_pipex *pipex, t_data *data);
 int		ft_lstsize_cmd(t_cmd_line *lst);

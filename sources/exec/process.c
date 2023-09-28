@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:48:14 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/28 12:02:52 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,13 @@ int	ft_child(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 	last_in = ft_lstlast_file(cmd->infile);
 	last_out = ft_lstlast_file(cmd->outfile);
 	if (last_in && last_in->fd == -1)
-	{
 		error_file(last_in, data);
-		exit (data->exit_status);
-	}
 	if (last_out && last_out->fd == -1)
-	{
 		error_file(last_out, data);
-		exit (data->exit_status);
+	if ((last_in && last_in->fd == -1) || (last_out && last_out->fd == -1))
+	{
+		fr_no_buil(cmd, pipex, data, pids);
+		exit(data->exit_status);
 	}
 	do_dup(cmd, last_in, last_out);
 	if (cmd->next)
