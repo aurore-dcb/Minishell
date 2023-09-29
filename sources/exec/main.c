@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 17:04:04 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/29 12:04:01 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **env)
 		else
 		{
 			if (isatty(0) == 1)
-				ft_printf("exit\n");
+				printf("exit\n");
 			return (free_all(&data), data.exit_status);
 		}
 		free_list(data.cmd);
