@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:48:51 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/29 16:23:10 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ int	read_standart(t_pipex *pipex, char *to_find)
 			unlink(".here_doc");
 			return (1);
 		}
-		if (!lign || ft_strncmp(lign, to_find, ft_strlen(to_find)) == 0)
+		if (!lign || ft_strcmp(lign, to_find) == 0)
 		{
 			free(lign);
 			return (1);
 		}
+		// faire l'expand de la ligne
 		ft_putstr_fd(lign, pipex->here_doc_file);
 		ft_putstr_fd("\n", pipex->here_doc_file);
 		free(lign);

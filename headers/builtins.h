@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 14:04:15 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/29 15:03:49 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		builtin_unset(t_cmd_line *cmd, t_data *data);
 int		builtins_pipe(char *cmd, t_data *data, t_cmd_line *cmd_l);
 int		builtins_no_pipe(t_cmd_line *cmd, t_data *data);
 int		is_str_digit(char *str);
-void	num_exit(char *str, int error);
+void	num_exit(char *str, int error, t_data *data);
 int		get_len_tab(char **str);
 int		builtin_exit(t_cmd_line *cmd, t_data *data);
 

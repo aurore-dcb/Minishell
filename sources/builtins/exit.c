@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:01:33 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/29 15:03:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	is_str_digit(char *str)
 	return (1);
 }
 
-void	num_exit(char *str, int error)
+void	num_exit(char *str, int error, t_data *data)
 {
 	int	exit_code;
 
 	if (!str)
-		exit_code = 0;
+		exit_code = data->exit_status;
 	else if (error == 1)
 	{
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
@@ -43,6 +43,7 @@ void	num_exit(char *str, int error)
 	}
 	else
 		exit_code = ft_atoi(str);
+	free_all(data);
 	free(str);
 	exit(exit_code);
 }
@@ -79,8 +80,7 @@ int	builtin_exit(t_cmd_line *cmd, t_data *data)
 		str = ft_strdup(cmd->args[1]);
 	else
 		str = 0;
-	free_all(data);
-	num_exit(str, error);
+	num_exit(str, error, data);
 	data->exit_status = 0;
 	return (EXIT_SUCCESS);
 }
