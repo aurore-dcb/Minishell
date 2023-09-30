@@ -3,52 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split_word_hd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:39:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/29 15:40:02 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/09/30 09:50:43 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-
-void	ft_strcpy_pos_hd(char *dst, char *src, int start, int end)
-{
-	int	i;
-
-	i = 0;
-	while (src[start] && start < end)
-	{
-		dst[i] = src[start];
-		start++;
-		i++;
-	}
-	dst[i] = '\0';
-}
-
-t_type	get_type_meta_hd(char *word)
-{
-	int	len;
-
-	len = ft_strlen(word);
-	if (len == 1)
-	{
-		if (word[0] == '>')
-			return (FILE_OUT);
-		else if (word[0] == '<')
-			return (FILE_IN);
-	}
-	else if (len == 2)
-	{
-		if (word[0] == '>' && word[1] == '>')
-			return (FILE_OUT_SUR);
-		else if (word[0] == '<' && word[1] == '<')
-			return (HERE_DOC);
-	}
-	if (len > 0)
-		return (ARG);
-	return (NONE);
-}
 
 void	get_type_hd(t_token *lst)
 {
@@ -67,7 +29,39 @@ void	get_type_hd(t_token *lst)
 	}
 }
 
-int	add_word_hd(t_cmd_line *list)
+t_token	*ft_lstnew_token_hd(char *lign, int start, int end)
+{
+	t_token	*elem;
+
+	elem = malloc(sizeof(t_token));
+	if (!elem)
+		return (NULL);
+	elem->word = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!elem->word)
+		return (NULL);
+	ft_strcpy_pos(elem->word, lign, start, end);
+	elem->type = get_type_meta(elem->word);
+	elem->next = NULL;
+	elem->previous = NULL;
+	return (elem);
+}
+
+void free_token(t_token *token)
+{
+	t_token		*cur_token;
+	
+	cur_token = NULL;
+	while (token)
+	{
+		cur_token = token;
+		token = token->next;
+		if (cur_token->word != NULL)
+			free(cur_token->word);
+		free(cur_token);
+	}
+}
+
+int	add_word_hd(t_token **token_hd, char *lign)
 {
 	int		i;
 	int		start;
@@ -75,30 +69,31 @@ int	add_word_hd(t_cmd_line *list)
 
 	i = 0;
 	start = 0;
-	list->token = NULL;
-	while (list->cmd[i])
+	new = NULL;
+	while (lign[i])
 	{
-		while (is_spaces(list->cmd[i]) && list->cmd[i])
+		while (is_spaces(lign[i]) && lign[i])
 			i++;
 		start = i;
-		i = get_end_word(list->cmd, i);
-		new = ft_lstnew_token(list, start, i);
+		i = get_end_word(lign, i);
+		new = ft_lstnew_token_hd(lign, start, i);
 		if (!new)
 			return (0);
-		ft_lstadd_back_token(&list->token, new);
+		ft_lstadd_back_token(token_hd, new);
 	}
-	get_type(list->token);
+	get_type(token_hd);
+	free_token(*token_hd);
 	return (1);
 }
 
-int	split_word(t_cmd_line *list)
-{
-	while (list)
-	{
-		if (!list->cmd[0])
-			return (0);
-		add_word(list);
-		list = list->next;
-	}
-	return (1);
-}
+// int	split_word_hd(t_token *token_hd)
+// {
+// 	while (list)
+// 	{
+// 		if (!list->cmd[0])
+// 			return (0);
+// 		add_word(list);
+// 		list = list->next;
+// 	}
+// 	return (1);
+// }

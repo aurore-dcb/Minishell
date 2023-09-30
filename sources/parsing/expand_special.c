@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_special.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:09:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/30 09:52:41 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,18 @@ t_token	*ft_lstnew_token_special(char *var, t_token *current)
 
 void	new_words(char *var, t_token **link)
 {
-	t_token	*new;
+	// t_token	*new;
 	t_token	*curr;
 
-	new = NULL;
+	// new = NULL;
 	curr = *link;
 	while (*var && *var != '\0')
 	{
 		if (*var == ' ')
 		{
 			var++;
-			new = ft_lstnew_token_special(var, curr);
+			// new = ft_lstnew_token_special(var, curr);
+			ft_lstnew_token_special(var, curr);
 			curr = curr->next;
 		}
 		var++;

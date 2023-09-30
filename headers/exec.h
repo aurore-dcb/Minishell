@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 11:25:03 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/09/30 09:53:41 by aurore           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,8 @@ int		is_shlvl(t_data *data);
 char	*get_shvalue(t_data *data);
 void	handle_shlevel(t_data *data);
 
+void    get_type_hd(t_token *lst);
+t_token	*ft_lstnew_token_hd(char *lign, int start, int end);
+void    free_token(t_token *token);
+int     add_word_hd(t_token **token_hd, char *lign);
 #endif
