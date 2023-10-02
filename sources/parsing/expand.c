@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 14:34:40 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 11:26:47 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ char	*ft_strcpy(char *dst, char *src, int dstsize)
 	return (dst);
 }
 
-int	count_char(char *s, t_data *data, t_token **token)
+int	count_char(char *s, t_data *data, t_token **token, int k)
 {
 	int	n;
-	int	k;
 
 	n = 0;
 	while (s && *s != '\0')
@@ -47,11 +46,12 @@ int	count_char(char *s, t_data *data, t_token **token)
 			n += k;
 			if (*s == '?')
 				s += len_var_env(s);
+			else if (k == 0)
+				s--;
 		}
 		else
 			n++;
-		if (*s)
-			s++;
+		s++;
 	}
 	return (n);
 }
@@ -66,10 +66,9 @@ char	*apply_expand(char *res, char *word, t_data *data, t_token **token)
 		if (*word == 39)
 			i = between_simple(res, &word, i);
 		else if (*word == 34 && (*token)->type != LIMITOR)
-				i = between_double(res, &word, data, i);
-		else if (*word == '$' && *(word + 1)
-			&& *(word + 1) != ' ' && *(word + 1) != '/'
-			&& (*token)->type != LIMITOR)
+			i = between_double(res, &word, data, i);
+		else if (*word == '$' && *(word + 1) && *(word + 1) != ' ' && *(word
+				+ 1) != '/' && (*token)->type != LIMITOR)
 		{
 			i = out_of_quotes(res, &word, data, i);
 			word = word + len_var_env(word) - 1;
@@ -112,7 +111,7 @@ char	*ft_expand(char *word, t_data *data, t_token **token)
 	trim = trim_isspace(word, " ");
 	if (!trim)
 		return (NULL);
-	len_malloc = count_char(trim, data, token);
+	len_malloc = count_char(trim, data, token, 0);
 	res = malloc(sizeof(char) * (len_malloc + 1));
 	if (!res)
 		return (free(trim), NULL);

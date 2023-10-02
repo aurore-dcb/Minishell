@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:56:48 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 11:12:30 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			error_double_pipe(char *input);
 int			error_syntax_alone(t_cmd_line **list);
 char		error_syntax(t_cmd_line **list);
 char		*ft_strcpy(char *dst, char *src, int dstsize);
-int			count_char(char *s, t_data *data, t_token **token);
+int			count_char(char *s, t_data *data, t_token **token, int k);
 char		*apply_expand(char *res, char *word, t_data *data, t_token **token);
 char		*trim_isspace(char const *s1, char const *set);
 char		*ft_expand(char *word, t_data *data, t_token **token);
