@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/29 12:04:01 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/02 11:36:04 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	initialize(t_data *data)
 {
-	g_flag = 0;
 	data->etat.simple = 0;
 	data->etat.doubl = 0;
 	data->cmd = NULL;
@@ -40,6 +39,7 @@ char	*prompt(void)
 
 void	init_main(t_data *data, char **env)
 {
+	g_flag = 0;
 	data->envp = NULL;
 	data->envex = NULL;
 	data->exit_status = 0;
@@ -49,6 +49,7 @@ void	init_main(t_data *data, char **env)
 
 void	main_utils(t_data *data)
 {
+	g_flag = 0;
 	if (data->input[0])
 	{
 		add_history(data->input);
