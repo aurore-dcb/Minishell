@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/30 09:53:41 by aurore           ###   ########.fr       */
+/*   Updated: 2023/10/02 10:45:06 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_elem_env(t_env *list);
 void	free_env(t_env *env);
 void	fr_no_buil(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids);
 void	free_pid(t_pid **pids);
+void	free_token(t_token *token);
 void	initialize(t_data *data);
 char	*prompt(void);
 int		nb_arg(t_cmd_line *list);
@@ -56,10 +57,15 @@ char	*find_path(char **paths, char *cmd);
 t_pid	*ft_lstnew_pipex(pid_t pid);
 int		ft_lstadd_back_pipex(t_pid **lst, t_pid *new);
 int		is_here_doc(t_cmd_line *cmd);
-int		read_standart(t_pipex *pipex, char *to_find);
-int		standart_input(t_cmd_line *cmd, t_pipex *pipex);
+int		read_standart(t_pipex *pipex, char *to_find, t_data *data);
+int		standart_input(t_cmd_line *cmd, t_pipex *pipex, t_data *data);
 int		proc_hd(t_pipex *pipex, t_cmd_line *cmd, t_data *data, t_pid **pids);
 int		ft_hd(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids);
+void	get_type_hd(t_token *lst);
+t_token	*ft_lstnew_token_hd(char *lign, int start, int end);
+int		add_word_hd(t_token **token_hd, char *lign);
+int		expand_here_doc(t_token **token_hd, t_data *data, char *lign,
+			t_pipex *pipex);
 void	error_file(t_file *in, t_data *data);
 void	error_cmd(t_cmd_line *cmd, t_data *data);
 void	error_token_gen(t_data *data, int tmp);
@@ -70,8 +76,8 @@ int		is_shlvl(t_data *data);
 char	*get_shvalue(t_data *data);
 void	handle_shlevel(t_data *data);
 
-void    get_type_hd(t_token *lst);
+void	get_type_hd(t_token *lst);
 t_token	*ft_lstnew_token_hd(char *lign, int start, int end);
-void    free_token(t_token *token);
-int     add_word_hd(t_token **token_hd, char *lign);
+void	free_token(t_token *token);
+int		add_word_hd(t_token **token_hd, char *lign);
 #endif

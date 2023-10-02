@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_word_hd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:39:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/30 09:50:43 by aurore           ###   ########.fr       */
+/*   Updated: 2023/10/02 10:48:46 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,6 @@ t_token	*ft_lstnew_token_hd(char *lign, int start, int end)
 	return (elem);
 }
 
-void free_token(t_token *token)
-{
-	t_token		*cur_token;
-	
-	cur_token = NULL;
-	while (token)
-	{
-		cur_token = token;
-		token = token->next;
-		if (cur_token->word != NULL)
-			free(cur_token->word);
-		free(cur_token);
-	}
-}
-
 int	add_word_hd(t_token **token_hd, char *lign)
 {
 	int		i;
@@ -81,19 +66,28 @@ int	add_word_hd(t_token **token_hd, char *lign)
 			return (0);
 		ft_lstadd_back_token(token_hd, new);
 	}
-	get_type(token_hd);
-	free_token(*token_hd);
+	get_type_hd(*token_hd);
 	return (1);
 }
 
-// int	split_word_hd(t_token *token_hd)
-// {
-// 	while (list)
-// 	{
-// 		if (!list->cmd[0])
-// 			return (0);
-// 		add_word(list);
-// 		list = list->next;
-// 	}
-// 	return (1);
-// }
+int	expand_here_doc(t_token **token_hd, t_data *data, char *lign,
+		t_pipex *pipex)
+{
+	t_token	*curr;
+
+	curr = NULL;
+	if (!add_word_hd(token_hd, lign))
+		return (0);
+	curr = *token_hd;
+	while (curr)
+	{
+		curr->word = ft_expand(curr->word, data, token_hd);
+		if (!curr->word)
+			return (0);
+		ft_putstr_fd(curr->word, pipex->here_doc_file);
+		if (curr->next)
+			ft_putstr_fd(" ", pipex->here_doc_file);
+		curr = curr->next;
+	}
+	return (1);
+}

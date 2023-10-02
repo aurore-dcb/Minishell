@@ -6,7 +6,7 @@
 #    By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/18 09:34:07 by aducobu           #+#    #+#              #
-#    Updated: 2023/09/29 12:00:50 by aducobu          ###   ########.fr        #
+#    Updated: 2023/10/02 10:04:08 by aducobu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS = 			${addprefix sources/, \
 						list_env.c parse_env.c get_end_word.c} \
 					${addprefix exec/, main.c frees.c frees2.c exec_utils.c \
 						pipex.c get_paths.c infiles.c outfiles.c process.c find_path.c pids.c \
-						here_doc.c error.c shlvl.c process_utils.c} \
+						here_doc.c error.c shlvl.c process_utils.c split_word_hd.c} \
 					${addprefix builtins/, pwd.c env.c cd.c echo.c export.c \
 						export_utils.c export_utils2.c unset.c builtins.c \
 						exit.c cd_utils.c } \
@@ -29,7 +29,7 @@ SRCS = 			${addprefix sources/, \
 OBJS = 			${SRCS:sources/%.c=objects/%.o}
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 EXECFLAGS = -lreadline
 RM = rm -rf
 

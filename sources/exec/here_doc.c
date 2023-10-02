@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aurore <aurore@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/30 09:54:23 by aurore           ###   ########.fr       */
+/*   Updated: 2023/10/02 10:48:25 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ int	is_here_doc(t_cmd_line *cmd)
 	return (0);
 }
 
-int	read_standart(t_pipex *pipex, char *to_find)
+int	read_standart(t_pipex *pipex, char *to_find, t_data *data)
 {
 	char	*lign;
-	t_token *token_hd;
+	t_token	*token_hd;
 
-	token_hd = NULL;
 	signal(SIGINT, heredoc_signal);
 	while (1)
 	{
@@ -45,21 +44,21 @@ int	read_standart(t_pipex *pipex, char *to_find)
 			unlink(".here_doc");
 			return (1);
 		}
-		if (!lign || ft_strcmp(lign, to_find) == 0) // pk || et pas && ?
+		if (!lign || ft_strcmp(lign, to_find) == 0)
 		{
 			free(lign);
 			return (1);
 		}
-		add_word_hd(&token_hd, lign);
-		// faire l'expand de la ligne
-		ft_putstr_fd(lign, pipex->here_doc_file);
+		token_hd = NULL;
+		if (!expand_here_doc(&token_hd, data, lign, pipex))
+			return (free_token(token_hd), 1);
 		ft_putstr_fd("\n", pipex->here_doc_file);
-		free(lign);
+		free_token(token_hd);
 	}
 	return (0);
 }
 
-int	standart_input(t_cmd_line *cmd, t_pipex *pipex)
+int	standart_input(t_cmd_line *cmd, t_pipex *pipex, t_data *data)
 {
 	t_token	*tok;
 	char	*to_find;
@@ -71,7 +70,7 @@ int	standart_input(t_cmd_line *cmd, t_pipex *pipex)
 			to_find = tok->word;
 		tok = tok->next;
 	}
-	if (!read_standart(pipex, to_find))
+	if (!read_standart(pipex, to_find, data))
 		return (0);
 	return (1);
 }
@@ -98,14 +97,14 @@ int	ft_hd(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 			0646);
 	if (pipex->here_doc_file == -1)
 		return (0);
-	if (!standart_input(cmd, pipex))
+	if (!standart_input(cmd, pipex, data))
 		return (0);
 	if (g_flag == 1)
-		ft_lstadd_file(&cmd->infile,
-			ft_lstnew_file(open("/dev/stdout", O_RDONLY), 0, ""));
+		ft_lstadd_file(&cmd->infile, ft_lstnew_file(open("/dev/stdout",
+					O_RDONLY), 0, ""));
 	else
-		ft_lstadd_file(&cmd->infile,
-			ft_lstnew_file(pipex->here_doc_file, 0, ""));
+		ft_lstadd_file(&cmd->infile, ft_lstnew_file(pipex->here_doc_file, 0,
+				""));
 	close(pipex->here_doc_file);
 	pipex->here_doc_file = open(".here_doc", O_RDONLY);
 	if (pipex->here_doc_file == -1)

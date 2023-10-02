@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 10:23:18 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:57:39 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 10:48:38 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,20 @@ void	free_pid(t_pid **pids)
 		tmp = *pids;
 		*pids = (*pids)->next;
 		free(tmp);
+	}
+}
+
+void	free_token(t_token *token)
+{
+	t_token	*cur_token;
+
+	cur_token = NULL;
+	while (token)
+	{
+		cur_token = token;
+		token = token->next;
+		if (cur_token->word != NULL)
+			free(cur_token->word);
+		free(cur_token);
 	}
 }
