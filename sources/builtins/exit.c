@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:01:33 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/29 15:03:31 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/04 16:04:58 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	is_str_digit(char *str)
 
 void	num_exit(char *str, int error, t_data *data)
 {
-	int	exit_code;
+	long long int	exit_code;
+	int good = 0;
 
 	if (!str)
 		exit_code = data->exit_status;
@@ -42,7 +43,17 @@ void	num_exit(char *str, int error, t_data *data)
 		exit_code = 2;
 	}
 	else
-		exit_code = ft_atoi(str);
+	{
+		exit_code = ft_long_atoi(str, &good);
+		if (good == 1)
+		{
+			ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+			ft_putstr_fd(str, STDERR_FILENO);
+			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+			exit_code = 2;
+		}
+		exit_code = exit_code % 256;
+	}
 	free_all(data);
 	free(str);
 	exit(exit_code);
@@ -71,7 +82,8 @@ int	builtin_exit(t_cmd_line *cmd, t_data *data)
 			error = 1;
 		else if (get_len_tab(cmd->args) > 2)
 		{
-			ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+			ft_putstr_fd("minishell: exit: too many arguments\n",
+					STDERR_FILENO);
 			data->exit_status = 1;
 			return (EXIT_FAILURE);
 		}

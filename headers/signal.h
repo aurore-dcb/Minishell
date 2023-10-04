@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:42 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:03:08 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/04 15:06:05 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNAL_H
 # define SIGNAL_H
+
+#ifndef LONG_MAX_EXIT
+# define LONG_MAX_EXIT 9223372036854775807
+#endif
+
+#ifndef LONG_MIN_EXIT
+# define LONG_MIN_EXIT -9223372036854775807
+#endif
 
 extern int	g_flag;
 

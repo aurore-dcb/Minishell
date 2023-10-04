@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/04 10:58:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/04 14:40:02 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,25 @@ int	read_standart(t_pipex *pipex, char *to_find, t_data *data)
 	while (1)
 	{
 		lign = readline(">");
+		// dprintf(1, "GFLAG = %d\n", g_flag);
 		if (g_flag == 1)
 		{
-			close(pipex->here_doc_file);
+			// if (pipex->here_doc_file > 2)
+			// 	close(pipex->here_doc_file);
+			dprintf(1, "CTRL C\n");
+			dprintf(1, "SORTIE 1\n");
 			return (unlink(".here_doc"), 1);
+			// return (1);
 		}
-		if (!lign || ft_strcmp(lign, to_find) == 0)
+		if ((!lign || ft_strcmp(lign, to_find) == 0))
 		{
+			dprintf(1, "SORTIE 2\n");
 			free(lign);
 			return (1);
 		}
 		token_hd = NULL;
-		if (!expand_here_doc(&token_hd, data, lign, pipex))
-			return (free_token(token_hd), 1);
+		if (!expand_here_doc(&token_hd, data, lign, pipex) || g_flag == 1)
+			return (free_token(token_hd), dprintf(1, "SORTIE 3\n"), 1);
 		ft_putstr_fd("\n", pipex->here_doc_file);
 		free_token(token_hd);
 	}
@@ -68,6 +74,7 @@ int	standart_input(t_cmd_line *cmd, t_pipex *pipex, t_data *data)
 	{
 		if (tok->type == LIMITOR)
 		{
+			g_flag = 0;
 			to_find = tok->word;
 			if (pipex->here_doc_file > 2)
 				close(pipex->here_doc_file);
