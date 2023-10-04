@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 13:40:16 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:28:16 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:47:33 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,21 @@ t_type	get_type_meta(char *word)
 
 void	get_type(t_token *lst)
 {
-	lst = lst->next;
-	while (lst)
+	if (lst && lst->next)
 	{
-		if (lst->previous->type == FILE_IN && lst->type == ARG)
-			lst->type = OPEN_FILE;
-		else if (lst->previous->type == HERE_DOC && lst->type == ARG)
-			lst->type = LIMITOR;
-		else if (lst->previous->type == FILE_OUT && lst->type == ARG)
-			lst->type = EXIT_FILE;
-		else if (lst->previous->type == FILE_OUT_SUR && lst->type == ARG)
-			lst->type = EXIT_FILE_RET;
 		lst = lst->next;
+		while (lst)
+		{
+			if (lst->previous->type == FILE_IN && lst->type == ARG)
+				lst->type = OPEN_FILE;
+			else if (lst->previous->type == HERE_DOC && lst->type == ARG)
+				lst->type = LIMITOR;
+			else if (lst->previous->type == FILE_OUT && lst->type == ARG)
+				lst->type = EXIT_FILE;
+			else if (lst->previous->type == FILE_OUT_SUR && lst->type == ARG)
+				lst->type = EXIT_FILE_RET;
+			lst = lst->next;
+		}
 	}
 }
 

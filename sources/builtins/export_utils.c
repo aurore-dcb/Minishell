@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 16:17:07 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 13:28:07 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 17:05:13 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,13 @@ void	ft_lstreplace_env(t_env **lst, t_env *new)
 void	ft_lstjoin_env(t_env **lst, t_env *new)
 {
 	t_env	*list;
-	char	*tmp;
 
 	list = *lst;
 	if (list)
 	{
 		while (list)
 		{
-			if (!ft_strcmp(list->key, new->key))
-			{	
-				tmp = ft_strdup(list->data);
-				free(list->data);
-				list->data = ft_strjoin(tmp, new->data);
-				free(tmp);
-			}
+			do_join(list, new);
 			list = list->next;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 17:05:15 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/02 14:00:01 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,14 @@ int	builtin_export(t_cmd_line *cmd, t_data *data)
 	char	**args;
 	int		i;
 
-	i = 0;
+	signal(SIGPIPE, SIG_IGN);
+	i = 1;
 	args = cmd->args;
 	data->exit_status = 0;
 	if (!args[1])
 		print_sorted_env(data->envex);
 	else if (args[1])
 	{
-		i = 1;
 		while (args[i])
 		{
 			if (!(args[i][0] == '_' && args[i][1] == '='))

@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 12:15:50 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 14:08:47 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	loop_process(t_data *data, t_pid **pids, t_pipex *pipex)
 	t_cmd_line	*tmp;
 
 	data->tab_env = list_to_tab(&data->envp);
+	if (!data->tab_env)
+		return (0);
 	tmp = data->cmd;
 	while (tmp)
 	{

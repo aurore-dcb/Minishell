@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:39:53 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	search_path(t_env *envp, char *str)
 	int		ret;
 
 	tmp = find_path_ret(envp, str);
-	ret = chdir(tmp);
+	ret = -1;
+	if (tmp)
+		ret = chdir(tmp);
 	if (ret != 0)
 	{
 		str = ft_substr(str, 0, ft_strlen(str));

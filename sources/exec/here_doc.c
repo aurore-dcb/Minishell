@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 10:48:25 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/04 10:58:34 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ int	read_standart(t_pipex *pipex, char *to_find, t_data *data)
 		if (g_flag == 1)
 		{
 			close(pipex->here_doc_file);
-			unlink(".here_doc");
-			return (1);
+			return (unlink(".here_doc"), 1);
 		}
 		if (!lign || ft_strcmp(lign, to_find) == 0)
 		{
@@ -63,15 +62,26 @@ int	standart_input(t_cmd_line *cmd, t_pipex *pipex, t_data *data)
 	t_token	*tok;
 	char	*to_find;
 
+	to_find = "";
 	tok = cmd->token;
 	while (tok)
 	{
 		if (tok->type == LIMITOR)
+		{
 			to_find = tok->word;
+			if (pipex->here_doc_file > 2)
+				close(pipex->here_doc_file);
+			unlink(".here_doc");
+			pipex->here_doc_file = open(".here_doc", O_WRONLY | O_CREAT | O_TRUNC,
+					0646);
+			if (pipex->here_doc_file == -1)
+				return (0);
+			if (!read_standart(pipex, to_find, data))
+				return (0);
+			
+		}
 		tok = tok->next;
 	}
-	if (!read_standart(pipex, to_find, data))
-		return (0);
 	return (1);
 }
 
@@ -92,11 +102,6 @@ int	proc_hd(t_pipex *pipex, t_cmd_line *cmd, t_data *data, t_pid **pids)
 
 int	ft_hd(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 {
-	unlink(".here_doc");
-	pipex->here_doc_file = open(".here_doc", O_WRONLY | O_CREAT | O_TRUNC,
-			0646);
-	if (pipex->here_doc_file == -1)
-		return (0);
 	if (!standart_input(cmd, pipex, data))
 		return (0);
 	if (g_flag == 1)

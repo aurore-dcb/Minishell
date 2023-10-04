@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:29:26 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/29 14:47:00 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/02 15:34:08 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ char	*change_pwd(t_data *data)
 	{
 		if (!ft_strncmp(tmp_env->key, "PWD", 3))
 		{
-			ret = ft_strdup(tmp_env->data);
-			if (!ret)
-				return (NULL);
+			if (tmp_env->data)
+			{
+				ret = ft_strdup(tmp_env->data);
+				if (!ret)
+					return (NULL);
+			}
 			free(tmp_env->data);
 			tmp_env->data = getcwd(NULL, 0);
 		}

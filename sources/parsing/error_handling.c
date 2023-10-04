@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:24:56 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:26:48 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 14:13:12 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	error_syntax_alone(t_cmd_line **list)
 	t_token		*token;
 
 	begin = *list;
+	token = NULL;
 	while (begin)
 	{
 		token = begin->token;
@@ -93,7 +94,7 @@ int	error_syntax_alone(t_cmd_line **list)
 			token = token->next;
 		begin = begin->next;
 	}
-	if (token->word[0] == '<' || token->word[0] == '>')
+	if (!token || (token->word[0] == '<' || token->word[0] == '>'))
 		return (1);
 	return (0);
 }
@@ -104,6 +105,7 @@ char	error_syntax(t_cmd_line **list)
 	t_token		*token;
 
 	begin = *list;
+	token = NULL;
 	while (begin)
 	{
 		token = begin->token;
@@ -115,7 +117,7 @@ char	error_syntax(t_cmd_line **list)
 		}
 		begin = begin->next;
 	}
-	if (token->word[0] == '|')
+	if (!token || token->word[0] == '|')
 		return (token->word[0]);
 	return (0);
 }

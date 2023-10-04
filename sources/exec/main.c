@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 11:36:04 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/02 14:08:10 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*prompt(void)
 	char	*input;
 	char	*line;
 
+	input = NULL;
 	set_signals(1);
 	if (isatty(STDIN_FILENO))
 		input = readline("minishell$ ");
@@ -89,4 +90,5 @@ int	main(int argc, char **argv, char **env)
 	}
 	clear_history();
 	free_all(&data);
+	return (0);
 }

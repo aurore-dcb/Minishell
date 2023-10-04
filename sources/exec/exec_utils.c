@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 11:24:39 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:38:43 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	fill_arg(t_cmd_line *list)
 	{
 		if (cur->type == ARG)
 		{
-			list->args[i] = ft_strdup(cur->word);
+			if (cur->word)
+				list->args[i] = ft_strdup(cur->word);
+			else
+				list->args[i] = NULL;
 			i++;
 		}
 		cur = cur->next;

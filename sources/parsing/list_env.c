@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:29:40 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/27 17:20:22 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:41:00 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ t_env	*ft_lstnew_env_no_equal(char *data)
 	split_res = malloc(sizeof(char *) * 3);
 	if (!split_res)
 		return (NULL);
-	split_res[0] = ft_strdup(data);
+	if (data)
+		split_res[0] = ft_strdup(data);
+	else
+		split_res[0] = NULL;
 	split_res[1] = NULL;
 	split_res[2] = NULL;
 	if (!copy_elem(split_res, NULL, elem))

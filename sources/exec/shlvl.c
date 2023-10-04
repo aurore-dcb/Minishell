@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:28:45 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 13:52:48 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	get_shlvl(t_data *data)
 	int		ret;
 
 	tmp_env = data->envp;
+	ret = 0;
 	while (tmp_env)
 	{
 		if (!ft_strncmp(tmp_env->key, "SHLVL", 5))

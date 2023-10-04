@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 11:26:47 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/03 10:45:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,17 @@ int	count_char(char *s, t_data *data, t_token **token, int k)
 	n = 0;
 	while (s && *s != '\0')
 	{
-		if (*s == 39)
+		if (*s == 39 && (*token)->type != LIMITOR)
 			n += count_between_simple(&s);
-		else if (*s == 34)
+		else if (*s == 34 && (*token)->type != LIMITOR)
 			n += count_between_double(&s, data, token);
 		if (*s == '$' && *(s + 1) && *(s + 1) != 34 && *(s + 1) != ' ' && *(s
-				+ 1) != '/')
+				+ 1) != '/' && (*token)->type != LIMITOR)
 		{
 			s++;
 			k = find_variable_special(&s, data, token);
 			n += k;
-			if (*s == '?')
-				s += len_var_env(s);
-			else if (k == 0)
+			if (k == 0)
 				s--;
 		}
 		else

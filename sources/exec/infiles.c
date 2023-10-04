@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 10:29:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:39:34 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ t_file	*ft_lstnew_file(int fd, int err, char *file)
 	elem->next = NULL;
 	elem->fd = fd;
 	elem->r_no = err;
-	elem->name = ft_strdup(file);
+	if (file)
+		elem->name = ft_strdup(file);
+	else
+		elem->name = NULL;
 	return (elem);
 }
 

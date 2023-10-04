@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_word_hd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:39:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 10:48:46 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/02 16:47:24 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 void	get_type_hd(t_token *lst)
 {
-	lst = lst->next;
-	while (lst)
+	if (lst && lst->next)
 	{
-		if (lst->previous->type == FILE_IN && lst->type == ARG)
-			lst->type = OPEN_FILE;
-		else if (lst->previous->type == HERE_DOC && lst->type == ARG)
-			lst->type = LIMITOR;
-		else if (lst->previous->type == FILE_OUT && lst->type == ARG)
-			lst->type = EXIT_FILE;
-		else if (lst->previous->type == FILE_OUT_SUR && lst->type == ARG)
-			lst->type = EXIT_FILE_RET;
 		lst = lst->next;
+		while (lst)
+		{
+			if (lst->previous->type == FILE_IN && lst->type == ARG)
+				lst->type = OPEN_FILE;
+			else if (lst->previous->type == HERE_DOC && lst->type == ARG)
+				lst->type = LIMITOR;
+			else if (lst->previous->type == FILE_OUT && lst->type == ARG)
+				lst->type = EXIT_FILE;
+			else if (lst->previous->type == FILE_OUT_SUR && lst->type == ARG)
+				lst->type = EXIT_FILE_RET;
+			lst = lst->next;
+		}
 	}
 }
 
@@ -76,6 +79,8 @@ int	expand_here_doc(t_token **token_hd, t_data *data, char *lign,
 	t_token	*curr;
 
 	curr = NULL;
+	if (!lign)
+		return (0);
 	if (!add_word_hd(token_hd, lign))
 		return (0);
 	curr = *token_hd;
