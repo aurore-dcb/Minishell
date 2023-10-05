@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:46:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 18:16:40 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ t_token	*ft_lstnew_token_hd(char *lign, int start, int end);
 int		add_word_hd(t_token **token_hd, char *lign);
 int		surr_by_quotes(char *s);
 char	*ft_trim_hd(char const *s1);
+int		quotes_hd(t_token *tok, t_token **token_hd);
+int		make_expand(t_token *tok, t_data *data, t_token	*curr,
+			t_token **token_hd);
 int		expand_here_doc(t_token *tok, t_data *data, char *lign,
 			t_pipex *pipex);
 void	error_file(t_file *in);

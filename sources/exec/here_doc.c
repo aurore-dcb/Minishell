@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:41:07 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 18:17:23 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ int	read_standart(t_pipex *pipex, t_data *data, t_token *tok)
 			return (unlink(".here_doc"), 1);
 		if ((!lign))
 		{
-			ft_putstr_fd("bash: warning: here-document delimited by end-of-file\n",
-							2);
+			ft_putstr_fd("bash: warning: here-document ", 2);
+			ft_putstr_fd("delimited by end-of-file\n", 2);
 			return (free(lign), 1);
 		}
-		if ((ft_strcmp(lign, tok->word) == 0))
-			return (free(lign), 1);
 		if (!expand_here_doc(tok, data, lign, pipex))
 			return (1);
 		ft_putstr_fd("\n", pipex->here_doc_file);
@@ -68,7 +66,7 @@ int	standart_input(t_cmd_line *cmd, t_pipex *pipex, t_data *data)
 				close(pipex->here_doc_file);
 			unlink(".here_doc");
 			pipex->here_doc_file = open(".here_doc",
-						O_WRONLY | O_CREAT | O_TRUNC, 0646);
+					O_WRONLY | O_CREAT | O_TRUNC, 0646);
 			if (pipex->here_doc_file == -1)
 				return (0);
 			if (!read_standart(pipex, data, tok))
@@ -101,13 +99,13 @@ int	ft_hd(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 	if (g_exit == 130)
 	{
 		ft_lstadd_file(&cmd->infile, ft_lstnew_file(open("/dev/stdout",
-				O_RDONLY), 0, ""));
+					O_RDONLY), 0, ""));
 	}
 	else
 	{
 		g_exit = 0;
 		ft_lstadd_file(&cmd->infile, ft_lstnew_file(pipex->here_doc_file, 0,
-			""));
+				""));
 	}
 	close(pipex->here_doc_file);
 	pipex->here_doc_file = open(".here_doc", O_RDONLY);
