@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 10:26:31 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 18:17:23 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 18:35:53 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	read_standart(t_pipex *pipex, t_data *data, t_token *tok)
 			return (free(lign), 1);
 		}
 		if (!expand_here_doc(tok, data, lign, pipex))
-			return (1);
+			return (free(lign), 1);
 		ft_putstr_fd("\n", pipex->here_doc_file);
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:53:36 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 18:33:19 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int	ft_process(t_pipex *pipex, t_pid **pids, t_cmd_line *cmd, t_data *data)
 			return (0);
 	}
 	else
+	{
+		set_signals(4);
 		ft_parent(pids, pid, cmd, last_in);
+	}
 	return (1);
 }
 

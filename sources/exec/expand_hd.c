@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:58:47 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 18:15:22 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 18:35:30 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	quotes_hd(t_token *tok, t_token **token_hd)
 	return (1);
 }
 
-int	make_expand(t_token *tok, t_data *data, t_token	*curr, t_token **token_hd)
+int	make_expand(t_token *tok, t_data *data, t_token *curr, t_token **token_hd)
 {
 	if (!quotes_hd(tok, token_hd))
 		return (0);
@@ -57,9 +57,9 @@ int	expand_here_doc(t_token *tok, t_data *data, char *lign, t_pipex *pipex)
 	while (curr)
 	{
 		if (!make_expand(tok, data, curr, &token_hd))
-			return (0);
+			return (free_token(token_hd), 0);
 		if ((ft_strcmp(curr->word, tok->word) == 0))
-			return (0);
+			return (free_token(token_hd), 0);
 		ft_putstr_fd(curr->word, pipex->here_doc_file);
 		curr = curr->next;
 	}

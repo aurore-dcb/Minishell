@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sig.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:06 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/05 17:16:22 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 18:34:23 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 	{
-		g_exit = 130;
 		printf("\n");
+		g_exit = 130;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -61,6 +61,11 @@ void	set_signals(int sig)
 	{
 		signal(SIGINT, sig_handler_job);
 		signal(SIGQUIT, sig_handler_job);
+	}
+	else if (sig == 3)
+	{
+		signal(SIGINT, heredoc_signal);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	if (sig == 4)
 	{
