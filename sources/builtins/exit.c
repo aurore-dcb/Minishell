@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:01:33 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/04 16:04:58 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 10:27:51 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ int	is_str_digit(char *str)
 	return (1);
 }
 
+void display_exit_error(char *str)
+{
+	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+}
+
 void	num_exit(char *str, int error, t_data *data)
 {
 	long long int	exit_code;
@@ -37,9 +44,7 @@ void	num_exit(char *str, int error, t_data *data)
 		exit_code = data->exit_status;
 	else if (error == 1)
 	{
-		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		display_exit_error(str);
 		exit_code = 2;
 	}
 	else
@@ -47,9 +52,7 @@ void	num_exit(char *str, int error, t_data *data)
 		exit_code = ft_long_atoi(str, &good);
 		if (good == 1)
 		{
-			ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-			ft_putstr_fd(str, STDERR_FILENO);
-			ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+			display_exit_error(str);
 			exit_code = 2;
 		}
 		exit_code = exit_code % 256;
