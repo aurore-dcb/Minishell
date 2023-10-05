@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:18:21 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:52:24 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ int	error_pars(t_data *data)
 	if (closed_quotes(data->input, &data->etat) == 0)
 		return (parse_error(data), 0);
 	if (error_begin_end_cmd(data->input) == 1)
-		return (error_token(data, '|'), 0);
+		return (error_token('|'), 0);
 	if (error_double_pipe(data->input) == 1)
-		return (error_token(data, '|'), 0);
+		return (error_token('|'), 0);
 	if (error_pipe_token(data->input) == 1)
-		return (error_token(data, '|'), 0);
+		return (error_token('|'), 0);
 	if (!split_pipe(data->input, &data->cmd))
 	{
 		g_exit = 1;
@@ -73,11 +73,11 @@ int	parsing(t_data *data)
 		return (0);
 	tmp = error_syntax(&data->cmd);
 	if (tmp)
-		return (error_token(data, tmp), 0);
+		return (error_token(tmp), 0);
 	if (error_syntax_alone(&data->cmd) == 1)
-		return (error_token_gen(data, 1), 0);
+		return (error_token_gen(1), 0);
 	else if (error_syntax_alone(&data->cmd) == 2)
-		return (error_token_gen(data, 2), 0);
+		return (error_token_gen(2), 0);
 	if (!expansion(data))
 		return (0);
 	if (!tab_cmd(&data->cmd))

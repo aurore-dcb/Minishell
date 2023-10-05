@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:29:26 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/05 14:58:46 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:49:03 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ int	change_oldpwd(t_data *data, char *ret)
 	return (1);
 }
 
-int	error_path(t_cmd_line *cmd, t_data *data)
+int	error_path(t_cmd_line *cmd)
 {
 	int	ret;
 
-	(void)data;
 	ret = chdir(cmd->args[1]);
 	if (ret != 0)
 	{
@@ -74,9 +73,8 @@ int	error_path(t_cmd_line *cmd, t_data *data)
 	return (ret);
 }
 
-void	error_message(t_data *data)
+void	error_message(void)
 {
-	(void)data;
 	g_exit = 1;
 	ft_putstr_fd("bash: cd: too many arguments\n", 2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:08:58 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/05 10:35:31 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:53:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	handle_pt(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 		exit(1);
 	}
 	if (execve(cmd->args[1], tab, data->tab_env) == -1)
-		error_file_exec(cmd->args[1], data, errno);
+		error_file_exec(cmd->args[1], errno);
 	free_tab(tab);
 	fr_no_buil(cmd, pipex, data, pids);
 	exit(126);

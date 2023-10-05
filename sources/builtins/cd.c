@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:51:10 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	builtin_cd(t_cmd_line *cmd, t_data *data)
 	char	*res;
 
 	if (get_len_tab(cmd->args) > 2)
-		return (error_message(data), EXIT_FAILURE);
+		return (error_message(), EXIT_FAILURE);
 	if (!cmd->args[1] || ft_strncmp(cmd->args[1], "~", 1) == 0
 		|| ft_strncmp(cmd->args[1], "--", 2) == 0)
 		ret = search_path(data->envp, "HOME");
@@ -77,7 +77,7 @@ int	builtin_cd(t_cmd_line *cmd, t_data *data)
 		print_oldpwd(data, ret);
 	}
 	else
-		ret = error_path(cmd, data);
+		ret = error_path(cmd);
 	if (ret != 0)
 		return (EXIT_FAILURE);
 	res = change_pwd(data);

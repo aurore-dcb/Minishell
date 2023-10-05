@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 14:53:43 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:44:18 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,10 @@ void	free_all(t_data *data)
 		free_tab(data->tab_env);
 }
 
-void	wait_fct(t_pid **pids, t_data *data)
+void	wait_fct(t_pid **pids)
 {
 	t_pid	*tmp;
 
-	(void)data;
 	tmp = *pids;
 	while (tmp)
 	{

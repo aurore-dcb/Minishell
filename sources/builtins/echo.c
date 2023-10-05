@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:46:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:16:44 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:47:12 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ void	print_echo(t_cmd_line *cmd, int i, int y)
 		printf("\n");
 }
 
-int	builtin_echo(t_cmd_line *cmd, t_data *data)
+int	builtin_echo(t_cmd_line *cmd)
 {
 	int	i;
 	int	y;
 	int	nb_op;
 	int	verif;
 
-	(void)data;
 	i = 1;
 	y = 0;
 	verif = verif_n(cmd->args);

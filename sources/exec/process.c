@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:27:36 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:53:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	no_built(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 {
 	if (!pipex->middle_cmd_path)
 	{
-		error_cmd(cmd, data);
+		error_cmd(cmd);
 		fr_no_buil(cmd, pipex, data, pids);
 		exit(127);
 	}
@@ -89,9 +89,9 @@ int	ft_child(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 	last_in = ft_lstlast_file(cmd->infile);
 	last_out = ft_lstlast_file(cmd->outfile);
 	if (last_in && last_in->fd == -1)
-		error_file(last_in, data);
+		error_file(last_in);
 	if (last_out && last_out->fd == -1)
-		error_file(last_out, data);
+		error_file(last_out);
 	if ((last_in && last_in->fd == -1) || (last_out && last_out->fd == -1))
 	{
 		fr_no_buil(cmd, pipex, data, pids);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:41:21 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:15:34 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:46:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_tab(char **tab);
 void	free_cmd_in(t_file *in);
 void	free_list(t_cmd_line *begin);
 void	free_all(t_data *data);
-void	wait_fct(t_pid **pids, t_data *data);
+void	wait_fct(t_pid **pids);
 void	free_elem_env(t_env *list);
 void	free_env(t_env *env);
 void	fr_no_buil(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids);
@@ -68,11 +68,11 @@ int		surr_by_quotes(char *s);
 char	*ft_trim_hd(char const *s1);
 int		expand_here_doc(t_token *tok, t_data *data, char *lign,
 			t_pipex *pipex);
-void	error_file(t_file *in, t_data *data);
-void	error_cmd(t_cmd_line *cmd, t_data *data);
-void	error_token_gen(t_data *data, int tmp);
-void	error_token(t_data *data, char c);
-void	error_file_exec(char *cmd, t_data *data, int error);
+void	error_file(t_file *in);
+void	error_cmd(t_cmd_line *cmd);
+void	error_token_gen(int tmp);
+void	error_token(char c);
+void	error_file_exec(char *cmd, int error);
 int		get_shlvl(t_data *data);
 int		is_shlvl(t_data *data);
 char	*get_shvalue(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:17:55 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:49:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int		test_arg(char **args, int i);
 int		nb_option(char **args);
 int		verif_n(char **args);
 void	print_echo(t_cmd_line *cmd, int i, int y);
-int		builtin_echo(t_cmd_line *cmd, t_data *data);
+int		builtin_echo(t_cmd_line *cmd);
 char	*find_path_ret(t_env *envp, char *str);
 int		search_path(t_env *envp, char *str);
 void	print_oldpwd(t_data *data, int ret);
 int		builtin_cd(t_cmd_line *cmd, t_data *data);
 char	*change_pwd(t_data *data);
 int		change_oldpwd(t_data *data, char *ret);
-int		error_path(t_cmd_line *cmd, t_data *data);
-void	error_message(t_data *data);
+int		error_path(t_cmd_line *cmd);
+void	error_message(void);
 int		builtin_env(t_data *data);
 int		add_to_envp(char *args, int to_equal, t_data *data);
 int		add_to_envex(char *args, int to_equal, t_data *data);
