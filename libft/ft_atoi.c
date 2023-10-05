@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:19:02 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/04 16:06:35 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 10:15:31 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ int	ft_atoi(const char *str)
 
 long long int	ft_long_atoi(const char *str, int *good)
 {
-	int		i;
+	int			i;
 	long long	neg;
 	long long	n;
+	long long	save;
 
 	i = 0;
 	neg = 1;
@@ -56,9 +57,10 @@ long long int	ft_long_atoi(const char *str, int *good)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 	{
+		save = n;
 		n = n * 10 + (str[i] - 48);
 		i++;
-		if (i >= 10)
+		if (save >= n)
 			*good = 1;
 	}
 	return (n * neg);
