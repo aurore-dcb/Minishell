@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:55:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	builtin_env(t_data *data)
 	begin = data->envp;
 	if (!data->envp)
 	{
-		data->exit_status = 1;
+		g_exit = 1;
 		return (EXIT_FAILURE);
 	}
 	while (begin)
@@ -31,6 +31,6 @@ int	builtin_env(t_data *data)
 		printf("\n");
 		begin = begin->next;
 	}
-	data->exit_status = 0;
+	g_exit = 0;
 	return (EXIT_SUCCESS);
 }

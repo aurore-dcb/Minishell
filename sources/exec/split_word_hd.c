@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_word_hd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 15:39:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 16:47:24 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 16:59:54 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,48 +51,54 @@ t_token	*ft_lstnew_token_hd(char *lign, int start, int end)
 
 int	add_word_hd(t_token **token_hd, char *lign)
 {
-	int		i;
-	int		start;
 	t_token	*new;
 
-	i = 0;
-	start = 0;
 	new = NULL;
-	while (lign[i])
-	{
-		while (is_spaces(lign[i]) && lign[i])
-			i++;
-		start = i;
-		i = get_end_word(lign, i);
-		new = ft_lstnew_token_hd(lign, start, i);
-		if (!new)
-			return (0);
-		ft_lstadd_back_token(token_hd, new);
-	}
+	new = ft_lstnew_token_hd(lign, 0, ft_strlen(lign));
+	if (!new)
+		return (0);
+	ft_lstadd_back_token(token_hd, new);
 	get_type_hd(*token_hd);
 	return (1);
 }
 
-int	expand_here_doc(t_token **token_hd, t_data *data, char *lign,
-		t_pipex *pipex)
+int	surr_by_quotes(char *s)
 {
-	t_token	*curr;
+	int	start;
+	int	end;
 
-	curr = NULL;
-	if (!lign)
+	if (!s)
 		return (0);
-	if (!add_word_hd(token_hd, lign))
-		return (0);
-	curr = *token_hd;
-	while (curr)
+	start = 0;
+	end = ft_strlen(s);
+	if (start != end)
 	{
-		curr->word = ft_expand(curr->word, data, token_hd);
-		if (!curr->word)
+		if (s[start] == 39 && s[end - 1] == 39)
+			return (1);
+		else if (s[start] == 34 && s[end - 1] == 34)
+			return (1);
+		else
 			return (0);
-		ft_putstr_fd(curr->word, pipex->here_doc_file);
-		if (curr->next)
-			ft_putstr_fd(" ", pipex->here_doc_file);
-		curr = curr->next;
 	}
-	return (1);
+	return (0);
+}
+
+char	*ft_trim_hd(char const *s1)
+{
+	char	*ret;
+	char	*start;
+	char	*end;
+	int		c;
+
+	if (!s1)
+		return (0);
+	c = s1[0];
+	start = (char *)s1;
+	end = start + ft_strlen(s1);
+	while (*start && *start == c)
+		++start;
+	while (start < end && *(end - 1) == c)
+		--end;
+	ret = ft_substr(start, 0, end - start);
+	return (ret);
 }

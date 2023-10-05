@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 14:08:47 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:27:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_child(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 	if ((last_in && last_in->fd == -1) || (last_out && last_out->fd == -1))
 	{
 		fr_no_buil(cmd, pipex, data, pids);
-		exit(data->exit_status);
+		exit(g_exit);
 	}
 	do_dup(cmd, last_in, last_out);
 	if (cmd->next)
@@ -106,5 +106,5 @@ int	ft_child(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 	if (builtins_pipe(cmd->args[0], data, cmd) == 0)
 		no_built(cmd, pipex, data, pids);
 	fr_no_buil(cmd, pipex, data, pids);
-	exit(data->exit_status);
+	exit(g_exit);
 }

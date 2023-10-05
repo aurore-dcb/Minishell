@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:36:37 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:17:11 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	builtin_pwd(t_data *data)
+int	builtin_pwd(void)
 {
 	char	*res;
 
@@ -24,12 +24,12 @@ int	builtin_pwd(t_data *data)
 	}
 	else
 	{
-		data->exit_status = 1;
+		g_exit = 1;
 		ft_putstr_fd("pwd: error retrieving current directory: getcwd: ", 2);
 		ft_putstr_fd("cannot access parent directories: ", 2);
 		ft_putstr_fd("No such file or directory\n", 2);
 		return (EXIT_FAILURE);
 	}
-	data->exit_status = 0;
+	g_exit = 0;
 	return (EXIT_SUCCESS);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:34:54 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 11:25:15 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:18:21 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	expansion(t_data *data)
 		token = begin->token;
 		while (token)
 		{
-			token->word = ft_expand(token->word, data, &token);
+			token->word = ft_expand(token->word, data, &token, 0);
 			if (!token->word)
 				return (0);
 			token = token->next;
@@ -59,7 +59,7 @@ int	error_pars(t_data *data)
 		return (error_token(data, '|'), 0);
 	if (!split_pipe(data->input, &data->cmd))
 	{
-		data->exit_status = 1;
+		g_exit = 1;
 		return (parse_error(data), 0);
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 15:39:53 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ int	builtin_cd(t_cmd_line *cmd, t_data *data)
 	if (!change_oldpwd(data, res))
 		return (EXIT_FAILURE);
 	free(res);
-	data->exit_status = 0;
+	g_exit = 0;
 	return (EXIT_SUCCESS);
 }

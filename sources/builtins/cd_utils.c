@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:29:26 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/02 15:34:08 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:58:46 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ int	error_path(t_cmd_line *cmd, t_data *data)
 {
 	int	ret;
 
+	(void)data;
 	ret = chdir(cmd->args[1]);
 	if (ret != 0)
 	{
-		data->exit_status = 1;
+		g_exit = 1;
 		ft_putstr_fd("bash: cd: ", 2);
 		ft_putstr_fd(cmd->args[1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
@@ -75,6 +76,7 @@ int	error_path(t_cmd_line *cmd, t_data *data)
 
 void	error_message(t_data *data)
 {
-	data->exit_status = 1;
+	(void)data;
+	g_exit = 1;
 	ft_putstr_fd("bash: cd: too many arguments\n", 2);
 }

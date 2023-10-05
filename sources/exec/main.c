@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 09:39:53 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 10:35:57 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 15:16:38 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,15 @@ char	*prompt(void)
 
 void	init_main(t_data *data, char **env)
 {
-	g_flag = 0;
+	g_exit = 0;
 	data->envp = NULL;
 	data->envex = NULL;
-	data->exit_status = 0;
 	parse_env(env, data);
 	handle_shlevel(data);
 }
 
 void	main_utils(t_data *data)
 {
-	g_flag = 0;
 	if (data->input[0])
 	{
 		add_history(data->input);
@@ -59,7 +57,7 @@ void	main_utils(t_data *data)
 			ft_pipex(data);
 		}
 		else
-			data->exit_status = 2;
+			g_exit = 2;
 	}
 	free(data->input);
 }
@@ -76,18 +74,13 @@ int	main(int argc, char **argv, char **env)
 	{
 		initialize(&data);
 		data.input = prompt();
-		if (g_flag == 130)
-		{
-			g_flag = 0;
-			data.exit_status = 130;
-		}
 		if (data.input)
 			main_utils(&data);
 		else
 		{
 			if (isatty(0) == 1)
 				printf("exit\n");
-			return (free_all(&data), data.exit_status);
+			return (free_all(&data), g_exit);
 		}
 		free_list(data.cmd);
 		if (data.tab_env)

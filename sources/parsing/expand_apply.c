@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_apply.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:01:12 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	out_of_quotes(char *res, char **word, t_data *data, int i)
 		return (0);
 	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
 	if (**word == '?')
-		var = ft_itoa(data->exit_status);
+		var = ft_itoa(g_exit);
 	else
 		var = existing_var(cpy, data, 1);
 	if (ft_strlen_expand(var) != ft_strlen(var))
@@ -66,7 +66,7 @@ int	apply_out_quotes(char *res, char **word, t_data *data, int i)
 		return (0);
 	cpy = ft_strcpy(cpy, *word, len_var_env(*word) + 1);
 	if (**word == '?')
-		var = ft_itoa(data->exit_status);
+		var = ft_itoa(g_exit);
 	else
 		var = existing_var(cpy, data, 1);
 	while (var && var[j])

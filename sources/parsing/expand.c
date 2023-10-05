@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 14:34:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/03 10:45:56 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 16:25:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*apply_expand(char *res, char *word, t_data *data, t_token **token)
 	i = 0;
 	while (*word)
 	{
-		if (*word == 39)
+		if (*word == 39 && (*token)->type != LIMITOR)
 			i = between_simple(res, &word, i);
 		else if (*word == 34 && (*token)->type != LIMITOR)
 			i = between_double(res, &word, data, i);
@@ -98,15 +98,19 @@ char	*trim_isspace(char const *s1, char const *set)
 	return (ret);
 }
 
-char	*ft_expand(char *word, t_data *data, t_token **token)
+char	*ft_expand(char *word, t_data *data, t_token **token, int hd)
 {
 	char	*res;
 	char	*trim;
 	int		len_malloc;
 
+	trim = NULL;
 	if (!word)
 		return (NULL);
-	trim = trim_isspace(word, " ");
+	if (!hd)
+		trim = trim_isspace(word, " ");
+	else
+		trim = ft_strdup(word);
 	if (!trim)
 		return (NULL);
 	len_malloc = count_char(trim, data, token, 0);

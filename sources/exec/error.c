@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 12:47:13 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:54:23 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	error_file(t_file *in, t_data *data)
 {
-	data->exit_status = 1;
+	(void)data;
+	g_exit = 1;
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(in->name, 2);
 	if (in->r_no == 13)
@@ -27,7 +28,8 @@ void	error_file(t_file *in, t_data *data)
 
 void	error_cmd(t_cmd_line *cmd, t_data *data)
 {
-	data->exit_status = 127;
+	(void)data;
+	g_exit = 127;
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd->args[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
@@ -35,7 +37,8 @@ void	error_cmd(t_cmd_line *cmd, t_data *data)
 
 void	error_token_gen(t_data *data, int tmp)
 {
-	data->exit_status = 2;
+	(void)data;
+	g_exit = 2;
 	if (tmp == 1)
 		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
 	else if (tmp == 2)
@@ -47,7 +50,8 @@ void	error_token_gen(t_data *data, int tmp)
 
 void	error_token(t_data *data, char c)
 {
-	data->exit_status = 2;
+	(void)data;
+	g_exit = 2;
 	ft_putstr_fd("bash: syntax error near unexpected token `", 2);
 	ft_putchar_fd(c, 2);
 	ft_putstr_fd("'\n", 2);
@@ -55,7 +59,8 @@ void	error_token(t_data *data, char c)
 
 void	error_file_exec(char *cmd, t_data *data, int error)
 {
-	data->exit_status = 1;
+	(void)data;
+	g_exit = 1;
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd, 2);
 	if (error == 13)

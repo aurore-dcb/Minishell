@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:42 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/05 10:37:46 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:50:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define LONG_MIN_EXIT -9223372036854775807
 # endif
 
-extern int	g_flag;
+extern int	g_exit;
 
 void		signal_cmd(int sig);
 void		sig_handler_job(int sig);

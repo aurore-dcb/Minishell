@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 11:12:30 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 15:46:55 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char		*ft_strcpy(char *dst, char *src, int dstsize);
 int			count_char(char *s, t_data *data, t_token **token, int k);
 char		*apply_expand(char *res, char *word, t_data *data, t_token **token);
 char		*trim_isspace(char const *s1, char const *set);
-char		*ft_expand(char *word, t_data *data, t_token **token);
+char		*ft_expand(char *word, t_data *data, t_token **token, int hd);
 char		*ft_copy(t_env *begin, t_type type, char *var);
 char		*existing_var(char *var, t_data *data, t_type type);
 int			count_between_simple(char **s);

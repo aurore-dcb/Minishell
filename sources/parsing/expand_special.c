@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 10:09:27 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 10:46:40 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	find_variable_special(char **s, t_data *data, t_token **token)
 
 	trim = NULL;
 	if (**s == '?')
-		return (size_nb(data->exit_status));
+		return (size_nb(g_exit));
 	cpy = malloc(sizeof(char) * (len_var_env(*s) + 1));
 	if (!cpy)
 		return (0);

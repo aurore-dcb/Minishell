@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 14:49:37 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parsing_pipex(t_pipex *pipex, t_data *data)
 	pipex->paths = get_paths(&data->envp);
 	if (!open_files(data))
 	{
-		data->exit_status = 1;
+		g_exit = 1;
 		return (0);
 	}
 	return (1);

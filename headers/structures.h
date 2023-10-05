@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:07:30 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:41:07 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:16:07 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ typedef struct s_data
 	struct s_env		*envp;
 	struct s_env		*envex;
 	char				**tab_env;
-	int					exit_status;
 }						t_data;
 
 typedef struct s_pipex

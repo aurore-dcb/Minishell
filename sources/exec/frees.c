@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 15:38:48 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:53:43 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,23 +91,24 @@ void	wait_fct(t_pid **pids, t_data *data)
 {
 	t_pid	*tmp;
 
+	(void)data;
 	tmp = *pids;
 	while (tmp)
 	{
-		waitpid((tmp->pid), &data->exit_status, 0);
+		waitpid((tmp->pid), &g_exit, 0);
 		tmp = tmp->next;
 	}
 	free_pid(pids);
-	if (WIFEXITED(data->exit_status))
-		data->exit_status = WEXITSTATUS(data->exit_status);
-	else if (WIFSIGNALED(data->exit_status))
+	if (WIFEXITED(g_exit))
+		g_exit = WEXITSTATUS(g_exit);
+	else if (WIFSIGNALED(g_exit))
 	{
-		if (data->exit_status == SIGTERM)
+		if (g_exit == SIGTERM)
 		{
-			data->exit_status = 143;
+			g_exit = 143;
 			ft_putstr_fd("Terminated\n", 2);
 		}
-		if (data->exit_status == SIGINT)
-			data->exit_status = 130;
+		if (g_exit == SIGINT)
+			g_exit = 130;
 	}
 }

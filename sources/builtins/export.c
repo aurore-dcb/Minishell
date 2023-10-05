@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 14:30:28 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/02 14:00:01 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	do_export(t_data *data, int i, char **args)
 	ret_inv = is_inv(args[i]);
 	if (ft_isdigit(args[i][0]) || (ret_inv == 1) || has_plus(args[i]))
 	{
-		data->exit_status = 1;
+		g_exit = 1;
 		ft_putstr_fd("bash: export: `", 2);
 		ft_putstr_fd(args[i], 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
@@ -109,7 +109,7 @@ int	builtin_export(t_cmd_line *cmd, t_data *data)
 	signal(SIGPIPE, SIG_IGN);
 	i = 1;
 	args = cmd->args;
-	data->exit_status = 0;
+	g_exit = 0;
 	if (!args[1])
 		print_sorted_env(data->envex);
 	else if (args[1])
@@ -120,7 +120,7 @@ int	builtin_export(t_cmd_line *cmd, t_data *data)
 			{
 				if (!do_export(data, i, args))
 				{
-					data->exit_status = 1;
+					g_exit = 1;
 					return (EXIT_FAILURE);
 				}
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 11:40:24 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/02 16:38:43 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	**new_tab(char **old_tab, int old_len)
 
 void	parse_error(t_data *data)
 {
-	data->exit_status = 1;
+	g_exit = 1;
 	ft_putstr_fd("bash: '", 2);
 	ft_putstr_fd(data->input, 2);
 	ft_putstr_fd("': parse error\n", 2);

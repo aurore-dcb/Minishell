@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:11:43 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 17:05:42 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:17:55 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		is_inv(char *str);
 int		has_plus(char *str);
 int		in_env(t_env *env, char *key);
 void	del_plus(char *str, char to_del);
-int		builtin_pwd(t_data *data);
+int		builtin_pwd(void);
 void	del_var(t_env **head, char *arg);
 int		builtin_unset(t_cmd_line *cmd, t_data *data);
 int		builtins_pipe(char *cmd, t_data *data, t_cmd_line *cmd_l);

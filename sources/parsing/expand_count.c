@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_count.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:46:24 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 14:52:26 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	find_variable(char *s, t_data *data, t_token **token)
 	char	*res;
 
 	if (*s == '?')
-		return (size_nb(data->exit_status));
+		return (size_nb(g_exit));
 	cpy = malloc(sizeof(char) * (len_var_env(s) + 1));
 	if (!cpy || len_var_env(s) == 0)
 		return (free(cpy), 0);

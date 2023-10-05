@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:46:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/28 10:30:32 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 17:16:44 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	builtin_echo(t_cmd_line *cmd, t_data *data)
 	int	nb_op;
 	int	verif;
 
+	(void)data;
 	i = 1;
 	y = 0;
 	verif = verif_n(cmd->args);
@@ -99,6 +100,6 @@ int	builtin_echo(t_cmd_line *cmd, t_data *data)
 		y = 1;
 	}
 	print_echo(cmd, i, y);
-	data->exit_status = 0;
+	g_exit = 0;
 	return (EXIT_SUCCESS);
 }
