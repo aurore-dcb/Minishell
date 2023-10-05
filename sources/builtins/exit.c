@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:01:33 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/05 10:27:51 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 10:28:50 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_str_digit(char *str)
 	return (1);
 }
 
-void display_exit_error(char *str)
+void	display_exit_error(char *str)
 {
 	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
@@ -38,8 +38,9 @@ void display_exit_error(char *str)
 void	num_exit(char *str, int error, t_data *data)
 {
 	long long int	exit_code;
-	int good = 0;
+	int				good;
 
+	good = 0;
 	if (!str)
 		exit_code = data->exit_status;
 	else if (error == 1)
@@ -86,7 +87,7 @@ int	builtin_exit(t_cmd_line *cmd, t_data *data)
 		else if (get_len_tab(cmd->args) > 2)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n",
-					STDERR_FILENO);
+				STDERR_FILENO);
 			data->exit_status = 1;
 			return (EXIT_FAILURE);
 		}

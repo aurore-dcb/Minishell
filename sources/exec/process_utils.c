@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:08:58 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/04 10:35:02 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 10:29:07 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**list_to_tab(t_env **envp)
 
 int	handle_hd(t_data *data, t_pid **pids, t_pipex *pipex, t_cmd_line *tmp)
 {
-	if (is_here_doc(tmp)) 
+	if (is_here_doc(tmp))
 	{
 		if (!ft_hd(tmp, pipex, data, pids))
 		{
@@ -84,7 +84,7 @@ void	handle_pt(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 	if (!tab)
 	{
 		fr_no_buil(cmd, pipex, data, pids);
-		exit (1);
+		exit(1);
 	}
 	if (execve(cmd->args[1], tab, data->tab_env) == -1)
 		error_file_exec(cmd->args[1], data, errno);
