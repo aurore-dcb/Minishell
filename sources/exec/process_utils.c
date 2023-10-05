@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:08:58 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/10/05 10:29:07 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/05 10:35:31 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ int	handle_hd(t_data *data, t_pid **pids, t_pipex *pipex, t_cmd_line *tmp)
 	if (is_here_doc(tmp))
 	{
 		if (!ft_hd(tmp, pipex, data, pids))
-		{
-			data->exit_status = 1;
 			return (unlink(".here_doc"), 0);
-		}
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 17:09:06 by rmeriau           #+#    #+#             */
-/*   Updated: 2023/09/27 14:29:40 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/05 10:34:44 by rmeriau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,28 @@
 
 int		g_flag = 0;
 
-void	signal_cmd(int sig)
+void	handle_sigint(int sig)
 {
 	if (sig == SIGINT)
 	{
-		if (g_flag == 0)
-			printf("\n");
-		rl_on_new_line();
+		g_flag = 130;
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 		rl_replace_line("", 0);
-		rl_redisplay();
+		rl_on_new_line();
 	}
 }
+
+// void	signal_cmd(int sig)
+// {
+// 	if (sig == SIGINT)
+// 	{
+// 		if (g_flag == 0)
+// 			printf("\n");
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 	}
+// }
 
 void	sig_handler_job(int sig)
 {
@@ -46,7 +57,7 @@ void	heredoc_signal(int sig)
 {
 	close(0);
 	if (sig == SIGINT)
-		g_flag = 1;
+		g_flag = 130;
 	ft_putstr_fd("\n", 2);
 }
 
@@ -54,7 +65,7 @@ void	set_signals(int sig)
 {
 	if (sig == 1)
 	{
-		signal(SIGINT, signal_cmd);
+		signal(SIGINT, handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (sig == 2)
