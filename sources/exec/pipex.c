@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:39:05 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 18:33:35 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/06 10:51:36 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ int	ft_pipex(t_data *data)
 	if (data->cmd->args[0] && !ft_strcmp(data->cmd->args[0], "exit")
 		&& ft_lstsize_cmd(data->cmd) == 1)
 		builtin_exit(data->cmd, data);
-	set_signals(2);
+	if (data->cmd->args[0] && !ft_strcmp(data->cmd->args[0], "./minishell")
+		&& ft_lstsize_cmd(data->cmd) == 1)
+		set_signals(4);
+	else
+		set_signals(2);
 	pids = NULL;
 	initialise_pipex(&pipex);
 	if (!parsing_pipex(&pipex, data))

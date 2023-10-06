@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:09:52 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 15:46:55 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/06 12:11:17 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 int			closed_quotes(char *input, t_quotes *etat);
+int			empty_cmd(char *input, int i);
 int			is_meta(char c);
 int			is_spaces(char c);
 int			expansion(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:24:56 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/02 14:13:12 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/06 12:10:56 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	error_double_pipe(char *input)
 		}
 		else if (input[i] == '|')
 		{
-			if (input[i + 1] && input[i + 1] == '|')
+			i = empty_cmd(input, i);
+			if (i == -1)
 				return (1);
-			i++;
 		}
 		else
 			i++;

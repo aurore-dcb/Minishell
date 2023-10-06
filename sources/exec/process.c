@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmeriau <rmeriau@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:26:26 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 18:33:19 by rmeriau          ###   ########.fr       */
+/*   Updated: 2023/10/06 11:33:06 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ft_process(t_pipex *pipex, t_pid **pids, t_cmd_line *cmd, t_data *data)
 	}
 	else
 	{
-		set_signals(4);
 		ft_parent(pids, pid, cmd, last_in);
 	}
 	return (1);
@@ -79,6 +78,14 @@ void	no_built(t_cmd_line *cmd, t_pipex *pipex, t_data *data, t_pid **pids)
 		handle_pt(cmd, pipex, data, pids);
 	else if (execve(pipex->middle_cmd_path, cmd->args, data->tab_env) == -1)
 	{
+		if (!chdir(pipex->middle_cmd_path))
+		{
+			ft_putstr_fd("bash: ", 2);
+			ft_putstr_fd(pipex->middle_cmd_path, 2);
+			ft_putstr_fd(": Is a directory\n", 2);
+			fr_no_buil(cmd, pipex, data, pids);
+			exit(126);
+		}
 		fr_no_buil(cmd, pipex, data, pids);
 		exit(127);
 	}

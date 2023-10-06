@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 13:04:51 by aducobu           #+#    #+#             */
-/*   Updated: 2023/10/05 17:51:10 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/06 10:16:42 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	search_path(t_env *envp, char *str)
 		ft_putstr_fd(str, STDERR_FILENO);
 		free(str);
 		ft_putendl_fd(" not set", STDERR_FILENO);
+		g_exit = 1;
 	}
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: aducobu <aducobu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 12:19:02 by aducobu           #+#    #+#             */
-/*   Updated: 2023/09/26 15:30:59 by aducobu          ###   ########.fr       */
+/*   Updated: 2023/10/06 12:11:59 by aducobu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,20 @@ int	closed_quotes(char *input, t_quotes *etat)
 		}
 	}
 	return (etat->simple == 0 && etat->doubl == 0);
+}
+
+int	empty_cmd(char *input, int i)
+{
+	if (!input)
+		return (-1);
+	i++;
+	if (input[i] && is_spaces(input[i]))
+	{
+		i++;
+		while (input[i] && is_spaces(input[i]))
+			i++;
+	}
+	if (input[i] && input[i] == '|')
+		return (-1);
+	return (i);
 }
